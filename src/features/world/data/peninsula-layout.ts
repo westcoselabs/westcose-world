@@ -26,8 +26,8 @@ export const PENINSULA_UPPER: readonly CoastPoint[] = [
   [26, 5], [29, 7], [31, 3], [32, -4], [30, -11], [27, -13], [25, -8],
 ];
 export const PENINSULA_SAND: readonly CoastPoint[] = [
-  [35, -12], [39, -11.5], [41, -13], [38, -16], [37.5, -18],
-  [39, -21], [41, -23], [39, -25], [36, -23], [34, -20], [33.5, -16],
+  [33, -12], [38, -11.5], [41, -13], [38, -16], [37.5, -18],
+  [39, -21], [41, -23], [39, -25], [34, -23], [31.8, -20], [31.5, -16],
 ];
 
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
@@ -61,6 +61,11 @@ export function peninsulaHeightAt(x: number, z: number) {
   const shore = coastDistance(x, z, PENINSULA_COAST);
   // Low intertidal skirt → broken coastal shelf. No continuous 8m radial wall.
   let height = -3 + 3.12 * smooth(-2.6, .65, shore);
+  // Keep the low public beach continuous into the south-west cave approach.
+  // This skirt meets the existing public shore; it is not a raised causeway.
+  const publicShore = -34 + 1.3 * Math.sin(x * .13) + .8 * Math.cos(x * .3);
+  const publicBeach = -3 + 2.9 * smooth(publicShore - 2, publicShore + 3, z);
+  height += (Math.max(height, publicBeach) - height) * (1 - smooth(24, 27, x));
   const shelf = .8 + .2 * Math.sin(x * .8 + z * .55);
   height += shelf * smooth(.6, 2.2, shore);
   const terrace = coastDistance(x, z, PENINSULA_TERRACE);

@@ -41,6 +41,7 @@ try {
   const hidden = town.COASTAL_RADIO;
   const views = [
     { id: 'courtyard-toward-lighthouse', x: 0, z: 8, facing: toward(0, 8, tower.x, tower.z) },
+    { id: 'main-street-lighthouse', x: 0, z: -10, facing: toward(0, -10, tower.x, tower.z) },
     { id: 'boardwalk-center-lighthouse', x: 0, z: -16, facing: toward(0, -16, tower.x, tower.z) },
     { id: 'boardwalk-west-lighthouse', x: -12, z: -16, facing: toward(-12, -16, tower.x, tower.z) },
     { id: 'lighthouse-terrace', x: terrace[0], z: terrace[1], facing: toward(...terrace, tower.x, tower.z) },
@@ -67,12 +68,12 @@ try {
       report.views.push({ filename, profile: profile.id, viewport: { width: profile.width, height: profile.height }, fixture, state: await state() });
     };
     await capture('fresh-courtyard', 'fresh-load');
-    for (const view of views) {
+    for (const view of views.filter(view => !process.env.WORLD_PENINSULA_VIEWS || process.env.WORLD_PENINSULA_VIEWS.split(',').includes(view.id))) {
       await page.evaluate(({ x, z, facing }) => window.__WESTCOSE_WORLD__.spawnAt(x, z, facing), view);
       await expect.poll(async () => (await state()).overviewTransition).toBeLessThan(.005);
       await capture(view.id, view);
     }
-    for (const view of [views[1], views.at(-1)]) {
+    for (const view of (process.env.WORLD_PENINSULA_VIEWS ? [] : [views.find(view => view.id === 'boardwalk-center-lighthouse'), views.at(-1)])) {
       await page.evaluate(({ x, z, facing }) => window.__WESTCOSE_WORLD__.spawnAt(x, z, facing), view);
       await page.getByRole('button', { name: 'Planet view', exact: true }).click();
       await expect.poll(async () => (await state()).overviewTransition).toBeGreaterThan(.995);

@@ -28,7 +28,7 @@ const fragments = source => ({
 try {
   for (const directory of ['data', 'runtime']) for (const name of readdirSync(path.join(world, directory)).filter(name => name.endsWith('.ts'))) {
     const source = path.join(world, directory, name);
-    const savedSource = path.join(destination, (revision === 2 ? 'baseline-v2-' : 'baseline-') + name);
+    const savedSource = path.join(destination, (revision === 2 ? 'baseline-v2-' : 'baseline-') + name + '.txt');
     const input = sightlineMode && directory === 'data' && existsSync(savedSource) ? savedSource : source;
     const result = ts.transpileModule(readFileSync(input, 'utf8'), { fileName: source,
       compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } });
@@ -163,7 +163,7 @@ try {
     const baseline = { revision, generatedAt: new Date().toISOString(), scope, snapshot, samples };
     writeFileSync(baselinePath, JSON.stringify(baseline) + '\n');
     for (const relative of ['data/town-surfaces.ts', 'data/town-layout.ts', 'data/concept-landmarks.ts', 'scene/ConceptLandmarks.tsx']) {
-      writeFileSync(path.join(destination, (revision === 2 ? 'baseline-v2-' : 'baseline-') + path.basename(relative)), readFileSync(path.join(world, relative)));
+      writeFileSync(path.join(destination, (revision === 2 ? 'baseline-v2-' : 'baseline-') + path.basename(relative) + '.txt'), readFileSync(path.join(world, relative)));
     }
     writeFileSync(path.join(destination, 'preservation-scope.json'), JSON.stringify({ generatedAt: baseline.generatedAt, ...scope, sampleCount: samples.length, fixedFileCount: fixedFiles.length, protectedBuildingCount: snapshot.buildings.length, protectedRouteCount: snapshot.routes.length, fixedFileHashes, protectedFragments }, null, 2) + '\n');
     console.log(JSON.stringify({ baseline: baselinePath, sampleCount: samples.length, fixedFileCount: fixedFiles.length, protectedRoutes: snapshot.routes.length, protectedBuildings: snapshot.buildings.length }));

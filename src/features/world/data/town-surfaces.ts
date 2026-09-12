@@ -128,11 +128,11 @@ export function groundSurfaceAt(x:number,z:number):{height:number;kind:'ground'|
  if(stair){height=stair.height;routeId='skate-stairs';}
  // The low passage owns its entire width, including near the high lookout's outer edge.
  // Never let a plaza or a trail lift the visitor into the separate rock roof.
- if(caveBlendAt(x,z)===1){height=CAVE_FLOOR;routeId='cave';}
  if(inPeninsulaRegion(x,z)){
   const foundation=peninsulaFoundationAt(x,z);
   if(foundation.blend>0)height+=(foundation.height-height)*foundation.blend;
  }
+ if(caveBlendAt(x,z)===1){height=CAVE_FLOOR;routeId='cave';}
  return {height,kind:'ground',route:routeId};
 }
 export function townSurfaceAt(x:number,z:number):{height:number;kind:'ground'|'pier';route?:string}{

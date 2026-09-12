@@ -1,0 +1,37 @@
+# WestCose World coastal layout
+
+This is the active September 2026 coastal layout for **WestCose World**, the playable spherical portfolio. The user-facing world name is WestCose World. Documents and QA folders titled “Dead Coast” record earlier iterations; their older shoreline, pier, building placements and layout-version references are historical. This document supersedes those layout details while retaining the sunset mood described in [STYLE.md](STYLE.md).
+
+## Shoreline and town
+
+The town retains **38 authored structures: 26 primary buildings and 12 secondary structures**, including the five walk-in studio, workshop, arcade, office and lab interiors. The expansion spreads coastal uses along a dry land strip rather than putting large buildings on the pier. Shops and small huts sit around chart north `z=-16`; the promenade runs near `z=-19`; the broad beach occupies roughly `z=-22` to `-26`. The waterline varies with longitude and terrain, approximately around `z=-26` in the central town coast. These are authored coordinates, not a universal sea boundary.
+
+The Arcade now stands on land at `[31,-9.5]`, faces west and connects through its forecourt to Ocean Avenue and Pier Walk. The bait kiosk is on land at `[34,-15]`. Salt Shack, Coast Radio and the beach hut sit behind the promenade, with beach furniture and driftwood farther toward the sand. The beach radio prop and its discovery hotspot share `COASTAL_RADIO` at `[-13,-21]`; this is separate from the Coast Radio building at `[-18,-16]`. The vehicle garage is inland at `[40,-4]`. Building setbacks preserve entrances, service gaps and the promenade; coastline changes must be checked against the full rotated footprints, not just building centers.
+
+There are **21 authored town routes**. Studio Row, the courtyard and Workshop Road connect through back alleys and office passages; Salt Road leads to the lab and the high lane reaches the overlook. Ocean Promenade reconnects the west cove to the pier entrance and the eastern shore. A separate sand Beach Loop runs below it, while Shore Walk returns toward the workshop district around the land-based Arcade. The pier ramp meets the promenade without closing its east–west crossing.
+
+Town positions use `x=longitude*36` and `z=latitude*36` on an authoring chart. Runtime positions remain three-dimensional coordinates on the radius-36 sphere. Buildings use exact tangent frames with local +Z as their front, followed by each building's authored rotation.
+
+## Timber pier
+
+[`pier-layout.ts`](../../src/features/world/data/pier-layout.ts) is the shared source for deck support, geometry and guards. The approach starts at `[25,-19]` at elevation `0.1` and rises smoothly to `[25,-24]` at elevation `1.5`. A **3.8-metre-wide walkway** continues to `[25,-38]`, opening onto an **8-metre-wide fishing head** centered at `[25,-41]` with six chart metres of north–south depth. Sea level is `-0.8`, so the main deck is 2.3 metres above the water surface. The deck follows the sphere rather than forming a flat platform across it.
+
+Physical cross-deck width is compensated for latitude and deck radius: chart offsets are divided by `cos(latitude) * (36 + elevation) / 36`. This prevents the walkway and fishing head from narrowing as longitude lines converge. The visible plank tops and `pierSurfaceAt` use the same mapping. Generic town pavement omits the pier footprint, so only the dedicated deck is drawn there.
+
+Transverse boards, driven piles, under-deck beams, diagonal braces, guard balusters, benches, lamps, rod holders and ropes establish a recognizable pier silhouette. Piles extend below sea level. Seven shared perimeter edges produce the rendered guards and simple collision boxes. The land entrance and first shallow part of the ramp remain open to the promenade; the sides, head shoulders and seaward edge are guarded. There is no barrier across the walkway/head join.
+
+Movement receives explicit `pier` support above the underlying water and stays dry on the full deck, including its physical edges. Guards block walking but do not shorten the camera. The existing single upper support surface remains in use; this layout does not introduce a separate navigable under-deck level.
+
+## Groves and open land
+
+Twenty authored coastal regions extend oak and windswept cypress planting through the east and west headlands, far side, ridges and town fringes. Six middle-slope groves connect the original headland and ridge planting. The manifest requests **236 new trees**; the final measured accepted layout contains **199** after clearance checks: **128 oaks and 71 cypresses**. Together with the existing 20 town trees, that is **219 trees**. The new hinterland also contains **708 grass clumps, 135 scrub clusters, 53 outcrops and three lookouts**.
+
+Planting preserves open ground and trail corridors. Placement checks reject water, pier support, building footprints and entrance/route conflicts; spacing is measured in physical metres. The new groves complement the existing courtyard trees, ferns and wall ivy. Three coastal trail corridors and the lookout pockets organize these outer regions without replacing the 21-route town network. Shared tree archetypes are instanced by region and species into **29 tree batches**; three ground batches and one lookout batch bring the potential total to **33 render batches**, containing **162,186 authored physical triangles**. Planet occlusion and camera-frustum culling reduce actual rendered batches, while shadow passes may add submissions. This batch count is not a measured per-frame draw budget. The [final static audit](../qa/westcose-coast/hinterland-static.json) measures at least **3.304 m** between new tree anchors, **1.709 m** from continuous trail edges and **0.614 m** of tree substrate above sea level; these are placement checks, not device performance results.
+
+## Runtime, checkpoints and verification
+
+The fixed-step geodesic controller, radial gravity, parallel-transported facing, close follow camera, keyboard/mouse/touch inputs, ocean traversal and globe overview are preserved. All five interiors retain open doorways, floor support and local roof cutaways. Project, service, about, contact and lab interactions remain tied to the content registry and HTML routes. The Arcade still references FightClub; an actual game build or verified launch destination is still required for a live launch.
+
+`PLANET_VERSION` is **4**, invalidating checkpoints from earlier building and coastline layouts. The storage schema and key remain version 2; their `layoutVersion` field is now 4. Valid current checkpoints are restored against the actual ground, room floor or pier support, with safe-spawn fallback for obstructed positions.
+
+Development fixtures now include `shoreline`, `beach`, `arcade`, `pierapproach`, `pierhead`, `pierside`, `promenade`, `eastgrove`, `westgrove`, `farside` and `ridge`, alongside the existing entry, interiors, stairs, camera, poles and circuit fixtures. The targeted pier checks cover dry travel from the promenade to the head and back, physical edge support, every guarded perimeter section, the open promenade crossing and a clear head walking loop. The updated layout preflight samples 4,957 route-centerline points across all 21 routes with zero findings. Current visual and measurement artifacts belong in [docs/qa/westcose-coast](../qa/westcose-coast/); earlier QA folders describe their respective iterations.

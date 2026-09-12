@@ -1,0 +1,200 @@
+{
+  "errors": [],
+  "rooms": {
+    "studio": {
+      "mode": "exploring",
+      "position": {
+        "x": -9.912155203671444,
+        "y": 8.357693967358252,
+        "z": 34.76121046794646
+      },
+      "forward": {
+        "x": 0.061773932818460164,
+        "y": 0.9742959086631148,
+        "z": -0.2166367087694418
+      },
+      "up": {
+        "x": -0.2671707315545185,
+        "y": 0.2252720185959978,
+        "z": 0.9369484072446614
+      },
+      "heading": 4.85722573273506e-17,
+      "lon": -0.27777777777777796,
+      "lat": 0.22722222222222221,
+      "radius": 37.1004531297201,
+      "travelDistance": 4.880000000000003,
+      "lapCount": 0,
+      "currentArea": "Studio Row",
+      "hotspot": "studio",
+      "grounded": true,
+      "swimming": false,
+      "interior": "studio",
+      "supportKind": "floor",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 62,
+        "triangles": 255744,
+        "geometries": 40,
+        "textures": 4
+      }
+    },
+    "workshop": {
+      "mode": "exploring",
+      "position": {
+        "x": 22.252650804301883,
+        "y": 22.10493622846798,
+        "z": 21.373149319943888
+      },
+      "forward": {
+        "x": -0.42002933876097565,
+        "y": 0.8129089347901507,
+        "z": -0.403428331080454
+      },
+      "up": {
+        "x": 0.5862825998963973,
+        "y": 0.582390817010659,
+        "z": 0.5631106901137451
+      },
+      "heading": 1.1102230246251563e-16,
+      "lon": 0.8055555555555562,
+      "lat": 0.6216666666666673,
+      "radius": 37.95550270165647,
+      "travelDistance": 9.760000000000007,
+      "lapCount": 0,
+      "currentArea": "Workshop District",
+      "hotspot": "workshop",
+      "grounded": true,
+      "swimming": false,
+      "interior": "workshop",
+      "supportKind": "floor",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 60,
+        "triangles": 255040,
+        "geometries": 40,
+        "textures": 4
+      }
+    },
+    "arcade": {
+      "mode": "exploring",
+      "position": {
+        "x": 18.1046479679892,
+        "y": -24.646193184673663,
+        "z": 21.738562258205047
+      },
+      "forward": {
+        "x": -0.4203728307599795,
+        "y": -0.7539994972825655,
+        "z": -0.5047488893068314
+      },
+      "up": {
+        "x": 0.4825284960289339,
+        "y": -0.6568749942703241,
+        "z": 0.5793802658206584
+      },
+      "heading": 3.1415926535897927,
+      "lon": 0.6944444444444454,
+      "lat": -0.716666666666666,
+      "radius": 37.52037054181271,
+      "travelDistance": 21.359999999999896,
+      "lapCount": 0,
+      "currentArea": "Dead Coast Pier",
+      "hotspot": "arcade",
+      "grounded": true,
+      "swimming": false,
+      "interior": "arcade",
+      "supportKind": "floor",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 58,
+        "triangles": 256364,
+        "geometries": 40,
+        "textures": 4
+      }
+    },
+    "lab": {
+      "mode": "exploring",
+      "position": {
+        "x": 10.87077282666592,
+        "y": 30.12901306361169,
+        "z": 21.01003887278424
+      },
+      "forward": {
+        "x": -0.8133547772750249,
+        "y": -0.1054971401075562,
+        "z": 0.5721226789011438
+      },
+      "up": {
+        "x": 0.2837874189792068,
+        "y": 0.7865342225475916,
+        "z": 0.5484784568153755
+      },
+      "heading": -1.7424710102882621,
+      "lon": 0.47747722483160515,
+      "lat": 0.9051765944707164,
+      "radius": 38.30604212747862,
+      "travelDistance": 43.35999999999943,
+      "lapCount": 0,
+      "currentArea": "Salt Road",
+      "hotspot": "lab",
+      "grounded": true,
+      "swimming": false,
+      "interior": "lab",
+      "supportKind": "floor",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 62,
+        "triangles": 257864,
+        "geometries": 40,
+        "textures": 4
+      }
+    },
+    "about": {
+      "mode": "exploring",
+      "position": {
+        "x": 6.5080422348172995,
+        "y": 16.827657532348024,
+        "z": 33.047046874826094
+      },
+      "forward": {
+        "x": -0.08635695398784814,
+        "y": 0.8945676951779044,
+        "z": -0.43851010848329675
+      },
+      "up": {
+        "x": 0.17284969277466022,
+        "y": 0.44693247671666464,
+        "z": 0.8777097156598037
+      },
+      "heading": -1.8041124150158794e-16,
+      "lon": 0.19444444444444414,
+      "lat": 0.4633333333333333,
+      "radius": 37.65145387502464,
+      "travelDistance": 48.23999999999933,
+      "lapCount": 0,
+      "currentArea": "WestCose Courtyard",
+      "hotspot": "about",
+      "grounded": true,
+      "swimming": false,
+      "interior": "about",
+      "supportKind": "floor",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 61,
+        "triangles": 255644,
+        "geometries": 40,
+        "textures": 4
+      }
+    }
+  }
+}

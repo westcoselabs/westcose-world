@@ -1,0 +1,2596 @@
+{
+  "generatedAt": "2026-09-08T04:13:24.416Z",
+  "method": "Static generation from exported layout/stats. Tests every accepted anchor against actual spherical terrain, existing planting clearance, independently intersected tangent building footprints, continuous great-circle trail segments, existing and new tree geodesic spacing. Geometry attributes are checked for finite aligned values. No browser, application build or frame-rate measurement.",
+  "stats": {
+    "trees": 199,
+    "grasses": 708,
+    "scrub": 135,
+    "outcrops": 53,
+    "lookouts": 3,
+    "regions": 20,
+    "physicalTriangles": 162186,
+    "drawCalls": 33,
+    "bySpecies": {
+      "oak": 128,
+      "cypress": 71
+    },
+    "byRegion": {
+      "east-bluff": 10,
+      "east-wood": 14,
+      "lantern-ridge": 14,
+      "outer-headland": 8,
+      "far-wood": 14,
+      "far-cypress": 13,
+      "west-headland": 10,
+      "west-wood": 14,
+      "inland-cypress": 11,
+      "west-ridge": 10,
+      "high-north": 4,
+      "north-saddle": 8,
+      "east-fringe": 3,
+      "west-fringe": 6,
+      "far-middle": 13,
+      "salt-wood-link": 11,
+      "western-middle": 10,
+      "western-lower": 7,
+      "eastern-middle": 10,
+      "eastern-lower": 9
+    }
+  },
+  "requestedTrees": 236,
+  "underfilledRegions": [
+    {
+      "id": "east-bluff",
+      "requested": 12,
+      "accepted": 10
+    },
+    {
+      "id": "outer-headland",
+      "requested": 12,
+      "accepted": 8
+    },
+    {
+      "id": "far-cypress",
+      "requested": 14,
+      "accepted": 13
+    },
+    {
+      "id": "west-headland",
+      "requested": 12,
+      "accepted": 10
+    },
+    {
+      "id": "inland-cypress",
+      "requested": 12,
+      "accepted": 11
+    },
+    {
+      "id": "high-north",
+      "requested": 10,
+      "accepted": 4
+    },
+    {
+      "id": "east-fringe",
+      "requested": 8,
+      "accepted": 3
+    },
+    {
+      "id": "far-middle",
+      "requested": 14,
+      "accepted": 13
+    },
+    {
+      "id": "salt-wood-link",
+      "requested": 14,
+      "accepted": 11
+    },
+    {
+      "id": "western-middle",
+      "requested": 12,
+      "accepted": 10
+    },
+    {
+      "id": "western-lower",
+      "requested": 12,
+      "accepted": 7
+    },
+    {
+      "id": "eastern-middle",
+      "requested": 12,
+      "accepted": 10
+    },
+    {
+      "id": "eastern-lower",
+      "requested": 12,
+      "accepted": 9
+    }
+  ],
+  "minimums": {
+    "newTreeSpacing": 3.304,
+    "existingTreeSpacing": 8.514,
+    "continuousTrailEdgeClearance": 1.709,
+    "townRouteAndDoorClearance": 2.213,
+    "independentBuildingClearance": 2.289,
+    "treeLandAboveSea": 0.614,
+    "lowPlantLandAboveSea": 0.598,
+    "lookoutAreaClearance": 2.306
+  },
+  "maximumTreeGroundAnchorError": 0,
+  "existingTreeClearances": [
+    {
+      "id": "courtyard-shade",
+      "clearance": 1.517
+    },
+    {
+      "id": "courtyard-south",
+      "clearance": 1.133
+    },
+    {
+      "id": "office-garden",
+      "clearance": 1.02
+    },
+    {
+      "id": "studio-side",
+      "clearance": 1.693
+    },
+    {
+      "id": "print-corner",
+      "clearance": 1.007
+    },
+    {
+      "id": "print-yard",
+      "clearance": 1.328
+    },
+    {
+      "id": "narrow-garden",
+      "clearance": 0.97
+    },
+    {
+      "id": "livework-yard",
+      "clearance": 1.106
+    },
+    {
+      "id": "garage-garden",
+      "clearance": 1.506
+    },
+    {
+      "id": "cafe-garden",
+      "clearance": 0.974
+    },
+    {
+      "id": "workshop-south",
+      "clearance": 0.704
+    },
+    {
+      "id": "fabrication-yard",
+      "clearance": 1.759
+    },
+    {
+      "id": "salt-road",
+      "clearance": 1.572
+    },
+    {
+      "id": "cove-west",
+      "clearance": 0.92
+    },
+    {
+      "id": "cove-radio",
+      "clearance": 1.49
+    },
+    {
+      "id": "cove-shack",
+      "clearance": 1.575
+    },
+    {
+      "id": "cove-east",
+      "clearance": 2.232
+    },
+    {
+      "id": "lab-garden",
+      "clearance": 0.882
+    },
+    {
+      "id": "upper-path",
+      "clearance": 1.263
+    },
+    {
+      "id": "motel-court",
+      "clearance": 0.619
+    }
+  ],
+  "trees": [
+    {
+      "id": "east-bluff-0",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        60.166,
+        -1.528
+      ],
+      "landMargin": 1.052,
+      "townClearance": 14.799,
+      "trailEdgeClearance": 2.568
+    },
+    {
+      "id": "east-bluff-1",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        60.159,
+        3.517
+      ],
+      "landMargin": 1.052,
+      "townClearance": 13.819,
+      "trailEdgeClearance": 7.473
+    },
+    {
+      "id": "east-bluff-2",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        56.837,
+        0.45
+      ],
+      "landMargin": 1.087,
+      "townClearance": 11.858,
+      "trailEdgeClearance": 3.706
+    },
+    {
+      "id": "east-bluff-3",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        64.053,
+        1.116
+      ],
+      "landMargin": 1.05,
+      "townClearance": 17.725,
+      "trailEdgeClearance": 5.062
+    },
+    {
+      "id": "east-bluff-4",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        57.967,
+        6.205
+      ],
+      "landMargin": 1.071,
+      "townClearance": 11.204,
+      "trailEdgeClearance": 9.561
+    },
+    {
+      "id": "east-bluff-5",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        53.688,
+        -6.634
+      ],
+      "landMargin": 1.146,
+      "townClearance": 9.761,
+      "trailEdgeClearance": 2.679
+    },
+    {
+      "id": "east-bluff-6",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        63.141,
+        6.914
+      ],
+      "landMargin": 1.05,
+      "townClearance": 15.683,
+      "trailEdgeClearance": 10.929
+    },
+    {
+      "id": "east-bluff-7",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        55.186,
+        4.052
+      ],
+      "landMargin": 1.116,
+      "townClearance": 9.455,
+      "trailEdgeClearance": 6.793
+    },
+    {
+      "id": "east-bluff-8",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        58.786,
+        -6.933
+      ],
+      "landMargin": 1.061,
+      "townClearance": 14.249,
+      "trailEdgeClearance": 1.758
+    },
+    {
+      "id": "east-bluff-9",
+      "region": "east-bluff",
+      "species": "cypress",
+      "chart": [
+        65.673,
+        4.602
+      ],
+      "landMargin": 1.05,
+      "townClearance": 18.142,
+      "trailEdgeClearance": 8.297
+    },
+    {
+      "id": "east-wood-0",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        64.987,
+        21.273
+      ],
+      "landMargin": 2.679,
+      "townClearance": 14.492,
+      "trailEdgeClearance": 15.741
+    },
+    {
+      "id": "east-wood-1",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        66.582,
+        24.363
+      ],
+      "landMargin": 2.671,
+      "townClearance": 14.329,
+      "trailEdgeClearance": 13.654
+    },
+    {
+      "id": "east-wood-2",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        72.32,
+        25.862
+      ],
+      "landMargin": 2.319,
+      "townClearance": 16.999,
+      "trailEdgeClearance": 13.97
+    },
+    {
+      "id": "east-wood-3",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        60.763,
+        19.68
+      ],
+      "landMargin": 2.695,
+      "townClearance": 12.638,
+      "trailEdgeClearance": 15.283
+    },
+    {
+      "id": "east-wood-4",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        69.686,
+        29.432
+      ],
+      "landMargin": 2.419,
+      "townClearance": 13.881,
+      "trailEdgeClearance": 9.971
+    },
+    {
+      "id": "east-wood-5",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        63.454,
+        29.805
+      ],
+      "landMargin": 2.728,
+      "townClearance": 10.199,
+      "trailEdgeClearance": 7.787
+    },
+    {
+      "id": "east-wood-6",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        63.196,
+        15.579
+      ],
+      "landMargin": 1.856,
+      "townClearance": 14.87,
+      "trailEdgeClearance": 19.5
+    },
+    {
+      "id": "east-wood-7",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        59.438,
+        26.065
+      ],
+      "landMargin": 3.328,
+      "townClearance": 9.001,
+      "trailEdgeClearance": 9.328
+    },
+    {
+      "id": "east-wood-8",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        70.113,
+        17.071
+      ],
+      "landMargin": 1.866,
+      "townClearance": 30.541,
+      "trailEdgeClearance": 19.951
+    },
+    {
+      "id": "east-wood-9",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        69.862,
+        22.009
+      ],
+      "landMargin": 2.376,
+      "townClearance": 17.252,
+      "trailEdgeClearance": 16.897
+    },
+    {
+      "id": "east-wood-10",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        59.554,
+        15.273
+      ],
+      "landMargin": 1.843,
+      "townClearance": 11.803,
+      "trailEdgeClearance": 18.715
+    },
+    {
+      "id": "east-wood-11",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        66.739,
+        14.201
+      ],
+      "landMargin": 1.485,
+      "townClearance": 17.745,
+      "trailEdgeClearance": 17.637
+    },
+    {
+      "id": "east-wood-12",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        63.557,
+        12.135
+      ],
+      "landMargin": 1.196,
+      "townClearance": 15.432,
+      "trailEdgeClearance": 16.044
+    },
+    {
+      "id": "east-wood-13",
+      "region": "east-wood",
+      "species": "oak",
+      "chart": [
+        73.888,
+        31.243
+      ],
+      "landMargin": 2.693,
+      "townClearance": 15.655,
+      "trailEdgeClearance": 9.179
+    },
+    {
+      "id": "lantern-ridge-0",
+      "region": "lantern-ridge",
+      "species": "cypress",
+      "chart": [
+        90.648,
+        7.626
+      ],
+      "landMargin": 1.05,
+      "townClearance": 54.224,
+      "trailEdgeClearance": 11.976
+    },
+    {
+      "id": "lantern-ridge-1",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        86.879,
+        18.245
+      ],
+      "landMargin": 1.674,
+      "townClearance": 44.701,
+      "trailEdgeClearance": 22.077
+    },
+    {
+      "id": "lantern-ridge-2",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        85.651,
+        9.091
+      ],
+      "landMargin": 1.05,
+      "townClearance": 48.715,
+      "trailEdgeClearance": 12.854
+    },
+    {
+      "id": "lantern-ridge-3",
+      "region": "lantern-ridge",
+      "species": "cypress",
+      "chart": [
+        90.264,
+        12.392
+      ],
+      "landMargin": 1.221,
+      "townClearance": 51.378,
+      "trailEdgeClearance": 16.687
+    },
+    {
+      "id": "lantern-ridge-4",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        82.417,
+        4.182
+      ],
+      "landMargin": 1.05,
+      "townClearance": 46.52,
+      "trailEdgeClearance": 7.56
+    },
+    {
+      "id": "lantern-ridge-5",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        94.247,
+        15.824
+      ],
+      "landMargin": 1.631,
+      "townClearance": 52.891,
+      "trailEdgeClearance": 20.024
+    },
+    {
+      "id": "lantern-ridge-6",
+      "region": "lantern-ridge",
+      "species": "cypress",
+      "chart": [
+        85.828,
+        3.795
+      ],
+      "landMargin": 1.05,
+      "townClearance": 49.773,
+      "trailEdgeClearance": 7.625
+    },
+    {
+      "id": "lantern-ridge-7",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        92.386,
+        19.182
+      ],
+      "landMargin": 1.94,
+      "townClearance": 48.817,
+      "trailEdgeClearance": 22.938
+    },
+    {
+      "id": "lantern-ridge-8",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        80.528,
+        14.308
+      ],
+      "landMargin": 1.304,
+      "townClearance": 41.27,
+      "trailEdgeClearance": 17.308
+    },
+    {
+      "id": "lantern-ridge-9",
+      "region": "lantern-ridge",
+      "species": "cypress",
+      "chart": [
+        90.12,
+        3.447
+      ],
+      "landMargin": 1.05,
+      "townClearance": 53.882,
+      "trailEdgeClearance": 7.785
+    },
+    {
+      "id": "lantern-ridge-10",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        89.373,
+        21.518
+      ],
+      "landMargin": 2.209,
+      "townClearance": 44.511,
+      "trailEdgeClearance": 20.889
+    },
+    {
+      "id": "lantern-ridge-11",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        81.776,
+        10.091
+      ],
+      "landMargin": 1.053,
+      "townClearance": 44.532,
+      "trailEdgeClearance": 13.321
+    },
+    {
+      "id": "lantern-ridge-12",
+      "region": "lantern-ridge",
+      "species": "cypress",
+      "chart": [
+        81.994,
+        18.353
+      ],
+      "landMargin": 1.649,
+      "townClearance": 40.37,
+      "trailEdgeClearance": 21.513
+    },
+    {
+      "id": "lantern-ridge-13",
+      "region": "lantern-ridge",
+      "species": "oak",
+      "chart": [
+        85.854,
+        14.251
+      ],
+      "landMargin": 1.364,
+      "townClearance": 46.21,
+      "trailEdgeClearance": 17.991
+    },
+    {
+      "id": "outer-headland-0",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        99.794,
+        2.576
+      ],
+      "landMargin": 1.05,
+      "townClearance": 63.152,
+      "trailEdgeClearance": 6.484
+    },
+    {
+      "id": "outer-headland-1",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        95.924,
+        1.489
+      ],
+      "landMargin": 1.05,
+      "townClearance": 59.247,
+      "trailEdgeClearance": 5.625
+    },
+    {
+      "id": "outer-headland-2",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        95.902,
+        -7.269
+      ],
+      "landMargin": 0.767,
+      "townClearance": 56.765,
+      "trailEdgeClearance": 1.871
+    },
+    {
+      "id": "outer-headland-3",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        94.032,
+        -2.521
+      ],
+      "landMargin": 1.05,
+      "townClearance": 56.525,
+      "trailEdgeClearance": 1.709
+    },
+    {
+      "id": "outer-headland-4",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        90.009,
+        -0.016
+      ],
+      "landMargin": 1.05,
+      "townClearance": 53.196,
+      "trailEdgeClearance": 4.331
+    },
+    {
+      "id": "outer-headland-5",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        92.43,
+        -7.282
+      ],
+      "landMargin": 0.614,
+      "townClearance": 53.37,
+      "trailEdgeClearance": 1.734
+    },
+    {
+      "id": "outer-headland-6",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        88.296,
+        -7.399
+      ],
+      "landMargin": 0.694,
+      "townClearance": 49.293,
+      "trailEdgeClearance": 1.945
+    },
+    {
+      "id": "outer-headland-7",
+      "region": "outer-headland",
+      "species": "cypress",
+      "chart": [
+        99.15,
+        -1.922
+      ],
+      "landMargin": 1.05,
+      "townClearance": 61.724,
+      "trailEdgeClearance": 2.036
+    },
+    {
+      "id": "far-wood-0",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        -112.693,
+        22.273
+      ],
+      "landMargin": 3.28,
+      "townClearance": 60.17,
+      "trailEdgeClearance": 18.575
+    },
+    {
+      "id": "far-wood-1",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        101.442,
+        28.666
+      ],
+      "landMargin": 4.377,
+      "townClearance": 44.696,
+      "trailEdgeClearance": 12.152
+    },
+    {
+      "id": "far-wood-2",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        112.345,
+        26.27
+      ],
+      "landMargin": 3.605,
+      "townClearance": 55.954,
+      "trailEdgeClearance": 14.488
+    },
+    {
+      "id": "far-wood-3",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        106.75,
+        27.253
+      ],
+      "landMargin": 4.054,
+      "townClearance": 50.44,
+      "trailEdgeClearance": 13.198
+    },
+    {
+      "id": "far-wood-4",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        -113.071,
+        29.567
+      ],
+      "landMargin": 3.094,
+      "townClearance": 51.043,
+      "trailEdgeClearance": 11.347
+    },
+    {
+      "id": "far-wood-5",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        105.258,
+        34.525
+      ],
+      "landMargin": 3.716,
+      "townClearance": 38.345,
+      "trailEdgeClearance": 5.982
+    },
+    {
+      "id": "far-wood-6",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        106.418,
+        30.85
+      ],
+      "landMargin": 3.705,
+      "townClearance": 44.79,
+      "trailEdgeClearance": 9.604
+    },
+    {
+      "id": "far-wood-7",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        111.225,
+        35.478
+      ],
+      "landMargin": 3.102,
+      "townClearance": 40.115,
+      "trailEdgeClearance": 5.326
+    },
+    {
+      "id": "far-wood-8",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        106.861,
+        23.559
+      ],
+      "landMargin": 3.706,
+      "townClearance": 55.82,
+      "trailEdgeClearance": 16.891
+    },
+    {
+      "id": "far-wood-9",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        -108.149,
+        34.966
+      ],
+      "landMargin": 2.914,
+      "townClearance": 39.858,
+      "trailEdgeClearance": 6.437
+    },
+    {
+      "id": "far-wood-10",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        110.24,
+        19.807
+      ],
+      "landMargin": 2.75,
+      "townClearance": 63.535,
+      "trailEdgeClearance": 20.736
+    },
+    {
+      "id": "far-wood-11",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        97.921,
+        35.079
+      ],
+      "landMargin": 4.73,
+      "townClearance": 33.369,
+      "trailEdgeClearance": 6.577
+    },
+    {
+      "id": "far-wood-12",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        -107.544,
+        38.832
+      ],
+      "landMargin": 4.035,
+      "townClearance": 33.423,
+      "trailEdgeClearance": 2.599
+    },
+    {
+      "id": "far-wood-13",
+      "region": "far-wood",
+      "species": "oak",
+      "chart": [
+        98.407,
+        31.426
+      ],
+      "landMargin": 4.546,
+      "townClearance": 38.819,
+      "trailEdgeClearance": 10.003
+    },
+    {
+      "id": "far-cypress-0",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        112.855,
+        -7.115
+      ],
+      "landMargin": 1.05,
+      "townClearance": 73.405,
+      "trailEdgeClearance": 4.097
+    },
+    {
+      "id": "far-cypress-1",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -103.451,
+        6.454
+      ],
+      "landMargin": 1.05,
+      "townClearance": 60.073,
+      "trailEdgeClearance": 10.217
+    },
+    {
+      "id": "far-cypress-2",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -111.988,
+        7.85
+      ],
+      "landMargin": 1.05,
+      "townClearance": 68.05,
+      "trailEdgeClearance": 10.269
+    },
+    {
+      "id": "far-cypress-3",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -105.298,
+        9.393
+      ],
+      "landMargin": 1.05,
+      "townClearance": 61.22,
+      "trailEdgeClearance": 12.702
+    },
+    {
+      "id": "far-cypress-4",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -112.278,
+        4.022
+      ],
+      "landMargin": 1.05,
+      "townClearance": 69.085,
+      "trailEdgeClearance": 6.512
+    },
+    {
+      "id": "far-cypress-5",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -104.317,
+        -1.624
+      ],
+      "landMargin": 1.05,
+      "townClearance": 61.169,
+      "trailEdgeClearance": 2.133
+    },
+    {
+      "id": "far-cypress-6",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -106.42,
+        1.104
+      ],
+      "landMargin": 1.05,
+      "townClearance": 63.417,
+      "trailEdgeClearance": 4.368
+    },
+    {
+      "id": "far-cypress-7",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -108.006,
+        6.067
+      ],
+      "landMargin": 1.05,
+      "townClearance": 64.58,
+      "trailEdgeClearance": 8.876
+    },
+    {
+      "id": "far-cypress-8",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -108.704,
+        10.306
+      ],
+      "landMargin": 1.052,
+      "townClearance": 64.159,
+      "trailEdgeClearance": 12.874
+    },
+    {
+      "id": "far-cypress-9",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -109.324,
+        -6.862
+      ],
+      "landMargin": 1.05,
+      "townClearance": 65.13,
+      "trailEdgeClearance": 2.78
+    },
+    {
+      "id": "far-cypress-10",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        112.839,
+        -0.943
+      ],
+      "landMargin": 1.05,
+      "townClearance": 75.465,
+      "trailEdgeClearance": 2.499
+    },
+    {
+      "id": "far-cypress-11",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -109.573,
+        -0.495
+      ],
+      "landMargin": 1.05,
+      "townClearance": 66.512,
+      "trailEdgeClearance": 2.131
+    },
+    {
+      "id": "far-cypress-12",
+      "region": "far-cypress",
+      "species": "cypress",
+      "chart": [
+        -106.345,
+        13.259
+      ],
+      "landMargin": 1.287,
+      "townClearance": 60.835,
+      "trailEdgeClearance": 16.243
+    },
+    {
+      "id": "west-headland-0",
+      "region": "west-headland",
+      "species": "cypress",
+      "chart": [
+        -87.452,
+        -2.694
+      ],
+      "landMargin": 1.05,
+      "townClearance": 44.229,
+      "trailEdgeClearance": 2.277
+    },
+    {
+      "id": "west-headland-1",
+      "region": "west-headland",
+      "species": "oak",
+      "chart": [
+        -83.205,
+        0.107
+      ],
+      "landMargin": 1.05,
+      "townClearance": 40.217,
+      "trailEdgeClearance": 4.75
+    },
+    {
+      "id": "west-headland-2",
+      "region": "west-headland",
+      "species": "oak",
+      "chart": [
+        -95.169,
+        -10.722
+      ],
+      "landMargin": 1.087,
+      "townClearance": 50.291,
+      "trailEdgeClearance": 4.119
+    },
+    {
+      "id": "west-headland-3",
+      "region": "west-headland",
+      "species": "cypress",
+      "chart": [
+        -78.18,
+        -1.523
+      ],
+      "landMargin": 1.05,
+      "townClearance": 35.077,
+      "trailEdgeClearance": 2.65
+    },
+    {
+      "id": "west-headland-4",
+      "region": "west-headland",
+      "species": "oak",
+      "chart": [
+        -90.7,
+        1.553
+      ],
+      "landMargin": 1.05,
+      "townClearance": 47.76,
+      "trailEdgeClearance": 6.71
+    },
+    {
+      "id": "west-headland-5",
+      "region": "west-headland",
+      "species": "oak",
+      "chart": [
+        -91.864,
+        -12.819
+      ],
+      "landMargin": 1.118,
+      "townClearance": 46.568,
+      "trailEdgeClearance": 6.338
+    },
+    {
+      "id": "west-headland-6",
+      "region": "west-headland",
+      "species": "cypress",
+      "chart": [
+        -86.148,
+        2.834
+      ],
+      "landMargin": 1.05,
+      "townClearance": 43.281,
+      "trailEdgeClearance": 7.701
+    },
+    {
+      "id": "west-headland-7",
+      "region": "west-headland",
+      "species": "oak",
+      "chart": [
+        -80.397,
+        1.953
+      ],
+      "landMargin": 1.05,
+      "townClearance": 37.545,
+      "trailEdgeClearance": 6.333
+    },
+    {
+      "id": "west-headland-8",
+      "region": "west-headland",
+      "species": "oak",
+      "chart": [
+        -92.969,
+        -3.042
+      ],
+      "landMargin": 1.05,
+      "townClearance": 49.691,
+      "trailEdgeClearance": 2.227
+    },
+    {
+      "id": "west-headland-9",
+      "region": "west-headland",
+      "species": "cypress",
+      "chart": [
+        -91.623,
+        -8.208
+      ],
+      "landMargin": 1.05,
+      "townClearance": 47.523,
+      "trailEdgeClearance": 1.744
+    },
+    {
+      "id": "west-wood-0",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -83.52,
+        12.827
+      ],
+      "landMargin": 1.185,
+      "townClearance": 40.495,
+      "trailEdgeClearance": 17.447
+    },
+    {
+      "id": "west-wood-1",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -68.751,
+        23.67
+      ],
+      "landMargin": 3.616,
+      "townClearance": 24.064,
+      "trailEdgeClearance": 26.248
+    },
+    {
+      "id": "west-wood-2",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -81.694,
+        25.961
+      ],
+      "landMargin": 3.196,
+      "townClearance": 32.586,
+      "trailEdgeClearance": 19.595
+    },
+    {
+      "id": "west-wood-3",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -80.198,
+        10.21
+      ],
+      "landMargin": 1.052,
+      "townClearance": 37.647,
+      "trailEdgeClearance": 14.528
+    },
+    {
+      "id": "west-wood-4",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -68.607,
+        27.885
+      ],
+      "landMargin": 4.297,
+      "townClearance": 19.661,
+      "trailEdgeClearance": 22.683
+    },
+    {
+      "id": "west-wood-5",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -85.949,
+        22.546
+      ],
+      "landMargin": 2.12,
+      "townClearance": 38.583,
+      "trailEdgeClearance": 21.495
+    },
+    {
+      "id": "west-wood-6",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -75.243,
+        12.406
+      ],
+      "landMargin": 1.082,
+      "townClearance": 33.284,
+      "trailEdgeClearance": 16.154
+    },
+    {
+      "id": "west-wood-7",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -74.882,
+        29.49
+      ],
+      "landMargin": 4.218,
+      "townClearance": 25.216,
+      "trailEdgeClearance": 18.934
+    },
+    {
+      "id": "west-wood-8",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -82.298,
+        19.254
+      ],
+      "landMargin": 1.735,
+      "townClearance": 38.024,
+      "trailEdgeClearance": 23.727
+    },
+    {
+      "id": "west-wood-9",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -75.704,
+        16.733
+      ],
+      "landMargin": 1.459,
+      "townClearance": 33.695,
+      "trailEdgeClearance": 20.499
+    },
+    {
+      "id": "west-wood-10",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -77.046,
+        20.867
+      ],
+      "landMargin": 2.238,
+      "townClearance": 32.478,
+      "trailEdgeClearance": 24.755
+    },
+    {
+      "id": "west-wood-11",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -72.799,
+        22.368
+      ],
+      "landMargin": 2.969,
+      "townClearance": 28.041,
+      "trailEdgeClearance": 25.697
+    },
+    {
+      "id": "west-wood-12",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -75.637,
+        25.408
+      ],
+      "landMargin": 3.614,
+      "townClearance": 28.399,
+      "trailEdgeClearance": 22.164
+    },
+    {
+      "id": "west-wood-13",
+      "region": "west-wood",
+      "species": "oak",
+      "chart": [
+        -86.429,
+        14.801
+      ],
+      "landMargin": 1.453,
+      "townClearance": 42.739,
+      "trailEdgeClearance": 19.652
+    },
+    {
+      "id": "inland-cypress-0",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -60.506,
+        6.364
+      ],
+      "landMargin": 1.05,
+      "townClearance": 17.255,
+      "trailEdgeClearance": 8.236
+    },
+    {
+      "id": "inland-cypress-1",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -57.061,
+        6.98
+      ],
+      "landMargin": 1.05,
+      "townClearance": 14.392,
+      "trailEdgeClearance": 8.394
+    },
+    {
+      "id": "inland-cypress-2",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -52.069,
+        12.595
+      ],
+      "landMargin": 1.181,
+      "townClearance": 8.744,
+      "trailEdgeClearance": 13.262
+    },
+    {
+      "id": "inland-cypress-3",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -64.375,
+        6.618
+      ],
+      "landMargin": 1.05,
+      "townClearance": 22.715,
+      "trailEdgeClearance": 8.968
+    },
+    {
+      "id": "inland-cypress-4",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -52.832,
+        7.456
+      ],
+      "landMargin": 1.05,
+      "townClearance": 10.882,
+      "trailEdgeClearance": 8.286
+    },
+    {
+      "id": "inland-cypress-5",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -56.324,
+        12.887
+      ],
+      "landMargin": 1.305,
+      "townClearance": 12.478,
+      "trailEdgeClearance": 14.143
+    },
+    {
+      "id": "inland-cypress-6",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -49.994,
+        9.868
+      ],
+      "landMargin": 1.051,
+      "townClearance": 7.517,
+      "trailEdgeClearance": 10.287
+    },
+    {
+      "id": "inland-cypress-7",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -61.344,
+        0.86
+      ],
+      "landMargin": 1.05,
+      "townClearance": 18.585,
+      "trailEdgeClearance": 2.882
+    },
+    {
+      "id": "inland-cypress-8",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -60.372,
+        11.302
+      ],
+      "landMargin": 1.12,
+      "townClearance": 16.022,
+      "trailEdgeClearance": 13.113
+    },
+    {
+      "id": "inland-cypress-9",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -57.864,
+        2.944
+      ],
+      "landMargin": 1.05,
+      "townClearance": 15.674,
+      "trailEdgeClearance": 4.501
+    },
+    {
+      "id": "inland-cypress-10",
+      "region": "inland-cypress",
+      "species": "cypress",
+      "chart": [
+        -63.896,
+        3.239
+      ],
+      "landMargin": 1.05,
+      "townClearance": 21.509,
+      "trailEdgeClearance": 5.556
+    },
+    {
+      "id": "west-ridge-0",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -55.46,
+        33.427
+      ],
+      "landMargin": 2.942,
+      "townClearance": 9.548,
+      "trailEdgeClearance": 23.315
+    },
+    {
+      "id": "west-ridge-1",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -62.081,
+        37.751
+      ],
+      "landMargin": 3.894,
+      "townClearance": 13.593,
+      "trailEdgeClearance": 17.684
+    },
+    {
+      "id": "west-ridge-2",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -52.376,
+        36.918
+      ],
+      "landMargin": 2.871,
+      "townClearance": 8.496,
+      "trailEdgeClearance": 21.768
+    },
+    {
+      "id": "west-ridge-3",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -60.542,
+        31.92
+      ],
+      "landMargin": 3.59,
+      "townClearance": 13.089,
+      "trailEdgeClearance": 22.56
+    },
+    {
+      "id": "west-ridge-4",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -55.688,
+        41.623
+      ],
+      "landMargin": 4.027,
+      "townClearance": 9.803,
+      "trailEdgeClearance": 17.458
+    },
+    {
+      "id": "west-ridge-5",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -62,
+        28.621
+      ],
+      "landMargin": 4.007,
+      "townClearance": 15.337,
+      "trailEdgeClearance": 24.66
+    },
+    {
+      "id": "west-ridge-6",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -45.345,
+        39.507
+      ],
+      "landMargin": 2.254,
+      "townClearance": 7.413,
+      "trailEdgeClearance": 22.141
+    },
+    {
+      "id": "west-ridge-7",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -42.985,
+        42.816
+      ],
+      "landMargin": 2.437,
+      "townClearance": 6.848,
+      "trailEdgeClearance": 20.41
+    },
+    {
+      "id": "west-ridge-8",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -54.597,
+        29.99
+      ],
+      "landMargin": 2.854,
+      "townClearance": 9.769,
+      "trailEdgeClearance": 26.405
+    },
+    {
+      "id": "west-ridge-9",
+      "region": "west-ridge",
+      "species": "oak",
+      "chart": [
+        -57.942,
+        26.826
+      ],
+      "landMargin": 3.618,
+      "townClearance": 13.426,
+      "trailEdgeClearance": 27.755
+    },
+    {
+      "id": "high-north-0",
+      "region": "high-north",
+      "species": "cypress",
+      "chart": [
+        11.638,
+        48.733
+      ],
+      "landMargin": 5.763,
+      "townClearance": 3.451,
+      "trailEdgeClearance": 17.047
+    },
+    {
+      "id": "high-north-1",
+      "region": "high-north",
+      "species": "oak",
+      "chart": [
+        15.746,
+        45.444
+      ],
+      "landMargin": 4.584,
+      "townClearance": 3.36,
+      "trailEdgeClearance": 16.984
+    },
+    {
+      "id": "high-north-2",
+      "region": "high-north",
+      "species": "oak",
+      "chart": [
+        14.059,
+        52.689
+      ],
+      "landMargin": 5.505,
+      "townClearance": 2.541,
+      "trailEdgeClearance": 14.84
+    },
+    {
+      "id": "high-north-3",
+      "region": "high-north",
+      "species": "cypress",
+      "chart": [
+        46.041,
+        43.824
+      ],
+      "landMargin": 2.993,
+      "townClearance": 2.318,
+      "trailEdgeClearance": 7.307
+    },
+    {
+      "id": "north-saddle-0",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        1.343,
+        41.435
+      ],
+      "landMargin": 2.25,
+      "townClearance": 4.734,
+      "trailEdgeClearance": 23.114
+    },
+    {
+      "id": "north-saddle-1",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        -9.718,
+        49.082
+      ],
+      "landMargin": 5.369,
+      "townClearance": 4.816,
+      "trailEdgeClearance": 19.837
+    },
+    {
+      "id": "north-saddle-2",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        -10.908,
+        42.628
+      ],
+      "landMargin": 2.322,
+      "townClearance": 6.352,
+      "trailEdgeClearance": 25.82
+    },
+    {
+      "id": "north-saddle-3",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        -5.875,
+        45.665
+      ],
+      "landMargin": 4.119,
+      "townClearance": 6.049,
+      "trailEdgeClearance": 22.346
+    },
+    {
+      "id": "north-saddle-4",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        -10.152,
+        38.764
+      ],
+      "landMargin": 2.25,
+      "townClearance": 3.573,
+      "trailEdgeClearance": 28.717
+    },
+    {
+      "id": "north-saddle-5",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        -19.801,
+        45.546
+      ],
+      "landMargin": 4.088,
+      "townClearance": 5.776,
+      "trailEdgeClearance": 22.936
+    },
+    {
+      "id": "north-saddle-6",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        -23.524,
+        52.81
+      ],
+      "landMargin": 5.498,
+      "townClearance": 3.969,
+      "trailEdgeClearance": 16.545
+    },
+    {
+      "id": "north-saddle-7",
+      "region": "north-saddle",
+      "species": "oak",
+      "chart": [
+        -3.961,
+        36.766
+      ],
+      "landMargin": 2.25,
+      "townClearance": 2.769,
+      "trailEdgeClearance": 27.648
+    },
+    {
+      "id": "east-fringe-0",
+      "region": "east-fringe",
+      "species": "cypress",
+      "chart": [
+        51.998,
+        30.513
+      ],
+      "landMargin": 2.992,
+      "townClearance": 2.57,
+      "trailEdgeClearance": 2.582
+    },
+    {
+      "id": "east-fringe-1",
+      "region": "east-fringe",
+      "species": "oak",
+      "chart": [
+        44.278,
+        36.051
+      ],
+      "landMargin": 2.47,
+      "townClearance": 2.373,
+      "trailEdgeClearance": 3.461
+    },
+    {
+      "id": "east-fringe-2",
+      "region": "east-fringe",
+      "species": "oak",
+      "chart": [
+        54.779,
+        39.818
+      ],
+      "landMargin": 3.574,
+      "townClearance": 3.126,
+      "trailEdgeClearance": 2.066
+    },
+    {
+      "id": "west-fringe-0",
+      "region": "west-fringe",
+      "species": "cypress",
+      "chart": [
+        -43.272,
+        6.023
+      ],
+      "landMargin": 1.05,
+      "townClearance": 6.407,
+      "trailEdgeClearance": 8.423
+    },
+    {
+      "id": "west-fringe-1",
+      "region": "west-fringe",
+      "species": "oak",
+      "chart": [
+        -46.052,
+        1.862
+      ],
+      "landMargin": 1.05,
+      "townClearance": 4.657,
+      "trailEdgeClearance": 3.483
+    },
+    {
+      "id": "west-fringe-2",
+      "region": "west-fringe",
+      "species": "oak",
+      "chart": [
+        -42.185,
+        2.631
+      ],
+      "landMargin": 1.05,
+      "townClearance": 2.933,
+      "trailEdgeClearance": 7.093
+    },
+    {
+      "id": "west-fringe-3",
+      "region": "west-fringe",
+      "species": "cypress",
+      "chart": [
+        -49.387,
+        1.378
+      ],
+      "landMargin": 1.05,
+      "townClearance": 7.252,
+      "trailEdgeClearance": 1.784
+    },
+    {
+      "id": "west-fringe-4",
+      "region": "west-fringe",
+      "species": "oak",
+      "chart": [
+        -39.421,
+        5.954
+      ],
+      "landMargin": 1.05,
+      "townClearance": 3.375,
+      "trailEdgeClearance": 11.181
+    },
+    {
+      "id": "west-fringe-5",
+      "region": "west-fringe",
+      "species": "oak",
+      "chart": [
+        -45.042,
+        -1.322
+      ],
+      "landMargin": 1.05,
+      "townClearance": 2.213,
+      "trailEdgeClearance": 3.344
+    },
+    {
+      "id": "far-middle-0",
+      "region": "far-middle",
+      "species": "cypress",
+      "chart": [
+        107.815,
+        11.502
+      ],
+      "landMargin": 1.075,
+      "townClearance": 68.5,
+      "trailEdgeClearance": 14.897
+    },
+    {
+      "id": "far-middle-1",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        104.285,
+        16.713
+      ],
+      "landMargin": 1.834,
+      "townClearance": 61.24,
+      "trailEdgeClearance": 20.24
+    },
+    {
+      "id": "far-middle-2",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        112.946,
+        10.948
+      ],
+      "landMargin": 1.051,
+      "townClearance": 73.76,
+      "trailEdgeClearance": 13.499
+    },
+    {
+      "id": "far-middle-3",
+      "region": "far-middle",
+      "species": "cypress",
+      "chart": [
+        107.926,
+        15.28
+      ],
+      "landMargin": 1.538,
+      "townClearance": 65.729,
+      "trailEdgeClearance": 18.676
+    },
+    {
+      "id": "far-middle-4",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        111.903,
+        14.408
+      ],
+      "landMargin": 1.375,
+      "townClearance": 70.104,
+      "trailEdgeClearance": 17.077
+    },
+    {
+      "id": "far-middle-5",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        -110.302,
+        19.538
+      ],
+      "landMargin": 2.639,
+      "townClearance": 60.563,
+      "trailEdgeClearance": 21.595
+    },
+    {
+      "id": "far-middle-6",
+      "region": "far-middle",
+      "species": "cypress",
+      "chart": [
+        102.563,
+        10.527
+      ],
+      "landMargin": 1.066,
+      "townClearance": 64.138,
+      "trailEdgeClearance": 14.217
+    },
+    {
+      "id": "far-middle-7",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        -106.224,
+        21.271
+      ],
+      "landMargin": 2.777,
+      "townClearance": 56,
+      "trailEdgeClearance": 20.179
+    },
+    {
+      "id": "far-middle-8",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        106.123,
+        19.964
+      ],
+      "landMargin": 2.727,
+      "townClearance": 59.877,
+      "trailEdgeClearance": 20.493
+    },
+    {
+      "id": "far-middle-9",
+      "region": "far-middle",
+      "species": "cypress",
+      "chart": [
+        105.076,
+        7.496
+      ],
+      "landMargin": 1.05,
+      "townClearance": 68.118,
+      "trailEdgeClearance": 10.993
+    },
+    {
+      "id": "far-middle-10",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        108.611,
+        7.582
+      ],
+      "landMargin": 1.05,
+      "townClearance": 71.457,
+      "trailEdgeClearance": 11.067
+    },
+    {
+      "id": "far-middle-11",
+      "region": "far-middle",
+      "species": "oak",
+      "chart": [
+        -109.7,
+        16.044
+      ],
+      "landMargin": 1.776,
+      "townClearance": 62.4,
+      "trailEdgeClearance": 18.461
+    },
+    {
+      "id": "far-middle-12",
+      "region": "far-middle",
+      "species": "cypress",
+      "chart": [
+        -108.265,
+        24.217
+      ],
+      "landMargin": 3.132,
+      "townClearance": 54.684,
+      "trailEdgeClearance": 17.148
+    },
+    {
+      "id": "salt-wood-link-0",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -95.694,
+        24.774
+      ],
+      "landMargin": 2.287,
+      "townClearance": 44.297,
+      "trailEdgeClearance": 17.295
+    },
+    {
+      "id": "salt-wood-link-1",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -99.733,
+        27.13
+      ],
+      "landMargin": 2.507,
+      "townClearance": 44.819,
+      "trailEdgeClearance": 14.5
+    },
+    {
+      "id": "salt-wood-link-2",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -100.626,
+        14.819
+      ],
+      "landMargin": 1.671,
+      "townClearance": 55.071,
+      "trailEdgeClearance": 18.964
+    },
+    {
+      "id": "salt-wood-link-3",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -101.543,
+        18.269
+      ],
+      "landMargin": 2.194,
+      "townClearance": 54.199,
+      "trailEdgeClearance": 22.135
+    },
+    {
+      "id": "salt-wood-link-4",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -102.423,
+        22.798
+      ],
+      "landMargin": 2.599,
+      "townClearance": 51.658,
+      "trailEdgeClearance": 18.673
+    },
+    {
+      "id": "salt-wood-link-5",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -105.969,
+        16.564
+      ],
+      "landMargin": 1.942,
+      "townClearance": 58.875,
+      "trailEdgeClearance": 19.535
+    },
+    {
+      "id": "salt-wood-link-6",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -104.983,
+        26.575
+      ],
+      "landMargin": 2.764,
+      "townClearance": 49.324,
+      "trailEdgeClearance": 14.883
+    },
+    {
+      "id": "salt-wood-link-7",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -101.66,
+        11.426
+      ],
+      "landMargin": 1.116,
+      "townClearance": 57.217,
+      "trailEdgeClearance": 15.443
+    },
+    {
+      "id": "salt-wood-link-8",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -104.437,
+        29.907
+      ],
+      "landMargin": 2.554,
+      "townClearance": 44.738,
+      "trailEdgeClearance": 11.545
+    },
+    {
+      "id": "salt-wood-link-9",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -98.706,
+        30.634
+      ],
+      "landMargin": 2.769,
+      "townClearance": 40.026,
+      "trailEdgeClearance": 11.137
+    },
+    {
+      "id": "salt-wood-link-10",
+      "region": "salt-wood-link",
+      "species": "oak",
+      "chart": [
+        -96.985,
+        16.426
+      ],
+      "landMargin": 1.907,
+      "townClearance": 51.263,
+      "trailEdgeClearance": 21.247
+    },
+    {
+      "id": "western-middle-0",
+      "region": "western-middle",
+      "species": "cypress",
+      "chart": [
+        -65.903,
+        15.07
+      ],
+      "landMargin": 1.528,
+      "townClearance": 26.024,
+      "trailEdgeClearance": 17.537
+    },
+    {
+      "id": "western-middle-1",
+      "region": "western-middle",
+      "species": "oak",
+      "chart": [
+        -59.025,
+        16.585
+      ],
+      "landMargin": 2.053,
+      "townClearance": 14.325,
+      "trailEdgeClearance": 18.165
+    },
+    {
+      "id": "western-middle-2",
+      "region": "western-middle",
+      "species": "oak",
+      "chart": [
+        -64.339,
+        22.06
+      ],
+      "landMargin": 3.32,
+      "townClearance": 18.381,
+      "trailEdgeClearance": 24.265
+    },
+    {
+      "id": "western-middle-3",
+      "region": "western-middle",
+      "species": "cypress",
+      "chart": [
+        -59.962,
+        21.083
+      ],
+      "landMargin": 3.104,
+      "townClearance": 14.983,
+      "trailEdgeClearance": 22.734
+    },
+    {
+      "id": "western-middle-4",
+      "region": "western-middle",
+      "species": "oak",
+      "chart": [
+        -54.399,
+        23.155
+      ],
+      "landMargin": 2.79,
+      "townClearance": 10.853,
+      "trailEdgeClearance": 24.013
+    },
+    {
+      "id": "western-middle-5",
+      "region": "western-middle",
+      "species": "oak",
+      "chart": [
+        -62.332,
+        14.608
+      ],
+      "landMargin": 1.578,
+      "townClearance": 17.144,
+      "trailEdgeClearance": 16.638
+    },
+    {
+      "id": "western-middle-6",
+      "region": "western-middle",
+      "species": "cypress",
+      "chart": [
+        -64.697,
+        25.772
+      ],
+      "landMargin": 4.119,
+      "townClearance": 18.388,
+      "trailEdgeClearance": 25.998
+    },
+    {
+      "id": "western-middle-7",
+      "region": "western-middle",
+      "species": "oak",
+      "chart": [
+        -66.88,
+        19.178
+      ],
+      "landMargin": 2.375,
+      "townClearance": 24.91,
+      "trailEdgeClearance": 21.723
+    },
+    {
+      "id": "western-middle-8",
+      "region": "western-middle",
+      "species": "oak",
+      "chart": [
+        -62.909,
+        18.742
+      ],
+      "landMargin": 2.446,
+      "townClearance": 17.109,
+      "trailEdgeClearance": 20.804
+    },
+    {
+      "id": "western-middle-9",
+      "region": "western-middle",
+      "species": "cypress",
+      "chart": [
+        -51.691,
+        27.003
+      ],
+      "landMargin": 2.528,
+      "townClearance": 8.704,
+      "trailEdgeClearance": 27.483
+    },
+    {
+      "id": "western-lower-0",
+      "region": "western-lower",
+      "species": "cypress",
+      "chart": [
+        -86.101,
+        7.316
+      ],
+      "landMargin": 1.05,
+      "townClearance": 43.233,
+      "trailEdgeClearance": 12.166
+    },
+    {
+      "id": "western-lower-1",
+      "region": "western-lower",
+      "species": "oak",
+      "chart": [
+        -80.184,
+        14.608
+      ],
+      "landMargin": 1.257,
+      "townClearance": 37.462,
+      "trailEdgeClearance": 18.898
+    },
+    {
+      "id": "western-lower-2",
+      "region": "western-lower",
+      "species": "oak",
+      "chart": [
+        -79.125,
+        5.508
+      ],
+      "landMargin": 1.05,
+      "townClearance": 36.508,
+      "trailEdgeClearance": 9.741
+    },
+    {
+      "id": "western-lower-3",
+      "region": "western-lower",
+      "species": "cypress",
+      "chart": [
+        -76.783,
+        8.905
+      ],
+      "landMargin": 1.05,
+      "townClearance": 34.479,
+      "trailEdgeClearance": 12.861
+    },
+    {
+      "id": "western-lower-4",
+      "region": "western-lower",
+      "species": "oak",
+      "chart": [
+        -82.547,
+        7.517
+      ],
+      "landMargin": 1.05,
+      "townClearance": 39.842,
+      "trailEdgeClearance": 12.074
+    },
+    {
+      "id": "western-lower-5",
+      "region": "western-lower",
+      "species": "oak",
+      "chart": [
+        -73.356,
+        9.247
+      ],
+      "landMargin": 1.05,
+      "townClearance": 31.369,
+      "trailEdgeClearance": 12.788
+    },
+    {
+      "id": "western-lower-6",
+      "region": "western-lower",
+      "species": "cypress",
+      "chart": [
+        -89.434,
+        4.689
+      ],
+      "landMargin": 1.05,
+      "townClearance": 46.531,
+      "trailEdgeClearance": 9.769
+    },
+    {
+      "id": "eastern-middle-0",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        81.062,
+        30.322
+      ],
+      "landMargin": 3.304,
+      "townClearance": 19.97,
+      "trailEdgeClearance": 11.519
+    },
+    {
+      "id": "eastern-middle-1",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        80.567,
+        35.161
+      ],
+      "landMargin": 4.497,
+      "townClearance": 17.048,
+      "trailEdgeClearance": 6.736
+    },
+    {
+      "id": "eastern-middle-2",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        77.797,
+        38.64
+      ],
+      "landMargin": 5.375,
+      "townClearance": 14.147,
+      "trailEdgeClearance": 3.004
+    },
+    {
+      "id": "eastern-middle-3",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        70.227,
+        36.646
+      ],
+      "landMargin": 3.997,
+      "townClearance": 11.704,
+      "trailEdgeClearance": 3.376
+    },
+    {
+      "id": "eastern-middle-4",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        76.225,
+        24.422
+      ],
+      "landMargin": 2.2,
+      "townClearance": 31.987,
+      "trailEdgeClearance": 16.177
+    },
+    {
+      "id": "eastern-middle-5",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        86.163,
+        38.853
+      ],
+      "landMargin": 5.711,
+      "townClearance": 17.487,
+      "trailEdgeClearance": 3.544
+    },
+    {
+      "id": "eastern-middle-6",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        75.807,
+        28.008
+      ],
+      "landMargin": 2.478,
+      "townClearance": 17.879,
+      "trailEdgeClearance": 12.665
+    },
+    {
+      "id": "eastern-middle-7",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        81.82,
+        24.987
+      ],
+      "landMargin": 2.451,
+      "townClearance": 35.389,
+      "trailEdgeClearance": 16.843
+    },
+    {
+      "id": "eastern-middle-8",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        86.353,
+        34.232
+      ],
+      "landMargin": 4.821,
+      "townClearance": 20.025,
+      "trailEdgeClearance": 8.159
+    },
+    {
+      "id": "eastern-middle-9",
+      "region": "eastern-middle",
+      "species": "oak",
+      "chart": [
+        79.413,
+        22.23
+      ],
+      "landMargin": 2.005,
+      "townClearance": 35.906,
+      "trailEdgeClearance": 19.02
+    },
+    {
+      "id": "eastern-lower-0",
+      "region": "eastern-lower",
+      "species": "cypress",
+      "chart": [
+        69.86,
+        1.402
+      ],
+      "landMargin": 1.05,
+      "townClearance": 33.953,
+      "trailEdgeClearance": 4.525
+    },
+    {
+      "id": "eastern-lower-1",
+      "region": "eastern-lower",
+      "species": "oak",
+      "chart": [
+        75.664,
+        12.707
+      ],
+      "landMargin": 1.141,
+      "townClearance": 37.529,
+      "trailEdgeClearance": 15.095
+    },
+    {
+      "id": "eastern-lower-2",
+      "region": "eastern-lower",
+      "species": "oak",
+      "chart": [
+        68.597,
+        9.671
+      ],
+      "landMargin": 1.051,
+      "townClearance": 19.803,
+      "trailEdgeClearance": 12.887
+    },
+    {
+      "id": "eastern-lower-3",
+      "region": "eastern-lower",
+      "species": "cypress",
+      "chart": [
+        73.588,
+        3.779
+      ],
+      "landMargin": 1.05,
+      "townClearance": 37.962,
+      "trailEdgeClearance": 6.293
+    },
+    {
+      "id": "eastern-lower-4",
+      "region": "eastern-lower",
+      "species": "oak",
+      "chart": [
+        72.179,
+        9.834
+      ],
+      "landMargin": 1.05,
+      "townClearance": 35.507,
+      "trailEdgeClearance": 12.493
+    },
+    {
+      "id": "eastern-lower-5",
+      "region": "eastern-lower",
+      "species": "oak",
+      "chart": [
+        69.31,
+        5.273
+      ],
+      "landMargin": 1.05,
+      "townClearance": 33.81,
+      "trailEdgeClearance": 8.435
+    },
+    {
+      "id": "eastern-lower-6",
+      "region": "eastern-lower",
+      "species": "cypress",
+      "chart": [
+        77.124,
+        9.558
+      ],
+      "landMargin": 1.05,
+      "townClearance": 40.338,
+      "trailEdgeClearance": 12.108
+    },
+    {
+      "id": "eastern-lower-7",
+      "region": "eastern-lower",
+      "species": "oak",
+      "chart": [
+        74.581,
+        7.047
+      ],
+      "landMargin": 1.05,
+      "townClearance": 38.889,
+      "trailEdgeClearance": 9.43
+    },
+    {
+      "id": "eastern-lower-8",
+      "region": "eastern-lower",
+      "species": "oak",
+      "chart": [
+        71.06,
+        13.338
+      ],
+      "landMargin": 1.252,
+      "townClearance": 32.956,
+      "trailEdgeClearance": 16.125
+    }
+  ],
+  "limitations": [
+    "Spacing concerns trunk anchors; canopies may overlap naturally.",
+    "Low plants and lookout furniture are decorative, without individual movement colliders.",
+    "This check does not establish visual quality, rendered shadow cost or device performance."
+  ]
+}

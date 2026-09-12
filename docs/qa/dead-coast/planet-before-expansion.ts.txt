@@ -1,0 +1,111 @@
+import { Matrix4, Quaternion, Vector3 } from 'three';
+
+/** Layout v2: a fixed planet, radial up/gravity, metres. No planar wrapping. */
+export const RADIUS = 36;
+export const SEA_LEVEL = -.8;
+export const PLANET_VERSION = 2;
+export const ROAD_HALF_LAT = .064;
+export const SIDEWALK_OUTER_LAT = .116;
+export const SPAWN_COORDS = { lon: -.35, lat: 0 };
+export const clamp = (v: number, low: number, high: number) => Math.max(low, Math.min(high, v));
+export function smoothstep(low: number, high: number, value: number) {
+  const t = clamp((value - low) / (high - low), 0, 1);
+  return t * t * (3 - 2 * t);
+}
+export const angleDifference = (a: number, b: number) => Math.atan2(Math.sin(a - b), Math.cos(a - b));
+export function directionAt(lon: number, lat: number): Vector3 {
+  return new Vector3(Math.sin(lon) * Math.cos(lat), Math.sin(lat), Math.cos(lon) * Math.cos(lat));
+}
+export function coordinatesAt(d: { x: number; y: number; z: number }) {
+  const length = Math.hypot(d.x, d.y, d.z) || 1;
+  return { lon: Math.atan2(d.x, d.z), lat: Math.asin(clamp(d.y / length, -1, 1)) };
+}
+export const STAIRS = { lon: .27, startLat: .116, endLat: .326, width: 2.6, count: 12, rise: .22, treadAngle: .0175, baseHeight: .25 };
+/** Continuous substrate; raised pavements/stairs are separate scene surfaces. */
+export function terrainHeightAt(d: { x: number; y: number; z: number }): number {
+  const { lon, lat } = coordinatesAt(d);
+  const coast = -.48 + .1 * Math.sin(lon * 3) + .07 * Math.cos(lon * 5);
+  const land = smoothstep(coast - .14, coast + .19, lat);
+  // Longitude becomes undefined at a pole; fade longitude-dependent relief
+  // into a single cap height so approaching from any bearing is continuous.
+  const polarBlend = 1 - smoothstep(1.1, 1.48, Math.abs(lat));
+  const hills = smoothstep(.3, .78, lat) * (2.25 + polarBlend * (-.95 + 1.9 * Math.pow(Math.sin(lon * 2 + lat * 3), 2)));
+  const ridge = 2.2 * smoothstep(.85, 1.25, lat);
+  const rolling = .48 * Math.pow(Math.sin(lon * 3) * Math.sin(lat * 5), 2) * smoothstep(.26, .48, Math.abs(lat)) * polarBlend;
+  let h = -2.8 + land * (3.05 + hills + ridge + rolling);
+  const terrace = (1 - smoothstep(.11, .19, Math.abs(angleDifference(lon, STAIRS.lon)))) * smoothstep(.29, .326, lat) * (1 - smoothstep(.5, .6, lat));
+  if (terrace > 0) h = Math.max(h, .25 + terrace * STAIRS.count * STAIRS.rise);
+  return h;
+}
+export function heightAt(d: { x: number; y: number; z: number }): number {
+  const { lon, lat } = coordinatesAt(d);
+  if (Math.abs(lat) <= ROAD_HALF_LAT) return .25;
+  if (Math.abs(lat) <= SIDEWALK_OUTER_LAT) return .45;
+  if (lat > STAIRS.startLat && lat < STAIRS.endLat && Math.abs(angleDifference(lon, STAIRS.lon)) < STAIRS.width / (2 * RADIUS)) {
+    return STAIRS.baseHeight + Math.min(STAIRS.count, Math.floor((lat - STAIRS.startLat) / STAIRS.treadAngle) + 1) * STAIRS.rise;
+  }
+  return terrainHeightAt(d);
+}
+export const waterAt = (d: { x: number; y: number; z: number }) => terrainHeightAt(d) < SEA_LEVEL;
+export function pointAt(lon: number, lat: number, elevation?: number): Vector3 {
+  const up = directionAt(lon, lat);
+  return up.multiplyScalar(RADIUS + (elevation ?? Math.max(SEA_LEVEL, heightAt(up))));
+}
+export function frameAt(lon: number, lat: number) {
+  const up = directionAt(lon, lat);
+  const east = new Vector3(Math.cos(lon), 0, -Math.sin(lon));
+  const north = new Vector3(-Math.sin(lat) * Math.sin(lon), Math.cos(lat), -Math.sin(lat) * Math.cos(lon));
+  const quaternion = new Quaternion().setFromRotationMatrix(new Matrix4().makeBasis(east, up, north.clone().negate()));
+  return { position: pointAt(lon, lat), quaternion, up, east, north };
+}
+export type PlanetBuilding = {
+  id: string; lon: number; lat: number; width: number; depth: number; height: number;
+  kind: 'studio' | 'arcade' | 'workshop' | 'house' | 'tower' | 'shop'; color: string; rotation?: number;
+};
+export const BUILDINGS: PlanetBuilding[] = [
+  { id: 'entry-house', lon: -.45, lat: .192, width: 4.6, depth: 4.7, height: 5.6, kind: 'house', color: '#d5cdbc' },
+  { id: 'studio', lon: -.22, lat: .193, width: 5.7, depth: 4.7, height: 5.1, kind: 'studio', color: '#dfd8c7' },
+  { id: 'print-shop', lon: .02, lat: .193, width: 4.6, depth: 4.7, height: 6.8, kind: 'shop', color: '#788e8b' },
+  { id: 'overlook-house', lon: .5, lat: .196, width: 5.5, depth: 4.8, height: 4.8, kind: 'house', color: '#ae7457' },
+  { id: 'arcade', lon: -.08, lat: -.192, width: 5.2, depth: 4.6, height: 4.7, kind: 'arcade', color: '#3e5052' },
+  { id: 'workshop', lon: -.38, lat: -.192, width: 5.1, depth: 4.6, height: 5.8, kind: 'workshop', color: '#657f88' },
+  { id: 'coast-house', lon: .17, lat: -.195, width: 4.2, depth: 4.5, height: 4.2, kind: 'house', color: '#dbccb1' },
+  { id: 'corner-store', lon: .43, lat: -.195, width: 4.9, depth: 4.5, height: 6.3, kind: 'shop', color: '#899180' },
+  { id: 'overlook', lon: .27, lat: .43, width: 3.3, depth: 3.2, height: 5.8, kind: 'tower', color: '#d2cbb7' },
+  ...[1.12,1.36,1.62,2.23,2.48,2.75,-2.86,-2.61,-2.34,-1.64,-1.38,-1.12].flatMap((lon,index): PlanetBuilding[] => [
+    { id: `lane-north-${index}`, lon, lat: .19 + .013 * (index % 2), width: 4.3 + (index % 3) * .35, depth: 4.6, height: 4.2 + (index % 4) * .8, kind: index % 3 === 0 ? 'shop' : 'house', color: ['#d3cbbb','#698189','#b47c61','#9aa08a'][index % 4] },
+    ...(index % 3 !== 2 ? [{ id: `lane-south-${index}`, lon: lon + .06, lat: -.20, width: 4.5, depth: 4.4, height: 4.3 + (index % 3), kind: 'house' as const, color: ['#73858b','#d6ceb8','#858d7a'][index % 3] }] : []),
+  ]),
+];
+export const PLANET_PLACES = [
+  { id:'studio',label:'Project Studio',section:'Projects',lon:-.22,lat:.099,radius:2.6,contentId:'world',number:'01' },
+  { id:'workshop',label:'The Workshop',section:'Services',lon:-.38,lat:-.099,radius:2.5,contentId:'services',number:'02' },
+  { id:'arcade',label:'The Arcade',section:'Games',lon:-.08,lat:-.099,radius:2.5,contentId:'fightclub',number:'03' },
+  { id:'contact',label:'Contact Post',section:'Contact',lon:.65,lat:.088,radius:2.1,contentId:'contact',number:'04' },
+  { id:'beach',label:'Coastal Frequency',section:'Discovery',lon:.65,lat:-.37,radius:2.8,contentId:'frequency',number:'05' },
+] as const;
+export function areaAt(d: { x: number; y: number; z: number }): string {
+  const {lon,lat}=coordinatesAt(d);
+  if(waterAt(d))return 'Open Water';
+  if(lat<-.29)return 'The Coast';
+  if(lat>.62)return 'The High Ground';
+  if(lat>.29)return 'Overlook Steps';
+  if(Math.abs(lon)<.8)return 'Studio Lane';
+  if(lon>.8&&lon<2)return 'Maker’s Row';
+  if(Math.abs(lon)>=2)return 'The Far Side';
+  return 'West Passage';
+}
+export const PLANET_FIXTURES = {
+  entry:{...SPAWN_COORDS,facing:'east'},
+  studio:{lon:-.22,lat:.10,facing:'north'},
+  alley:{lon:-.325,lat:.12,facing:'north'},
+  collision:{lon:-.22,lat:.10,facing:'north'},
+  stairs:{lon:STAIRS.lon,lat:.101,facing:'north'},
+  camera:{lon:-.22,lat:.28,facing:'north'},
+  pole:{lon:.9,lat:1.39,facing:'north'},
+  south:{lon:.8,lat:-1.39,facing:'south'},
+  shoreline:{lon:.65,lat:-.36,facing:'south'},
+  beach:{lon:.65,lat:-.37,facing:'east'},
+  arcade:{lon:-.08,lat:-.10,facing:'south'},
+  circuit:{lon:.82,lat:0,facing:'east'},
+} as const;

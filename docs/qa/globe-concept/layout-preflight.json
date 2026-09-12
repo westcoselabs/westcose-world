@@ -1,0 +1,75 @@
+{
+  "generatedAt": "2026-09-12T20:22:33.797Z",
+  "method": "Authored route centerlines sampled every 0.12 chart metres using the actual spherical support and capsule collision modules, including segmented walls, furniture, tangent floors and pier rails. This static check complements actual movement tests; it does not prove every road edge or camera view.",
+  "primaryBuildings": 9,
+  "secondaryBuildings": 0,
+  "interiors": [
+    "studio",
+    "workshop",
+    "arcade",
+    "about",
+    "lab"
+  ],
+  "routes": 20,
+  "sampleCount": 5338,
+  "findings": [
+    {
+      "route": "lighthouse-trail",
+      "hits": [
+        {
+          "wall": "cave:15:crown",
+          "first": [
+            33.72,
+            -21
+          ],
+          "last": [
+            32.996,
+            -21.118
+          ],
+          "samples": 9
+        },
+        {
+          "wall": "cave:12:crown",
+          "first": [
+            32.992,
+            -21.235
+          ],
+          "last": [
+            32.941,
+            -22.765
+          ],
+          "samples": 14
+        }
+      ]
+    }
+  ],
+  "reviewApproaches": [
+    {
+      "label": "lighthouse-approach",
+      "x": 24.3,
+      "z": -4.5,
+      "facing": "east",
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    },
+    {
+      "label": "hidden-beach-open",
+      "x": 34,
+      "z": 5,
+      "facing": "east",
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    },
+    {
+      "label": "cave-exterior-entry",
+      "x": 21,
+      "z": -25,
+      "facing": "north",
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    }
+  ]
+}

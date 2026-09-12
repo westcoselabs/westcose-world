@@ -1,0 +1,497 @@
+{
+  "generatedAt": "2026-09-12T20:00:27.083Z",
+  "layoutVersion": 5,
+  "buildingCount": 9,
+  "radius": 36,
+  "seaLevel": -0.8,
+  "courtyard": [
+    0,
+    8
+  ],
+  "resort": [
+    0,
+    115
+  ],
+  "resortPlaza": [
+    0,
+    112
+  ],
+  "summit": [
+    0,
+    153
+  ],
+  "pierTip": [
+    0,
+    -39
+  ],
+  "inlandMapMetres": 192,
+  "oceanAngleDegrees": 54.42250926356097,
+  "routes": [
+    {
+      "id": "boulevard",
+      "label": "The Boulevard",
+      "points": [
+        [
+          -23,
+          0
+        ],
+        [
+          -12,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          20,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "main-street",
+      "label": "Courtyard to Pier",
+      "points": [
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -16
+        ]
+      ]
+    },
+    {
+      "id": "boardwalk",
+      "label": "Beach Boardwalk",
+      "points": [
+        [
+          -25,
+          -16
+        ],
+        [
+          -12,
+          -16
+        ],
+        [
+          0,
+          -16
+        ],
+        [
+          12,
+          -16
+        ],
+        [
+          24,
+          -16
+        ]
+      ]
+    },
+    {
+      "id": "gallery-entry",
+      "label": "Gallery Entrance",
+      "points": [
+        [
+          -10,
+          0
+        ],
+        [
+          -10,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "shop-entry",
+      "label": "Shop Entrance",
+      "points": [
+        [
+          9,
+          0
+        ],
+        [
+          9,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "shop-link",
+      "label": "Connected Skate Shop",
+      "points": [
+        [
+          9,
+          3
+        ],
+        [
+          16,
+          3
+        ],
+        [
+          16,
+          3.5
+        ]
+      ]
+    },
+    {
+      "id": "social-entry",
+      "label": "Social Club Entrance",
+      "points": [
+        [
+          -8,
+          0
+        ],
+        [
+          -8,
+          -4
+        ]
+      ]
+    },
+    {
+      "id": "motel-entry",
+      "label": "Motel Lobby",
+      "points": [
+        [
+          9,
+          0
+        ],
+        [
+          9,
+          -4
+        ]
+      ]
+    },
+    {
+      "id": "alley",
+      "label": "Graffiti Alley",
+      "points": [
+        [
+          19,
+          4
+        ],
+        [
+          18,
+          0
+        ],
+        [
+          18,
+          -6
+        ],
+        [
+          18,
+          -16
+        ]
+      ]
+    },
+    {
+      "id": "lab-entry",
+      "label": "Alley Room",
+      "points": [
+        [
+          18,
+          -6
+        ],
+        [
+          19,
+          -6
+        ]
+      ]
+    },
+    {
+      "id": "forest-trail",
+      "label": "Forest Trail to Skate Park",
+      "points": [
+        [
+          -25,
+          -16
+        ],
+        [
+          -30,
+          -11
+        ],
+        [
+          -33,
+          -1
+        ],
+        [
+          -32,
+          8
+        ],
+        [
+          -27,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "skate-stairs",
+      "label": "Skate Park Stairs",
+      "points": [
+        [
+          -23,
+          0
+        ],
+        [
+          -24,
+          5
+        ],
+        [
+          -27,
+          9
+        ]
+      ]
+    },
+    {
+      "id": "resort-trail",
+      "label": "Forest Route to Resort",
+      "points": [
+        [
+          0,
+          13
+        ],
+        [
+          0,
+          20
+        ],
+        [
+          7,
+          27
+        ],
+        [
+          8,
+          34
+        ],
+        [
+          -6,
+          42
+        ],
+        [
+          -9,
+          49
+        ],
+        [
+          6,
+          58
+        ],
+        [
+          10,
+          68
+        ],
+        [
+          -5,
+          79
+        ],
+        [
+          -8,
+          87
+        ],
+        [
+          6,
+          97
+        ],
+        [
+          7,
+          103
+        ],
+        [
+          0,
+          109
+        ],
+        [
+          0,
+          115
+        ]
+      ]
+    },
+    {
+      "id": "ski-central",
+      "label": "1 / Central Snow Trail",
+      "points": [
+        [
+          0,
+          115
+        ],
+        [
+          0,
+          132
+        ],
+        [
+          4,
+          139
+        ],
+        [
+          0,
+          146
+        ],
+        [
+          0,
+          153
+        ]
+      ]
+    },
+    {
+      "id": "ski-west",
+      "label": "2 / Western Forest Trail",
+      "points": [
+        [
+          0,
+          115
+        ],
+        [
+          -7,
+          122
+        ],
+        [
+          -12,
+          130
+        ],
+        [
+          -16,
+          139
+        ],
+        [
+          -9,
+          149
+        ],
+        [
+          0,
+          153
+        ]
+      ]
+    },
+    {
+      "id": "ski-east",
+      "label": "3 / Eastern Contour Trail",
+      "points": [
+        [
+          0,
+          115
+        ],
+        [
+          9,
+          121
+        ],
+        [
+          14,
+          131
+        ],
+        [
+          15,
+          140
+        ],
+        [
+          9,
+          148
+        ],
+        [
+          0,
+          153
+        ]
+      ]
+    },
+    {
+      "id": "lighthouse-trail",
+      "label": "Lighthouse Upper Trail",
+      "points": [
+        [
+          19,
+          4
+        ],
+        [
+          23,
+          3
+        ],
+        [
+          26,
+          -1
+        ],
+        [
+          26,
+          -7
+        ],
+        [
+          26.5,
+          -8
+        ]
+      ]
+    },
+    {
+      "id": "beach-west",
+      "label": "West Beach Ramp",
+      "points": [
+        [
+          -20,
+          -16
+        ],
+        [
+          -18,
+          -20
+        ],
+        [
+          -10,
+          -23
+        ],
+        [
+          -3,
+          -23
+        ]
+      ]
+    },
+    {
+      "id": "beach-east",
+      "label": "East Beach and Cave Access",
+      "points": [
+        [
+          20,
+          -16
+        ],
+        [
+          18,
+          -21
+        ],
+        [
+          20,
+          -23
+        ],
+        [
+          24,
+          -23
+        ]
+      ]
+    },
+    {
+      "id": "cave",
+      "label": "Covered Cave to Hidden Beach",
+      "points": [
+        [
+          24,
+          -23
+        ],
+        [
+          28,
+          -16
+        ],
+        [
+          32,
+          -8
+        ],
+        [
+          33,
+          1
+        ]
+      ]
+    }
+  ],
+  "captures": 38,
+  "renderErrors": []
+}

@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-09-08T03:41:01.649Z",
+  "method": "Authored route centerlines sampled every 0.12 chart metres using the actual spherical support and capsule collision modules, including segmented walls, furniture, tangent floors and pier rails. This static check complements actual movement tests; it does not prove every road edge or camera view.",
+  "primaryBuildings": 26,
+  "secondaryBuildings": 12,
+  "interiors": [
+    "studio",
+    "about",
+    "workshop",
+    "lab",
+    "arcade"
+  ],
+  "routes": 21,
+  "sampleCount": 4957,
+  "findings": []
+}

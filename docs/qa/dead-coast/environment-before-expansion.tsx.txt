@@ -1,0 +1,387 @@
+'use client';
+
+import { useEffect, useMemo, useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+import { BUILDINGS, RADIUS, SEA_LEVEL, STAIRS, directionAt, frameAt, heightAt, terrainHeightAt, pointAt } from '../data/planet';
+import { SceneryBatch, variation } from './sceneryGeometry';
+
+const C = {
+  bone: '#e9dfc8', plaster: '#d3cbb7', concrete: '#b4b5a5', graphite: '#343e3d',
+  slate: '#5e7478', blue: '#718f96', rust: '#ac7153', glass: '#344e55',
+  grass: '#78916a', grassLight: '#91a77a', forest: '#567963', leaf: '#759365',
+  sand: '#d2c59d', wetSand: '#a9b4a0', rock: '#999f8b', light: '#e4bf7d',
+};
+type Triple = [number, number, number];
+type SignData = { title: string; subtitle?: string; matrix: THREE.Matrix4; width: number; height: number; dark?: boolean };
+const box = new THREE.BoxGeometry(1, 1, 1);
+const foliage = new THREE.IcosahedronGeometry(1, 1);
+const rock = new THREE.DodecahedronGeometry(1, 0);
+const cylinder = new THREE.CylinderGeometry(1, 1, 1, 8);
+
+function placement(lon: number, lat: number, elevation?: number) {
+  const frame = frameAt(lon, lat);
+  return new THREE.Matrix4().compose(elevation === undefined ? frame.position : pointAt(lon, lat, elevation), frame.quaternion, new THREE.Vector3(1, 1, 1));
+}
+
+function makeTerrain() {
+  // Six subdivided cube faces avoid a longitude pinch at either pole.
+  const geometry = new THREE.BoxGeometry(2, 2, 2, 80, 80, 80);
+  const positions = geometry.getAttribute('position');
+  const colors = new Float32Array(positions.count * 3);
+  const up = new THREE.Vector3();
+  const color = new THREE.Color();
+  for (let i = 0; i < positions.count; i++) {
+    up.fromBufferAttribute(positions, i).normalize();
+    const elevation = terrainHeightAt(up);
+    const lat = Math.asin(up.y), lon = Math.atan2(up.x, up.z);
+    const noise = Math.sin(lon * 31 + lat * 13) * Math.cos(lat * 39 - lon * 17);
+    if (elevation < SEA_LEVEL + 0.08) color.set(C.wetSand);
+    else if (lat < -0.3 && elevation < 0.65) color.set(C.sand);
+    else if (Math.abs(lat) < 0.32) color.set(C.concrete);
+    else color.set(elevation > 3.5 ? C.rock : C.grass);
+    color.multiplyScalar(0.985 + noise * 0.015);
+    colors.set([color.r, color.g, color.b], i * 3);
+    up.multiplyScalar(RADIUS + elevation);
+    positions.setXYZ(i, up.x, up.y, up.z);
+  }
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  geometry.computeVertexNormals();
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
+function ribbon(lonStart: number, lonEnd: number, latStart: number, latEnd: number, lift = 0.026, segments = 480, fixedElevation?: number) {
+  const positions: number[] = [], indices: number[] = [];
+  for (let i = 0; i <= segments; i++) {
+    const lon = THREE.MathUtils.lerp(lonStart, lonEnd, i / segments);
+    for (const lat of [latStart, latEnd]) {
+      const p = pointAt(lon, lat, (fixedElevation ?? heightAt(directionAt(lon, lat))) + lift);
+      positions.push(p.x, p.y, p.z);
+    }
+    if (i < segments) { const a = i * 2; indices.push(a, a + 2, a + 1, a + 2, a + 3, a + 1); }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  g.setIndex(indices); g.computeVertexNormals();
+  return g;
+}
+
+function makeStreets() {
+  const batch = new SceneryBatch(), identity = new THREE.Matrix4();
+  const add = (g: THREE.BufferGeometry, color: string) => { batch.add(g, identity, color); g.dispose(); };
+  const band = (a: number, b: number, color: string, h: number) => add(ribbon(-Math.PI, Math.PI, a, b, 0.018, 640, h), color);
+  band(-0.064, 0.064, '#697b7a', 0.25);
+  band(-0.116, -0.064, C.plaster, 0.45); band(0.064, 0.116, C.plaster, 0.45);
+  band(-0.069, -0.064, C.bone, 0.456); band(0.064, 0.069, C.bone, 0.456);
+  band(-0.059, -0.057, C.bone, 0.253); band(0.057, 0.059, C.bone, 0.253);
+  for (let i = 0; i < 232; i++) {
+    const lon = i / 232 * Math.PI * 2 - Math.PI;
+    for (const side of [-1, 1]) {
+      batch.shape(box, placement(lon, side * 0.09), [0, 0.023, 0], [0.022, 0.008, 1.77], '#a5aa9a');
+      batch.shape(box, placement(lon, side * 0.064, 0.45), [0, -0.1, 0], [1.01, 0.2, 0.065], C.bone);
+    }
+    if (i % 5 === 0) batch.shape(box, placement(lon, 0), [0, 0.029, 0], [0.78, 0.012, 0.095], C.bone);
+  }
+  for (const cross of [-0.45, 0.12, 1.28, 2.8, -2.1]) for (let i = 0; i < 7; i++) {
+    batch.shape(box, placement(cross + (i - 3) * 0.016, 0), [0, 0.033, 0], [0.32, 0.012, 3.72], C.bone);
+  }
+  // Paths fit through the actual gaps between buildings, descending to coves.
+  for (const lon of [-0.6, 0.30, 0.69, 1.88, -1.89]) {
+    for (let i = 0; i < 24; i++) {
+      const lat = -0.117 - i * 0.012;
+      const bend = Math.sin(i / 24 * Math.PI) * 0.024;
+      if (terrainHeightAt(directionAt(lon + bend, lat)) <= SEA_LEVEL + 0.06) break;
+      add(ribbon(lon + bend - 0.033, lon + bend + 0.033, lat - 0.012, lat, 0.025, 8), i < 10 ? '#b2b3a2' : '#c4bd9b');
+    }
+  }
+  // Exact raised treads match the controller's staircase height function.
+  for (let i = 0; i < STAIRS.count; i++) {
+    const lat = STAIRS.startLat + i * STAIRS.treadAngle;
+    const h = STAIRS.baseHeight + (i + 1) * STAIRS.rise;
+    const half = STAIRS.width / (2 * RADIUS);
+    add(ribbon(STAIRS.lon - half, STAIRS.lon + half, lat, lat + STAIRS.treadAngle, 0.008, 12, h), C.plaster);
+    add(ribbon(STAIRS.lon - half, STAIRS.lon + half, lat, lat + 0.0018, 0.014, 12, h), C.bone);
+    const m = placement(STAIRS.lon, lat + STAIRS.treadAngle / 2, h);
+    batch.shape(box, m, [0, -STAIRS.rise / 2, 0], [STAIRS.width, STAIRS.rise, STAIRS.treadAngle * RADIUS], C.plaster);
+    for (const side of [-1, 1]) {
+      const edge = placement(STAIRS.lon + side * (half + 0.003), lat, h);
+      batch.shape(box, edge, [0, -0.15, 0], [0.18, 0.32, STAIRS.treadAngle * RADIUS + 0.1], C.bone);
+      if (i % 3 === 0) batch.shape(box, edge, [0, 0.47, 0], [0.065, 0.94, 0.065], C.graphite);
+    }
+  }
+  for (const side of [-1, 1]) for (let i = 0; i < STAIRS.count - 1; i++) {
+    const lon = STAIRS.lon + side * (STAIRS.width / (2 * RADIUS) + 0.003);
+    const lat = STAIRS.startLat + i * STAIRS.treadAngle;
+    const start = pointAt(lon, lat, STAIRS.baseHeight + (i + 1) * STAIRS.rise + 0.94);
+    const end = pointAt(lon, lat + STAIRS.treadAngle, STAIRS.baseHeight + (i + 2) * STAIRS.rise + 0.94);
+    const delta = end.clone().sub(start);
+    const matrix = new THREE.Matrix4().compose(start.clone().lerp(end, 0.5), new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), delta.clone().normalize()), new THREE.Vector3(0.038, delta.length(), 0.038));
+    batch.add(cylinder, matrix, C.graphite);
+  }
+  return batch.finish();
+}
+
+function makeCoast() {
+  const positions: number[] = [], indices: number[] = [], colors: number[] = [];
+  const color = new THREE.Color(), segments = 480;
+  for (let i = 0; i <= segments; i++) {
+    const lon = i / segments * Math.PI * 2 - Math.PI;
+    let shoreLat = -0.2;
+    while (shoreLat > -1.52 && terrainHeightAt(directionAt(lon, shoreLat)) > SEA_LEVEL) shoreLat -= 0.005;
+    for (let j = 0; j < 4; j++) {
+      const p = pointAt(lon, shoreLat - j * 0.014, SEA_LEVEL + 0.014 + j * 0.001);
+      positions.push(p.x, p.y, p.z);
+      color.set(['#d0d9bd', '#a4c1b7', '#83aaa7', '#67949a'][j]); colors.push(color.r, color.g, color.b);
+    }
+    if (i < segments) for (let j = 0; j < 3; j++) { const a = i * 4 + j; indices.push(a, a + 1, a + 4, a + 1, a + 5, a + 4); }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  g.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  g.setIndex(indices); g.computeVertexNormals(); return g;
+}
+
+function buildScenery() {
+  const architecture = new SceneryBatch(), greenery = new SceneryBatch(), stones = new SceneryBatch(), illuminated = new SceneryBatch();
+  const signs: SignData[] = [], wirePoints: number[] = [];
+  const labels: Record<string, [string, string]> = {
+    studio: ['STUDIO', 'WESTCOSE / PROJECTS'], workshop: ['WORKSHOP', 'IDEAS INTO REAL THINGS'],
+    arcade: ['ARCADE', 'GAMES & EXPERIMENTS'],
+  };
+  const b = (parent: THREE.Matrix4, p: Triple, s: Triple, color: string, rotation?: Triple) => architecture.shape(box, parent, p, s, color, rotation);
+  const plant = (parent: THREE.Matrix4, p: Triple, s: Triple, color = C.leaf, seed = 1) => greenery.shape(foliage, parent, p, s, color, [0.1, seed, 0.12]);
+  const sign = (parent: THREE.Matrix4, title: string, subtitle: string, p: Triple, width: number, height: number, angle = 0, dark = false) => {
+    const local = new THREE.Matrix4().compose(new THREE.Vector3(...p), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), angle), new THREE.Vector3(1, 1, 1));
+    signs.push({ title, subtitle, matrix: parent.clone().multiply(local), width, height, dark });
+  };
+  BUILDINGS.forEach((building, index) => {
+    const { width: w, depth: d, height: h, lon, lat } = building;
+    const m = placement(lon, lat);
+    if (building.rotation) m.multiply(new THREE.Matrix4().makeRotationY(building.rotation));
+    const front = lat > 0 ? 1 : -1, fz = front * (d / 2 + 0.045);
+    const wall = building.color, trim = index % 3 === 0 ? C.blue : index % 3 === 1 ? C.bone : C.slate;
+    const roof = index % 3 === 0 ? C.slate : C.graphite;
+    b(m, [0, h / 2 - 0.06, 0], [w, h, d], wall);
+    b(m, [0, 0.09, 0], [w + 0.13, 0.38, d + 0.13], '#929b8e');
+    b(m, [0, h + 0.04, 0], [w + 0.36, 0.2, d + 0.38], roof);
+    b(m, [0, h - 0.2, fz + front * 0.02], [w + 0.14, 0.16, 0.19], trim);
+    if (index % 3 !== 1) {
+      const rise = 0.44, angle = Math.atan2(rise, d / 2);
+      for (const side of [-1, 1]) b(m, [0, h + rise / 2 + 0.13, side * d / 4], [w + 0.45, 0.16, Math.hypot(d / 2, rise) + 0.22], roof, [side * angle, 0, 0]);
+    } else {
+      for (const side of [-1, 1]) {
+        b(m, [0, h + 0.38, side * (d / 2 - 0.05)], [w, 0.64, 0.15], wall);
+        b(m, [side * (w / 2 - 0.07), h + 0.38, 0], [0.15, 0.64, d], wall);
+      }
+    }
+    b(m, [w * 0.29, 1.05, fz], [0.97, 2.08, 0.12], C.graphite);
+    b(m, [w * 0.29, 1.12, fz + front * 0.075], [0.78, 1.93, 0.06], trim);
+    illuminated.shape(box, m, [w * 0.29, 1.6, fz + front * 0.12], [0.55, 0.61, 0.02], index % 4 === 0 ? C.light : C.glass);
+    b(m, [w * 0.29 + 0.25, 0.91, fz + front * 0.15], [0.045, 0.19, 0.05], C.bone);
+    const bayW = w * 0.47;
+    b(m, [-w * 0.17, 1.15, fz], [bayW, 2.27, 0.12], C.graphite);
+    for (let i = 0; i < 12; i++) b(m, [-w * 0.17, 0.2 + i * 0.172, fz + front * 0.075], [bayW - 0.11, 0.035, 0.055], C.slate);
+    const awningY = Math.min(h - 0.75, 2.6);
+    if (index % 4 !== 3) for (let i = 0; i < 7; i++) {
+      const aw = w * 0.8 / 7, color = i % 2 === 0 ? C.bone : index % 2 ? C.blue : C.rust;
+      b(m, [-w * 0.4 + (i + 0.5) * aw, awningY, fz + front * 0.4], [aw, 0.085, 0.84], color, [front * 0.12, 0, 0]);
+      b(m, [-w * 0.4 + (i + 0.5) * aw, awningY - 0.13, fz + front * 0.8], [aw, 0.24, 0.06], color);
+    }
+    const floors = Math.max(1, Math.floor((h - 2.4) / 2));
+    for (let floor = 0; floor < floors; floor++) {
+      const y = 3.25 + floor * 1.95;
+      if (y + 0.53 > h - 0.3) continue;
+      for (let column = 0; column < 2; column++) {
+        const x = (column - 0.5) * w * 0.49;
+        b(m, [x, y, fz + front * 0.05], [1.4, 1.43, 0.12], trim);
+        illuminated.shape(box, m, [x, y, fz + front * 0.125], [1.16, 1.19, 0.02], (index + column + floor) % 5 === 0 ? C.light : C.glass);
+        b(m, [x, y, fz + front * 0.16], [0.045, 1.22, 0.035], C.bone);
+        b(m, [x, y - 0.72, fz + front * 0.11], [1.61, 0.12, 0.32], C.bone);
+        if (index % 2 === 0) for (const side of [-1, 1]) b(m, [x + side * 0.87, y, fz + front * 0.04], [0.29, 1.35, 0.07], C.blue);
+      }
+      if (floor === 0 && index % 3 === 1) {
+        const z = fz + front * 0.67;
+        b(m, [0, y - 0.9, z], [w * 0.86, 0.13, 1.2], C.plaster);
+        b(m, [0, y - 0.12, z + front * 0.58], [w * 0.85, 0.065, 0.075], C.graphite);
+        for (let rail = 0; rail < 11; rail++) b(m, [(rail / 10 - 0.5) * w * 0.84, y - 0.48, z + front * 0.58], [0.043, 0.74, 0.044], C.graphite);
+      }
+    }
+    for (const side of [-1, 1]) for (let i = 0; i < 2; i++) {
+      b(m, [side * (w / 2 + 0.022), 2.7, (i - 0.5) * d * 0.45], [0.07, 1.35, 1.07], trim);
+      b(m, [side * (w / 2 + 0.066), 2.7, (i - 0.5) * d * 0.45], [0.025, 1.12, 0.84], C.glass);
+    }
+    b(m, [w * 0.46, h * 0.48, fz], [0.07, h * 0.94, 0.075], C.slate);
+    b(m, [-w * 0.27, h + 0.55, -d * 0.15], [0.94, 0.58, 0.66], C.slate);
+    for (let i = 0; i < 5; i++) b(m, [-w * 0.27, h + 0.34 + i * 0.09, -d * 0.15 + 0.345], [0.75, 0.025, 0.035], C.graphite);
+    architecture.shape(cylinder, m, [w * 0.21, h + 0.83, -d * 0.2], [0.16, 1.08, 0.16], C.slate);
+    b(m, [w * 0.21, h + 1.39, -d * 0.2], [0.47, 0.08, 0.47], C.graphite);
+    if (index % 3 === 0) {
+      b(m, [-w * 0.41, 0.37, fz + front * 0.4], [0.62, 0.71, 0.65], C.rust);
+      plant(m, [-w * 0.41, 0.91, fz + front * 0.4], [0.47, 0.56, 0.43], C.leaf, index);
+    }
+    const label = labels[building.kind];
+    if (label) {
+      const balcony = index % 3 === 1;
+      const sy = Math.min(h - 0.5, balcony ? 2.94 : 3.05);
+      const signZ = fz + front * (balcony ? 1.32 : 0.11);
+      b(m, [0, sy, signZ], [w * 0.86, 0.77, 0.12], C.graphite);
+      sign(m, label[0], label[1], [0, sy, signZ + front * 0.066], w * 0.8, 0.66, front < 0 ? Math.PI : 0, true);
+      if (building.kind === 'studio') {
+        for (const side of [-1, 1]) b(m, [side * w * 0.3, h + 1.12, 0], [0.08, 1.8, 0.08], C.graphite);
+        b(m, [0, h + 1.75, 0], [w + 0.4, 1.04, 0.19], C.bone);
+        sign(m, 'WESTCOSE', 'A LITTLE WORLD OF THINGS WE MAKE', [0, h + 1.75, front * 0.107], w + 0.18, 0.87, front < 0 ? Math.PI : 0);
+      }
+      if (building.kind === 'arcade') {
+        b(m, [w * 0.31, 0.65, fz + front * 0.66], [0.75, 1.3, 0.68], C.rust);
+        b(m, [w * 0.31, 1.29, fz + front * 0.64], [0.82, 0.53, 0.64], C.graphite);
+        sign(m, 'FIGHTCLUB', 'PLAY', [w * 0.31, 1.37, fz + front * 0.974], 0.67, 0.35, front < 0 ? Math.PI : 0, true);
+      }
+    }
+  });
+  for (let i = 0; i < 34; i++) {
+    const lon = i / 34 * Math.PI * 2 - Math.PI, side = i % 2 ? 1 : -1;
+    const m = placement(lon, side * 0.105);
+    architecture.shape(cylinder, m, [0, 1.6, 0], [0.044, 3.2, 0.044], C.graphite);
+    b(m, [0, 3.18, side * 0.35], [0.07, 0.07, 0.75], C.graphite);
+    b(m, [0, 3.15, side * 0.69], [0.37, 0.12, 0.49], C.graphite);
+    illuminated.shape(box, m, [0, 3.075, side * 0.69], [0.28, 0.026, 0.37], C.light);
+    if (i % 4 === 0) {
+      const bench = placement(lon + 0.05, side * 0.108);
+      for (let slat = 0; slat < 3; slat++) b(bench, [0, 0.47, (slat - 1) * 0.17], [1.62, 0.075, 0.14], C.rust);
+      b(bench, [0, 0.84, -side * 0.23], [1.62, 0.39, 0.075], C.rust);
+      for (const leg of [-0.58, 0.58]) b(bench, [leg, 0.24, 0], [0.085, 0.48, 0.46], C.graphite);
+    }
+  }
+  for (let i = 0; i < 8; i++) {
+    const lon = -0.84 + i * 0.27, lat = 0.13;
+    const p1 = pointAt(lon, lat, heightAt(directionAt(lon, lat)) + 5.1);
+    const p2 = pointAt(lon + 0.27, lat, heightAt(directionAt(lon + 0.27, lat)) + 5.1);
+    const m = placement(lon, lat);
+    architecture.shape(cylinder, m, [0, 2.55, 0], [0.047, 5.1, 0.047], '#6c7265');
+    b(m, [0, 4.7, 0], [0.78, 0.055, 0.055], C.graphite);
+    let previous = p1;
+    for (let j = 1; j <= 14; j++) {
+      const t = j / 14, p = p1.clone().lerp(p2, t);
+      p.addScaledVector(p.clone().normalize(), -Math.sin(t * Math.PI) * 0.36);
+      wirePoints.push(previous.x, previous.y, previous.z, p.x, p.y, p.z); previous = p;
+    }
+  }
+  const clearOfBuildings = (lon: number, lat: number, margin: number) => {
+    const p = pointAt(lon, lat);
+    if (lat > STAIRS.startLat && lat < 0.56 && Math.abs(lon - STAIRS.lon) < 0.085) return false;
+    return BUILDINGS.every((building) => {
+      const frame = frameAt(building.lon, building.lat);
+      const local = p.clone().sub(frame.position).applyQuaternion(frame.quaternion.clone().invert());
+      return Math.abs(local.x) > building.width / 2 + margin || Math.abs(local.z) > building.depth / 2 + margin || Math.abs(local.y) > 5;
+    });
+  };
+  for (let i = 0; i < 186; i++) {
+    const lon = variation(i + 70) * Math.PI * 2 - Math.PI, lat = 0.28 + variation(i + 701) * 1.2;
+    if (!clearOfBuildings(lon, lat, 0.9) || heightAt(directionAt(lon, lat)) <= SEA_LEVEL + 0.3) continue;
+    const m = placement(lon, lat), h = 1.5 + variation(i + 50) * 1.75;
+    architecture.shape(cylinder, m, [0, h * 0.4, 0], [0.14, h * 0.8, 0.14], '#746e59', [0.08, i, 0.07]);
+    const canopy = i % 3 === 0 ? C.forest : i % 3 === 1 ? C.leaf : '#8ca06e';
+    plant(m, [0, h + 0.35, 0], [h * 0.59, h * 0.65, h * 0.53], canopy, i);
+    plant(m, [h * 0.36, h * 0.89, -0.2], [h * 0.42, h * 0.4, h * 0.45], canopy, i + 3);
+    if (i % 3 === 0) plant(m, [-0.65, 0.33, 0.47], [0.8, 0.47, 0.65], C.forest, i);
+  }
+  for (let i = 0; i < 76; i++) {
+    const lon = variation(i + 800) * Math.PI * 2 - Math.PI, lat = -0.37 - variation(i + 30) * 0.56;
+    const elevation = heightAt(directionAt(lon, lat));
+    if (elevation < SEA_LEVEL - 0.5 || !clearOfBuildings(lon, lat, 1)) continue;
+    const m = placement(lon, lat), scale = 0.36 + variation(i + 610) * 1.12;
+    stones.shape(rock, m, [0, scale * 0.3, 0], [scale * 1.27, scale * 0.75, scale], i % 3 ? C.rock : '#b5b5a0', [0.16, i, 0.12]);
+    if (elevation > 0.2 && i % 4 === 0) plant(m, [0.42, 0.4, 0.24], [0.83, 0.55, 0.73], C.leaf, i);
+  }
+  const contact = placement(0.65, 0.106);
+  b(contact, [0, 0.7, 0], [0.75, 1.4, 0.54], C.blue);
+  b(contact, [0, 1.5, 0], [0.91, 0.25, 0.71], C.graphite);
+  sign(contact, 'HELLO.', 'CONTACT WESTCOSE', [0, 1.13, 0.281], 0.65, 0.48, 0, true);
+  const beach = placement(0.705, -0.37);
+  b(beach, [0, 0.42, 0], [1.35, 0.12, 0.75], C.rust);
+  for (const x of [-0.5, 0.5]) b(beach, [x, 0.21, 0], [0.12, 0.42, 0.65], C.graphite);
+  b(beach, [0.18, 0.7, 0], [0.5, 0.44, 0.32], C.graphite);
+  b(beach, [0.18, 0.68, -0.17], [0.43, 0.33, 0.026], C.slate);
+  illuminated.shape(box, beach, [0.18, 0.79, -0.189], [0.29, 0.085, 0.02], C.light);
+  for (let i = 0; i < 4; i++) b(beach, [0.14, 0.55 + i * 0.044, -0.193], [0.22, 0.018, 0.02], C.graphite);
+  b(beach, [0.34, 0.62, -0.201], [0.055, 0.055, 0.035], C.bone);
+  b(beach, [0.38, 1.05, 0.02], [0.015, 0.4, 0.015], C.graphite, [0, 0, -0.15]);
+  sign(beach, 'COASTAL FREQUENCY', 'A SIGNAL FROM SOMEWHERE ELSE', [-0.32, 1.36, 0.04], 1.42, 0.52, Math.PI);
+  b(beach, [-0.32, 0.93, 0.105], [0.065, 0.86, 0.065], C.rust);
+  const lookout = placement(2.7, 0.83);
+  for (const x of [-1.5, 1.5]) for (const z of [-1.5, 1.5]) b(lookout, [x, 1.47, z], [0.15, 2.94, 0.15], C.rust);
+  b(lookout, [0, 3.02, 0], [3.55, 0.17, 3.55], C.graphite);
+  for (const x of [-1.5, 1.5]) b(lookout, [x, 0.94, 0], [0.1, 0.1, 3.04], C.bone);
+  b(lookout, [0, 0.94, -1.5], [3.04, 0.1, 0.1], C.bone);
+  sign(lookout, 'KEEP WANDERING', 'THERE IS ALWAYS ANOTHER SIDE', [0, 2.48, 1.585], 2.67, 0.61, 0, true);
+  const wires = new THREE.BufferGeometry(); wires.setAttribute('position', new THREE.Float32BufferAttribute(wirePoints, 3));
+  return { architecture: architecture.finish(), greenery: greenery.finish(), stones: stones.finish(), illuminated: illuminated.finish(), wires, signs };
+}
+
+function Sign({ title, subtitle, matrix, width, height, dark = false }: SignData) {
+  const texture = useMemo(() => {
+    const canvas = document.createElement('canvas'); canvas.width = 1024; canvas.height = Math.max(128, Math.round(1024 * height / width));
+    const ctx = canvas.getContext('2d')!;
+    ctx.fillStyle = dark ? C.graphite : C.bone; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = dark ? C.bone : C.graphite; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `900 ${canvas.height * (subtitle ? 0.5 : 0.66)}px Arial, sans-serif`;
+    ctx.fillText(title, 512, canvas.height * (subtitle ? 0.4 : 0.52), 950);
+    if (subtitle) { ctx.font = `600 ${canvas.height * 0.12}px Arial, sans-serif`; ctx.fillText(subtitle, 512, canvas.height * 0.83, 900); }
+    const result = new THREE.CanvasTexture(canvas); result.colorSpace = THREE.SRGBColorSpace; result.anisotropy = 4; return result;
+  }, [dark, height, subtitle, title, width]);
+  useEffect(() => () => texture.dispose(), [texture]);
+  return <mesh matrix={matrix} matrixAutoUpdate={false}><planeGeometry args={[width, height]} /><meshStandardMaterial map={texture} roughness={1} /></mesh>;
+}
+
+const waterVertex = `
+  varying vec3 vWorld;
+  varying vec3 vNormal;
+  void main() {
+    vec4 world = modelMatrix * vec4(position, 1.0);
+    vWorld = world.xyz; vNormal = normalize(mat3(modelMatrix) * normal);
+    gl_Position = projectionMatrix * viewMatrix * world;
+  }
+`;
+const waterFragment = `
+  uniform float time;
+  varying vec3 vWorld;
+  varying vec3 vNormal;
+  void main() {
+    vec3 n = normalize(vNormal);
+    float ripple = sin(vWorld.x * 1.8 + vWorld.z * 0.55 + time * 0.28) * sin(vWorld.y * 1.6 - vWorld.z * 0.9 - time * 0.17);
+    float fine = sin(vWorld.x * 5.7 + vWorld.y * 3.8 + time * 0.36) * sin(vWorld.z * 4.4 - vWorld.y * 2.1 - time * 0.22);
+    float facing = max(dot(n, normalize(cameraPosition - vWorld)), 0.0);
+    float light = 0.78 + 0.22 * max(dot(n, normalize(vec3(0.6, 0.8, 1.0))), 0.0);
+    vec3 water = mix(vec3(0.055, 0.145, 0.18), vec3(0.20, 0.37, 0.39), pow(1.0 - facing, 2.0));
+    water += ripple * 0.005; water += smoothstep(0.88, 0.98, fine) * 0.035;
+    gl_FragColor = vec4(water * light, 1.0);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+  }
+`;
+function Ocean() {
+  const material = useRef<THREE.ShaderMaterial>(null), uniforms = useMemo(() => ({ time: { value: 0 } }), []);
+  useFrame((_, dt) => { if (material.current) material.current.uniforms.time.value += Math.min(dt, 0.05); });
+  return <mesh><sphereGeometry args={[RADIUS + SEA_LEVEL, 128, 80]} /><shaderMaterial ref={material} uniforms={uniforms} vertexShader={waterVertex} fragmentShader={waterFragment} /></mesh>;
+}
+
+/** A closed planet: every district and coastline shares the walking surface. */
+export default function Environment() {
+  const world = useMemo(() => ({ terrain: makeTerrain(), streets: makeStreets(), coast: makeCoast(), ...buildScenery() }), []);
+  useEffect(() => () => { for (const value of Object.values(world)) if (value instanceof THREE.BufferGeometry) value.dispose(); }, [world]);
+  return (
+    <group>
+      <mesh geometry={world.terrain} receiveShadow><meshStandardMaterial vertexColors roughness={1} /></mesh>
+      <mesh geometry={world.streets} receiveShadow><meshStandardMaterial vertexColors roughness={1} side={THREE.DoubleSide} /></mesh>
+      <Ocean />
+      <mesh geometry={world.coast}><meshStandardMaterial vertexColors roughness={0.94} side={THREE.DoubleSide} /></mesh>
+      <mesh geometry={world.architecture} castShadow receiveShadow userData={{ cameraObstacle: true }}><meshStandardMaterial vertexColors roughness={0.95} /></mesh>
+      <mesh geometry={world.greenery} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={1} flatShading /></mesh>
+      <mesh geometry={world.stones} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={1} flatShading /></mesh>
+      <mesh geometry={world.illuminated}><meshStandardMaterial vertexColors roughness={0.78} emissive='#998668' emissiveIntensity={0.12} /></mesh>
+      <lineSegments geometry={world.wires}><lineBasicMaterial color='#545e55' /></lineSegments>
+      {world.signs.map((s, i) => <Sign key={i} {...s} />)}
+    </group>
+  );
+}

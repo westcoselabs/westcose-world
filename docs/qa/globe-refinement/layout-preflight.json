@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-09-12T20:46:33.745Z",
+  "method": "Authored route centerlines sampled every 0.12 chart metres using the actual spherical support and capsule collision modules, including segmented walls, furniture, tangent floors and pier rails. This static check complements actual movement tests; it does not prove every road edge or camera view.",
+  "primaryBuildings": 9,
+  "secondaryBuildings": 0,
+  "interiors": [
+    "studio",
+    "workshop",
+    "arcade",
+    "about",
+    "lab"
+  ],
+  "routes": 20,
+  "sampleCount": 5324,
+  "findings": [],
+  "reviewApproaches": [
+    {
+      "label": "lighthouse-approach",
+      "x": 24.5,
+      "z": -10,
+      "facing": {
+        "east": 11.5,
+        "north": -17
+      },
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    },
+    {
+      "label": "lighthouse-from-beach",
+      "x": 14,
+      "z": -29,
+      "facing": {
+        "east": 22,
+        "north": 2
+      },
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    },
+    {
+      "label": "lighthouse-from-pier",
+      "x": 0,
+      "z": -43,
+      "facing": {
+        "east": 1,
+        "north": 0.25
+      },
+      "supportKind": "pier",
+      "interior": null,
+      "contact": null
+    },
+    {
+      "label": "lighthouse-destination",
+      "x": 32.8,
+      "z": -27,
+      "facing": {
+        "east": 3.200000000000003,
+        "north": 0
+      },
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    },
+    {
+      "label": "hidden-beach-open",
+      "x": 36,
+      "z": 5,
+      "facing": "east",
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    },
+    {
+      "label": "cave-exterior-entry",
+      "x": 20,
+      "z": -33,
+      "facing": {
+        "east": 4,
+        "north": 4
+      },
+      "supportKind": "ground",
+      "interior": null,
+      "contact": null
+    }
+  ]
+}

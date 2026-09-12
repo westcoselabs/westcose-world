@@ -1,0 +1,37 @@
+{
+  "/projects": {
+    "transferBytes": 266548,
+    "encodedBodyBytes": 258748,
+    "decodedBodyBytes": 643197,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/services": {
+    "transferBytes": 266019,
+    "encodedBodyBytes": 258519,
+    "decodedBodyBytes": 641944,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/world": {
+    "transferBytes": 512628,
+    "encodedBodyBytes": 507228,
+    "decodedBodyBytes": 1556697,
+    "debugExposed": false,
+    "canvasCount": 1,
+    "externalRequests": [],
+    "errors": [],
+    "scriptRequests": 9,
+    "heavyChunks": [
+      "http://127.0.0.1:3001/_next/static/chunks/3brfk1zhgzku5.js"
+    ]
+  }
+}

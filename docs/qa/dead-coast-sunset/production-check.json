@@ -1,0 +1,76 @@
+{
+  "/projects": {
+    "transferBytes": 266586,
+    "encodedBodyBytes": 258786,
+    "decodedBodyBytes": 643417,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/about": {
+    "transferBytes": 266073,
+    "encodedBodyBytes": 258573,
+    "decodedBodyBytes": 642163,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/services": {
+    "transferBytes": 266043,
+    "encodedBodyBytes": 258543,
+    "decodedBodyBytes": 642032,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/games": {
+    "transferBytes": 266085,
+    "encodedBodyBytes": 258585,
+    "decodedBodyBytes": 642222,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/labs": {
+    "transferBytes": 266042,
+    "encodedBodyBytes": 258542,
+    "decodedBodyBytes": 642005,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/world": {
+    "transferBytes": 538240,
+    "encodedBodyBytes": 532840,
+    "decodedBodyBytes": 1629472,
+    "debugExposed": false,
+    "canvasCount": 1,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 9,
+    "heavyChunks": [
+      "http://127.0.0.1:3001/_next/static/chunks/3pcs5moe4zl7r.js"
+    ]
+  }
+}

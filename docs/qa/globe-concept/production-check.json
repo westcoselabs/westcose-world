@@ -1,0 +1,88 @@
+{
+  "/projects": {
+    "transferBytes": 266618,
+    "encodedBodyBytes": 258818,
+    "decodedBodyBytes": 643497,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/about": {
+    "transferBytes": 266096,
+    "encodedBodyBytes": 258596,
+    "decodedBodyBytes": 642195,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/services": {
+    "transferBytes": 266067,
+    "encodedBodyBytes": 258567,
+    "decodedBodyBytes": 642064,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/games": {
+    "transferBytes": 266110,
+    "encodedBodyBytes": 258610,
+    "decodedBodyBytes": 642254,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/labs": {
+    "transferBytes": 266066,
+    "encodedBodyBytes": 258566,
+    "decodedBodyBytes": 642037,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/contact": {
+    "transferBytes": 266052,
+    "encodedBodyBytes": 258552,
+    "decodedBodyBytes": 642060,
+    "debugExposed": false,
+    "canvasCount": 0,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 7,
+    "heavyChunks": []
+  },
+  "/world": {
+    "transferBytes": 531837,
+    "encodedBodyBytes": 526437,
+    "decodedBodyBytes": 1611476,
+    "debugExposed": false,
+    "canvasCount": 1,
+    "externalRequests": [],
+    "errors": [],
+    "renderErrors": [],
+    "scriptRequests": 9,
+    "heavyChunks": [
+      "http://127.0.0.1:3001/_next/static/chunks/1g5-zbg1i68_9.js"
+    ]
+  }
+}

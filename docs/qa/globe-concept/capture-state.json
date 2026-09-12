@@ -1,0 +1,2122 @@
+{
+  "capturedAt": "2026-09-12T19:58:10.705Z",
+  "base": "http://127.0.0.1:3000",
+  "method": "Real browser captures of the procedural concept. Debug fixtures only place the existing player and camera; route traversability is checked separately by check-planet.mjs.",
+  "errors": [],
+  "views": [
+    {
+      "filename": "desktop-00-courtyard-load.jpg",
+      "label": "00-courtyard-load",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "fresh-load",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.18777616939494,
+          "z": 36.236484672217976
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894475,
+          "z": 0.22039774345612217
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612223,
+          "z": 0.9754100853894476
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222218,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.15,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 67,
+          "triangles": 437298,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-01-globe-overview.jpg",
+      "label": "01-globe-overview",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "overview",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": 8.18777616939494,
+          "z": 36.236484672217976
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894475,
+          "z": 0.22039774345612217
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612223,
+          "z": 0.9754100853894476
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222218,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.15,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-02-courtyard.jpg",
+      "label": "02-courtyard",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "courtyard",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.187776169394938,
+          "z": 36.23648467221797
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894477,
+          "z": 0.22039774345612226
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612217,
+          "z": 0.9754100853894474
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222215,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.14999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 67,
+          "triangles": 437298,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-03-promenade.jpg",
+      "label": "03-promenade",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "promenade",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -15.886887632372739,
+          "z": 33.36029528281131
+        },
+        "forward": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "up": {
+          "x": 0,
+          "y": -0.42995636352835553,
+          "z": 0.9028496693588987
+        },
+        "heading": 1.5707963267948966,
+        "lon": 0,
+        "lat": -0.4444444444444444,
+        "map": {
+          "x": 0,
+          "z": -16
+        },
+        "mapX": 0,
+        "mapZ": -16,
+        "radius": 36.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 437018,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-04-beach.jpg",
+      "label": "04-beach",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "beach",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -10.098836264082962,
+          "y": -20.320850905027324,
+          "z": 29.006001116542667
+        },
+        "forward": {
+          "x": 0.961667188493381,
+          "y": -0.15734094769589632,
+          "z": 0.22458861225225413
+        },
+        "up": {
+          "x": -0.27421928921072664,
+          "y": -0.5517833090484064,
+          "z": 0.7876159986188415
+        },
+        "heading": 1.7605948441074581,
+        "lon": -0.3350379691359348,
+        "lat": -0.584501021320306,
+        "map": {
+          "x": -10,
+          "z": -22
+        },
+        "mapX": -10,
+        "mapZ": -22,
+        "radius": 36.827592592592595,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 66,
+          "triangles": 436738,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-05-pierapproach.jpg",
+      "label": "05-pierapproach",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "pierapproach",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -14.51680669449017,
+          "z": 34.071300949549986
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9199757243026863,
+          "z": -0.3919753393949013
+        },
+        "up": {
+          "x": 0,
+          "y": -0.39197533939490126,
+          "z": 0.9199757243026861
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -0.4027777777777775,
+        "map": {
+          "x": 0,
+          "z": -14.5
+        },
+        "mapX": 0,
+        "mapZ": -14.5,
+        "radius": 37.03500000000001,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Boardwalk",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 435842,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-06-pieroutward.jpg",
+      "label": "06-pieroutward",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "pieroutward",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -33.37117707429825,
+          "z": 18.89674682784925
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.4927443762151043,
+          "z": -0.8701741088474121
+        },
+        "up": {
+          "x": 0,
+          "y": -0.870174108847412,
+          "z": 0.49274437621510425
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -1.0555555555555554,
+        "map": {
+          "x": 0,
+          "z": -38
+        },
+        "mapX": 0,
+        "mapZ": -38,
+        "radius": 38.35,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 435602,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-07-skatepark.jpg",
+      "label": "07-skatepark",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "skatepark",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -26.362379043902447,
+          "y": 11.452639837023893,
+          "z": 25.876971169536564
+        },
+        "forward": {
+          "x": -7.567710458548472e-17,
+          "y": 0.9144430665938305,
+          "z": -0.40471456356112473
+        },
+        "up": {
+          "x": -0.681638760023334,
+          "y": 0.29612514122880135,
+          "z": 0.6690878130455478
+        },
+        "heading": -0.292997314144624,
+        "lon": -0.7946898927714329,
+        "lat": 0.30063327829796455,
+        "map": {
+          "x": -26.999999999999996,
+          "z": 15
+        },
+        "mapX": -26.999999999999996,
+        "mapZ": 15,
+        "radius": 38.675,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Skate Park",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 415462,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-08-resort.jpg",
+      "label": "08-resort",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "resort",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -2.0787498885582005,
+          "z": -39.29505438220972
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9986036691794083,
+          "z": 0.052827189035786544
+        },
+        "up": {
+          "x": 0,
+          "y": -0.052827189035786544,
+          "z": -0.9986036691794083
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -0.052851790854651415,
+        "map": {
+          "x": 0,
+          "z": 114.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 114.99999999999997,
+        "radius": 39.349999999999994,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 54,
+          "triangles": 391854,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-09-summit.jpg",
+      "label": "09-summit",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "summit",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -45.51020886592346,
+          "z": -22.68354886211636
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.4460874899137929,
+          "z": 0.8949893582285835
+        },
+        "up": {
+          "x": 0,
+          "y": -0.8949893582285835,
+          "z": -0.4460874899137929
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -1.1084073464102069,
+        "map": {
+          "x": 0,
+          "z": 152.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 152.99999999999997,
+        "radius": 50.84999999999998,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Mountain Summit",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 412234,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-10-lighthouse.jpg",
+      "label": "10-lighthouse",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "lighthouse",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 26.906795741576953,
+          "y": -6.545590233847926,
+          "z": 28.96869372981135
+        },
+        "forward": {
+          "x": 0.7410851987958715,
+          "y": 0.14797746887282245,
+          "z": -0.6549010588109294
+        },
+        "up": {
+          "x": 0.6714109979183269,
+          "y": -0.16333350552334186,
+          "z": 0.7228619770383368
+        },
+        "heading": 1.4202364279849768,
+        "lon": 0.7485132456253526,
+        "lat": -0.16406859564261075,
+        "map": {
+          "x": 26.5,
+          "z": -8
+        },
+        "mapX": 26.5,
+        "mapZ": -8,
+        "radius": 40.075,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 415234,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-11-cave.jpg",
+      "label": "11-cave",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "cave",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 25.05022443085753,
+          "y": -13.541981903200941,
+          "z": 23.230658236413507
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.863928346628094,
+          "z": 0.5036147455073648
+        },
+        "up": {
+          "x": 0.6816387600233341,
+          "y": -0.368489303488461,
+          "z": 0.6321267547323404
+        },
+        "heading": -0.3782212105439748,
+        "lon": 0.8230674306868317,
+        "lat": -0.37738344836173543,
+        "map": {
+          "x": 27.000000000000004,
+          "z": -19
+        },
+        "mapX": 27.000000000000004,
+        "mapZ": -19,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Cave Access",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 1.670587815500535,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 418050,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-12-hiddenbeach.jpg",
+      "label": "12-hiddenbeach",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "hiddenbeach",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 29.163984269398618,
+          "y": 0.6210653479182375,
+          "z": 22.352601624148477
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.9996142223374836,
+          "z": -0.027774205670508752
+        },
+        "up": {
+          "x": 0.793577803248942,
+          "y": 0.01689973735831939,
+          "z": 0.6082340577999585
+        },
+        "heading": 0.022045927024356936,
+        "lon": 0.9168529727029193,
+        "lat": 0.01690054189238351,
+        "map": {
+          "x": 32.99999999999999,
+          "z": 1
+        },
+        "mapX": 32.99999999999999,
+        "mapZ": 1,
+        "radius": 36.75,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.630781705980277,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 394146,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-approach.jpg",
+      "label": "lighthouse-approach",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "x": 24.3,
+        "z": -4.5,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 25.027137534944384,
+          "y": -3.8982439609264934,
+          "z": 31.023355408918594
+        },
+        "forward": {
+          "x": 0.7807069511324468,
+          "y": 0.07790890635617016,
+          "z": -0.620021659915091
+        },
+        "up": {
+          "x": 0.6248973167276999,
+          "y": -0.09733443098443179,
+          "z": 0.7746156157033356
+        },
+        "heading": 1.4924355531543918,
+        "lon": 0.6788246288104498,
+        "lat": -0.09748878086129566,
+        "map": {
+          "x": 24.3,
+          "z": -4.5
+        },
+        "mapX": 24.3,
+        "mapZ": -4.5,
+        "radius": 40.050000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Graffiti Alley",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 415234,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-hidden-beach-open.jpg",
+      "label": "hidden-beach-open",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "x": 34,
+        "z": 5,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 29.760422479053226,
+          "y": 2.981077050564326,
+          "z": 21.32556412531869
+        },
+        "forward": {
+          "x": 0.5861930646769719,
+          "y": -0.11216238741967671,
+          "z": -0.8023697961494675
+        },
+        "up": {
+          "x": 0.8101713960172993,
+          "y": 0.08115420261223616,
+          "z": 0.580548279192827
+        },
+        "heading": 1.683568780734339,
+        "lon": 0.949032838780749,
+        "lat": 0.08124354798472301,
+        "map": {
+          "x": 34,
+          "z": 5
+        },
+        "mapX": 34,
+        "mapZ": 5,
+        "radius": 36.7334895126534,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 394146,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-cave-exterior-entry.jpg",
+      "label": "cave-exterior-entry",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "x": 21,
+        "z": -25,
+        "facing": "north"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 19.91672697432343,
+          "y": -19.313608453774734,
+          "z": 23.19018191048589
+        },
+        "forward": {
+          "x": -6.115209404266795e-17,
+          "y": 0.7684093529355933,
+          "z": 0.6399586442271897
+        },
+        "up": {
+          "x": 0.5508090958869698,
+          "y": -0.5341294894714985,
+          "z": 0.6413384663070627
+        },
+        "heading": -0.430092851334271,
+        "lon": 0.7096055705265331,
+        "lat": -0.5634777125095584,
+        "map": {
+          "x": 21,
+          "z": -25
+        },
+        "mapX": 21,
+        "mapZ": -25,
+        "radius": 36.15903790087464,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 67,
+          "triangles": 418982,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-globe-resort.jpg",
+      "label": "globe-resort",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "resort",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -2.0787498885582005,
+          "z": -39.29505438220972
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9986036691794083,
+          "z": 0.052827189035786544
+        },
+        "up": {
+          "x": 0,
+          "y": -0.052827189035786544,
+          "z": -0.9986036691794083
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -0.052851790854651415,
+        "map": {
+          "x": 0,
+          "z": 114.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 114.99999999999997,
+        "radius": 39.349999999999994,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-globe-farside.jpg",
+      "label": "globe-farside",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "farside",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": 21.582825225723187,
+          "z": -32.512514468282625
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.8331389527369899,
+          "z": -0.5530637263754619
+        },
+        "up": {
+          "x": 0,
+          "y": 0.5530637263754618,
+          "z": -0.8331389527369899
+        },
+        "heading": 3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": 0.5860370980342379,
+        "map": {
+          "x": 0,
+          "z": 92
+        },
+        "mapX": 0,
+        "mapZ": 92,
+        "radius": 39.024119999999996,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Forest Trail",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-globe-ocean.jpg",
+      "label": "globe-ocean",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "pieroutward",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -33.37117707429825,
+          "z": 18.89674682784925
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.4927443762151043,
+          "z": -0.8701741088474121
+        },
+        "up": {
+          "x": 0,
+          "y": -0.870174108847412,
+          "z": 0.49274437621510425
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -1.0555555555555554,
+        "map": {
+          "x": 0,
+          "z": -38
+        },
+        "mapX": 0,
+        "mapZ": -38,
+        "radius": 38.35,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-00-courtyard-load.jpg",
+      "label": "00-courtyard-load",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "fresh-load",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.18777616939494,
+          "z": 36.236484672217976
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894475,
+          "z": 0.22039774345612217
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612223,
+          "z": 0.9754100853894476
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222218,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.15,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 66,
+          "triangles": 436402,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-01-globe-overview.jpg",
+      "label": "01-globe-overview",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "overview",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": 8.187776169394938,
+          "z": 36.23648467221797
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894477,
+          "z": 0.22039774345612226
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612217,
+          "z": 0.9754100853894474
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222215,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.14999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-02-courtyard.jpg",
+      "label": "02-courtyard",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "courtyard",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.18777616939494,
+          "z": 36.236484672217976
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894475,
+          "z": 0.22039774345612217
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612223,
+          "z": 0.9754100853894476
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222218,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.15,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 66,
+          "triangles": 436402,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-03-promenade.jpg",
+      "label": "03-promenade",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "promenade",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -15.886887632372739,
+          "z": 33.36029528281131
+        },
+        "forward": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "up": {
+          "x": 0,
+          "y": -0.42995636352835553,
+          "z": 0.9028496693588987
+        },
+        "heading": 1.5707963267948966,
+        "lon": 0,
+        "lat": -0.4444444444444444,
+        "map": {
+          "x": 0,
+          "z": -16
+        },
+        "mapX": 0,
+        "mapZ": -16,
+        "radius": 36.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 436122,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-04-beach.jpg",
+      "label": "04-beach",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "beach",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -10.09883626408296,
+          "y": -20.32085090502732,
+          "z": 29.00600111654266
+        },
+        "forward": {
+          "x": 0.961667188493381,
+          "y": -0.1573409476958963,
+          "z": 0.2245886122522541
+        },
+        "up": {
+          "x": -0.2742192892107266,
+          "y": -0.5517833090484063,
+          "z": 0.7876159986188414
+        },
+        "heading": 1.7605948441074581,
+        "lon": -0.3350379691359348,
+        "lat": -0.584501021320306,
+        "map": {
+          "x": -10,
+          "z": -22
+        },
+        "mapX": -10,
+        "mapZ": -22,
+        "radius": 36.82759259259259,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 62,
+          "triangles": 435222,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-05-pierapproach.jpg",
+      "label": "05-pierapproach",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "pierapproach",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -14.51680669449017,
+          "z": 34.071300949549986
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9199757243026863,
+          "z": -0.3919753393949013
+        },
+        "up": {
+          "x": 0,
+          "y": -0.39197533939490126,
+          "z": 0.9199757243026861
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -0.4027777777777775,
+        "map": {
+          "x": 0,
+          "z": -14.5
+        },
+        "mapX": 0,
+        "mapZ": -14.5,
+        "radius": 37.03500000000001,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Boardwalk",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 435842,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-06-pieroutward.jpg",
+      "label": "06-pieroutward",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "pieroutward",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -33.37117707429825,
+          "z": 18.89674682784925
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.4927443762151043,
+          "z": -0.8701741088474121
+        },
+        "up": {
+          "x": 0,
+          "y": -0.870174108847412,
+          "z": 0.49274437621510425
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -1.0555555555555554,
+        "map": {
+          "x": 0,
+          "z": -38
+        },
+        "mapX": 0,
+        "mapZ": -38,
+        "radius": 38.35,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 435602,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-07-skatepark.jpg",
+      "label": "07-skatepark",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "skatepark",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -26.362379043902447,
+          "y": 11.452639837023893,
+          "z": 25.876971169536564
+        },
+        "forward": {
+          "x": -7.567710458548472e-17,
+          "y": 0.9144430665938305,
+          "z": -0.40471456356112473
+        },
+        "up": {
+          "x": -0.681638760023334,
+          "y": 0.29612514122880135,
+          "z": 0.6690878130455478
+        },
+        "heading": -0.292997314144624,
+        "lon": -0.7946898927714329,
+        "lat": 0.30063327829796455,
+        "map": {
+          "x": -26.999999999999996,
+          "z": 15
+        },
+        "mapX": -26.999999999999996,
+        "mapZ": 15,
+        "radius": 38.675,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Skate Park",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 415462,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-08-resort.jpg",
+      "label": "08-resort",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "resort",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -2.0787498885582005,
+          "z": -39.29505438220972
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9986036691794083,
+          "z": 0.052827189035786544
+        },
+        "up": {
+          "x": 0,
+          "y": -0.052827189035786544,
+          "z": -0.9986036691794083
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -0.052851790854651415,
+        "map": {
+          "x": 0,
+          "z": 114.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 114.99999999999997,
+        "radius": 39.349999999999994,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 54,
+          "triangles": 391854,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-09-summit.jpg",
+      "label": "09-summit",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "summit",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -45.51020886592346,
+          "z": -22.68354886211636
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.4460874899137929,
+          "z": 0.8949893582285835
+        },
+        "up": {
+          "x": 0,
+          "y": -0.8949893582285835,
+          "z": -0.4460874899137929
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -1.1084073464102069,
+        "map": {
+          "x": 0,
+          "z": 152.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 152.99999999999997,
+        "radius": 50.84999999999998,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Mountain Summit",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 412234,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-10-lighthouse.jpg",
+      "label": "10-lighthouse",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "lighthouse",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 26.906795741576953,
+          "y": -6.545590233847926,
+          "z": 28.96869372981135
+        },
+        "forward": {
+          "x": 0.7410851987958715,
+          "y": 0.14797746887282245,
+          "z": -0.6549010588109294
+        },
+        "up": {
+          "x": 0.6714109979183269,
+          "y": -0.16333350552334186,
+          "z": 0.7228619770383368
+        },
+        "heading": 1.4202364279849768,
+        "lon": 0.7485132456253526,
+        "lat": -0.16406859564261075,
+        "map": {
+          "x": 26.5,
+          "z": -8
+        },
+        "mapX": 26.5,
+        "mapZ": -8,
+        "radius": 40.075,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 415234,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-11-cave.jpg",
+      "label": "11-cave",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "cave",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 25.05022443085753,
+          "y": -13.541981903200941,
+          "z": 23.230658236413507
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.863928346628094,
+          "z": 0.5036147455073648
+        },
+        "up": {
+          "x": 0.6816387600233341,
+          "y": -0.368489303488461,
+          "z": 0.6321267547323404
+        },
+        "heading": -0.3782212105439748,
+        "lon": 0.8230674306868317,
+        "lat": -0.37738344836173543,
+        "map": {
+          "x": 27.000000000000004,
+          "z": -19
+        },
+        "mapX": 27.000000000000004,
+        "mapZ": -19,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Cave Access",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 1.670587815500535,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 50,
+          "triangles": 415046,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-12-hiddenbeach.jpg",
+      "label": "12-hiddenbeach",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "hiddenbeach",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 29.163984269398618,
+          "y": 0.6210653479182375,
+          "z": 22.352601624148477
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.9996142223374836,
+          "z": -0.027774205670508752
+        },
+        "up": {
+          "x": 0.793577803248942,
+          "y": 0.01689973735831939,
+          "z": 0.6082340577999585
+        },
+        "heading": 0.022045927024356936,
+        "lon": 0.9168529727029193,
+        "lat": 0.01690054189238351,
+        "map": {
+          "x": 32.99999999999999,
+          "z": 1
+        },
+        "mapX": 32.99999999999999,
+        "mapZ": 1,
+        "radius": 36.75,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.630781705980277,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 394146,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-lighthouse-approach.jpg",
+      "label": "lighthouse-approach",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "x": 24.3,
+        "z": -4.5,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 25.027137534944384,
+          "y": -3.8982439609264934,
+          "z": 31.023355408918594
+        },
+        "forward": {
+          "x": 0.780706951132447,
+          "y": 0.07790890635617018,
+          "z": -0.6200216599150911
+        },
+        "up": {
+          "x": 0.6248973167276999,
+          "y": -0.09733443098443179,
+          "z": 0.7746156157033356
+        },
+        "heading": 1.4924355531543918,
+        "lon": 0.6788246288104498,
+        "lat": -0.09748878086129566,
+        "map": {
+          "x": 24.3,
+          "z": -4.5
+        },
+        "mapX": 24.3,
+        "mapZ": -4.5,
+        "radius": 40.050000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Graffiti Alley",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 415234,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-hidden-beach-open.jpg",
+      "label": "hidden-beach-open",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "x": 34,
+        "z": 5,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 29.760422479053226,
+          "y": 2.981077050564326,
+          "z": 21.32556412531869
+        },
+        "forward": {
+          "x": 0.5861930646769719,
+          "y": -0.11216238741967671,
+          "z": -0.8023697961494675
+        },
+        "up": {
+          "x": 0.8101713960172993,
+          "y": 0.08115420261223616,
+          "z": 0.580548279192827
+        },
+        "heading": 1.683568780734339,
+        "lon": 0.949032838780749,
+        "lat": 0.08124354798472301,
+        "map": {
+          "x": 34,
+          "z": 5
+        },
+        "mapX": 34,
+        "mapZ": 5,
+        "radius": 36.7334895126534,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 394146,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-cave-exterior-entry.jpg",
+      "label": "cave-exterior-entry",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "x": 21,
+        "z": -25,
+        "facing": "north"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 19.91672697432343,
+          "y": -19.313608453774734,
+          "z": 23.19018191048589
+        },
+        "forward": {
+          "x": -6.115209404266795e-17,
+          "y": 0.7684093529355933,
+          "z": 0.6399586442271897
+        },
+        "up": {
+          "x": 0.5508090958869698,
+          "y": -0.5341294894714985,
+          "z": 0.6413384663070627
+        },
+        "heading": -0.430092851334271,
+        "lon": 0.7096055705265331,
+        "lat": -0.5634777125095584,
+        "map": {
+          "x": 21,
+          "z": -25
+        },
+        "mapX": 21,
+        "mapZ": -25,
+        "radius": 36.15903790087464,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 417754,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-globe-resort.jpg",
+      "label": "globe-resort",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "resort",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -2.0787498885582005,
+          "z": -39.29505438220972
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9986036691794083,
+          "z": 0.052827189035786544
+        },
+        "up": {
+          "x": 0,
+          "y": -0.052827189035786544,
+          "z": -0.9986036691794083
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -0.052851790854651415,
+        "map": {
+          "x": 0,
+          "z": 114.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 114.99999999999997,
+        "radius": 39.349999999999994,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-globe-farside.jpg",
+      "label": "globe-farside",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "farside",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": 21.582825225723187,
+          "z": -32.512514468282625
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.8331389527369899,
+          "z": -0.5530637263754619
+        },
+        "up": {
+          "x": 0,
+          "y": 0.5530637263754618,
+          "z": -0.8331389527369899
+        },
+        "heading": 3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": 0.5860370980342379,
+        "map": {
+          "x": 0,
+          "z": 92
+        },
+        "mapX": 0,
+        "mapZ": 92,
+        "radius": 39.024119999999996,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Forest Trail",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-globe-ocean.jpg",
+      "label": "globe-ocean",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "pieroutward",
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -33.37117707429825,
+          "z": 18.89674682784925
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.4927443762151043,
+          "z": -0.8701741088474121
+        },
+        "up": {
+          "x": 0,
+          "y": -0.870174108847412,
+          "z": 0.49274437621510425
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -1.0555555555555554,
+        "map": {
+          "x": 0,
+          "z": -38
+        },
+        "mapX": 0,
+        "mapZ": -38,
+        "radius": 38.35,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 248610,
+          "geometries": 43,
+          "textures": 7
+        }
+      }
+    }
+  ]
+}

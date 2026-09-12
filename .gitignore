@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*
+!.env.example
+*.log
+
+# Local-only art/reference assets (large binaries)
+references/
+
+# graphify tool cache
+graphify-out/

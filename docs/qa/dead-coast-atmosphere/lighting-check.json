@@ -1,0 +1,422 @@
+{
+  "checkedAt": "2026-09-05T21:13:02.484Z",
+  "browser": "152.0.7977.77",
+  "captures": [
+    {
+      "name": "entry",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.0006065763204303862,
+        "counters": {
+          "drawCalls": 67,
+          "triangles": 536628,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "circuit",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 36.12974710558104,
+          "y": 0,
+          "z": -8.429197713113531
+        },
+        "forward": {
+          "x": -0.2272020946930871,
+          "y": 0,
+          "z": -0.9738476308781951
+        },
+        "up": {
+          "x": 0.973847630878195,
+          "y": 0,
+          "z": -0.22720209469308708
+        },
+        "heading": 1.5707963267948966,
+        "lon": 1.8,
+        "lat": 0,
+        "radius": 37.099999999999994,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Workshop District",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 52,
+          "triangles": 286772,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "pole",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 5.837721737789877,
+          "y": 40.77015307291776,
+          "z": 4.6325307858072025
+        },
+        "forward": {
+          "x": -0.7705593192641547,
+          "y": 0.17981297767299959,
+          "z": -0.6114782322826643
+        },
+        "up": {
+          "x": 0.14085234411150643,
+          "y": 0.9837008148112764,
+          "z": 0.11177353934596693
+        },
+        "heading": 0,
+        "lon": 0.9000000000000001,
+        "lat": 1.3899999999999997,
+        "radius": 41.4456839509069,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Salt Road",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 530696,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "south",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 4.650087147972049,
+          "y": -35.46241437394652,
+          "z": 4.516232532407575
+        },
+        "forward": {
+          "x": -0.7056637711276927,
+          "y": -0.1798129776729996,
+          "z": -0.6853509576692899
+        },
+        "up": {
+          "x": 0.1289899347565062,
+          "y": -0.9837008148112766,
+          "z": 0.12527690797247087
+        },
+        "heading": 3.141592653589793,
+        "lon": 0.8000000000000002,
+        "lat": -1.3899999999999997,
+        "radius": 36.050000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Open Water",
+        "hotspot": null,
+        "grounded": false,
+        "swimming": true,
+        "interior": null,
+        "supportKind": "water",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 57,
+          "triangles": 493524,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "entry-reduced",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 42,
+          "triangles": 352756,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "globe-reduced",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 43,
+          "triangles": 353124,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "globe",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9993234877482605,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 538296,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "phone-entry",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.0005805584922954555,
+        "counters": {
+          "drawCalls": 63,
+          "triangles": 533632,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    },
+    {
+      "name": "phone-globe",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9993543674344759,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 538296,
+          "geometries": 43,
+          "textures": 6
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "renderErrors": []
+}

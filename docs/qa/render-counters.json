@@ -1,0 +1,81 @@
+{
+  "environment": "Installed Chrome, headless, 1440×900, software WebGL permitted; not a real-device FPS benchmark",
+  "samples": {
+    "entry": {
+      "mode": "exploring",
+      "position": {
+        "x": 0.0000023963389139680658,
+        "y": 0.8751000165939331,
+        "z": -15.00000286102295
+      },
+      "heading": -0.15,
+      "hotspot": null,
+      "grounded": true,
+      "cameraDistance": 23,
+      "desiredCameraDistance": 23,
+      "counters": {
+        "drawCalls": 131,
+        "triangles": 4284,
+        "geometries": 81,
+        "textures": 15
+      }
+    },
+    "shoreline": {
+      "mode": "exploring",
+      "position": {
+        "x": 3.125554323196411,
+        "y": 0.8746697902679443,
+        "z": 25.712482452392578
+      },
+      "heading": 0,
+      "hotspot": null,
+      "grounded": true,
+      "cameraDistance": 23,
+      "desiredCameraDistance": 23,
+      "counters": {
+        "drawCalls": 70,
+        "triangles": 3096,
+        "geometries": 81,
+        "textures": 15
+      }
+    },
+    "inland": {
+      "mode": "exploring",
+      "position": {
+        "x": 3.1255528926849365,
+        "y": 0.8750916719436646,
+        "z": 25.712278366088867
+      },
+      "heading": 3.1399999999999935,
+      "hotspot": null,
+      "grounded": true,
+      "cameraDistance": 23,
+      "desiredCameraDistance": 23,
+      "counters": {
+        "drawCalls": 126,
+        "triangles": 4080,
+        "geometries": 81,
+        "textures": 15
+      }
+    },
+    "reduced": {
+      "mode": "exploring",
+      "position": {
+        "x": 0.0000023963389139680658,
+        "y": 0.8751000165939331,
+        "z": -15.00000286102295
+      },
+      "heading": 0,
+      "hotspot": null,
+      "grounded": true,
+      "cameraDistance": 23,
+      "desiredCameraDistance": 23,
+      "counters": {
+        "drawCalls": 80,
+        "triangles": 3024,
+        "geometries": 81,
+        "textures": 15
+      }
+    }
+  }
+}

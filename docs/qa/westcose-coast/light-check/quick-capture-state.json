@@ -1,0 +1,163 @@
+{
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) http://127.0.0.1:3000/favicon.ico"
+  ],
+  "states": {
+    "entry": {
+      "mode": "exploring",
+      "position": {
+        "x": -12.733510079858185,
+        "y": 0,
+        "z": 34.88360569158742
+      },
+      "forward": {
+        "x": 0.9393727128473791,
+        "y": 0,
+        "z": 0.34289780745545134
+      },
+      "up": {
+        "x": -0.34289780745545134,
+        "y": 0,
+        "z": 0.9393727128473791
+      },
+      "heading": 1.5707963267948966,
+      "lon": -0.3499999999999999,
+      "lat": 0,
+      "radius": 37.135000000000005,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "Studio Row",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 78,
+        "triangles": 635666,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "pierapproach": {
+      "mode": "exploring",
+      "position": {
+        "x": 20.805942933481283,
+        "y": -17.527234863960032,
+        "z": 24.982053591974868
+      },
+      "forward": {
+        "x": -0.3036877070689426,
+        "y": -0.8802324804979204,
+        "z": -0.36464305402912417
+      },
+      "up": {
+        "x": 0.5633123848241852,
+        "y": -0.4745427064832823,
+        "z": 0.6763788707722991
+      },
+      "heading": 3.141592653589793,
+      "lon": 0.6944444444444444,
+      "lat": -0.49444444444444446,
+      "radius": 36.935,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "The Cove",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 76,
+        "triangles": 655754,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "farside": {
+      "mode": "exploring",
+      "position": {
+        "x": 3.1127122167839225,
+        "y": 16.43926404154062,
+        "z": -33.88921294297255
+      },
+      "forward": {
+        "x": -0.03978396696092463,
+        "y": 0.9004471023526769,
+        "z": 0.4331422997555421
+      },
+      "up": {
+        "x": 0.08235907206592236,
+        "y": 0.4349655341112302,
+        "z": -0.8966727203298717
+      },
+      "heading": 0,
+      "lon": 3.05,
+      "lat": 0.45,
+      "radius": 37.79440611342034,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "East Headlands",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 73,
+        "triangles": 663204,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "eastgrove": {
+      "mode": "exploring",
+      "position": {
+        "x": 29.71413927484655,
+        "y": 14.553753783763803,
+        "z": -17.378249175725035
+      },
+      "forward": {
+        "x": -0.3361495606257045,
+        "y": 0.9210609940028851,
+        "z": 0.19659633317425612
+      },
+      "up": {
+        "x": 0.7950684772782124,
+        "y": 0.38941834230865047,
+        "z": -0.4649940549212293
+      },
+      "heading": 0,
+      "lon": 2.1,
+      "lat": 0.39999999999999997,
+      "radius": 37.37305669137842,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "East Headlands",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 76,
+        "triangles": 669702,
+        "geometries": 54,
+        "textures": 7
+      }
+    }
+  }
+}

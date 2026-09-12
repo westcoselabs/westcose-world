@@ -1,0 +1,227 @@
+{
+  "environment": "Installed Chrome; headless; software WebGL permitted. Phone uses touch/viewport emulation, not a real-device benchmark.",
+  "samples": {
+    "entry": {
+      "mode": "exploring",
+      "position": {
+        "x": -12.72150865659724,
+        "y": 0,
+        "z": 34.85072764663776
+      },
+      "forward": {
+        "x": 0.9393727128473791,
+        "y": 0,
+        "z": 0.34289780745545134
+      },
+      "up": {
+        "x": -0.34289780745545123,
+        "y": 0,
+        "z": 0.9393727128473789
+      },
+      "heading": 1.5707963267948966,
+      "lon": -0.34999999999999987,
+      "lat": 0,
+      "radius": 37.1,
+      "travelDistance": 12.134999999999962,
+      "lapCount": 0,
+      "currentArea": "Studio Lane",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 57,
+        "triangles": 264058,
+        "geometries": 39,
+        "textures": 11
+      }
+    },
+    "stairs": {
+      "mode": "exploring",
+      "position": {
+        "x": 9.898380415815355,
+        "y": 3.7608982282128873,
+        "z": 35.765454137488994
+      },
+      "forward": {
+        "x": -0.026894096183691762,
+        "y": 0.9949038343759766,
+        "z": -0.09717544923714808
+      },
+      "up": {
+        "x": 0.2653721291103312,
+        "y": 0.10082837072956802,
+        "z": 0.9588593602543966
+      },
+      "heading": 3.469446951953615e-18,
+      "lon": 0.27,
+      "lat": 0.10099999999999999,
+      "radius": 37.30000000000001,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "Studio Lane",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 48,
+        "triangles": 260660,
+        "geometries": 39,
+        "textures": 11
+      }
+    },
+    "alley": {
+      "mode": "exploring",
+      "position": {
+        "x": -11.76116449581549,
+        "y": 4.441322890418908,
+        "z": 34.90500910593507
+      },
+      "forward": {
+        "x": 0.03822515956168646,
+        "y": 0.9928086358538663,
+        "z": -0.11344536019806542
+      },
+      "up": {
+        "x": -0.3170125201028434,
+        "y": 0.11971220728891935,
+        "z": 0.9408358249578186
+      },
+      "heading": 6.938893903907228e-18,
+      "lon": -0.325,
+      "lat": 0.11999999999999998,
+      "radius": 37.1,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "Studio Lane",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 50,
+        "triangles": 260664,
+        "geometries": 39,
+        "textures": 11
+      }
+    },
+    "beach": {
+      "mode": "exploring",
+      "position": {
+        "x": 20.615503451414778,
+        "y": -13.21244871333142,
+        "z": 27.118369052991625
+      },
+      "forward": {
+        "x": 0.7960837985490559,
+        "y": 0,
+        "z": -0.6051864057360395
+      },
+      "up": {
+        "x": 0.5642318352567384,
+        "y": -0.361615431964962,
+        "z": 0.7422106947812104
+      },
+      "heading": 1.5707963267948966,
+      "lon": 0.6499999999999999,
+      "lat": -0.36999999999999994,
+      "radius": 36.53729223207382,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "The Coast",
+      "hotspot": "beach",
+      "grounded": true,
+      "swimming": false,
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 51,
+        "triangles": 264046,
+        "geometries": 39,
+        "textures": 11
+      }
+    },
+    "shoreline": {
+      "mode": "exploring",
+      "position": {
+        "x": 20.754335789192357,
+        "y": -12.908404916146589,
+        "z": 27.300994065338013
+      },
+      "forward": {
+        "x": -0.2131915770691709,
+        "y": -0.935896823677935,
+        "z": -0.28043980975658983
+      },
+      "up": {
+        "x": 0.5663920348614255,
+        "y": -0.35227423327508994,
+        "z": 0.7450522984435262
+      },
+      "heading": 3.141592653589793,
+      "lon": 0.6500000000000002,
+      "lat": -0.36,
+      "radius": 36.643057302651066,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "The Coast",
+      "hotspot": "beach",
+      "grounded": true,
+      "swimming": false,
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 51,
+        "triangles": 264046,
+        "geometries": 39,
+        "textures": 11
+      }
+    },
+    "ocean": {
+      "mode": "exploring",
+      "position": {
+        "x": 16.727461358820925,
+        "y": -23.14352898701814,
+        "z": 22.003899711555782
+      },
+      "forward": {
+        "x": -0.38852008664913534,
+        "y": -0.7667178996421946,
+        "z": -0.5110731891210982
+      },
+      "up": {
+        "x": 0.4640072498979452,
+        "y": -0.6419841605275489,
+        "z": 0.6103716979627123
+      },
+      "heading": 3.1415926535897927,
+      "lon": 0.6499999999999997,
+      "lat": -0.6970833333333334,
+      "radius": 36.05000000000001,
+      "travelDistance": 12.134999999999962,
+      "lapCount": 0,
+      "currentArea": "Open Water",
+      "hotspot": null,
+      "grounded": false,
+      "swimming": true,
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 50,
+        "triangles": 264044,
+        "geometries": 39,
+        "textures": 11
+      }
+    }
+  }
+}

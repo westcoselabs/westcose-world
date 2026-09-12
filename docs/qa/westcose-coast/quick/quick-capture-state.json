@@ -1,0 +1,358 @@
+{
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) http://127.0.0.1:3000/favicon.ico"
+  ],
+  "states": {
+    "entry": {
+      "mode": "exploring",
+      "position": {
+        "x": -12.733510079858185,
+        "y": 0,
+        "z": 34.88360569158742
+      },
+      "forward": {
+        "x": 0.9393727128473791,
+        "y": 0,
+        "z": 0.34289780745545134
+      },
+      "up": {
+        "x": -0.34289780745545134,
+        "y": 0,
+        "z": 0.9393727128473791
+      },
+      "heading": 1.5707963267948966,
+      "lon": -0.3499999999999999,
+      "lat": 0,
+      "radius": 37.135000000000005,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "Studio Row",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 78,
+        "triangles": 635666,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "pierapproach": {
+      "mode": "exploring",
+      "position": {
+        "x": 20.805942933481283,
+        "y": -17.527234863960032,
+        "z": 24.982053591974868
+      },
+      "forward": {
+        "x": -0.3036877070689426,
+        "y": -0.8802324804979204,
+        "z": -0.36464305402912417
+      },
+      "up": {
+        "x": 0.5633123848241852,
+        "y": -0.4745427064832823,
+        "z": 0.6763788707722991
+      },
+      "heading": 3.141592653589793,
+      "lon": 0.6944444444444444,
+      "lat": -0.49444444444444446,
+      "radius": 36.935,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "The Cove",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 76,
+        "triangles": 655754,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "pierhead": {
+      "mode": "exploring",
+      "position": {
+        "x": 10.888635185061087,
+        "y": -34.36897090949883,
+        "z": 13.074171577146794
+      },
+      "forward": {
+        "x": 0.5735259459381119,
+        "y": 0.4436660217022285,
+        "z": 0.6886424692993539
+      },
+      "up": {
+        "x": 0.2839279057382291,
+        "y": -0.8961922010299563,
+        "z": 0.3409171206557182
+      },
+      "heading": -1.6653345369377348e-16,
+      "lon": 0.6944444444444445,
+      "lat": -1.1111111111111112,
+      "radius": 38.35,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "The Pier",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "pier",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 80,
+        "triangles": 659906,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "pierside": {
+      "mode": "exploring",
+      "position": {
+        "x": 8.630540069490435,
+        "y": -24.5730772988412,
+        "z": 24.92549197456483
+      },
+      "forward": {
+        "x": 0.9449569463147377,
+        "y": -3.783855229274236e-17,
+        "z": -0.3271946967961522
+      },
+      "up": {
+        "x": 0.23940471760028942,
+        "y": -0.6816387600233341,
+        "z": 0.6914144791834904
+      },
+      "heading": 1.5707963267948968,
+      "lon": 0.33333333333333326,
+      "lat": -0.7499999999999999,
+      "radius": 36.050000000000004,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "Open Water",
+      "hotspot": null,
+      "grounded": false,
+      "swimming": true,
+      "interior": null,
+      "supportKind": "water",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 75,
+        "triangles": 673070,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "promenade": {
+      "mode": "exploring",
+      "position": {
+        "x": 4.344370059700558,
+        "y": -19.480087273483853,
+        "z": 31.07807705765963
+      },
+      "forward": {
+        "x": 0.9903704328415154,
+        "y": 1.4638717620637108e-17,
+        "z": -0.13844278873711527
+      },
+      "up": {
+        "x": 0.11762204033303256,
+        "y": -0.5274153857718655,
+        "z": 0.8414262097647117
+      },
+      "heading": 1.5707963267948966,
+      "lon": 0.13888888888888892,
+      "lat": -0.5555555555555556,
+      "radius": 36.935,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "The Cove",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 77,
+        "triangles": 675998,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "eastgrove": {
+      "mode": "exploring",
+      "position": {
+        "x": 29.71413927484655,
+        "y": 14.553753783763803,
+        "z": -17.378249175725035
+      },
+      "forward": {
+        "x": -0.3361495606257045,
+        "y": 0.9210609940028851,
+        "z": 0.19659633317425612
+      },
+      "up": {
+        "x": 0.7950684772782124,
+        "y": 0.38941834230865047,
+        "z": -0.4649940549212293
+      },
+      "heading": 0,
+      "lon": 2.1,
+      "lat": 0.39999999999999997,
+      "radius": 37.37305669137842,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "East Headlands",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 76,
+        "triangles": 669702,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "westgrove": {
+      "mode": "exploring",
+      "position": {
+        "x": -30.594725256043013,
+        "y": 10.963803144632516,
+        "z": -17.893257955226737
+      },
+      "forward": {
+        "x": 0.2550958104240792,
+        "y": 0.9553364891256062,
+        "z": 0.14919222516352215
+      },
+      "up": {
+        "x": -0.824655405714673,
+        "y": 0.29552020666133955,
+        "z": -0.48229790511716636
+      },
+      "heading": 0,
+      "lon": -2.1,
+      "lat": 0.3,
+      "radius": 37.10001176737408,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "West Headlands",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 73,
+        "triangles": 663636,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "farside": {
+      "mode": "exploring",
+      "position": {
+        "x": 3.1127122167839225,
+        "y": 16.43926404154062,
+        "z": -33.88921294297255
+      },
+      "forward": {
+        "x": -0.03978396696092463,
+        "y": 0.9004471023526769,
+        "z": 0.4331422997555421
+      },
+      "up": {
+        "x": 0.08235907206592236,
+        "y": 0.4349655341112302,
+        "z": -0.8966727203298717
+      },
+      "heading": 0,
+      "lon": 3.05,
+      "lat": 0.45,
+      "radius": 37.79440611342034,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "East Headlands",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 73,
+        "triangles": 663204,
+        "geometries": 54,
+        "textures": 7
+      }
+    },
+    "ridge": {
+      "mode": "exploring",
+      "position": {
+        "x": 16.733201389354598,
+        "y": 35.080475845765996,
+        "z": 2.886087788320009
+      },
+      "forward": {
+        "x": -0.8870037377053305,
+        "y": 0.4356824462767122,
+        "z": -0.1529875004799842
+      },
+      "up": {
+        "x": 0.4293431490440977,
+        "y": 0.9001004421765049,
+        "z": 0.07405170060544052
+      },
+      "heading": 2.7755575615628914e-17,
+      "lon": 1.4,
+      "lat": 1.12,
+      "radius": 38.97395690745244,
+      "travelDistance": 0,
+      "lapCount": 0,
+      "currentArea": "Salt Road",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 81,
+        "triangles": 675758,
+        "geometries": 54,
+        "textures": 7
+      }
+    }
+  }
+}

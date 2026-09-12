@@ -1,0 +1,726 @@
+{
+  "generatedAt": "2026-09-12T20:46:34.899Z",
+  "layoutVersion": 6,
+  "buildingCount": 9,
+  "radius": 36,
+  "seaLevel": -0.8,
+  "chartBounds": [
+    -50.194671058465104,
+    176
+  ],
+  "maximumHeightEnvelope": 39,
+  "terrainSampleSpacing": {
+    "full": 0.6,
+    "coast": 0.3
+  },
+  "contourElevations": [
+    -0.8,
+    4,
+    8,
+    16,
+    24,
+    31
+  ],
+  "courtyard": [
+    0,
+    8
+  ],
+  "resort": [
+    0,
+    115
+  ],
+  "resortPlaza": [
+    0,
+    112
+  ],
+  "summit": [
+    0,
+    153
+  ],
+  "summitHeight": 32,
+  "lighthouse": {
+    "x": 36,
+    "z": -27,
+    "elevation": 7.8,
+    "height": 12
+  },
+  "pierTip": [
+    0,
+    -47
+  ],
+  "pier": {
+    "radius": 36,
+    "entrance": [
+      0,
+      -30
+    ],
+    "neckEnd": [
+      0,
+      -40
+    ],
+    "width": 3.8,
+    "elevation": 1.5,
+    "head": {
+      "center": [
+        0,
+        -43
+      ],
+      "width": 8,
+      "depth": 8
+    },
+    "approach": {
+      "start": [
+        0,
+        -16
+      ],
+      "end": [
+        0,
+        -30
+      ],
+      "startElevation": 0.1
+    },
+    "railStartZ": -17,
+    "railHeight": 1.12,
+    "boardThickness": 0.18,
+    "plankPitch": 0.24,
+    "pileBottom": -3.2
+  },
+  "inlandMapMetres": 200,
+  "oceanAngleDegrees": 41.690113816209326,
+  "cave": {
+    "points": [
+      [
+        24,
+        -29
+      ],
+      [
+        29,
+        -23
+      ],
+      [
+        33,
+        -13
+      ],
+      [
+        35,
+        1
+      ]
+    ],
+    "width": 3.8,
+    "clearance": 4.35,
+    "floor": -0.1
+  },
+  "stairs": {
+    "points": [
+      [
+        -23,
+        0
+      ],
+      [
+        -24,
+        5
+      ],
+      [
+        -27,
+        9
+      ]
+    ],
+    "width": 3,
+    "count": 12,
+    "rise": 0.19,
+    "baseHeight": 0.22
+  },
+  "routes": [
+    {
+      "id": "boulevard",
+      "label": "The Boulevard",
+      "points": [
+        [
+          -23,
+          0
+        ],
+        [
+          -12,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          20,
+          0
+        ]
+      ],
+      "width": 4,
+      "material": "asphalt",
+      "elevation": 0.22
+    },
+    {
+      "id": "main-street",
+      "label": "Courtyard to Pier",
+      "points": [
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -16
+        ]
+      ],
+      "width": 4,
+      "material": "concrete"
+    },
+    {
+      "id": "boardwalk",
+      "label": "Beach Boardwalk",
+      "points": [
+        [
+          -25,
+          -16
+        ],
+        [
+          -12,
+          -16
+        ],
+        [
+          0,
+          -16
+        ],
+        [
+          12,
+          -16
+        ],
+        [
+          24,
+          -16
+        ]
+      ],
+      "width": 4,
+      "material": "timber"
+    },
+    {
+      "id": "gallery-entry",
+      "label": "Gallery Entrance",
+      "points": [
+        [
+          -9,
+          0
+        ],
+        [
+          -9,
+          4
+        ]
+      ],
+      "width": 2.8,
+      "material": "concrete"
+    },
+    {
+      "id": "shop-entry",
+      "label": "Shop Entrance",
+      "points": [
+        [
+          8,
+          0
+        ],
+        [
+          8,
+          4
+        ]
+      ],
+      "width": 3.2,
+      "material": "concrete"
+    },
+    {
+      "id": "shop-link",
+      "label": "Connected Skate Shop",
+      "points": [
+        [
+          8,
+          2
+        ],
+        [
+          14.2,
+          2
+        ],
+        [
+          14.2,
+          2.5
+        ]
+      ],
+      "width": 2.4,
+      "material": "concrete"
+    },
+    {
+      "id": "social-entry",
+      "label": "Social Club Entrance",
+      "points": [
+        [
+          -8,
+          0
+        ],
+        [
+          -8,
+          -3
+        ]
+      ],
+      "width": 2.8,
+      "material": "concrete"
+    },
+    {
+      "id": "motel-entry",
+      "label": "Motel Lobby",
+      "points": [
+        [
+          8,
+          0
+        ],
+        [
+          8,
+          -3
+        ]
+      ],
+      "width": 2.8,
+      "material": "concrete"
+    },
+    {
+      "id": "alley",
+      "label": "Graffiti Alley",
+      "points": [
+        [
+          20,
+          4
+        ],
+        [
+          16.5,
+          0
+        ],
+        [
+          16.5,
+          -6
+        ],
+        [
+          16.5,
+          -16
+        ]
+      ],
+      "width": 2.4,
+      "material": "concrete"
+    },
+    {
+      "id": "lab-entry",
+      "label": "Alley Room",
+      "points": [
+        [
+          16.5,
+          -6
+        ],
+        [
+          17.5,
+          -6
+        ]
+      ],
+      "width": 2.4,
+      "material": "concrete"
+    },
+    {
+      "id": "forest-trail",
+      "label": "Forest Trail to Skate Park",
+      "points": [
+        [
+          -25,
+          -16
+        ],
+        [
+          -30,
+          -11
+        ],
+        [
+          -33,
+          -1
+        ],
+        [
+          -32,
+          8
+        ],
+        [
+          -27,
+          15
+        ]
+      ],
+      "width": 2.4,
+      "material": "dirt"
+    },
+    {
+      "id": "skate-stairs",
+      "label": "Skate Park Stairs",
+      "points": [
+        [
+          -23,
+          0
+        ],
+        [
+          -24,
+          5
+        ],
+        [
+          -27,
+          9
+        ]
+      ],
+      "width": 3,
+      "material": "concrete"
+    },
+    {
+      "id": "resort-trail",
+      "label": "Forest Route to Resort",
+      "points": [
+        [
+          0,
+          13
+        ],
+        [
+          0,
+          20
+        ],
+        [
+          7,
+          27
+        ],
+        [
+          8,
+          34
+        ],
+        [
+          -6,
+          42
+        ],
+        [
+          -9,
+          49
+        ],
+        [
+          6,
+          58
+        ],
+        [
+          10,
+          68
+        ],
+        [
+          -5,
+          79
+        ],
+        [
+          -8,
+          87
+        ],
+        [
+          6,
+          97
+        ],
+        [
+          7,
+          103
+        ],
+        [
+          0,
+          109
+        ],
+        [
+          0,
+          115
+        ]
+      ],
+      "width": 4,
+      "material": "dirt"
+    },
+    {
+      "id": "ski-central",
+      "label": "1 / Central Snow Trail",
+      "points": [
+        [
+          0,
+          115
+        ],
+        [
+          0,
+          132
+        ],
+        [
+          4,
+          139
+        ],
+        [
+          0,
+          146
+        ],
+        [
+          0,
+          153
+        ]
+      ],
+      "width": 4,
+      "material": "concrete"
+    },
+    {
+      "id": "ski-west",
+      "label": "2 / Western Forest Trail",
+      "points": [
+        [
+          0,
+          115
+        ],
+        [
+          -7,
+          122
+        ],
+        [
+          -12,
+          130
+        ],
+        [
+          -16,
+          139
+        ],
+        [
+          -9,
+          149
+        ],
+        [
+          0,
+          153
+        ]
+      ],
+      "width": 4,
+      "material": "concrete"
+    },
+    {
+      "id": "ski-east",
+      "label": "3 / Eastern Contour Trail",
+      "points": [
+        [
+          0,
+          115
+        ],
+        [
+          9,
+          121
+        ],
+        [
+          14,
+          131
+        ],
+        [
+          15,
+          140
+        ],
+        [
+          9,
+          148
+        ],
+        [
+          0,
+          153
+        ]
+      ],
+      "width": 4,
+      "material": "concrete"
+    },
+    {
+      "id": "lighthouse-trail",
+      "label": "Lighthouse Upper Trail",
+      "points": [
+        [
+          20,
+          4
+        ],
+        [
+          23,
+          0
+        ],
+        [
+          24.5,
+          -10
+        ],
+        [
+          25.5,
+          -14
+        ],
+        [
+          23,
+          -21
+        ],
+        [
+          19,
+          -23
+        ],
+        [
+          18.5,
+          -29
+        ],
+        [
+          20,
+          -33
+        ],
+        [
+          24,
+          -36
+        ],
+        [
+          29,
+          -38
+        ],
+        [
+          32.8,
+          -35
+        ],
+        [
+          32.8,
+          -27
+        ]
+      ],
+      "width": 2.4,
+      "material": "dirt",
+      "elevations": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.1,
+        -0.05,
+        -0.1,
+        -0.1,
+        0.8,
+        3.6,
+        6.2,
+        7.8
+      ]
+    },
+    {
+      "id": "beach-west",
+      "label": "West Beach Ramp",
+      "points": [
+        [
+          -20,
+          -16
+        ],
+        [
+          -18,
+          -22
+        ],
+        [
+          -10,
+          -28
+        ],
+        [
+          -3,
+          -28
+        ]
+      ],
+      "width": 2.4,
+      "material": "sand"
+    },
+    {
+      "id": "beach-east",
+      "label": "East Beach and Cave Access",
+      "points": [
+        [
+          20,
+          -16
+        ],
+        [
+          18,
+          -23
+        ],
+        [
+          20,
+          -28
+        ],
+        [
+          24,
+          -29
+        ]
+      ],
+      "width": 2.4,
+      "material": "sand"
+    },
+    {
+      "id": "cave",
+      "label": "Covered Cave to Hidden Beach",
+      "points": [
+        [
+          24,
+          -29
+        ],
+        [
+          29,
+          -23
+        ],
+        [
+          33,
+          -13
+        ],
+        [
+          35,
+          1
+        ]
+      ],
+      "width": 3.8,
+      "material": "sand"
+    }
+  ],
+  "captures": 46,
+  "framingChecks": [
+    {
+      "profile": "desktop",
+      "fixture": "pieroutward",
+      "summitVisible": true,
+      "summitNdc": {
+        "x": -0.014292243540282985,
+        "y": 0.5919341349665161,
+        "z": 0.9970458921439321
+      }
+    },
+    {
+      "profile": "desktop",
+      "fixture": "resort",
+      "summitVisible": true,
+      "summitNdc": {
+        "x": -0.01142891604592705,
+        "y": 0.5529371686942827,
+        "z": 0.9976960117276316
+      }
+    },
+    {
+      "profile": "phone",
+      "fixture": "pieroutward",
+      "summitVisible": true,
+      "summitNdc": {
+        "x": -0.04948913576640173,
+        "y": 0.5921403017178988,
+        "z": 0.997045805172054
+      }
+    },
+    {
+      "profile": "phone",
+      "fixture": "resort",
+      "summitVisible": true,
+      "summitNdc": {
+        "x": -0.039573612754518955,
+        "y": 0.5529904029724784,
+        "z": 0.9976959947886643
+      }
+    }
+  ],
+  "renderErrors": []
+}

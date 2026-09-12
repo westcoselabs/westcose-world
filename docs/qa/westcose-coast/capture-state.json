@@ -1,0 +1,886 @@
+{
+  "generatedAt": "2026-09-08T04:15:39.706Z",
+  "errors": [],
+  "captures": [
+    {
+      "file": "19-entry-screen",
+      "fixture": "intro",
+      "overview": true,
+      "state": {
+        "mode": "intro",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 123,
+          "triangles": 806850,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "01-coast-overview",
+      "fixture": "pierapproach",
+      "overview": true,
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 20.805942933481283,
+          "y": -17.527234863960032,
+          "z": 24.982053591974868
+        },
+        "forward": {
+          "x": -0.3036877070689426,
+          "y": -0.8802324804979204,
+          "z": -0.36464305402912417
+        },
+        "up": {
+          "x": 0.5633123848241852,
+          "y": -0.4745427064832823,
+          "z": 0.6763788707722991
+        },
+        "heading": 3.141592653589793,
+        "lon": 0.6944444444444444,
+        "lat": -0.49444444444444446,
+        "radius": 36.935,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Cove",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9992512609253373,
+        "counters": {
+          "drawCalls": 115,
+          "triangles": 762338,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "02-town-overview",
+      "fixture": "entry",
+      "overview": true,
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9992275421476071,
+        "counters": {
+          "drawCalls": 123,
+          "triangles": 806850,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "03-east-overview",
+      "fixture": "eastgrove",
+      "overview": true,
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 29.71413927484655,
+          "y": 14.553753783763803,
+          "z": -17.378249175725035
+        },
+        "forward": {
+          "x": -0.3361495606257045,
+          "y": 0.9210609940028851,
+          "z": 0.19659633317425612
+        },
+        "up": {
+          "x": 0.7950684772782124,
+          "y": 0.38941834230865047,
+          "z": -0.4649940549212293
+        },
+        "heading": 0,
+        "lon": 2.1,
+        "lat": 0.39999999999999997,
+        "radius": 37.37305669137842,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "East Headlands",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9993109128994545,
+        "counters": {
+          "drawCalls": 131,
+          "triangles": 853442,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "04-far-overview",
+      "fixture": "farside",
+      "overview": true,
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 3.1127122167839225,
+          "y": 16.43926404154062,
+          "z": -33.88921294297255
+        },
+        "forward": {
+          "x": -0.03978396696092463,
+          "y": 0.9004471023526769,
+          "z": 0.4331422997555421
+        },
+        "up": {
+          "x": 0.08235907206592236,
+          "y": 0.4349655341112302,
+          "z": -0.8966727203298717
+        },
+        "heading": 0,
+        "lon": 3.05,
+        "lat": 0.45,
+        "radius": 37.79440611342034,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "East Headlands",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9992820626893923,
+        "counters": {
+          "drawCalls": 139,
+          "triangles": 885018,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "05-west-overview",
+      "fixture": "westgrove",
+      "overview": true,
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": -30.594725256043013,
+          "y": 10.963803144632516,
+          "z": -17.893257955226737
+        },
+        "forward": {
+          "x": 0.2550958104240792,
+          "y": 0.9553364891256062,
+          "z": 0.14919222516352215
+        },
+        "up": {
+          "x": -0.824655405714673,
+          "y": 0.29552020666133955,
+          "z": -0.48229790511716636
+        },
+        "heading": 0,
+        "lon": -2.1,
+        "lat": 0.3,
+        "radius": 37.10001176737408,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "West Headlands",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9992931024376476,
+        "counters": {
+          "drawCalls": 133,
+          "triangles": 861746,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "06-pier-entrance",
+      "fixture": "pierapproach",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 20.805942933481283,
+          "y": -17.527234863960032,
+          "z": 24.982053591974868
+        },
+        "forward": {
+          "x": -0.30368770706894255,
+          "y": -0.8802324804979201,
+          "z": -0.3646430540291241
+        },
+        "up": {
+          "x": 0.5633123848241852,
+          "y": -0.4745427064832823,
+          "z": 0.6763788707722991
+        },
+        "heading": 3.141592653589793,
+        "lon": 0.6944444444444444,
+        "lat": -0.49444444444444446,
+        "radius": 36.935,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Cove",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.027552004155203116,
+        "counters": {
+          "drawCalls": 73,
+          "triangles": 608246,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "07-pier-deck",
+      "fixture": "pierhead",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 10.888635185061087,
+          "y": -34.36897090949883,
+          "z": 13.074171577146794
+        },
+        "forward": {
+          "x": 0.5735259459381119,
+          "y": 0.4436660217022285,
+          "z": 0.6886424692993539
+        },
+        "up": {
+          "x": 0.2839279057382291,
+          "y": -0.8961922010299563,
+          "z": 0.3409171206557182
+        },
+        "heading": -1.6653345369377348e-16,
+        "lon": 0.6944444444444445,
+        "lat": -1.1111111111111112,
+        "radius": 38.35,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 75,
+          "triangles": 600804,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "08-pier-from-beach",
+      "fixture": "pierbeach",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 9.619035155171987,
+          "y": -21.837745034788668,
+          "z": 27.78032216209295
+        },
+        "forward": {
+          "x": 0.9449569463147377,
+          "y": 0,
+          "z": -0.3271946967961522
+        },
+        "up": {
+          "x": 0.26265842645837856,
+          "y": -0.5963038553978862,
+          "z": 0.758572516670638
+        },
+        "heading": 1.5707963267948966,
+        "lon": 0.33333333333333326,
+        "lat": -0.6388888888888888,
+        "radius": 36.62184109176577,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Cove",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 68,
+          "triangles": 588308,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "09-promenade",
+      "fixture": "promenade",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 4.344370059700558,
+          "y": -19.480087273483853,
+          "z": 31.07807705765963
+        },
+        "forward": {
+          "x": 0.9903704328415154,
+          "y": 1.4638717620637108e-17,
+          "z": -0.13844278873711527
+        },
+        "up": {
+          "x": 0.11762204033303256,
+          "y": -0.5274153857718655,
+          "z": 0.8414262097647117
+        },
+        "heading": 1.5707963267948966,
+        "lon": 0.13888888888888892,
+        "lat": -0.5555555555555556,
+        "radius": 36.935,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Cove",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 591236,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "10-far-groves",
+      "fixture": "farside",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 3.1127122167839225,
+          "y": 16.43926404154062,
+          "z": -33.88921294297255
+        },
+        "forward": {
+          "x": -0.03978396696092463,
+          "y": 0.9004471023526769,
+          "z": 0.4331422997555421
+        },
+        "up": {
+          "x": 0.08235907206592236,
+          "y": 0.4349655341112302,
+          "z": -0.8966727203298717
+        },
+        "heading": 0,
+        "lon": 3.05,
+        "lat": 0.45,
+        "radius": 37.79440611342034,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "East Headlands",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 94,
+          "triangles": 738834,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "11-west-groves",
+      "fixture": "westgrove",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -30.594725256043013,
+          "y": 10.963803144632516,
+          "z": -17.893257955226737
+        },
+        "forward": {
+          "x": 0.2550958104240792,
+          "y": 0.9553364891256062,
+          "z": 0.14919222516352215
+        },
+        "up": {
+          "x": -0.824655405714673,
+          "y": 0.29552020666133955,
+          "z": -0.48229790511716636
+        },
+        "heading": 0,
+        "lon": -2.1,
+        "lat": 0.3,
+        "radius": 37.10001176737408,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "West Headlands",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 90,
+          "triangles": 691666,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "12-ridge",
+      "fixture": "ridge",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 16.733201389354598,
+          "y": 35.080475845765996,
+          "z": 2.886087788320009
+        },
+        "forward": {
+          "x": -0.8870037377053305,
+          "y": 0.4356824462767122,
+          "z": -0.1529875004799842
+        },
+        "up": {
+          "x": 0.4293431490440977,
+          "y": 0.9001004421765049,
+          "z": 0.07405170060544052
+        },
+        "heading": 2.7755575615628914e-17,
+        "lon": 1.4,
+        "lat": 1.12,
+        "radius": 38.97395690745244,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Salt Road",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 97,
+          "triangles": 705086,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "13-studio-row",
+      "fixture": "entry",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 78,
+          "triangles": 610856,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "14-courtyard",
+      "fixture": "courtyard",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 5.092360831378222,
+          "y": 6.18792574946438,
+          "z": 36.42893679593409
+        },
+        "forward": {
+          "x": -0.022967123250778897,
+          "y": 0.9861432315629253,
+          "z": -0.1642986247423109
+        },
+        "up": {
+          "x": 0.13652441907180218,
+          "y": 0.165896132693415,
+          "z": 0.9766470990867048
+        },
+        "heading": 6.938893903907227e-18,
+        "lon": 0.1388888888888889,
+        "lat": 0.16666666666666663,
+        "radius": 37.300000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 81,
+          "triangles": 601618,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "16-beach-loop",
+      "fixture": "beach",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -9.862557298727044,
+          "y": -21.117247667707257,
+          "z": 28.483628002276458
+        },
+        "forward": {
+          "x": 0.9449569463147377,
+          "y": 3.185106768949598e-17,
+          "z": 0.32719469679615215
+        },
+        "up": {
+          "x": -0.2679760534032863,
+          "y": -0.5737778263110661,
+          "z": 0.7739301265851765
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.33333333333333326,
+        "lat": -0.6111111111111112,
+        "radius": 36.80387547123304,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Cove",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 72,
+          "triangles": 595080,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "15-arcade",
+      "fixture": "arcade",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 27.16427468627145,
+          "y": -9.614217857530349,
+          "z": 23.52739678093422
+        },
+        "forward": {
+          "x": 0.661384985249365,
+          "y": 0.03524968898696316,
+          "z": -0.7492178326181378
+        },
+        "up": {
+          "x": 0.7302146801230004,
+          "y": -0.25844397093427357,
+          "z": 0.6324501836671316
+        },
+        "heading": 1.534298854751134,
+        "lon": 0.8570205206747629,
+        "lat": -0.26141110263584844,
+        "radius": 37.2003952066477,
+        "travelDistance": 4.880000000000003,
+        "lapCount": 0,
+        "currentArea": "Coast Paths",
+        "hotspot": "arcade",
+        "grounded": true,
+        "swimming": false,
+        "interior": "arcade",
+        "supportKind": "floor",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 69,
+          "triangles": 599452,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "20-phone-entry",
+      "fixture": "intro",
+      "overview": true,
+      "state": {
+        "mode": "intro",
+        "position": {
+          "x": -12.733510079858185,
+          "y": 0,
+          "z": 34.88360569158742
+        },
+        "forward": {
+          "x": 0.9393727128473791,
+          "y": 0,
+          "z": 0.34289780745545134
+        },
+        "up": {
+          "x": -0.34289780745545134,
+          "y": 0,
+          "z": 0.9393727128473791
+        },
+        "heading": 1.5707963267948966,
+        "lon": -0.3499999999999999,
+        "lat": 0,
+        "radius": 37.135000000000005,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Studio Row",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "counters": {
+          "drawCalls": 125,
+          "triangles": 824426,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "17-phone-pier",
+      "fixture": "pierapproach",
+      "overview": false,
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 20.805942933481283,
+          "y": -17.527234863960032,
+          "z": 24.982053591974868
+        },
+        "forward": {
+          "x": -0.30368770706894255,
+          "y": -0.8802324804979201,
+          "z": -0.3646430540291241
+        },
+        "up": {
+          "x": 0.5633123848241852,
+          "y": -0.4745427064832823,
+          "z": 0.6763788707722991
+        },
+        "heading": 3.141592653589793,
+        "lon": 0.6944444444444444,
+        "lat": -0.49444444444444446,
+        "radius": 36.935,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Cove",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "counters": {
+          "drawCalls": 69,
+          "triangles": 584616,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "file": "18-phone-globe",
+      "fixture": "farside",
+      "overview": true,
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 3.1127122167839225,
+          "y": 16.43926404154062,
+          "z": -33.88921294297255
+        },
+        "forward": {
+          "x": -0.03978396696092463,
+          "y": 0.9004471023526769,
+          "z": 0.4331422997555421
+        },
+        "up": {
+          "x": 0.08235907206592236,
+          "y": 0.4349655341112302,
+          "z": -0.8966727203298717
+        },
+        "heading": 0,
+        "lon": 3.05,
+        "lat": 0.45,
+        "radius": 37.79440611342034,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "East Headlands",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0.9992522186981903,
+        "counters": {
+          "drawCalls": 139,
+          "triangles": 885018,
+          "geometries": 54,
+          "textures": 7
+        }
+      }
+    }
+  ]
+}

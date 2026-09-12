@@ -1,0 +1,46 @@
+{
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found) http://127.0.0.1:3000/favicon.ico"
+  ],
+  "states": {
+    "beach": {
+      "mode": "exploring",
+      "position": {
+        "x": -9.222752306212708,
+        "y": -17.188824893617277,
+        "z": 30.746302004654872
+      },
+      "forward": {
+        "x": 0.2315885563326711,
+        "y": -0.8770659509926244,
+        "z": -0.4208587152301267
+      },
+      "up": {
+        "x": -0.25328726646917676,
+        "y": -0.4720619535872036,
+        "z": 0.844395092726151
+      },
+      "heading": 3.040515936276024,
+      "lon": -0.29142282882734283,
+      "lat": -0.4916282856580564,
+      "radius": 36.41222251231903,
+      "travelDistance": 8.720000000000006,
+      "lapCount": 0,
+      "currentArea": "Dead Coast Cove",
+      "hotspot": null,
+      "grounded": true,
+      "swimming": false,
+      "interior": null,
+      "supportKind": "ground",
+      "cameraDistance": 4.8,
+      "desiredCameraDistance": 4.8,
+      "overviewTransition": 0,
+      "counters": {
+        "drawCalls": 61,
+        "triangles": 532652,
+        "geometries": 43,
+        "textures": 6
+      }
+    }
+  }
+}

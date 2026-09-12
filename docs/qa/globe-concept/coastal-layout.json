@@ -1,0 +1,686 @@
+{
+  "generatedAt": "2026-09-12T19:40:14.153Z",
+  "seaLevel": -0.8,
+  "minimumSetback": 3,
+  "candidates": [],
+  "method": "Actual rotated tangent footprints, including every corner and an interior grid no coarser than 0.35 m. Substrate is sampled independently of paving/pier support. Coastal distance is a signed spherical distance to a 0.1-chart-metre sampled zero-sea intersection over the authored town longitude range; negative means submerged. Floor gap is radial floor minus substrate/surface, not proof of a missing rendered foundation. Overlap detection samples exact transformed footprints and is conservative at 0.35 m resolution.",
+  "coastline": [
+    {
+      "x": -34.4,
+      "z": -7.138
+    },
+    {
+      "x": -29.4,
+      "z": -23.734
+    },
+    {
+      "x": -24.4,
+      "z": -25.21
+    },
+    {
+      "x": -19.4,
+      "z": -25.21
+    },
+    {
+      "x": -14.4,
+      "z": -25.21
+    },
+    {
+      "x": -9.4,
+      "z": -25.21
+    },
+    {
+      "x": -4.4,
+      "z": -25.21
+    },
+    {
+      "x": 0.6,
+      "z": -25.21
+    },
+    {
+      "x": 5.6,
+      "z": -25.21
+    },
+    {
+      "x": 10.6,
+      "z": -25.21
+    },
+    {
+      "x": 15.6,
+      "z": -25.21
+    },
+    {
+      "x": 20.6,
+      "z": -25.21
+    },
+    {
+      "x": 25.6,
+      "z": -27.521
+    },
+    {
+      "x": 30.6,
+      "z": -25.711
+    },
+    {
+      "x": 35.6,
+      "z": -7.901
+    }
+  ],
+  "findings": [],
+  "dryFootprintFailures": [],
+  "spacingWarnings": [],
+  "buildings": [
+    {
+      "id": "studio",
+      "center": [
+        -10,
+        8
+      ],
+      "rotation": 0,
+      "floorHeight": 0.4,
+      "samples": 441,
+      "minSubstrate": 0.16,
+      "submergedSamples": 0,
+      "minCoastClearance": 22.545,
+      "floorGapToSubstrate": [
+        0.24,
+        0.566
+      ],
+      "floorGapToSurface": [
+        0.24,
+        0.566
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            -13.289,
+            11.685
+          ],
+          "substrate": 0.16,
+          "floor": 0.726,
+          "gap": 0.566,
+          "coastClearance": 25.413,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -13.289,
+            4.315
+          ],
+          "substrate": 0.16,
+          "floor": 0.726,
+          "gap": 0.566,
+          "coastClearance": 22.545,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -6.616,
+            11.495
+          ],
+          "substrate": 0.16,
+          "floor": 0.726,
+          "gap": 0.566,
+          "coastClearance": 31.436,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -6.616,
+            4.505
+          ],
+          "substrate": 0.16,
+          "floor": 0.726,
+          "gap": 0.566,
+          "coastClearance": 28.325,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "workshop",
+      "center": [
+        9,
+        8
+      ],
+      "rotation": 0,
+      "floorHeight": 0.4,
+      "samples": 420,
+      "minSubstrate": 0.16,
+      "submergedSamples": 0,
+      "minCoastClearance": 25.167,
+      "floorGapToSubstrate": [
+        0.24,
+        0.548
+      ],
+      "floorGapToSurface": [
+        0.24,
+        0.548
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            5.816,
+            11.483
+          ],
+          "substrate": 0.16,
+          "floor": 0.708,
+          "gap": 0.548,
+          "coastClearance": 33.242,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            5.816,
+            4.517
+          ],
+          "substrate": 0.16,
+          "floor": 0.708,
+          "gap": 0.548,
+          "coastClearance": 29.222,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            12.099,
+            11.642
+          ],
+          "substrate": 0.16,
+          "floor": 0.708,
+          "gap": 0.548,
+          "coastClearance": 27.442,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            12.099,
+            4.358
+          ],
+          "substrate": 0.16,
+          "floor": 0.708,
+          "gap": 0.548,
+          "coastClearance": 25.167,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "skate-shop",
+      "center": [
+        16,
+        8
+      ],
+      "rotation": 0,
+      "floorHeight": 0.4,
+      "samples": 304,
+      "minSubstrate": 0.16,
+      "submergedSamples": 0,
+      "minCoastClearance": 19.224,
+      "floorGapToSubstrate": [
+        0.24,
+        0.449
+      ],
+      "floorGapToSurface": [
+        0.24,
+        0.449
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            13.484,
+            11.174
+          ],
+          "substrate": 0.16,
+          "floor": 0.609,
+          "gap": 0.449,
+          "coastClearance": 25.997,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            13.484,
+            4.826
+          ],
+          "substrate": 0.16,
+          "floor": 0.609,
+          "gap": 0.449,
+          "coastClearance": 23.956,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            18.4,
+            11.387
+          ],
+          "substrate": 0.16,
+          "floor": 0.609,
+          "gap": 0.449,
+          "coastClearance": 21.651,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            18.4,
+            4.613
+          ],
+          "substrate": 0.16,
+          "floor": 0.609,
+          "gap": 0.449,
+          "coastClearance": 19.224,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "arcade",
+      "center": [
+        -8,
+        -7
+      ],
+      "rotation": 3.142,
+      "floorHeight": 0.4,
+      "samples": 437,
+      "minSubstrate": 0.16,
+      "submergedSamples": 0,
+      "minCoastClearance": 14.274,
+      "floorGapToSubstrate": [
+        0.24,
+        0.555
+      ],
+      "floorGapToSurface": [
+        0.24,
+        0.555
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            -4.29,
+            -9.966
+          ],
+          "substrate": 0.16,
+          "floor": 0.715,
+          "gap": 0.555,
+          "coastClearance": 15.129,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -4.29,
+            -4.034
+          ],
+          "substrate": 0.16,
+          "floor": 0.715,
+          "gap": 0.555,
+          "coastClearance": 21.006,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -11.655,
+            -10.107
+          ],
+          "substrate": 0.16,
+          "floor": 0.715,
+          "gap": 0.555,
+          "coastClearance": 14.274,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -11.655,
+            -3.893
+          ],
+          "substrate": 0.16,
+          "floor": 0.715,
+          "gap": 0.555,
+          "coastClearance": 20.073,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "center": [
+        9,
+        -7
+      ],
+      "rotation": 3.142,
+      "floorHeight": 0.4,
+      "samples": 570,
+      "minSubstrate": 0.16,
+      "submergedSamples": 0,
+      "minCoastClearance": 13.882,
+      "floorGapToSubstrate": [
+        0.24,
+        0.704
+      ],
+      "floorGapToSurface": [
+        0.24,
+        0.704
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            13.866,
+            -10.165
+          ],
+          "substrate": 0.16,
+          "floor": 0.864,
+          "gap": 0.704,
+          "coastClearance": 13.882,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            13.866,
+            -3.835
+          ],
+          "substrate": 0.16,
+          "floor": 0.864,
+          "gap": 0.704,
+          "coastClearance": 19.623,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            4.072,
+            -9.952
+          ],
+          "substrate": 0.16,
+          "floor": 0.864,
+          "gap": 0.704,
+          "coastClearance": 15.155,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            4.072,
+            -4.048
+          ],
+          "substrate": 0.16,
+          "floor": 0.864,
+          "gap": 0.704,
+          "coastClearance": 21.009,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "lab",
+      "center": [
+        21,
+        -6
+      ],
+      "rotation": -1.571,
+      "floorHeight": 0.4,
+      "samples": 240,
+      "minSubstrate": 0.16,
+      "submergedSamples": 0,
+      "minCoastClearance": 11.915,
+      "floorGapToSubstrate": [
+        -2.8,
+        0.405
+      ],
+      "floorGapToSurface": [
+        -2.8,
+        0.38
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            23.409,
+            -3.028
+          ],
+          "substrate": 3.2,
+          "floor": 0.565,
+          "gap": -2.635,
+          "coastClearance": 12.617,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            18.487,
+            -3.285
+          ],
+          "substrate": 0.16,
+          "floor": 0.565,
+          "gap": 0.405,
+          "coastClearance": 17.414,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            23.409,
+            -8.972
+          ],
+          "substrate": 3.2,
+          "floor": 0.565,
+          "gap": -2.635,
+          "coastClearance": 11.915,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            18.487,
+            -8.715
+          ],
+          "substrate": 0.16,
+          "floor": 0.565,
+          "gap": 0.405,
+          "coastClearance": 14.238,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "town-corner",
+      "center": [
+        -19,
+        -7
+      ],
+      "rotation": 3.142,
+      "floorHeight": 0.4,
+      "samples": 323,
+      "minSubstrate": 0.16,
+      "submergedSamples": 0,
+      "minCoastClearance": 8.703,
+      "floorGapToSubstrate": [
+        -1.9,
+        0.467
+      ],
+      "floorGapToSurface": [
+        -1.9,
+        0.467
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            -15.991,
+            -9.997
+          ],
+          "substrate": 0.16,
+          "floor": 0.627,
+          "gap": 0.467,
+          "coastClearance": 13.657,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -15.991,
+            -4.003
+          ],
+          "substrate": 0.16,
+          "floor": 0.627,
+          "gap": 0.467,
+          "coastClearance": 16.28,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -21.889,
+            -10.298
+          ],
+          "substrate": 0.462,
+          "floor": 0.627,
+          "gap": 0.165,
+          "coastClearance": 8.703,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -21.889,
+            -3.702
+          ],
+          "substrate": 2.45,
+          "floor": 0.627,
+          "gap": -1.823,
+          "coastClearance": 11.437,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "resort-lodge",
+      "center": [
+        -7,
+        115
+      ],
+      "rotation": 0,
+      "floorHeight": 2.8,
+      "samples": 336,
+      "minSubstrate": 2.38,
+      "submergedSamples": 0,
+      "minCoastClearance": 66.126,
+      "floorGapToSubstrate": [
+        0.42,
+        0.658
+      ],
+      "floorGapToSurface": [
+        0.3,
+        0.658
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            -10.217,
+            117.403
+          ],
+          "substrate": 2.38,
+          "floor": 3.038,
+          "gap": 0.658,
+          "coastClearance": 66.126,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -10.217,
+            112.597
+          ],
+          "substrate": 2.38,
+          "floor": 3.038,
+          "gap": 0.658,
+          "coastClearance": 68.123,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -3.754,
+            117.32
+          ],
+          "substrate": 2.38,
+          "floor": 3.038,
+          "gap": 0.658,
+          "coastClearance": 71.685,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            -3.754,
+            112.68
+          ],
+          "substrate": 2.38,
+          "floor": 3.038,
+          "gap": 0.658,
+          "coastClearance": 74.028,
+          "supportKind": "ground"
+        }
+      ]
+    },
+    {
+      "id": "ticket-hut",
+      "center": [
+        6,
+        116
+      ],
+      "rotation": 0,
+      "floorHeight": 2.8,
+      "samples": 100,
+      "minSubstrate": 2.38,
+      "submergedSamples": 0,
+      "minCoastClearance": 66.797,
+      "floorGapToSubstrate": [
+        0.421,
+        0.478
+      ],
+      "floorGapToSurface": [
+        0.313,
+        0.478
+      ],
+      "intersecting": [],
+      "corners": [
+        {
+          "chart": [
+            4.605,
+            117.401
+          ],
+          "substrate": 2.38,
+          "floor": 2.858,
+          "gap": 0.478,
+          "coastClearance": 69.194,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            4.605,
+            114.599
+          ],
+          "substrate": 2.38,
+          "floor": 2.858,
+          "gap": 0.478,
+          "coastClearance": 70.577,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            7.385,
+            117.42
+          ],
+          "substrate": 2.38,
+          "floor": 2.858,
+          "gap": 0.478,
+          "coastClearance": 66.797,
+          "supportKind": "ground"
+        },
+        {
+          "chart": [
+            7.385,
+            114.58
+          ],
+          "substrate": 2.38,
+          "floor": 2.858,
+          "gap": 0.478,
+          "coastClearance": 68.108,
+          "supportKind": "ground"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-09-05T21:18:16.318Z",
+  "browser": "152.0.7977.77",
+  "method": "Fresh production context. CDP heap snapshots distinguish construction garbage from retained JS heap. Explicit collection is diagnostic only, not normal user behavior; GPU memory is excluded. Route exits and returns use actual Next.js links, without document reloads.",
+  "samples": [
+    {
+      "label": "initial-ready",
+      "collected": false,
+      "url": "http://127.0.0.1:3001/world",
+      "canvasCount": 1,
+      "usedSize": 138113124,
+      "totalSize": 189259776,
+      "embedderHeapUsedSize": 1697480,
+      "backingStorageSize": 43147040
+    },
+    {
+      "label": "settled-eight-seconds",
+      "collected": false,
+      "url": "http://127.0.0.1:3001/world",
+      "canvasCount": 1,
+      "usedSize": 33311656,
+      "totalSize": 80015360,
+      "embedderHeapUsedSize": 1441216,
+      "backingStorageSize": 43146604
+    },
+    {
+      "label": "world-after-collection",
+      "collected": true,
+      "url": "http://127.0.0.1:3001/world",
+      "canvasCount": 1,
+      "usedSize": 9408892,
+      "totalSize": 10809344,
+      "embedderHeapUsedSize": 1244704,
+      "backingStorageSize": 43109382
+    },
+    {
+      "label": "after-route-exit-1",
+      "collected": true,
+      "url": "http://127.0.0.1:3001/projects/westcose-world",
+      "canvasCount": 0,
+      "usedSize": 8879812,
+      "totalSize": 10285056,
+      "embedderHeapUsedSize": 1418008,
+      "backingStorageSize": 29213278
+    },
+    {
+      "label": "world-after-return",
+      "collected": true,
+      "url": "http://127.0.0.1:3001/world",
+      "canvasCount": 1,
+      "usedSize": 10819008,
+      "totalSize": 12120064,
+      "embedderHeapUsedSize": 1616696,
+      "backingStorageSize": 43117254
+    },
+    {
+      "label": "after-route-exit-2",
+      "collected": true,
+      "url": "http://127.0.0.1:3001/projects/westcose-world",
+      "canvasCount": 0,
+      "usedSize": 9739784,
+      "totalSize": 11071488,
+      "embedderHeapUsedSize": 1359624,
+      "backingStorageSize": 29213935
+    }
+  ],
+  "errors": []
+}

@@ -45,9 +45,14 @@ try {
     { id: 'boardwalk-center-lighthouse', x: 0, z: -16, facing: toward(0, -16, tower.x, tower.z) },
     { id: 'boardwalk-west-lighthouse', x: -12, z: -16, facing: toward(-12, -16, tower.x, tower.z) },
     { id: 'lighthouse-terrace', x: terrace[0], z: terrace[1], facing: toward(...terrace, tower.x, tower.z) },
+    { id: 'lighthouse-toward-town', x: terrace[0], z: terrace[1], facing: toward(...terrace, 0, -16) },
+    { id: 'lighthouse-approach', x: 24.5, z: -10, facing: toward(24.5, -10, tower.x, tower.z) },
     { id: 'public-cave-entry', x: caveEntry[0] - 2, z: caveEntry[1] - 3, facing: toward(caveEntry[0] - 2, caveEntry[1] - 3, ...caveMiddle) },
     { id: 'covered-cave', x: caveMiddle[0], z: caveMiddle[1], facing: toward(...caveMiddle, ...caveExit) },
     { id: 'hidden-beach-ocean', x: hidden.x, z: hidden.z, facing: 'east' },
+    { id: 'hidden-beach-reverse', x: hidden.x, z: hidden.z, facing: 'west' },
+    { id: 'hidden-beach-north', x: hidden.x, z: hidden.z, facing: 'north' },
+    { id: 'hidden-beach-south', x: hidden.x, z: hidden.z, facing: 'south' },
   ];
   browser = await chromium.launch({ channel: 'chrome', headless: true, args: ['--enable-unsafe-swiftshader'] });
   for (const profile of [{ id: 'desktop', width: 1440, height: 900 }, { id: 'phone', width: 390, height: 844 }]
@@ -73,7 +78,7 @@ try {
       await expect.poll(async () => (await state()).overviewTransition).toBeLessThan(.005);
       await capture(view.id, view);
     }
-    for (const view of (process.env.WORLD_PENINSULA_VIEWS ? [] : [views.find(view => view.id === 'boardwalk-center-lighthouse'), views.at(-1)])) {
+    for (const view of (process.env.WORLD_PENINSULA_VIEWS && !process.env.WORLD_PENINSULA_GLOBE ? [] : [views.find(view => view.id === 'boardwalk-center-lighthouse'), views.find(view => view.id === 'hidden-beach-ocean')])) {
       await page.evaluate(({ x, z, facing }) => window.__WESTCOSE_WORLD__.spawnAt(x, z, facing), view);
       await page.getByRole('button', { name: 'Planet view', exact: true }).click();
       await expect.poll(async () => (await state()).overviewTransition).toBeGreaterThan(.995);

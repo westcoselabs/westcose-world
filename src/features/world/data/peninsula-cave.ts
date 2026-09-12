@@ -54,13 +54,13 @@ const rings: Ring[] = authoredPoints.map(([x, z], index) => {
   // A shallow outward shelf, sloping upper face, and irregular4.5–4.65m ridge.
   // There are no crowns or tall solid masses above the tunnel.
   const outerProfile: Point[] = [
-    [-2.48 - .09 * alternate, -.26],
-    [-2.94 - .1 * variation, 1.53 + .09 * alternate],
-    [-2.55 - .11 * alternate, 4.02 + .075 * variation],
-    [-.1 + .11 * variation, 4.55 + .065 * alternate],
-    [2.63 + .09 * variation, 4.06 + .065 * alternate],
-    [3.02 + .11 * alternate, 1.69 + .085 * variation],
-    [2.5 + .09 * variation, -.26],
+    [-4.04 - .15 * alternate, -.38],
+    [-3.32 - .12 * variation, 1.4 + .09 * alternate],
+    [-2.32 - .085 * alternate, 3.98 + .075 * variation],
+    [-.1 + .11 * variation, 4.55 + .085 * alternate],
+    [2.37 + .085 * variation, 4.01 + .065 * alternate],
+    [3.37 + .11 * alternate, 1.54 + .085 * variation],
+    [4.08 + .13 * variation, -.38],
   ];
   const project = ([lateral, height]: Point) => origin.clone().addScaledVector(right, lateral).addScaledVector(up, height);
   return { x, z, up, tangent, right, inner: innerProfile.map(project), outer: outerProfile.map(project) };
@@ -93,7 +93,9 @@ export function caveDistanceAt(x: number, z: number) {
 }
 
 export function caveBlendAt(x: number, z: number) {
-  return 1 - MathUtils.smoothstep(caveDistanceAt(x, z), PENINSULA_CAVE.width / 2 + .08, PENINSULA_CAVE.width / 2 + .72);
+  // Carry the flat carve beneath the side wedges, so the coarser globe mesh
+  // cannot interpolate neighbouring cliff vertices into the visible tunnel.
+  return 1 - MathUtils.smoothstep(caveDistanceAt(x, z), PENINSULA_CAVE.width / 2 + .4, PENINSULA_CAVE.width / 2 + .95);
 }
 
 export function caveHeightAt(x: number, z: number): number | undefined {

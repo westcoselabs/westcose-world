@@ -3,6 +3,7 @@ import type { TownRoute } from './town-types';
 import { pierSurfaceAt } from './pier-layout';
 import { mapCoordinates, mapMetric, MAP_SUMMIT } from './world-map';
 import { CAVE_FLOOR, caveBlendAt, caveHeightAt, skateBlendAt, skateHeightAt, skateStairSurfaceAt } from './concept-landmarks';
+import { inPeninsulaRegion, peninsulaBlendAt, peninsulaHeightAt, peninsulaFoundationAt, coastDistance, PENINSULA_SAND } from './peninsula-layout';
 
 const clamp=(v:number,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=(a:number,b:number,v:number)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t);};
@@ -12,7 +13,7 @@ export const TOWN_STEPS={lon:-24/36,startLat:0,endLat:11/36,width:3,count:12,ris
 export const COVE_STEPS={start:[-20,-16] as const,end:[-18,-20] as const,width:2.4,count:0,top:.15,rise:0};
 
 /** Broad continuous island, with scalloped shores instead of a rectangular land strip. */
-export function naturalTerrainAt(x:number,z:number):number {
+function existingIslandTerrainAt(x:number,z:number):number {
  const coastWave=2*Math.sin(z*.075)+1.2*Math.sin(z*.17+.8);
  const forestWidth=35+coastWave;
  const inlandWidth=34+(forestWidth-34)*smooth(10,32,z);
@@ -58,6 +59,11 @@ export function naturalTerrainAt(x:number,z:number):number {
  height+=(Math.min(height,coveFloor)-height)*outlet;
  return height;
 }
+/** A bounded replacement, not a smoothing pass on the former headland mound. */
+export function naturalTerrainAt(x:number,z:number):number {
+ const existing=existingIslandTerrainAt(x,z),blend=peninsulaBlendAt(x,z);
+ return blend===0?existing:existing+(peninsulaHeightAt(x,z)-existing)*blend;
+}
 export function substrateAt(x:number,z:number):number {
  let height=naturalTerrainAt(x,z);
  const skate=skateHeightAt(x,z),skateBlend=skateBlendAt(x,z);
@@ -67,13 +73,20 @@ export function substrateAt(x:number,z:number):number {
  return height;
 }
 type Segment={route:TownRoute;ax:number;az:number;dx:number;dz:number;length:number;offset:number;total:number;minX:number;maxX:number;minZ:number;maxZ:number};
-const segments:Segment[]=TOWN_ROUTES.flatMap(route=>{
+const makeSegments=(routes:TownRoute[]):Segment[]=>routes.flatMap(route=>{
  const lengths=route.points.slice(1).map((p,i)=>Math.hypot(p[0]-route.points[i][0],p[1]-route.points[i][1]));
  const total=lengths.reduce((a,b)=>a+b,0);let offset=0;
  return lengths.map((length,i)=>{const a=route.points[i],b=route.points[i+1],pad=(route.width/2+(route.sidewalk||0)+1)/.45;
   const s={route,ax:a[0],az:a[1],dx:b[0]-a[0],dz:b[1]-a[1],length,offset,total,minX:Math.min(a[0],b[0])-pad,maxX:Math.max(a[0],b[0])+pad,minZ:Math.min(a[1],b[1])-pad,maxZ:Math.max(a[1],b[1])+pad};offset+=length;return s;
  });
 });
+const segments=makeSegments(TOWN_ROUTES);
+// The short prefix within the protected town keeps its exact old support/shoulders.
+// The obsolete coastal detour is never evaluated inside the rebuilt peninsula.
+const outsideSegments=makeSegments(TOWN_ROUTES.map(route=>route.id==='lighthouse-trail'?{...route,
+ points:[[20,4],[23,0],[24.5,-10],[25.5,-14],[23,-21],[19,-23],[18.5,-29],[20,-33],[24,-36],[29,-38],[32.8,-35],[32.8,-27]],
+ elevations:[.2,.2,.2,.2,.1,-.05,-.1,-.1,.8,3.6,6.2,7.8],
+}:route));
 function closest(s:Segment,x:number,z:number,height:number){
  const metric=mapMetric(x,height),dx=s.dx*metric.x,dz=s.dz*metric.z;
  const t=clamp(((x-s.ax)*metric.x*dx+(z-s.az)*metric.z*dz)/(dx*dx+dz*dz));
@@ -102,7 +115,7 @@ export function routeDistanceAt(x:number,z:number){
 /** Terrain and paths use the same radial support, including the carved cave and skate ramps. */
 export function groundSurfaceAt(x:number,z:number):{height:number;kind:'ground'|'pier';route?:string}{
  let height=substrateAt(x,z),routeId:string|undefined;
- for(const s of segments){
+ for(const s of inPeninsulaRegion(x,z)?segments:outsideSegments){
   if(x<s.minX||x>s.maxX||z<s.minZ||z>s.maxZ)continue;
   const c=closest(s,x,z,height),half=s.route.width/2;
   if(c.distance<=half){height=routeElevation(s.route,x,z,c.progress);routeId=s.route.id;}
@@ -116,6 +129,10 @@ export function groundSurfaceAt(x:number,z:number):{height:number;kind:'ground'|
  // The low passage owns its entire width, including near the high lookout's outer edge.
  // Never let a plaza or a trail lift the visitor into the separate rock roof.
  if(caveBlendAt(x,z)===1){height=CAVE_FLOOR;routeId='cave';}
+ if(inPeninsulaRegion(x,z)){
+  const foundation=peninsulaFoundationAt(x,z);
+  if(foundation.blend>0)height+=(foundation.height-height)*foundation.blend;
+ }
  return {height,kind:'ground',route:routeId};
 }
 export function townSurfaceAt(x:number,z:number):{height:number;kind:'ground'|'pier';route?:string}{
@@ -134,6 +151,10 @@ export function surfaceMaterialAt(x:number,z:number):string|null{
 export function terrainColorAt(x:number,z:number,height:number){
  const material=surfaceMaterialAt(x,z);if(material)return material;
  if(height<-.5)return '#BCA87B';
+ if(inPeninsulaRegion(x,z)&&peninsulaBlendAt(x,z)>.5){
+  if(caveBlendAt(x,z)>.3||coastDistance(x,z,PENINSULA_SAND)>-.5)return '#D7BB85';
+  return height>2.4?'#999C89':height>.4?'#818C83':'#BDA77F';
+ }
  if(z>127&&height>8)return (z>153||Math.abs(Math.sin(x*.27+z*.08))<.19)?'#82918E':'#EDF2E9';
  if(caveBlendAt(x,z)>.3||(x>30&&z<12&&height<.4)||(z<-17&&Math.abs(x)<27&&height<.5))return '#D7BB85';
  if(skateBlendAt(x,z)>.98)return '#B5BAB3';

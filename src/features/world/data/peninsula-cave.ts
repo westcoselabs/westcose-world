@@ -71,11 +71,16 @@ const curveSegments = rings.slice(1).map((end, index) => {
   return { start: start.up, end: end.up, normal, angle: start.up.angleTo(end.up) };
 });
 export const PENINSULA_CAVE_LENGTH = curveSegments.reduce((length, segment) => length + segment.angle * floorRadius, 0);
+const caveBounds = {
+  minX: Math.min(...PENINSULA_CAVE.points.map(point => point[0])) - 4,
+  maxX: Math.max(...PENINSULA_CAVE.points.map(point => point[0])) + 4,
+  minZ: Math.min(...PENINSULA_CAVE.points.map(point => point[1])) - 8,
+  maxZ: Math.max(...PENINSULA_CAVE.points.map(point => point[1])) + 8,
+};
 
 /** Physical spherical distance to the same short centerline used by the tunnel rings. */
 export function caveDistanceAt(x: number, z: number) {
-  const xs = PENINSULA_CAVE.points.map(point => point[0]), zs = PENINSULA_CAVE.points.map(point => point[1]);
-  if (x < Math.min(...xs) - 4 || x > Math.max(...xs) + 4 || z < Math.min(...zs) - 8 || z > Math.max(...zs) + 8) return Infinity;
+  if (x < caveBounds.minX || x > caveBounds.maxX || z < caveBounds.minZ || z > caveBounds.maxZ) return Infinity;
   const direction = mapDirection(x, z);
   let distance = Infinity;
   for (const segment of curveSegments) {

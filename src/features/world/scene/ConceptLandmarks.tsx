@@ -10,6 +10,8 @@ import { townSurfaceAt } from '../data/town-surfaces';
 import { SceneryBatch, variation } from './sceneryGeometry';
 import { block, createKitContext, physicalSign, tube, UNIT_BOX } from './kit/context';
 import { SignAtlas } from './kit/SignAtlas';
+import PeninsulaCliffs from './PeninsulaCliffs';
+import { PENINSULA_COVE } from '../data/peninsula-layout';
 
 const CONE = new THREE.ConeGeometry(1, 1, 7);
 const CYLINDER = new THREE.CylinderGeometry(1, 1, 1, 7);
@@ -89,9 +91,9 @@ function buildLandmarks() {
   tube(kit.details, courtyard, [0, .75, 0], .3, .2, '#D5C7A5');
   sign('WESTCOSE COURTYARD', 'ARRIVAL / CONTACT / WATERFRONT', -3.7, 11.5, 3.3);
   sign('SKATE PARK', 'BOWL / QUARTER PIPES / BANK / RAIL', -30.3, 9.8, 3.3);
-  sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', 32.8, -25.3, 2.5);
+  sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', LIGHTHOUSE.x - 3.3, LIGHTHOUSE.z + 4.5, 2.5);
   sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', CAVE_POINTS[0][0] - 2.5, CAVE_POINTS[0][1] - .5, 3.4, CAVE_FLOOR);
-  sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', 35.2, 2.5, 2.5);
+  sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', PENINSULA_COVE.x - .7, PENINSULA_COVE.z + 3, 2.5);
   sign('SKI RESORT', 'THREE WALKABLE SNOW TRAILS', -2.3, 119, 3.4);
 
   // Simple coping makes the bowl legible without introducing a second support mesh.
@@ -195,6 +197,7 @@ export default function ConceptLandmarks() {
   const geometry = useMemo(() => buildLandmarks(), []);
   useEffect(() => () => { geometry.structure.dispose(); geometry.details.dispose(); geometry.plants.dispose(); }, [geometry]);
   return <group name="concept-landmarks">
+    <PeninsulaCliffs />
     <mesh geometry={geometry.structure} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={1} /></mesh>
     <mesh geometry={geometry.details} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={.88} /></mesh>
     <mesh geometry={geometry.plants} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={1} flatShading /></mesh>

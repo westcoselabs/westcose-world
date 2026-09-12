@@ -78,9 +78,9 @@ export function areaAt(d:{x:number;y:number;z:number}):string{
  if(z>=108)return 'Ski Resort';
  if(z>=40)return 'Forest Trail';
  if(x<=-20&&z>=-5&&z<=22)return 'Skate Park';
- if(x>=30&&z>=-35&&z<=-18)return 'Lighthouse Point';
- if(x>=20&&x<30&&z<=-18)return 'Cave Access';
- if(x>=27&&z>=-2&&z<=5)return 'Hidden Beach';
+ if(x>=34&&z>=-25&&z<=-11)return 'Hidden Beach';
+ if(x>=29&&z>=-32&&z<=-21)return 'Cave Access';
+ if(x>=23&&z>=-28&&z<=-18)return 'Lighthouse Point';
  if(z<=-18)return 'The Beach';
  if(z<=-12)return 'Boardwalk';
  if(x>=17&&z>=-9&&z<=8)return 'Graffiti Alley';

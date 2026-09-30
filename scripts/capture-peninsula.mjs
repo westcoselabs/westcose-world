@@ -1,12 +1,12 @@
 import { chromium, expect } from '@playwright/test';
 import { createHash } from 'node:crypto';
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import ts from 'typescript';
 
 const repository = process.cwd(), world = path.join(repository, 'src/features/world');
-const destination = path.resolve(process.env.WORLD_PENINSULA_CAPTURE_DIR || 'docs/qa/peninsula-rebuild/final');
+const destination = path.resolve(process.env.WORLD_PENINSULA_CAPTURE_DIR || 'docs/qa/peninsula-underpass/preview');
 const base = process.env.WORLD_CAPTURE_URL || 'http://127.0.0.1:3000';
 const artifacts = path.join(repository, '.next');
 mkdirSync(artifacts, { recursive: true }); mkdirSync(path.join(destination, 'views'), { recursive: true });
@@ -19,6 +19,15 @@ const sourceFingerprint = () => {
   return hash.digest('hex');
 };
 const report = { capturedAt: new Date().toISOString(), base, sourceBefore: sourceFingerprint(), method: 'Actual current third-person camera, ordinary heading turns only; no pitch/framing workaround or scene edits. Debug placement positions the visitor; independent preservation and physical route checks establish geometry safety.', errors: [], views: [] };
+const append=process.env.WORLD_PENINSULA_APPEND==='1';
+if(append){
+  const filename=path.join(destination,'capture-state.json');
+  if(!existsSync(filename))throw new Error('Cannot append without a completed capture manifest');
+  const previous=JSON.parse(readFileSync(filename,'utf8'));
+  if(previous.sourceBefore!==report.sourceBefore||!previous.sourceUnchanged||previous.errors.length)throw new Error('Cannot merge captures from different or unverified app sources');
+  report.capturedAt=previous.capturedAt;report.views=previous.views;
+  report.captureUpdates=[...(previous.captureUpdates||[]),{at:new Date().toISOString(),fixtures:process.env.WORLD_PENINSULA_VIEWS,method:'Retake data-specified ordinary visitor positions against exactly the same app source; replace matching view IDs only.'}];
+}
 let browser;
 try {
   for (const name of readdirSync(path.join(world, 'data')).filter(name => name.endsWith('.ts'))) {
@@ -37,22 +46,27 @@ try {
     return { east: tangent.dot(frame.east), north: tangent.dot(frame.north) };
   };
   const caveEntry = landmarks.CAVE_POINTS[0], caveExit = landmarks.CAVE_POINTS.at(-1), caveMiddle = landmarks.CAVE_POINTS[Math.floor(landmarks.CAVE_POINTS.length / 2)];
-  const terrace = town.TOWN_ROUTES.find(route => route.id === 'lighthouse-trail').points.at(-1);
+  const lighthouseRoute = town.TOWN_ROUTES.find(route => route.id === 'lighthouse-trail');
+  const terrace = lighthouseRoute.points.at(-1), routeApproach = lighthouseRoute.points.at(-3);
   const hidden = town.COASTAL_RADIO;
   const views = [
     { id: 'courtyard-toward-lighthouse', x: 0, z: 8, facing: toward(0, 8, tower.x, tower.z) },
     { id: 'main-street-lighthouse', x: 0, z: -10, facing: toward(0, -10, tower.x, tower.z) },
     { id: 'boardwalk-center-lighthouse', x: 0, z: -16, facing: toward(0, -16, tower.x, tower.z) },
     { id: 'boardwalk-west-lighthouse', x: -12, z: -16, facing: toward(-12, -16, tower.x, tower.z) },
-    { id: 'lighthouse-terrace', x: terrace[0], z: terrace[1], facing: toward(...terrace, tower.x, tower.z) },
-    { id: 'lighthouse-toward-town', x: terrace[0], z: terrace[1], facing: toward(...terrace, 0, -16) },
+    { id: 'lighthouse-terrace', x: terrace[0], z: terrace[1], layer:'upper', facing: toward(...terrace, tower.x, tower.z) },
+    { id: 'lighthouse-toward-town', x: 33.1, z: -35.5, layer:'upper', facing: toward(33.1, -35.5, 0, -16) },
     { id: 'lighthouse-approach', x: 24.5, z: -10, facing: toward(24.5, -10, tower.x, tower.z) },
-    { id: 'public-cave-entry', x: caveEntry[0] - 2, z: caveEntry[1] - 3, facing: toward(caveEntry[0] - 2, caveEntry[1] - 3, ...caveMiddle) },
-    { id: 'covered-cave', x: caveMiddle[0], z: caveMiddle[1], facing: toward(...caveMiddle, ...caveExit) },
+    { id: 'lighthouse-route-approach', x: routeApproach[0], z: routeApproach[1], facing: toward(...routeApproach, tower.x, tower.z) },
+    { id: 'public-cave-entry', x: caveEntry[0], z: caveEntry[1], layer:'tunnel', facing: toward(...caveEntry, ...landmarks.CAVE_POINTS[1]) },
+    { id: 'public-cave-approach', x: 25, z: -29, facing: toward(25, -29, ...caveEntry) },
+    { id: 'covered-cave', x: caveMiddle[0], z: caveMiddle[1], layer:'tunnel', facing: toward(...caveMiddle, ...caveExit) },
+    { id: 'under-lighthouse', x: tower.x, z: tower.z, layer:'tunnel', facing: toward(tower.x, tower.z, ...caveExit) },
     { id: 'hidden-beach-ocean', x: hidden.x, z: hidden.z, facing: 'east' },
     { id: 'hidden-beach-reverse', x: hidden.x, z: hidden.z, facing: 'west' },
     { id: 'hidden-beach-north', x: hidden.x, z: hidden.z, facing: 'north' },
     { id: 'hidden-beach-south', x: hidden.x, z: hidden.z, facing: 'south' },
+    { id: 'hidden-beach-toward-lighthouse', x: hidden.x, z: hidden.z, facing: toward(hidden.x, hidden.z, tower.x, tower.z) },
   ];
   browser = await chromium.launch({ channel: 'chrome', headless: true, args: ['--enable-unsafe-swiftshader'] });
   for (const profile of [{ id: 'desktop', width: 1440, height: 900 }, { id: 'phone', width: 390, height: 844 }]
@@ -70,16 +84,22 @@ try {
       await page.waitForTimeout(1600);
       const filename = `${profile.id}-${label}.jpg`;
       await page.screenshot({ path: path.join(destination, 'views', filename), type: 'jpeg', quality: 90 });
-      report.views.push({ filename, profile: profile.id, viewport: { width: profile.width, height: profile.height }, fixture, state: await state() });
+      const entry={ filename, profile: profile.id, viewport: { width: profile.width, height: profile.height }, fixture, state: await state() };
+      const previous=report.views.findIndex(view=>view.filename===filename);
+      if(previous>=0)report.views[previous]=entry;else report.views.push(entry);
     };
-    await capture('fresh-courtyard', 'fresh-load');
+    if(!append)await capture('fresh-courtyard', 'fresh-load');
     for (const view of views.filter(view => !process.env.WORLD_PENINSULA_VIEWS || process.env.WORLD_PENINSULA_VIEWS.split(',').includes(view.id))) {
-      await page.evaluate(({ x, z, facing }) => window.__WESTCOSE_WORLD__.spawnAt(x, z, facing), view);
+      await page.evaluate(({ x, z, facing, layer }) => window.__WESTCOSE_WORLD__.spawnAt(x, z, facing, layer || 'upper'), view);
       await expect.poll(async () => (await state()).overviewTransition).toBeLessThan(.005);
+      // A low outdoor approach can naturally enter a portal apron. Only the
+      // explicitly stacked fixtures require a specific final layer.
+      if(view.layer)await expect.poll(async () => (await state()).supportLayer).toBe(view.layer);
       await capture(view.id, view);
     }
-    for (const view of (process.env.WORLD_PENINSULA_VIEWS && !process.env.WORLD_PENINSULA_GLOBE ? [] : [views.find(view => view.id === 'boardwalk-center-lighthouse'), views.find(view => view.id === 'hidden-beach-ocean')])) {
-      await page.evaluate(({ x, z, facing }) => window.__WESTCOSE_WORLD__.spawnAt(x, z, facing), view);
+    const globeViews=process.env.WORLD_PENINSULA_GLOBE_VIEWS?process.env.WORLD_PENINSULA_GLOBE_VIEWS.split(',').map(id=>views.find(view=>view.id===id)):[views.find(view=>view.id==='lighthouse-terrace'),views.find(view=>view.id==='hidden-beach-ocean')];
+    for (const view of (process.env.WORLD_PENINSULA_VIEWS && !process.env.WORLD_PENINSULA_GLOBE ? [] : globeViews)) {
+      await page.evaluate(({ x, z, facing, layer }) => window.__WESTCOSE_WORLD__.spawnAt(x, z, facing, layer || 'upper'), view);
       await page.getByRole('button', { name: 'Planet view', exact: true }).click();
       await expect.poll(async () => (await state()).overviewTransition).toBeGreaterThan(.995);
       await capture('globe-' + view.id, view);

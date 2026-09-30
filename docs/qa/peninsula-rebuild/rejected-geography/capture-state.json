@@ -1,0 +1,2521 @@
+{
+  "capturedAt": "2026-09-12T21:44:17.127Z",
+  "base": "http://127.0.0.1:3000",
+  "sourceBefore": "434d4ff0c396c965410e3e8ec51759de4f6033c6c25acf94d58eb255cfbfd49a",
+  "method": "Actual current third-person camera, ordinary heading turns only; no pitch/framing workaround or scene edits. Debug placement positions the visitor; independent preservation and physical route checks establish geometry safety.",
+  "errors": [],
+  "views": [
+    {
+      "filename": "desktop-fresh-courtyard.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "fresh-load",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.18777616939494,
+          "z": 36.236484672217976
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894475,
+          "z": 0.22039774345612217
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612223,
+          "z": 0.9754100853894476
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222218,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.15,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.008073921932348137,
+            "y": -1.1814388993398957,
+            "z": 0.9984577644020052
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 72,
+          "triangles": 458030,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-courtyard-toward-lighthouse.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "courtyard-toward-lighthouse",
+        "x": 0,
+        "z": 8,
+        "facing": {
+          "east": 0.7829554268361831,
+          "north": -0.6220778083067827
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.187776169394938,
+          "z": 36.23648467221797
+        },
+        "forward": {
+          "x": 0.7829554268361831,
+          "y": -0.6067809681193993,
+          "z": 0.13710454520494508
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612217,
+          "z": 0.9754100853894474
+        },
+        "heading": 2.242190042721131,
+        "lon": 0,
+        "lat": 0.22222222222222215,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.14999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.7517863143312711,
+            "y": -1.742607557364428,
+            "z": 0.9979839393208293
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 71,
+          "triangles": 457134,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-main-street-lighthouse.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "main-street-lighthouse",
+        "x": 0,
+        "z": -10,
+        "facing": {
+          "east": 0.943499085243914,
+          "north": -0.3313751290364097
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -10.155711375919259,
+          "z": 35.61534432585236
+        },
+        "forward": {
+          "x": 0.9434990852439142,
+          "y": -0.3186725886770755,
+          "z": -0.09086945234647709
+        },
+        "up": {
+          "x": 0,
+          "y": -0.2742192892107265,
+          "z": 0.9616671884933807
+        },
+        "heading": 1.9085570074869886,
+        "lon": 0,
+        "lat": -0.2777777777777777,
+        "map": {
+          "x": 0,
+          "z": -10
+        },
+        "mapX": 0,
+        "mapZ": -10,
+        "radius": 37.035000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Boulevard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 1.7234373848645106,
+            "y": -1.5870784223229926,
+            "z": 0.996848426363296
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 70,
+          "triangles": 456822,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-boardwalk-center-lighthouse.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "boardwalk-center-lighthouse",
+        "x": 0,
+        "z": -16,
+        "facing": {
+          "east": 0.9845116577560765,
+          "north": -0.1753191254324016
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -15.886887632372739,
+          "z": 33.36029528281131
+        },
+        "forward": {
+          "x": 0.9845116577560765,
+          "y": -0.15828681442893508,
+          "z": -0.07537957362788703
+        },
+        "up": {
+          "x": 0,
+          "y": -0.42995636352835553,
+          "z": 0.9028496693588987
+        },
+        "heading": 1.7470262315247636,
+        "lon": 0,
+        "lat": -0.4444444444444444,
+        "map": {
+          "x": 0,
+          "z": -16
+        },
+        "mapX": 0,
+        "mapZ": -16,
+        "radius": 36.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 2.6306427030375397,
+            "y": -1.91541276892328,
+            "z": 0.9953424900367013
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 68,
+          "triangles": 456258,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-boardwalk-west-lighthouse.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "boardwalk-west-lighthouse",
+        "x": -12,
+        "z": -16,
+        "facing": {
+          "east": 0.9906247021505573,
+          "north": -0.13661149105810888
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -12.117655595845502,
+          "y": -15.046959494980229,
+          "z": 31.596560854259106
+        },
+        "forward": {
+          "x": 0.9360976934881372,
+          "y": -0.2627001698626306,
+          "z": 0.2339011094465667
+        },
+        "up": {
+          "x": -0.3271946967961523,
+          "y": -0.4062902523283442,
+          "z": 0.8531540665386554
+        },
+        "heading": 1.8624105076174515,
+        "lon": -0.36621215445034616,
+        "lat": -0.41839043809352605,
+        "map": {
+          "x": -12.000000000000004,
+          "z": -16
+        },
+        "mapX": -12.000000000000004,
+        "mapZ": -16,
+        "radius": 37.035000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Boardwalk",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 2.8924207816912957,
+            "y": -2.1834093470801745,
+            "z": 0.9948883258567671
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 68,
+          "triangles": 454754,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-terrace.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "lighthouse-terrace",
+        "x": 27,
+        "z": -17,
+        "facing": {
+          "east": 0.047359065337444106,
+          "north": -0.9988779299445771
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 27.164030421500364,
+          "y": -13.263259393242226,
+          "z": 25.967455982762573
+        },
+        "forward": {
+          "x": 0.0346521009476759,
+          "y": -0.8748765078101441,
+          "z": -0.48310488300351423
+        },
+        "up": {
+          "x": 0.6816387600233342,
+          "y": -0.3328207024654819,
+          "z": 0.6516126002804387
+        },
+        "heading": 2.759183856994283,
+        "lon": 0.8079153614307096,
+        "lat": -0.3392932345350652,
+        "map": {
+          "x": 27.000000000000004,
+          "z": -17
+        },
+        "mapX": 27.000000000000004,
+        "mapZ": -17,
+        "radius": 39.85106483758416,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.04809907353510985,
+            "y": -0.17111111595994216,
+            "z": 0.9983691947745315
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 67,
+          "triangles": 454842,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-toward-town.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "lighthouse-toward-town",
+        "x": 27,
+        "z": -17,
+        "facing": {
+          "east": -0.9991702655832734,
+          "north": 0.04072812755640995
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 27.164030421500364,
+          "y": -13.263259393242226,
+          "z": 25.967455982762573
+        },
+        "forward": {
+          "x": -0.7310817614369804,
+          "y": -0.2735264972648685,
+          "z": 0.625062167618721
+        },
+        "up": {
+          "x": 0.6816387600233342,
+          "y": -0.3328207024654819,
+          "z": 0.6516126002804387
+        },
+        "heading": -1.8650889408964317,
+        "lon": 0.8079153614307096,
+        "lat": -0.3392932345350652,
+        "map": {
+          "x": 27.000000000000004,
+          "z": -17
+        },
+        "mapX": 27.000000000000004,
+        "mapZ": -17,
+        "radius": 39.85106483758416,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -4.381294878329322,
+            "y": -3.834175301560159,
+            "z": 0.9923047422272573
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 73,
+          "triangles": 458362,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-approach.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "lighthouse-approach",
+        "x": 24.5,
+        "z": -10,
+        "facing": {
+          "east": 0.367934023080151,
+          "north": -0.9298518993151839
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 23.386820089262073,
+          "y": -7.9215298202862225,
+          "z": 27.780231408108914
+        },
+        "forward": {
+          "x": 0.28596688431069445,
+          "y": -0.8307226619881776,
+          "z": -0.4776220262267123
+        },
+        "up": {
+          "x": 0.6292249118040396,
+          "y": -0.21312961246968495,
+          "z": 0.7474301162341003
+        },
+        "heading": 2.587272057433906,
+        "lon": 0.6997441792283904,
+        "lat": -0.21477705650606896,
+        "map": {
+          "x": 24.499999999999996,
+          "z": -10
+        },
+        "mapX": 24.499999999999996,
+        "mapZ": -10,
+        "radius": 37.167663979180574,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Trail",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.2555021554252887,
+            "y": -0.36508510537911354,
+            "z": 0.9983850729302989
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 68,
+          "triangles": 455174,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-route-approach.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "lighthouse-route-approach",
+        "x": 28,
+        "z": -8,
+        "facing": {
+          "east": 0.0380462739131214,
+          "north": -0.9992759784170375
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 26.629434399768606,
+          "y": -5.959204991708688,
+          "z": 26.37353975891774
+        },
+        "forward": {
+          "x": 0.027107004721336994,
+          "y": -0.9688199111704452,
+          "z": -0.24627868363853195
+        },
+        "up": {
+          "x": 0.7016978761467353,
+          "y": -0.1570277995180155,
+          "z": 0.6949549343588337
+        },
+        "heading": 2.9462946986732184,
+        "lon": 0.790226055732404,
+        "lat": -0.15768039176369134,
+        "map": {
+          "x": 28,
+          "z": -8
+        },
+        "mapX": 28,
+        "mapZ": -8,
+        "radius": 37.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Trail",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.13918972799011217,
+            "y": -0.3964040244718519,
+            "z": 0.9984376372968621
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 66,
+          "triangles": 454282,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-public-cave-entry.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "public-cave-entry",
+        "x": 28,
+        "z": -32,
+        "facing": {
+          "east": 0.7993954847358257,
+          "north": 0.6008051755635715
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 25.814052776027292,
+          "y": -20.349102192102333,
+          "z": 16.519829051618483
+        },
+        "forward": {
+          "x": 0.5695489978448649,
+          "y": 0.8141660083084685,
+          "z": 0.1129054913144836
+        },
+        "up": {
+          "x": 0.7016978761467353,
+          "y": -0.553145293130859,
+          "z": 0.4490549802622582
+        },
+        "heading": 0.21352189544774247,
+        "lon": 1.001515145292532,
+        "lat": -0.5861350041590037,
+        "map": {
+          "x": 28,
+          "z": -32
+        },
+        "mapX": 28,
+        "mapZ": -32,
+        "radius": 36.78798761338875,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -1.3415934181327198,
+            "y": 2.2649799488294464,
+            "z": 1.0048091658533898
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 428954,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-public-cave-approach.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "public-cave-approach",
+        "x": 25.5,
+        "z": -31.5,
+        "facing": {
+          "east": 0.9375265171337447,
+          "north": 0.3479138250645848
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 23.924954490180667,
+          "y": -21.436722874636207,
+          "z": 17.90240158626768
+        },
+        "forward": {
+          "x": 0.7120018994499563,
+          "y": 0.691156117506447,
+          "z": -0.12392141224610455
+        },
+        "up": {
+          "x": 0.6505689298222361,
+          "y": -0.5829087727281447,
+          "z": 0.4868032767212222
+        },
+        "heading": 0.5536437751551461,
+        "lon": 0.9284013042823634,
+        "lat": -0.6223039754758591,
+        "map": {
+          "x": 25.500000000000014,
+          "z": -31.5
+        },
+        "mapX": 25.500000000000014,
+        "mapZ": -31.5,
+        "radius": 36.77543361426439,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -2.943186562677148,
+            "y": 2.9283707888436536,
+            "z": 1.007402814055898
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 428954,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-covered-cave.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "covered-cave",
+        "x": 33,
+        "z": -25.5,
+        "facing": {
+          "east": 0.8517567581011043,
+          "north": 0.523937424726557
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 29.163984269398618,
+          "y": -14.547520225713125,
+          "z": 16.98217232325527
+        },
+        "forward": {
+          "x": 0.518267405226519,
+          "y": 0.8376452931529738,
+          "z": -0.17247973660241875
+        },
+        "up": {
+          "x": 0.793577803248942,
+          "y": -0.39585089049559524,
+          "z": 0.4620999271634087
+        },
+        "heading": 0.4222849538159722,
+        "lon": 1.043493612022222,
+        "lat": -0.40699424444281657,
+        "map": {
+          "x": 32.99999999999999,
+          "z": -25.5
+        },
+        "mapX": 32.99999999999999,
+        "mapZ": -25.5,
+        "radius": 36.75,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Cave Access",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 3.785086469929068,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -2.346932232743743,
+            "y": 3.406830445703127,
+            "z": 1.0063037332411868
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 63,
+          "triangles": 428394,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-hidden-beach-ocean.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "hidden-beach-ocean",
+        "x": 36.5,
+        "z": -16,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0.5285634729426559,
+          "y": 0.36498728402502245,
+          "z": -0.7664234714378443
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": 1.186621723629666,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 3.892900481003466,
+            "y": -3.1627234719076442,
+            "z": 0.9930824206041577
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 62,
+          "triangles": 427726,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-hidden-beach-reverse.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "hidden-beach-reverse",
+        "x": 36.5,
+        "z": -16,
+        "facing": "west"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": -0.5285634729426559,
+          "y": -0.36498728402502245,
+          "z": 0.7664234714378443
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": -1.9549709299601274,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -4.3193983023023925,
+            "y": -3.543707011578887,
+            "z": 0.9924210358231296
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 71,
+          "triangles": 457134,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-hidden-beach-north.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "hidden-beach-north",
+        "x": 36.5,
+        "z": -16,
+        "facing": "north"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.9028496693588987,
+          "z": 0.42995636352835553
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": -0.38417460316523083,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.015577208314468467,
+            "y": 3.2963088313761837,
+            "z": 1.0042952558601042
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 429458,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-hidden-beach-south.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "hidden-beach-south",
+        "x": 36.5,
+        "z": -16,
+        "facing": "south"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9028496693588987,
+          "z": -0.42995636352835553
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": 2.7574180504245622,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.024632770238492214,
+            "y": -0.12771756390167976,
+            "z": 0.9983511697989857
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 453614,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-globe-boardwalk-center-lighthouse.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "boardwalk-center-lighthouse",
+        "x": 0,
+        "z": -16,
+        "facing": {
+          "east": 0.9845116577560765,
+          "north": -0.1753191254324016
+        }
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -15.886887632372739,
+          "z": 33.36029528281131
+        },
+        "forward": {
+          "x": 0.9845116577560765,
+          "y": -0.15828681442893508,
+          "z": -0.07537957362788703
+        },
+        "up": {
+          "x": 0,
+          "y": -0.42995636352835553,
+          "z": 0.9028496693588987
+        },
+        "heading": 1.7470262315247636,
+        "lon": 0,
+        "lat": -0.4444444444444444,
+        "map": {
+          "x": 0,
+          "z": -16
+        },
+        "mapX": 0,
+        "mapZ": -16,
+        "radius": 36.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.38967850261125475,
+            "y": 0.10565597140889997,
+            "z": 0.9995639562618559
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 73,
+          "triangles": 267850,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-globe-hidden-beach-ocean.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "hidden-beach-ocean",
+        "x": 36.5,
+        "z": -16,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0.5285634729426559,
+          "y": 0.36498728402502245,
+          "z": -0.7664234714378443
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": 1.186621723629666,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.40127841213620613,
+            "y": 0.008167311033958975,
+            "z": 0.9995539102798443
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 73,
+          "triangles": 267850,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-fresh-courtyard.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": "fresh-load",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.187776169394938,
+          "z": 36.23648467221797
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894477,
+          "z": 0.22039774345612226
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612217,
+          "z": 0.9754100853894474
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222215,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.14999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.02795647224985366,
+            "y": -1.1814388993398959,
+            "z": 0.9984577644020052
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 69,
+          "triangles": 455314,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-courtyard-toward-lighthouse.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "courtyard-toward-lighthouse",
+        "x": 0,
+        "z": 8,
+        "facing": {
+          "east": 0.7829554268361831,
+          "north": -0.6220778083067827
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.187776169394938,
+          "z": 36.23648467221797
+        },
+        "forward": {
+          "x": 0.7829554268361831,
+          "y": -0.6067809681193993,
+          "z": 0.13710454520494508
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612217,
+          "z": 0.9754100853894474
+        },
+        "heading": 2.242190042721131,
+        "lon": 0,
+        "lat": 0.22222222222222215,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.14999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 2.603108304802432,
+            "y": -1.742607557364428,
+            "z": 0.9979839393208293
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 69,
+          "triangles": 457082,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-main-street-lighthouse.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "main-street-lighthouse",
+        "x": 0,
+        "z": -10,
+        "facing": {
+          "east": 0.943499085243914,
+          "north": -0.3313751290364097
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -10.155711375919259,
+          "z": 35.61534432585236
+        },
+        "forward": {
+          "x": 0.9434990852439142,
+          "y": -0.3186725886770755,
+          "z": -0.09086945234647709
+        },
+        "up": {
+          "x": 0,
+          "y": -0.2742192892107265,
+          "z": 0.9616671884933807
+        },
+        "heading": 1.9085570074869886,
+        "lon": 0,
+        "lat": -0.2777777777777777,
+        "map": {
+          "x": 0,
+          "z": -10
+        },
+        "mapX": 0,
+        "mapZ": -10,
+        "radius": 37.035000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Boulevard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 5.967512421848808,
+            "y": -1.5870784223229926,
+            "z": 0.996848426363296
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 68,
+          "triangles": 456486,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-boardwalk-center-lighthouse.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "boardwalk-center-lighthouse",
+        "x": 0,
+        "z": -16,
+        "facing": {
+          "east": 0.9845116577560765,
+          "north": -0.1753191254324016
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -15.886887632372739,
+          "z": 33.36029528281131
+        },
+        "forward": {
+          "x": 0.9845116577560765,
+          "y": -0.15828681442893508,
+          "z": -0.07537957362788703
+        },
+        "up": {
+          "x": 0,
+          "y": -0.42995636352835553,
+          "z": 0.9028496693588987
+        },
+        "heading": 1.7470262315247636,
+        "lon": 0,
+        "lat": -0.4444444444444444,
+        "map": {
+          "x": 0,
+          "z": -16
+        },
+        "mapX": 0,
+        "mapZ": -16,
+        "radius": 36.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 9.108768990209983,
+            "y": -1.91541276892328,
+            "z": 0.9953424900367013
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 454790,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-boardwalk-west-lighthouse.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "boardwalk-west-lighthouse",
+        "x": -12,
+        "z": -16,
+        "facing": {
+          "east": 0.9906247021505573,
+          "north": -0.13661149105810888
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -12.117655595845502,
+          "y": -15.046959494980229,
+          "z": 31.596560854259106
+        },
+        "forward": {
+          "x": 0.9360976934881372,
+          "y": -0.2627001698626306,
+          "z": 0.2339011094465667
+        },
+        "up": {
+          "x": -0.3271946967961523,
+          "y": -0.4062902523283442,
+          "z": 0.8531540665386554
+        },
+        "heading": 1.8624105076174515,
+        "lon": -0.36621215445034616,
+        "lat": -0.41839043809352605,
+        "map": {
+          "x": -12.000000000000004,
+          "z": -16
+        },
+        "mapX": -12.000000000000004,
+        "mapZ": -16,
+        "radius": 37.035000000000004,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Boardwalk",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 10.01519236819468,
+            "y": -2.1834093470801745,
+            "z": 0.9948883258567671
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 453474,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-lighthouse-terrace.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "lighthouse-terrace",
+        "x": 27,
+        "z": -17,
+        "facing": {
+          "east": 0.047359065337444106,
+          "north": -0.9988779299445771
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 27.16403042150036,
+          "y": -13.263259393242224,
+          "z": 25.96745598276257
+        },
+        "forward": {
+          "x": 0.03465210094767586,
+          "y": -0.8748765078101439,
+          "z": -0.4831048830035142
+        },
+        "up": {
+          "x": 0.6816387600233341,
+          "y": -0.33282070246548184,
+          "z": 0.6516126002804385
+        },
+        "heading": 2.7591838569942833,
+        "lon": 0.8079153614307096,
+        "lat": -0.33929323453506516,
+        "map": {
+          "x": 26.999999999999996,
+          "z": -17
+        },
+        "mapX": 26.999999999999996,
+        "mapZ": -17,
+        "radius": 39.85106483758416,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.1665461253892626,
+            "y": -0.171111115959942,
+            "z": 0.9983691947745315
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 454790,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-lighthouse-toward-town.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "lighthouse-toward-town",
+        "x": 27,
+        "z": -17,
+        "facing": {
+          "east": -0.9991702655832734,
+          "north": 0.04072812755640995
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 27.16403042150036,
+          "y": -13.263259393242224,
+          "z": 25.96745598276257
+        },
+        "forward": {
+          "x": -0.7310817614369806,
+          "y": -0.27352649726486844,
+          "z": 0.6250621676187209
+        },
+        "up": {
+          "x": 0.6816387600233341,
+          "y": -0.33282070246548184,
+          "z": 0.6516126002804385
+        },
+        "heading": -1.8650889408964317,
+        "lon": 0.8079153614307096,
+        "lat": -0.33929323453506516,
+        "map": {
+          "x": 26.999999999999996,
+          "z": -17
+        },
+        "mapX": 26.999999999999996,
+        "mapZ": -17,
+        "radius": 39.85106483758416,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -15.170514368451075,
+            "y": -3.8341753015601605,
+            "z": 0.9923047422272572
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 68,
+          "triangles": 456486,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-lighthouse-approach.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "lighthouse-approach",
+        "x": 24.5,
+        "z": -10,
+        "facing": {
+          "east": 0.367934023080151,
+          "north": -0.9298518993151839
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 23.386820089262073,
+          "y": -7.9215298202862225,
+          "z": 27.780231408108914
+        },
+        "forward": {
+          "x": 0.28596688431069445,
+          "y": -0.8307226619881776,
+          "z": -0.4776220262267123
+        },
+        "up": {
+          "x": 0.6292249118040396,
+          "y": -0.21312961246968495,
+          "z": 0.7474301162341003
+        },
+        "heading": 2.587272057433906,
+        "lon": 0.6997441792283904,
+        "lat": -0.21477705650606896,
+        "map": {
+          "x": 24.499999999999996,
+          "z": -10
+        },
+        "mapX": 24.499999999999996,
+        "mapZ": -10,
+        "radius": 37.167663979180574,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Trail",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.8846925915033587,
+            "y": -0.36508510537911354,
+            "z": 0.9983850729302989
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 429286,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-lighthouse-route-approach.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "lighthouse-route-approach",
+        "x": 28,
+        "z": -8,
+        "facing": {
+          "east": 0.0380462739131214,
+          "north": -0.9992759784170375
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 26.629434399768606,
+          "y": -5.959204991708688,
+          "z": 26.37353975891774
+        },
+        "forward": {
+          "x": 0.027107004721336994,
+          "y": -0.9688199111704452,
+          "z": -0.24627868363853195
+        },
+        "up": {
+          "x": 0.7016978761467353,
+          "y": -0.1570277995180155,
+          "z": 0.6949549343588337
+        },
+        "heading": 2.9462946986732184,
+        "lon": 0.790226055732404,
+        "lat": -0.15768039176369134,
+        "map": {
+          "x": 28,
+          "z": -8
+        },
+        "mapX": 28,
+        "mapZ": -8,
+        "radius": 37.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Trail",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.4819533555842243,
+            "y": -0.3964040244718519,
+            "z": 0.9984376372968621
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 454230,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-public-cave-entry.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "public-cave-entry",
+        "x": 28,
+        "z": -32,
+        "facing": {
+          "east": 0.7993954847358257,
+          "north": 0.6008051755635715
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 25.814052776027292,
+          "y": -20.349102192102333,
+          "z": 16.519829051618483
+        },
+        "forward": {
+          "x": 0.5695489978448649,
+          "y": 0.8141660083084685,
+          "z": 0.1129054913144836
+        },
+        "up": {
+          "x": 0.7016978761467353,
+          "y": -0.553145293130859,
+          "z": 0.4490549802622582
+        },
+        "heading": 0.21352189544774247,
+        "lon": 1.001515145292532,
+        "lat": -0.5861350041590037,
+        "map": {
+          "x": 28,
+          "z": -32
+        },
+        "mapX": 28,
+        "mapZ": -32,
+        "radius": 36.78798761338875,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -4.645353209862628,
+            "y": 2.2649799488294464,
+            "z": 1.0048091658533898
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 428954,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-public-cave-approach.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "public-cave-approach",
+        "x": 25.5,
+        "z": -31.5,
+        "facing": {
+          "east": 0.9375265171337447,
+          "north": 0.3479138250645848
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 23.924954490180664,
+          "y": -21.436722874636203,
+          "z": 17.902401586267676
+        },
+        "forward": {
+          "x": 0.7120018994499563,
+          "y": 0.691156117506447,
+          "z": -0.12392141224610453
+        },
+        "up": {
+          "x": 0.650568929822236,
+          "y": -0.5829087727281446,
+          "z": 0.4868032767212221
+        },
+        "heading": 0.5536437751551461,
+        "lon": 0.9284013042823634,
+        "lat": -0.6223039754758591,
+        "map": {
+          "x": 25.500000000000014,
+          "z": -31.5
+        },
+        "mapX": 25.500000000000014,
+        "mapZ": -31.5,
+        "radius": 36.77543361426438,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Beach",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -10.19097213907491,
+            "y": 2.928370788843655,
+            "z": 1.007402814055898
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 64,
+          "triangles": 428954,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-covered-cave.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "covered-cave",
+        "x": 33,
+        "z": -25.5,
+        "facing": {
+          "east": 0.8517567581011043,
+          "north": 0.523937424726557
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 29.163984269398618,
+          "y": -14.547520225713125,
+          "z": 16.98217232325527
+        },
+        "forward": {
+          "x": 0.518267405226519,
+          "y": 0.8376452931529738,
+          "z": -0.17247973660241875
+        },
+        "up": {
+          "x": 0.793577803248942,
+          "y": -0.39585089049559524,
+          "z": 0.4620999271634087
+        },
+        "heading": 0.4222849538159722,
+        "lon": 1.043493612022222,
+        "lat": -0.40699424444281657,
+        "map": {
+          "x": 32.99999999999999,
+          "z": -25.5
+        },
+        "mapX": 32.99999999999999,
+        "mapZ": -25.5,
+        "radius": 36.75,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Cave Access",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 3.785086469929068,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -8.126403300249104,
+            "y": 3.406830445703127,
+            "z": 1.0063037332411868
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 63,
+          "triangles": 428394,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-hidden-beach-ocean.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "hidden-beach-ocean",
+        "x": 36.5,
+        "z": -16,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0.5285634729426559,
+          "y": 0.36498728402502245,
+          "z": -0.7664234714378443
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": 1.186621723629666,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 13.479417460377126,
+            "y": -3.1627234719076442,
+            "z": 0.9930824206041577
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 62,
+          "triangles": 427726,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-hidden-beach-reverse.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "hidden-beach-reverse",
+        "x": 36.5,
+        "z": -16,
+        "facing": "west"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": -0.5285634729426559,
+          "y": -0.36498728402502245,
+          "z": 0.7664234714378443
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": -1.9549709299601274,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -14.956193506228592,
+            "y": -3.543707011578887,
+            "z": 0.9924210358231296
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 66,
+          "triangles": 455258,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-hidden-beach-north.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "hidden-beach-north",
+        "x": 36.5,
+        "z": -16,
+        "facing": "north"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.9028496693588987,
+          "z": 0.42995636352835553
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": -0.38417460316523083,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.053937082327841585,
+            "y": 3.2963088313761837,
+            "z": 1.0042952558601042
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 62,
+          "triangles": 427726,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-hidden-beach-south.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "hidden-beach-south",
+        "x": 36.5,
+        "z": -16,
+        "facing": "south"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9028496693588987,
+          "z": -0.42995636352835553
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": 2.7574180504245622,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.08529254597451252,
+            "y": -0.12771756390167976,
+            "z": 0.9983511697989857
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 62,
+          "triangles": 427726,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-globe-boardwalk-center-lighthouse.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "boardwalk-center-lighthouse",
+        "x": 0,
+        "z": -16,
+        "facing": {
+          "east": 0.9845116577560765,
+          "north": -0.1753191254324016
+        }
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -15.886887632372739,
+          "z": 33.36029528281131
+        },
+        "forward": {
+          "x": 0.9845116577560765,
+          "y": -0.15828681442893508,
+          "z": -0.07537957362788703
+        },
+        "up": {
+          "x": 0,
+          "y": -0.42995636352835553,
+          "z": 0.9028496693588987
+        },
+        "heading": 1.7470262315247636,
+        "lon": 0,
+        "lat": -0.4444444444444444,
+        "map": {
+          "x": 0,
+          "z": -16
+        },
+        "mapX": 0,
+        "mapZ": -16,
+        "radius": 36.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.6826866043049535,
+            "y": 0.05345780943676057,
+            "z": 0.9999231201600052
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 73,
+          "triangles": 267850,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "phone-globe-hidden-beach-ocean.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "hidden-beach-ocean",
+        "x": 36.5,
+        "z": -16,
+        "facing": "east"
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 31.19684653076421,
+          "y": -8.351776655472593,
+          "z": 17.53759086171895
+        },
+        "forward": {
+          "x": 0.5285634729426559,
+          "y": 0.36498728402502245,
+          "z": -0.7664234714378443
+        },
+        "up": {
+          "x": 0.8488937831500465,
+          "y": -0.22725922872034265,
+          "z": 0.47721335678146803
+        },
+        "heading": 1.186621723629666,
+        "lon": 1.0586658742913768,
+        "lat": -0.22926234195008371,
+        "map": {
+          "x": 36.50000000000001,
+          "z": -16
+        },
+        "mapX": 36.50000000000001,
+        "mapZ": -16,
+        "radius": 36.74999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Hidden Beach",
+        "hotspot": "beach",
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.6982419373449115,
+            "y": 0.004104321815932734,
+            "z": 0.9999205658605049
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 73,
+          "triangles": 267850,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    }
+  ],
+  "sourceAfter": "434d4ff0c396c965410e3e8ec51759de4f6033c6c25acf94d58eb255cfbfd49a",
+  "sourceUnchanged": true
+}

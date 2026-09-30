@@ -2,8 +2,8 @@ import { Matrix4, Quaternion, Vector3 } from 'three';
 /** A periodic authoring chart, independent of geographic runtime coordinates. */
 export const MAP_RADIUS=36;
 export const MAP_SEA_LEVEL=-.8;
-export const MAP_MAX_HEIGHT=39;
-export const MAP_SUMMIT={x:0,z:153,height:32} as const;
+export const MAP_MAX_HEIGHT=42;
+export const MAP_SUMMIT={x:0,z:153,height:40} as const;
 export const MAP_CIRCUMFERENCE=2*Math.PI*MAP_RADIUS;
 // Leave the longer pier and opposite shoreline clear of the coordinate seam.
 export const MAP_SEAM=176;

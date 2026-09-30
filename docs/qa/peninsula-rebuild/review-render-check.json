@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-09-12T21:46:08.457Z",
+  "passed": true,
+  "browserClosed": true,
+  "results": [
+    {
+      "profile": "desktop",
+      "imageCount": 37,
+      "decodedCount": 37,
+      "overflow": false,
+      "heading": "A lower lighthouse point and a real hidden cove",
+      "passed": true
+    },
+    {
+      "profile": "phone",
+      "imageCount": 37,
+      "decodedCount": 37,
+      "overflow": false,
+      "heading": "A lower lighthouse point and a real hidden cove",
+      "passed": true
+    }
+  ]
+}

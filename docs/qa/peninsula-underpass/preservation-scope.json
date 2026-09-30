@@ -1,0 +1,40 @@
+{
+  "revision": 3,
+  "source": "docs/qa/peninsula-rebuild/preservation-baseline-v2.json",
+  "sourceSha256": "b3acba14164f22c92ea0a3e770b4ab82b4492192e0184a715b815ba1f9b51931",
+  "originalSampleCount": 123654,
+  "protectedSampleCount": 122869,
+  "removedSampleCount": 785,
+  "snapshotSha256": "593dfbb37251e9438a8625b5b7849d8edd86662f35485e38e52eeecb6c127469",
+  "mutableZone": "(x >= 15 and -47 <= z < -18) OR (x > 24 and -18 <= z <= 30); all x <=24 at z >=-18 remain protected",
+  "protectedTerrainFields": [
+    "naturalTerrainAt",
+    "substrateAt",
+    "groundSurfaceAt.height"
+  ],
+  "sampleColumns": [
+    "mapX",
+    "mapZ",
+    "naturalHeight",
+    "substrateHeight",
+    "groundHeight"
+  ],
+  "wholeGlobeSpacing": 0.5,
+  "townBoundarySpacing": 0.125,
+  "heightTolerance": 1e-8,
+  "mutableAreaIds": [
+    "lighthouse-view"
+  ],
+  "mutableRouteIds": [
+    "lighthouse-trail",
+    "cave",
+    "beach-east"
+  ],
+  "mutableFixtureIds": [
+    "lighthouse",
+    "cave",
+    "hiddenbeach"
+  ],
+  "note": "Changing an allowed route does not waive terrain preservation outside the local zone. Source hashes protect fixed runtime/camera/pier/vegetation/interiors; mixed scene source fragments protect mountain/lift, forest and skate stairs.",
+  "changeFromV2": "Only x>=15, -47<=z<-43 added for removing the old detached southern headland fringe. Town, boardwalk, pier, mountain and all other protected regions unchanged."
+}

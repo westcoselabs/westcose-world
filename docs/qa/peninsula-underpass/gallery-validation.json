@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-09-12T22:31:06.719Z",
+  "results": [
+    {
+      "profile": "desktop",
+      "images": 21,
+      "broken": [],
+      "horizontalOverflow": false,
+      "figures": 20,
+      "title": "Lighthouse above · hidden passage below",
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "images": 21,
+      "broken": [],
+      "horizontalOverflow": false,
+      "figures": 20,
+      "title": "Lighthouse above · hidden passage below",
+      "errors": []
+    }
+  ],
+  "browserClosed": true,
+  "passed": true
+}

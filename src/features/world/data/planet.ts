@@ -4,10 +4,12 @@ import { substrateAt, townSurfaceAt, TOWN_STEPS } from './town-surfaces';
 import { buildingDoorPoint, buildingLocalPoint } from './building-shapes';
 import { CAVE_POINTS, LIGHTHOUSE } from './concept-landmarks';
 import { PIER_LAYOUT } from './pier-layout';
+import { MOUNTAIN_LAYOUT, MOUNTAIN_RUNS, mountainSnowAt } from './mountain-layout';
+import { coastDistance, PENINSULA_SAND } from './peninsula-layout';
 import { MAP_MAX_HEIGHT, MAP_MIN_Z, MAP_RADIUS, MAP_SEAM, MAP_SEA_LEVEL, mapCoordinates, mapFrame } from './world-map';
 export const RADIUS=MAP_RADIUS;
 export const SEA_LEVEL=MAP_SEA_LEVEL;
-export const PLANET_VERSION=6;
+export const PLANET_VERSION=7;
 export const SPAWN_COORDS={lon:TOWN_SPAWN.lon,lat:TOWN_SPAWN.lat};
 export const clamp=(v:number,low:number,high:number)=>Math.max(low,Math.min(high,v));
 export function smoothstep(low:number,high:number,value:number){const t=clamp((value-low)/(high-low),0,1);return t*t*(3-2*t);}
@@ -75,12 +77,18 @@ export function areaAt(d:{x:number;y:number;z:number}):string{
  if(surface.kind==='pier')return 'The Pier';
  if(surface.height<SEA_LEVEL)return 'Open Water';
  if(z>=147)return 'Mountain Summit';
- if(z>=108)return 'Ski Resort';
+ if(z>=MOUNTAIN_LAYOUT.finishApron.z-7&&z<=MOUNTAIN_LAYOUT.finishApron.z+5&&Math.abs(x-MOUNTAIN_LAYOUT.finishApron.x)<20)return 'F / Run Finish';
+ if(z>=MOUNTAIN_LAYOUT.pedestrianArrival.z-4&&z<MOUNTAIN_LAYOUT.finishApron.z-7&&Math.abs(x-MOUNTAIN_LAYOUT.resort.x)<12)return 'Ski Resort';
+ if(mountainSnowAt(x,z))return MOUNTAIN_RUNS.find(run=>surface.route?.startsWith(run.id))?.name??'Snow Trails';
  if(z>=40)return 'Forest Trail';
  if(x<=-20&&z>=-5&&z<=22)return 'Skate Park';
- if(x>=34&&z>=-25&&z<=-11)return 'Hidden Beach';
- if(x>=29&&z>=-32&&z<=-21)return 'Cave Access';
- if(x>=23&&z>=-28&&z<=-18)return 'Lighthouse Point';
+ if(x>24&&z>=-23&&z<=30&&surface.height<1&&coastDistance(x,z,PENINSULA_SAND)>-.5)return 'Hidden Beach';
+ if(x>=27&&x<=41&&z>=-35&&z<=-19){
+  const radius=Math.hypot(d.x,d.y,d.z);
+  if(radius>RADIUS-1&&radius<RADIUS+4)return 'Cave Access';
+  return 'Lighthouse Point';
+ }
+ if(x>24&&x<35&&z>-25&&z<6)return 'Lighthouse Trail';
  if(z<=-18)return 'The Beach';
  if(z<=-12)return 'Boardwalk';
  if(x>=17&&z>=-9&&z<=8)return 'Graffiti Alley';
@@ -103,7 +111,9 @@ export const PLANET_FIXTURES={
  // must shorten against that real obstruction.
  camera:galleryCameraFixture,
  seam:{x:0,z:MAP_SEAM-4,facing:'north'},
- pole:{x:0,z:52.5,facing:'north'},
+ // The north geographic pole now lies under the approved lodge. Exercise the
+ // antipodal south pole through the unobstructed rear-ocean lane instead.
+ pole:{x:0,z:165.7,facing:'north'},
  south:{x:0,z:MAP_MIN_Z+6,facing:'south'},
  // Start beside the pier, not on it, so the shoreline traversal crosses the
  // actual beach into open water.
@@ -130,6 +140,6 @@ export const PLANET_FIXTURES={
  lighthouse:{x:LIGHTHOUSE.x-3.2,z:LIGHTHOUSE.z,facing:'east'},
  cave:{x:CAVE_POINTS[0][0]-2,z:CAVE_POINTS[0][1],facing:'east'},
  hiddenbeach:{x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,facing:'north'},
- resort:{x:0,z:115,facing:'north'},
- summit:{x:0,z:153,facing:'north'},
+ resort:{x:MOUNTAIN_LAYOUT.pedestrianArrival.x,z:MOUNTAIN_LAYOUT.pedestrianArrival.z,facing:'north'},
+ summit:{x:MOUNTAIN_LAYOUT.spawnPad.x,z:MOUNTAIN_LAYOUT.spawnPad.z,facing:'south'},
 } as const;

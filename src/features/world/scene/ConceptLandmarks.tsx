@@ -12,6 +12,7 @@ import { block, createKitContext, physicalSign, tube, UNIT_BOX } from './kit/con
 import { SignAtlas } from './kit/SignAtlas';
 import PeninsulaCliffs from './PeninsulaCliffs';
 import { PENINSULA_COVE } from '../data/peninsula-layout';
+import { MOUNTAIN_LAYOUT, MOUNTAIN_RUNS } from '../data/mountain-layout';
 
 const CONE = new THREE.ConeGeometry(1, 1, 7);
 const CYLINDER = new THREE.CylinderGeometry(1, 1, 1, 7);
@@ -92,9 +93,9 @@ function buildLandmarks() {
   sign('WESTCOSE COURTYARD', 'ARRIVAL / CONTACT / WATERFRONT', -3.7, 11.5, 3.3);
   sign('SKATE PARK', 'BOWL / QUARTER PIPES / BANK / RAIL', -30.3, 9.8, 3.3);
   sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', LIGHTHOUSE.x - 3.3, LIGHTHOUSE.z + 4.5, 2.5);
-  sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', CAVE_POINTS[0][0] - 2.5, CAVE_POINTS[0][1] - .5, 3.4, CAVE_FLOOR);
+  sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', CAVE_POINTS[0][0] - 3.2, CAVE_POINTS[0][1] + 2.5, 3.4, CAVE_FLOOR);
   sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', PENINSULA_COVE.x - .7, PENINSULA_COVE.z + 3, 2.5);
-  sign('SKI RESORT', 'THREE WALKABLE SNOW TRAILS', -2.3, 119, 3.4);
+  sign('SKI RESORT / F', 'LODGE / TICKETS / THREE SNOW TRAILS', MOUNTAIN_LAYOUT.pedestrianArrival.x-5.5, MOUNTAIN_LAYOUT.pedestrianArrival.z-1, 3.4);
 
   // Simple coping makes the bowl legible without introducing a second support mesh.
   const metric = mapMetric(SKATE_CENTER[0], SKATE_ELEVATION);
@@ -127,7 +128,7 @@ function buildLandmarks() {
   }
 
   // Static lift infrastructure: no skiing or lift mechanics in this milestone.
-  const liftPoints = [124, 134, 144, 150].map(z => {
+  const liftPoints = [57, 67, 77, 87, 97, 107, 117, 127, 137, 145, 150].map(z => {
     const x = 7.8, height = townSurfaceAt(x, z).height;
     const frame = mapFrame(x, z, height);
     tube(kit.structure, frame.matrix, [0, 2.25, 0], .13, 4.5, '#687878');
@@ -152,7 +153,11 @@ function buildLandmarks() {
   tube(kit.details, peak, [0, 1.1, 0], .055, 2.2, '#56676A');
   block(kit.details, peak, [.44, 1.84, 0], [.86, .48, .035], '#CE775B');
   sign(`SUMMIT / ${MAP_SUMMIT.height} M`, 'SAME MOUNTAIN / OCEAN REAR FACE', MAP_SUMMIT.x - 2.7, MAP_SUMMIT.z - 1, 3.2);
-  for (const [index, x, z] of [[1, 2.4, 145], [2, -11.1, 147], [3, 11.3, 145]]) sign(`TRAIL ${index}`, ['','CENTRAL', 'WESTERN FOREST', 'EASTERN CONTOUR'][index], x, z, 1.9);
+  for (const run of MOUNTAIN_RUNS) {
+    const [x,z,h]=run.points[0],metric=mapMetric(x,h);
+    // Gate signs stand on the shoulder, leaving the full approved racing width clear.
+    sign(`TRAIL ${run.number}`,run.name.toUpperCase(),x+(run.number===3?-1:1)*(run.width/2+1.2)/metric.x,z,1.9);
+  }
 
   // Blank art and graffiti walls reserve the approved spaces without styling them yet.
   for (const { x, z, elevation, title } of ART_WALLS) {

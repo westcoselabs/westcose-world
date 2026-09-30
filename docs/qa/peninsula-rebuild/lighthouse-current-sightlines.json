@@ -1,0 +1,1744 @@
+{
+  "generatedAt": "2026-09-12T21:45:36.282Z",
+  "baselineRevision": 2,
+  "method": "Current third-person camera: actual support and camera collision, height3, shoulder0.55, follow4.8, target-forward1.2, FOV52. No camera framing change. Default south and ordinary heading turned toward candidate are separate. Fixed building wall OBBs tested; roof/eave decoration is not included. All current terrain is tested; baselineTerrainClearance is retained as a stable field name and means current terrain clearance in this report.",
+  "results": [
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "courtyard",
+        "x": 0,
+        "z": 8
+      },
+      "heading": "default-south",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -0.55,
+        "y": 12.839986937242434,
+        "z": 38.35729333278607
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -1.0884095112732302,
+            "y": -0.5255324899399771,
+            "z": 0.9952564977992375,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -1.1916871433281733,
+            "y": -0.250009916181952,
+            "z": 0.9955039612213666,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -1.2615768959284015,
+            "y": -0.06355904455969892,
+            "z": 0.9956714239817543,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -1.2852874419099927,
+            "y": -0.00030439276268075217,
+            "z": 0.9957282367952593,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -3.7686877026240255,
+            "y": -0.5255324899399771,
+            "z": 0.9952564977992375,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -4.126293123975295,
+            "y": -0.250009916181952,
+            "z": 0.9955039612213666,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -4.368290872465932,
+            "y": -0.06355904455969892,
+            "z": 0.9956714239817543,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -4.450390157833985,
+            "y": -0.00030439276268075217,
+            "z": 0.9957282367952593,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -2.7781701820205202,
+          "protectedTerrainClearance": -2.7781701820205202,
+          "minimumAt": {
+            "x": 14.843899300855435,
+            "z": -2.5996691070563998,
+            "groundHeight": 0.21272512428684404,
+            "rayHeight": -2.565445057733676
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": -0.4391730147114157,
+          "protectedTerrainClearance": -0.4391730147114157,
+          "minimumAt": {
+            "x": 12.576959865852993,
+            "z": -0.20188567697726967,
+            "groundHeight": 0.22,
+            "rayHeight": -0.2191730147114157
+          },
+          "protectedBuildingHits": [
+            "workshop",
+            "lab"
+          ]
+        },
+        "lantern": {
+          "baselineTerrainClearance": 0.8630155775724606,
+          "protectedTerrainClearance": 0.8630155775724606,
+          "minimumAt": {
+            "x": 11.641856489221542,
+            "z": 0.7392804633099104,
+            "groundHeight": 0.22,
+            "rayHeight": 1.0830155775724606
+          },
+          "protectedBuildingHits": [
+            "workshop",
+            "lab"
+          ]
+        },
+        "top": {
+          "baselineTerrainClearance": 1.249618072150286,
+          "protectedTerrainClearance": 1.249618072150286,
+          "minimumAt": {
+            "x": 10.031028208479729,
+            "z": 2.307272668078781,
+            "groundHeight": 0.185,
+            "rayHeight": 1.4346180721502861
+          },
+          "protectedBuildingHits": [
+            "workshop",
+            "lab"
+          ]
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "courtyard",
+        "x": 0,
+        "z": 8
+      },
+      "heading": "turned-toward-tower",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -3.5290781900983124,
+        "y": 10.919485538372818,
+        "z": 38.791238173992205
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.0162836205066608,
+            "y": -0.12306374136624747,
+            "z": 0.99659374925531,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.015090854124517585,
+            "y": 0.10234501795122469,
+            "z": 0.9968645673106452,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.014317406689318113,
+            "y": 0.24851096408756046,
+            "z": 0.9970401788414869,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.014060900759896031,
+            "y": 0.2969854048281962,
+            "z": 0.9970984186091633,
+            "inFrustum": true
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -0.05638307982614037,
+            "y": -0.12306374136624747,
+            "z": 0.99659374925531,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.05225304976858601,
+            "y": 0.10234501795122469,
+            "z": 0.9968645673106452,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.04957493844424405,
+            "y": 0.24851096408756046,
+            "z": 0.9970401788414869,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.048686770220932304,
+            "y": 0.2969854048281962,
+            "z": 0.9970984186091633,
+            "inFrustum": true
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -3.022332087584481,
+          "protectedTerrainClearance": -3.022332087584481,
+          "minimumAt": {
+            "x": 12.754130491608322,
+            "z": -3.1629166096479935,
+            "groundHeight": 0.19808027173221682,
+            "rayHeight": -2.8242518158522643
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": -0.7332066502931636,
+          "protectedTerrainClearance": -0.7332066502931636,
+          "minimumAt": {
+            "x": 10.92904105237944,
+            "z": -1.507372614459996,
+            "groundHeight": 0.22,
+            "rayHeight": -0.5132066502931636
+          },
+          "protectedBuildingHits": [
+            "lab"
+          ]
+        },
+        "lantern": {
+          "baselineTerrainClearance": 0.5599159254838841,
+          "protectedTerrainClearance": 0.5599159254838841,
+          "minimumAt": {
+            "x": 9.605026490687756,
+            "z": -0.3510867177789123,
+            "groundHeight": 0.22,
+            "rayHeight": 0.7799159254838841
+          },
+          "protectedBuildingHits": [
+            "workshop",
+            "about",
+            "lab"
+          ]
+        },
+        "top": {
+          "baselineTerrainClearance": 0.967484267629795,
+          "protectedTerrainClearance": 0.967484267629795,
+          "minimumAt": {
+            "x": 8.363446613122562,
+            "z": 0.7050553316581727,
+            "groundHeight": 0.185,
+            "rayHeight": 1.152484267629795
+          },
+          "protectedBuildingHits": [
+            "about",
+            "lab"
+          ]
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boulevard-center",
+        "x": 0,
+        "z": 0
+      },
+      "heading": "default-south",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -0.55,
+        "y": 4.070391859224422,
+        "z": 40.128994912015266
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -1.347599187199825,
+            "y": -0.5070754342187709,
+            "z": 0.9940576122817786,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -1.510241881909202,
+            "y": -0.1567084502702943,
+            "z": 0.9942243313982018,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -1.624724451860642,
+            "y": 0.08991137375703155,
+            "z": 0.9943416833207227,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -1.6644110142498034,
+            "y": 0.17540467668354617,
+            "z": 0.9943823645737432,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -4.666148570242676,
+            "y": -0.5070754342187709,
+            "z": 0.9940576122817786,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -5.229309326487657,
+            "y": -0.1567084502702943,
+            "z": 0.9942243313982018,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -5.625712563570798,
+            "y": 0.08991137375703155,
+            "z": 0.9943416833207227,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -5.763129829853678,
+            "y": 0.17540467668354617,
+            "z": 0.9943823645737432,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -1.8613271459020213,
+          "protectedTerrainClearance": -1.4461970708103329,
+          "minimumAt": {
+            "x": 24.63938257678823,
+            "z": -18.36590469351387,
+            "groundHeight": 2.996344773742483,
+            "rayHeight": 1.1350176278404618
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 0.9736729723443639,
+          "protectedTerrainClearance": 0.9736729723443639,
+          "minimumAt": {
+            "x": 11.305178814379808,
+            "z": -4.883246018347393,
+            "groundHeight": 0.16,
+            "rayHeight": 1.133672972344364
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        },
+        "lantern": {
+          "baselineTerrainClearance": 2.146274052881234,
+          "protectedTerrainClearance": 2.146274052881234,
+          "minimumAt": {
+            "x": 8.86121825460631,
+            "z": -3.008498171516578,
+            "groundHeight": 0.185,
+            "rayHeight": 2.331274052881234
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        },
+        "top": {
+          "baselineTerrainClearance": 2.478364488969819,
+          "protectedTerrainClearance": 2.478364488969819,
+          "minimumAt": {
+            "x": 8.015405593410131,
+            "z": -2.3795085874511983,
+            "groundHeight": 0.185,
+            "rayHeight": 2.663364488969819
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boulevard-center",
+        "x": 0,
+        "z": 0
+      },
+      "heading": "turned-toward-tower",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -3.7542043711100685,
+        "y": 1.6662951201928489,
+        "z": 40.128994912015266
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.01808289575339319,
+            "y": 0.0038060285446921372,
+            "z": 0.9961852231343293,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.016885954279887982,
+            "y": 0.26518653931841707,
+            "z": 0.9964569891457274,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.01610000767119456,
+            "y": 0.4368165902177015,
+            "z": 0.9966354386186086,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.015837631165981678,
+            "y": 0.4941127124305605,
+            "z": 0.9966950113027244,
+            "inFrustum": true
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -0.0626131857061081,
+            "y": 0.0038060285446921372,
+            "z": 0.9961852231343293,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.058468699127078805,
+            "y": 0.26518653931841707,
+            "z": 0.9964569891457274,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.05574730861328497,
+            "y": 0.4368165902177015,
+            "z": 0.9966354386186086,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.05483881314497861,
+            "y": 0.4941127124305605,
+            "z": 0.9966950113027244,
+            "inFrustum": true
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -1.9307328591241726,
+          "protectedTerrainClearance": -1.7502302581891873,
+          "minimumAt": {
+            "x": 24.38176537222284,
+            "z": -18.752903787130947,
+            "groundHeight": 2.993462634579127,
+            "rayHeight": 1.0627297754549545
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 0.6351088080821051,
+          "protectedTerrainClearance": 0.6351088080821051,
+          "minimumAt": {
+            "x": 9.63822419859285,
+            "z": -6.515364553728716,
+            "groundHeight": 0.16,
+            "rayHeight": 0.7951088080821052
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        },
+        "lantern": {
+          "baselineTerrainClearance": 1.8559532206692817,
+          "protectedTerrainClearance": 1.8559532206692817,
+          "minimumAt": {
+            "x": 7.149505283944783,
+            "z": -4.913228941637158,
+            "groundHeight": 0.16,
+            "rayHeight": 2.0159532206692816
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        },
+        "top": {
+          "baselineTerrainClearance": 2.200997232582207,
+          "protectedTerrainClearance": 2.200997232582207,
+          "minimumAt": {
+            "x": 6.355057487847899,
+            "z": -4.4138074695108,
+            "groundHeight": 0.16,
+            "rayHeight": 2.360997232582207
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "main-street-waterfront",
+        "x": 0,
+        "z": -10
+      },
+      "heading": "default-south",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -0.55,
+        "y": -7.089782166186995,
+        "z": 39.706917676548564
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -1.9421101953890907,
+            "y": -0.7104108736856256,
+            "z": 0.9913076931920622,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -2.3021977574289756,
+            "y": -0.21467488114795133,
+            "z": 0.9910430559870748,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -2.5816571071889154,
+            "y": 0.1700594799678948,
+            "z": 0.9908376744381836,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -2.68414486946314,
+            "y": 0.3111553630529927,
+            "z": 0.9907623536612034,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -6.724681045778021,
+            "y": -0.7104108736856256,
+            "z": 0.9913076931920622,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -7.97150731187715,
+            "y": -0.21467488114795133,
+            "z": 0.9910430559870748,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -8.939153224481824,
+            "y": 0.1700594799678948,
+            "z": 0.9908376744381836,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -9.294023671084677,
+            "y": 0.3111553630529927,
+            "z": 0.9907623536612034,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -1.3870965477243398,
+          "protectedTerrainClearance": -0.24173844913580694,
+          "minimumAt": {
+            "x": 24.15964148050704,
+            "z": -19.607473141867615,
+            "groundHeight": 2.924943117289835,
+            "rayHeight": 1.5378465695654953
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        },
+        "stripe": {
+          "baselineTerrainClearance": 2.19911122818581,
+          "protectedTerrainClearance": 2.19911122818581,
+          "minimumAt": {
+            "x": 9.816454460929203,
+            "z": -11.080021473258569,
+            "groundHeight": 0.16,
+            "rayHeight": 2.35911122818581
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        },
+        "lantern": {
+          "baselineTerrainClearance": 3.250191224376021,
+          "protectedTerrainClearance": 3.250191224376021,
+          "minimumAt": {
+            "x": 6.595698188158988,
+            "z": -9.557245154185694,
+            "groundHeight": 0.16,
+            "rayHeight": 3.410191224376021
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        },
+        "top": {
+          "baselineTerrainClearance": 3.507416127110755,
+          "protectedTerrainClearance": 3.507416127110755,
+          "minimumAt": {
+            "x": 5.535168545846314,
+            "z": -9.069268207412449,
+            "groundHeight": 0.16,
+            "rayHeight": 3.667416127110755
+          },
+          "protectedBuildingHits": [
+            "about"
+          ]
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "main-street-waterfront",
+        "x": 0,
+        "z": -10
+      },
+      "heading": "turned-toward-tower",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -4.022667316732543,
+        "y": -10.206054812763474,
+        "z": 38.81831288649659
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.020315405138122432,
+            "y": 0.11673325351100566,
+            "z": 0.995678331039497,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.019155655803902372,
+            "y": 0.42326621713168094,
+            "z": 0.9959416525616928,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.01838175099103146,
+            "y": 0.6278167427063819,
+            "z": 0.9961173679403067,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.018121169225762318,
+            "y": 0.6966910230500765,
+            "z": 0.9961765331280439,
+            "inFrustum": true
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -0.07034339256030905,
+            "y": 0.11673325351100566,
+            "z": 0.995678331039497,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.06632768614766606,
+            "y": 0.42326621713168094,
+            "z": 0.9959416525616928,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.06364799112381765,
+            "y": 0.6278167427063819,
+            "z": 0.9961173679403067,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.06274571005761392,
+            "y": 0.6966910230500765,
+            "z": 0.9961765331280439,
+            "inFrustum": true
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -1.394472448810827,
+          "protectedTerrainClearance": -0.6700546711615778,
+          "minimumAt": {
+            "x": 24.136083028864622,
+            "z": -20.23761349524932,
+            "groundHeight": 2.8926820954926775,
+            "rayHeight": 1.4982096466818504
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 1.7694932306299516,
+          "protectedTerrainClearance": 1.7694932306299516,
+          "minimumAt": {
+            "x": 8.226094560197224,
+            "z": -13.305875339854481,
+            "groundHeight": 0.16,
+            "rayHeight": 1.9294932306299515
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 2.886438131755799,
+          "protectedTerrainClearance": 2.886438131755799,
+          "minimumAt": {
+            "x": 5.084704905502068,
+            "z": -12.204531501524741,
+            "groundHeight": 0.16,
+            "rayHeight": 3.0464381317557994
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 3.1763957417195705,
+          "protectedTerrainClearance": 3.1763957417195705,
+          "minimumAt": {
+            "x": 4.049891351419524,
+            "z": -11.848910706518382,
+            "groundHeight": 0.16,
+            "rayHeight": 3.3363957417195707
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-west",
+        "x": -12,
+        "z": -16
+      },
+      "heading": "default-south",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -13.649720643444276,
+        "y": -12.551693831123465,
+        "z": 35.82383188412227
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -2.524771247583639,
+            "y": -1.8963867742088594,
+            "z": 0.991205380287427,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -3.001156562164013,
+            "y": -1.6206992146506043,
+            "z": 0.9909175891649474,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -3.372289409974364,
+            "y": -1.4059220039490778,
+            "z": 0.9906933825498581,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -3.508708708467169,
+            "y": -1.3269751885728331,
+            "z": 0.9906109697175571,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -8.742182289069092,
+            "y": -1.8963867742088594,
+            "z": 0.991205380287427,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -10.391696978323802,
+            "y": -1.6206992146506043,
+            "z": 0.9909175891649474,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -11.676768254434311,
+            "y": -1.4059220039490778,
+            "z": 0.9906933825498581,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -12.149128820292473,
+            "y": -1.3269751885728331,
+            "z": 0.9906109697175571,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -2.7292964309512917,
+          "protectedTerrainClearance": -2.7292964309512917,
+          "minimumAt": {
+            "x": 8.47373334193252,
+            "z": -16.693818135138315,
+            "groundHeight": 0.185,
+            "rayHeight": -2.5442964309512917
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": -0.38472492305031153,
+          "protectedTerrainClearance": -0.38472492305031153,
+          "minimumAt": {
+            "x": 4.429034882282237,
+            "z": -15.809722509919823,
+            "groundHeight": 0.185,
+            "rayHeight": -0.19972492305031153
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 0.8798384913730453,
+          "protectedTerrainClearance": 0.8798384913730453,
+          "minimumAt": {
+            "x": 1.8728699584534003,
+            "z": -15.265291214009096,
+            "groundHeight": 0.185,
+            "rayHeight": 1.0648384913730453
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 1.2515911737931824,
+          "protectedTerrainClearance": 1.2515911737931824,
+          "minimumAt": {
+            "x": 1.0336544857343546,
+            "z": -15.087719163675672,
+            "groundHeight": 0.185,
+            "rayHeight": 1.4365911737931825
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-west",
+        "x": -12,
+        "z": -16
+      },
+      "heading": "turned-toward-tower",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -17.011279341566016,
+        "y": -15.716068551714176,
+        "z": 33.027691214755194
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.015866920037525573,
+            "y": -0.15470113530272392,
+            "z": 0.9966883612534327,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.01467599691902197,
+            "y": 0.06169648092120502,
+            "z": 0.9969587607950657,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.013906224487262218,
+            "y": 0.20156858238566924,
+            "z": 0.9971335379149954,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.013651366556432816,
+            "y": 0.2478777419362352,
+            "z": 0.9971914035039718,
+            "inFrustum": true
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -0.05494022774019111,
+            "y": -0.15470113530272392,
+            "z": 0.9966883612534327,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.05081658010114684,
+            "y": 0.06169648092120502,
+            "z": 0.9969587607950657,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.048151193711792044,
+            "y": 0.20156858238566924,
+            "z": 0.9971335379149954,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.047268731789248404,
+            "y": 0.2478777419362352,
+            "z": 0.9971914035039718,
+            "inFrustum": true
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -3.4723403708782583,
+          "protectedTerrainClearance": -3.4723403708782583,
+          "minimumAt": {
+            "x": 6.670777882498628,
+            "z": -18.794090834190854,
+            "groundHeight": 0.15738134224584988,
+            "rayHeight": -3.3149590286324084
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": -1.1690394684810488,
+          "protectedTerrainClearance": -1.1690394684810488,
+          "minimumAt": {
+            "x": 2.966361898261398,
+            "z": -18.343418136027594,
+            "groundHeight": 0.15961710361890932,
+            "rayHeight": -1.0094223648621394
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 0.09049194266502752,
+          "protectedTerrainClearance": 0.09049194266502752,
+          "minimumAt": {
+            "x": 0.012159863572068852,
+            "z": -17.98998302518561,
+            "groundHeight": 0.185,
+            "rayHeight": 0.2754919426650275
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 0.4848269628531451,
+          "protectedTerrainClearance": 0.4848269628531451,
+          "minimumAt": {
+            "x": -0.3091844635845321,
+            "z": -17.95162511660692,
+            "groundHeight": 0.17201372702741544,
+            "rayHeight": 0.6568406898805605
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-center",
+        "x": 0,
+        "z": -16
+      },
+      "heading": "default-south",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -0.55,
+        "y": -13.542218489256134,
+        "z": 37.90379844804996
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -2.631984446155185,
+            "y": -1.0970693815025185,
+            "z": 0.9881166700729721,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -3.342476620241747,
+            "y": -0.4847443666495288,
+            "z": 0.9868642706919852,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -3.967811827029814,
+            "y": 0.054189633963332984,
+            "z": 0.9857619792742119,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -4.215911401200032,
+            "y": 0.2680098292865385,
+            "z": 0.9853246489777686,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -9.113414861764005,
+            "y": -1.0970693815025185,
+            "z": 0.9881166700729721,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -11.573539558908859,
+            "y": -0.4847443666495288,
+            "z": 0.9868642706919852,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -13.738802798002721,
+            "y": 0.054189633963332984,
+            "z": 0.9857619792742119,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -14.597863477385955,
+            "y": 0.2680098292865385,
+            "z": 0.9853246489777686,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -1.1479604436059172,
+          "protectedTerrainClearance": 0.16971482705057156,
+          "minimumAt": {
+            "x": 24.16428643373339,
+            "z": -20.57191841753459,
+            "groundHeight": 2.8967486257115236,
+            "rayHeight": 1.7487881821056064
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 2.5594932975130953,
+          "protectedTerrainClearance": 2.5594932975130953,
+          "minimumAt": {
+            "x": 9.01887552032751,
+            "z": -15.075022669080852,
+            "groundHeight": 0.185,
+            "rayHeight": 2.7444932975130953
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 3.5040679859310537,
+          "protectedTerrainClearance": 3.5040679859310537,
+          "minimumAt": {
+            "x": 5.346613589831002,
+            "z": -14.00098400618333,
+            "groundHeight": 0.185,
+            "rayHeight": 3.689067985931054
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 3.7368756592551002,
+          "protectedTerrainClearance": 3.7368756592551002,
+          "minimumAt": {
+            "x": 5.339187936696408,
+            "z": -13.998854603873724,
+            "groundHeight": 0.185,
+            "rayHeight": 3.9218756592551003
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-center",
+        "x": 0,
+        "z": -16
+      },
+      "heading": "turned-toward-tower",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": -4.103773756029694,
+        "y": -17.061757386220734,
+        "z": 36.227718590248124
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.0212956165169497,
+            "y": 0.16089528592718347,
+            "z": 0.9954557736775478,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.02016294298434425,
+            "y": 0.48695071523572114,
+            "z": 0.9957129476288111,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.01940188038137682,
+            "y": 0.7060329014067271,
+            "z": 0.9958857471788402,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.019144674012107062,
+            "y": 0.7800732411330673,
+            "z": 0.9959441459816473,
+            "inFrustum": true
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -0.07373743729356122,
+            "y": 0.16089528592718347,
+            "z": 0.9954557736775478,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.06981548257963711,
+            "y": 0.48695071523572114,
+            "z": 0.9957129476288111,
+            "inFrustum": true
+          },
+          "lantern": {
+            "x": -0.0671802545307981,
+            "y": 0.7060329014067271,
+            "z": 0.9958857471788402,
+            "inFrustum": true
+          },
+          "top": {
+            "x": -0.06628966098961378,
+            "y": 0.7800732411330673,
+            "z": 0.9959441459816473,
+            "inFrustum": true
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -1.2241733671739685,
+          "protectedTerrainClearance": -0.32046249587892006,
+          "minimumAt": {
+            "x": 24.13302970825157,
+            "z": -21.168648750091876,
+            "groundHeight": 2.8768230735320235,
+            "rayHeight": 1.652649706358055
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 2.051138381245901,
+          "protectedTerrainClearance": 2.051138381245901,
+          "minimumAt": {
+            "x": 7.608083619516504,
+            "z": -17.725691857320555,
+            "groundHeight": 0.185,
+            "rayHeight": 2.236138381245901
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 3.103010540924027,
+          "protectedTerrainClearance": 3.103010540924027,
+          "minimumAt": {
+            "x": 4.127553652899051,
+            "z": -17.136075806702422,
+            "groundHeight": 0.185,
+            "rayHeight": 3.2880105409240272
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 3.3627443351194253,
+          "protectedTerrainClearance": 3.3627443351194253,
+          "minimumAt": {
+            "x": 2.966466545007733,
+            "z": -16.942884340173237,
+            "groundHeight": 0.185,
+            "rayHeight": 3.5477443351194253
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-east",
+        "x": 16,
+        "z": -16
+      },
+      "heading": "default-south",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": 16.757149406270575,
+        "y": -12.004234856587129,
+        "z": 34.67424277212139
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -1.6855173439830171,
+            "y": 0.14832294743789842,
+            "z": 0.9833042438171419,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -2.393955121322427,
+            "y": 1.6433394094989837,
+            "z": 0.9792708339483924,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -3.177739574069941,
+            "y": 3.2973599841297516,
+            "z": 0.9748084463572666,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -3.5435809240017604,
+            "y": 4.06939509877989,
+            "z": 0.9727255702622717,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -5.836211849524785,
+            "y": 0.14832294743789842,
+            "z": 0.9833042438171419,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -8.289223066240526,
+            "y": 1.6433394094989837,
+            "z": 0.9792708339483924,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -11.003126976471918,
+            "y": 3.2973599841297516,
+            "z": 0.9748084463572666,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -12.269876101979428,
+            "y": 4.06939509877989,
+            "z": 0.9727255702622717,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -0.37345128310797726,
+          "protectedTerrainClearance": 2.504412697402653,
+          "minimumAt": {
+            "x": 24.277662385335724,
+            "z": -19.093319440305777,
+            "groundHeight": 2.978889559512199,
+            "rayHeight": 2.6054382764042217
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 3.9440201005807753,
+          "protectedTerrainClearance": 4.155363676451603,
+          "minimumAt": {
+            "x": 24.12296609797076,
+            "z": -18.942274517971725,
+            "groundHeight": 2.9397786486068296,
+            "rayHeight": 6.883798749187605
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 4.162174446373039,
+          "protectedTerrainClearance": 4.162174446373039,
+          "minimumAt": {
+            "x": 15.446224552918197,
+            "z": -12.014443943215213,
+            "groundHeight": 0.185,
+            "rayHeight": 4.347174446373039
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 4.164598666585948,
+          "protectedTerrainClearance": 4.164598666585948,
+          "minimumAt": {
+            "x": 15.446990610739258,
+            "z": -12.014959973950454,
+            "groundHeight": 0.185,
+            "rayHeight": 4.349598666585948
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-east",
+        "x": 16,
+        "z": -16
+      },
+      "heading": "turned-toward-tower",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": 13.655436565561704,
+        "y": -15.4174871059405,
+        "z": 34.68482328163525
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.042316214421033935,
+            "y": 0.5137938267228888,
+            "z": 0.9906830390233909,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.04414186225809529,
+            "y": 1.3013420173736434,
+            "z": 0.9902685249958646,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -0.04559252296599194,
+            "y": 1.9271282136815606,
+            "z": 0.9899391519369443,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -0.046132140541512635,
+            "y": 2.1599085104164457,
+            "z": 0.9898166315636213,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -0.14652260501067751,
+            "y": 0.5137938267228888,
+            "z": 0.9906830390233909,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.15284402767520994,
+            "y": 1.3013420173736434,
+            "z": 0.9902685249958646,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -0.15786703336737312,
+            "y": 1.9271282136815606,
+            "z": 0.9899391519369443,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -0.15973549381348376,
+            "y": 2.1599085104164457,
+            "z": 0.9898166315636213,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": -0.41228614700096955,
+          "protectedTerrainClearance": 2.456411705260225,
+          "minimumAt": {
+            "x": 24.290584442635986,
+            "z": -20.374058630978652,
+            "groundHeight": 2.9267440942578204,
+            "rayHeight": 2.514457947256851
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 4.154116495603712,
+          "protectedTerrainClearance": 4.154116495603712,
+          "minimumAt": {
+            "x": 12.458905497327136,
+            "z": -15.067750818906404,
+            "groundHeight": 0.185,
+            "rayHeight": 4.339116495603712
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 4.160804307817112,
+          "protectedTerrainClearance": 4.160804307817112,
+          "minimumAt": {
+            "x": 12.461522027090073,
+            "z": -15.068730383022626,
+            "groundHeight": 0.185,
+            "rayHeight": 4.345804307817112
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 4.163184773350234,
+          "protectedTerrainClearance": 4.163184773350234,
+          "minimumAt": {
+            "x": 12.462453122929007,
+            "z": -15.069078975464492,
+            "groundHeight": 0.185,
+            "rayHeight": 4.3481847733502335
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-end",
+        "x": 23,
+        "z": -16
+      },
+      "heading": "default-south",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": 23.474696494640817,
+        "y": -10.309188858344633,
+        "z": 31.114877569330446
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.7478076455559765,
+            "y": 0.5032250351204449,
+            "z": 0.9819328365221686,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -1.0905257699407889,
+            "y": 2.345842200161792,
+            "z": 0.9767641607793737,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -1.4993265696123854,
+            "y": 4.543751551788982,
+            "z": 0.9705988645007175,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -1.7018525647164016,
+            "y": 5.632628527920904,
+            "z": 0.9675444850451268,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -2.589331909125104,
+            "y": 0.5032250351204449,
+            "z": 0.9819328365221686,
+            "inFrustum": false
+          },
+          "stripe": {
+            "x": -3.7760153839180544,
+            "y": 2.345842200161792,
+            "z": 0.9767641607793737,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -5.191514357960424,
+            "y": 4.543751551788982,
+            "z": 0.9705988645007175,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -5.892773598443663,
+            "y": 5.632628527920904,
+            "z": 0.9675444850451268,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": 0.0002921283374561767,
+          "protectedTerrainClearance": 3.350396155896405,
+          "minimumAt": {
+            "x": 26.99346173965311,
+            "z": -21.980116559485396,
+            "groundHeight": 2.8000038087962835,
+            "rayHeight": 2.8002959371337397
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 3.227801847994119,
+          "protectedTerrainClearance": 4.145603393526669,
+          "minimumAt": {
+            "x": 25.058452292846333,
+            "z": -16.89985005923836,
+            "groundHeight": 3.0366957438533184,
+            "rayHeight": 6.264497591847437
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 4.152718933078089,
+          "protectedTerrainClearance": 4.152718933078089,
+          "minimumAt": {
+            "x": 22.384469855588627,
+            "z": -11.536889741313189,
+            "groundHeight": 0.17659897364927288,
+            "rayHeight": 4.329317906727361
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 4.155251610605927,
+          "protectedTerrainClearance": 4.155251610605927,
+          "minimumAt": {
+            "x": 22.38481131476439,
+            "z": -11.537494157925948,
+            "groundHeight": 0.1766042802621992,
+            "rayHeight": 4.331855890868127
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    },
+    {
+      "candidate": {
+        "x": 27,
+        "z": -22,
+        "elevation": 2.8,
+        "height": 12
+      },
+      "source": {
+        "id": "boardwalk-end",
+        "x": 23,
+        "z": -16
+      },
+      "heading": "turned-toward-tower",
+      "cameraDistance": 4.8,
+      "camera": {
+        "x": 21.331327549437656,
+        "y": -12.366481096293615,
+        "z": 31.898604465721643
+      },
+      "projections": {
+        "desktop": {
+          "base": {
+            "x": -0.06800020089621982,
+            "y": 0.5805623439243668,
+            "z": 0.984851480241554,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.08097000869325231,
+            "y": 2.049408704059899,
+            "z": 0.9819066805068791,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -0.09422400797881442,
+            "y": 3.5504400926893522,
+            "z": 0.9788973549879276,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -0.10005338046169905,
+            "y": 4.21062355009711,
+            "z": 0.9775737937748737,
+            "inFrustum": false
+          }
+        },
+        "phone": {
+          "base": {
+            "x": -0.235455054590398,
+            "y": 0.5805623439243668,
+            "z": 0.984851480241554,
+            "inFrustum": true
+          },
+          "stripe": {
+            "x": -0.28036384548555876,
+            "y": 2.049408704059899,
+            "z": 0.9819066805068791,
+            "inFrustum": false
+          },
+          "lantern": {
+            "x": -0.3262566676271564,
+            "y": 3.5504400926893522,
+            "z": 0.9788973549879276,
+            "inFrustum": false
+          },
+          "top": {
+            "x": -0.3464412435268677,
+            "y": 4.21062355009711,
+            "z": 0.9775737937748737,
+            "inFrustum": false
+          }
+        }
+      },
+      "rays": {
+        "base": {
+          "baselineTerrainClearance": 0.00007939549806934565,
+          "protectedTerrainClearance": 2.9715216539164464,
+          "minimumAt": {
+            "x": 26.989116350114465,
+            "z": -21.982728611614647,
+            "groundHeight": 2.8000041644097564,
+            "rayHeight": 2.8000835599078258
+          },
+          "protectedBuildingHits": []
+        },
+        "stripe": {
+          "baselineTerrainClearance": 3.677131666360146,
+          "protectedTerrainClearance": 4.16195147574226,
+          "minimumAt": {
+            "x": 24.561889566426785,
+            "z": -18.483866876490083,
+            "groundHeight": 2.984954427639331,
+            "rayHeight": 6.662086093999477
+          },
+          "protectedBuildingHits": []
+        },
+        "lantern": {
+          "baselineTerrainClearance": 4.1690586820686555,
+          "protectedTerrainClearance": 4.1690586820686555,
+          "minimumAt": {
+            "x": 20.085726691681508,
+            "z": -13.329389782837723,
+            "groundHeight": 0.16,
+            "rayHeight": 4.329058682068656
+          },
+          "protectedBuildingHits": []
+        },
+        "top": {
+          "baselineTerrainClearance": 4.171588388880476,
+          "protectedTerrainClearance": 4.171588388880476,
+          "minimumAt": {
+            "x": 20.08620014664796,
+            "z": -13.329871821664824,
+            "groundHeight": 0.16,
+            "rayHeight": 4.331588388880476
+          },
+          "protectedBuildingHits": []
+        }
+      }
+    }
+  ],
+  "geometry": "Current rebuilt terrain, unchanged third-person camera and fixed buildings",
+  "acceptance": {
+    "sources": [
+      "main-street-waterfront",
+      "boardwalk-center"
+    ],
+    "parts": [
+      "stripe",
+      "lantern",
+      "top"
+    ],
+    "passed": true,
+    "failures": [],
+    "courtyardLimitation": [
+      "workshop",
+      "about",
+      "lab"
+    ]
+  }
+}

@@ -1,0 +1,180 @@
+<div id="wc-mountain-approval">
+  <h2>Mountain revision 3 · resort at the base of F</h2>
+  <p class="text-small">Mountain awaiting approval · cove approved and retained · no live-world changes</p>
+  <section>
+    <h3>01 · Mountain and snow-run plan</h3>
+    <svg id="wm-plan" role="img" aria-label="Three unchanged runs finish at F with the compact lodge and ticket booth immediately downhill"></svg>
+    <div class="wm-key text-small" id="wm-run-key"></div>
+    <div class="wm-key text-small"><span>S · Summit spawn + three-way staging fan</span><span>R / L / T · Resort grouped at the base of F</span><span>F · Finish and run-out above the resort</span><span>Thin gray path · short walking connections</span></div>
+    <p class="text-small">Future flow: ticket booth → summit spawn → choose run → finish at F → return to the base resort.</p>
+  </section>
+  <section>
+    <h3>01b · Compact lodge + ticket terrace</h3>
+    <svg id="wm-resort" role="img" aria-label="Close-up plan of lodge and ticket booth beside one shared forecourt, clear of the downhill runs"></svg>
+    <div class="wm-key text-small"><span>L · Lodge</span><span>T · Ticket booth / future game start</span><span>Shared forecourt · buildings grouped together</span><span>No downhill race through the pedestrian terrace</span></div>
+  </section>
+  <section>
+    <h3>02 · Mountain elevation concept</h3>
+    <svg id="wm-section" role="img" aria-label="Mountain elevation with the resort immediately below the finish at the foot of the slope"></svg>
+    <div class="wm-key text-small"><span>Solid profile · proposed mountain</span><span>Dashed profile · current mountain</span><span>Height measured above base sphere</span><span>Unwrapped section · not a player-camera view</span></div>
+  </section>
+  <section>
+    <h3>03 · Whole-world layout</h3>
+    <svg id="wm-world" role="img" aria-label="Whole world retaining the approved cove and existing town, with the resort at the foot of finish F"></svg>
+    <div class="wm-key text-small"><span>Mountain and resort · proposed change</span><span>Lower forest route · retained approach</span><span>Town, skate park, beach and pier · fixed</span><span>Single cove · approved outline retained</span></div>
+  </section>
+  <section id="wm-pictures">
+    <h3>04 · Approval pictures</h3>
+    <p class="text-small">Unwrapped views show the complete layout. Globe views preserve the real curvature; the lower finish is still about 140° around the sphere from the summit.</p>
+    <!-- APPROVAL_PICTURES -->
+  </section>
+  <p class="text-small">Proposal drawings and isolated blockout previews—not live-game captures. Run lengths are approximate curved-surface centerline measurements, not gameplay times. Snowboarding, speed, collision and camera tuning remain future work.</p>
+</div>
+<style>
+  #wc-mountain-approval{width:100%;color:var(--foreground)}
+  #wc-mountain-approval section{margin-block:24px 32px}
+  #wc-mountain-approval svg{display:block;width:100%;overflow:hidden}
+  #wc-mountain-approval .wm-key{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 20px;margin-block:12px}
+  #wc-mountain-approval figure{margin:20px 0}
+  #wc-mountain-approval figure img{display:block;width:100%;height:auto}
+  #wc-mountain-approval figcaption{margin-top:8px}
+  #wc-mountain-approval svg text{font:inherit;fill:var(--foreground)}
+  #wc-mountain-approval svg .label{paint-order:stroke;stroke:var(--background);stroke-width:4;stroke-linejoin:round}
+  #wc-mountain-approval svg .water{fill:var(--blue);fill-opacity:.12}
+  #wc-mountain-approval svg .land{fill:var(--green);fill-opacity:.2}
+  #wc-mountain-approval svg .sand{fill:var(--yellow);fill-opacity:.32}
+  #wc-mountain-approval svg .rock{fill:var(--foreground);fill-opacity:.23}
+  #wc-mountain-approval svg .high{fill:var(--foreground);fill-opacity:.08}
+  #wc-mountain-approval svg .snow{fill:var(--background)}
+  #wc-mountain-approval svg .slope{fill:var(--blue);fill-opacity:.1}
+  #wc-mountain-approval svg .contour{fill:none;stroke:var(--foreground);stroke-width:1;stroke-opacity:.2}
+  #wc-mountain-approval svg .route{fill:none;stroke:var(--foreground);stroke-width:1.5;stroke-opacity:.65}
+  #wc-mountain-approval svg .old{fill:none;stroke:var(--foreground);stroke-width:1.5;stroke-dasharray:5 5;stroke-opacity:.5}
+  #wc-mountain-approval svg .proposed{fill:none;stroke:var(--orange);stroke-width:1.5;stroke-dasharray:7 4}
+  #wc-mountain-approval svg .pin{fill:var(--background);stroke:var(--foreground);stroke-width:1.2}
+  @media(max-width:450px){#wc-mountain-approval .wm-key{grid-template-columns:1fr}}
+</style>
+<script>
+(() => {
+ const root=document.getElementById('wc-mountain-approval');
+ const data=/* MOUNTAIN_DRAWING_DATA */ null;
+ if(!data)return;
+ const {proposal:p,current,metrics}=data;
+ const fmt=n=>Math.round(n*100)/100;
+ const line=pts=>'M'+pts.map(pt=>pt.map(fmt).join(' ')).join('L');
+ const poly=(pts,project,cls)=>`<path d="${line(pts.map(project))}Z" class="${cls}"/>`;
+ const stroke=(pts,project,cls)=>`<path d="${line(pts.map(project))}" class="${cls}"/>`;
+ const xy=obj=>Array.isArray(obj)?obj:[obj.x,obj.z];
+ const text=(x,y,s,anchor='start',cls='label')=>`<text x="${fmt(x)}" y="${fmt(y)}" text-anchor="${anchor}" class="${cls}">${s}</text>`;
+ const pin=(pt,s)=>`<circle class="pin" cx="${fmt(pt[0])}" cy="${fmt(pt[1])}" r="10"/>`+text(pt[0],pt[1]+4,s,'middle','');
+ const colors=['var(--blue)','var(--green)','var(--orange)'];
+ const cove=[[24,30],[37,30],[40,27],[40,24],[37,21],[35,16],[34,10],[34,4],[35,-3],[37,-11],[41,-19],[44,-24],[45,-29],[43,-34],[40,-38],[36,-40],[32,-38],[29,-35],[27,-31],[24,-32]];
+ const coveSand=[[36,26],[33,22],[30,17],[29,10],[29.5,3],[31,-5],[33,-13],[36,-20],[38,-23],[41,-20],[38,-14],[36,-7],[34,2],[34,10],[35,17],[37,22],[40,25]];
+ const underlay=(paths,project,sx,sy)=>Object.entries(paths).map(([cls,d])=>{const a=project([0,0]);return `<path class="${cls}" d="${d}" transform="translate(${a[0]} ${a[1]}) scale(${sx} ${-sy})"/>`;}).join('');
+ const pathRibbon=(run,project)=>poly(run.ribbon,project,'') .replace('class=""',`fill="${colors[run.number-1]}" fill-opacity=".25" stroke="${colors[run.number-1]}" stroke-width="1.2"`);
+ function routes(project,arrows=false){
+   let out='';
+   for(const run of metrics.runs){
+     out+=pathRibbon(run,project);
+     if(arrows)for(const fraction of [.22,.52,.78]){
+       const i=Math.floor((run.samples.length-2)*fraction),a=project(run.samples[i]),b=project(run.samples[i+1]),angle=Math.atan2(b[1]-a[1],b[0]-a[0]);
+       const dir=[Math.cos(angle),Math.sin(angle)],side=[-dir[1],dir[0]];
+       out+=`<path d="${line([[a[0]-dir[0]*5+side[0]*4,a[1]-dir[1]*5+side[1]*4],a,[a[0]-dir[0]*5-side[0]*4,a[1]-dir[1]*5-side[1]*4]])}" fill="none" stroke="${colors[run.number-1]}" stroke-width="2"/>`;
+     }
+   }
+   return out;
+ }
+ function building(project,obj,label,sx,sy){
+   const point=project(xy(obj));
+   const k=(p.radius+obj.height)/p.radius,width=obj.width/k*sx,depth=obj.depth/(k*Math.cos(obj.x/p.radius))*sy;
+   return `<rect x="${point[0]-width/2}" y="${point[1]-depth/2}" width="${width}" height="${depth}" class="rock"/>`+(label?pin(point,label):'');
+ }
+ function area(project,obj,cls){
+   const k=(p.radius+obj.height)/p.radius,dx=obj.width/2/k,dz=obj.depth/2/k/Math.cos(obj.x/p.radius);
+   if(obj.shape==='oval')return poly(Array.from({length:48},(_,i)=>{const a=i/48*Math.PI*2;return[obj.x+Math.cos(a)*dx,obj.z+Math.sin(a)*dz];}),project,cls);
+   return poly([[obj.x-dx,obj.z-dz],[obj.x+dx,obj.z-dz],[obj.x+dx,obj.z+dz],[obj.x-dx,obj.z+dz]],project,cls);
+ }
+ function fit(svg,w,h,out){svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.style.height=h+'px';svg.innerHTML=out;}
+ function plan(w){
+   const sx=(w-50)/76,sy=sx*.7,h=119*sy+68,project=([x,z])=>[w/2+x*sx,35+(166-z)*sy];
+   let out=`<rect width="${w}" height="${h}" class="water"/>`+underlay(current.terrain.paths,project,sx,sy);
+   out+=poly(p.mountainBoundary,project,'land')+poly(p.snowBoundary,project,'snow')+underlay(data.heightBands,project,sx,sy);
+   for(const d of data.contours){const a=project([0,0]);out+=`<path d="${d}" class="contour" transform="translate(${a[0]} ${a[1]}) scale(${sx} ${-sy})" vector-effect="non-scaling-stroke"/>`;}
+   out+=stroke([[-27,127],[-20,128],[0,127],[20,129],[27,127]],project,'old');
+   out+=routes(project,true);
+   out+=area(project,p.finishApron,'sand')+area(project,p.resortTerrace,'sand');
+   out+=poly([[-7,147],[7,147],[7,153],[-7,153]],project,'high');
+   for(const run of p.runs)out+=stroke([xy(p.summit),run.points[0]],project,'route');
+   for(const run of metrics.runs){const point=run.samples[Math.floor(run.samples.length*.39)];out+=pin(project(point),String(run.number));}
+   out+=pin(project(xy(p.summit)),'S')+pin(project(xy(p.finishApron)),'F')+building(project,p.ticketHut,w>500?'T':'',sx,sy)+building(project,p.lodge,w>500?'L':'',sx,sy);
+   if(w<=500)out+=pin(project(xy(p.resort)),'R');
+   for(const link of p.pedestrianLinks)out+=stroke(link.points,project,'route');
+   const old=project([0,115]);out+=`<rect x="${old[0]-7*sx}" y="${old[1]-3*sy}" width="${14*sx}" height="${6*sy}" class="old"/>`;
+   if(w>500){
+     out+=text(...project([-35,114]),'Old base')+text(...project([-35,129]),'Old snow start');
+     out+=text(...project([0,159]),'Summit + 3 gates','middle')+text(...project([20,65]),'F · finish','middle');
+     out+=text(...project([17,53]),'Base resort');
+   }
+   out+=text(12,19,'Summit ↑')+text(w-12,19,'Downhill ↓','end');
+   out+=text(12,h-12,w>500?'Dashed gray = current extent · colored corridors = proposed runs':'Dashed = current · color = proposed runs');
+   fit(root.querySelector('#wm-plan'),w,h,out);
+ }
+ function resort(w){
+   const a=p.resortTerrace,k=(p.radius+a.height)/p.radius,kz=k*Math.cos(a.x/p.radius),h=275;
+   const scale=Math.min((w-40)/(a.width+12),(h-75)/(a.depth+13));
+   const project=([x,z])=>[w/2+(x-a.x)*k*scale,125-(z-a.z)*kz*scale];
+   let out=`<rect width="${w}" height="${h}" class="land"/>`+area(project,a,'sand');
+   for(const link of p.pedestrianLinks)out+=stroke(link.points,project,'route');
+   out+=building(project,p.lodge,'L',k*scale,kz*scale)+building(project,p.ticketHut,'T',k*scale,kz*scale);
+   out+=text(12,20,'Resort terrace · top view')+text(w/2,h-40,`Lodge ↔ ticket · ~${metrics.resortGap.toFixed(1)} m clear gap`,'middle');
+   out+=text(w/2,h-17,'One shared forecourt · no run crossings','middle');
+   fit(root.querySelector('#wm-resort'),w,h,out);
+ }
+ function section(w){
+   const left=42,right=18,top=38,bottom=280,sx=(w-left-right)/119,sy=4.6,project=([z,height])=>[left+(z-48)*sx,bottom-height*sy];
+   const pts=data.profile.map(a=>[a.z,a.proposed]);
+   let out=poly([[48,0],...pts,[167,0]],project,'slope');
+   out+=stroke(data.profile.map(a=>[a.z,a.current]),project,'old')+stroke(pts,project,'route');
+   for(const value of [0,20,40]){const y=project([48,value])[1];out+=`<path d="M${left} ${y}H${w-right}" class="contour"/>`+text(left-8,y+4,String(value),'end','');}
+   out+=text(12,18,'Height (m)');
+   out+=pin(project([p.finishApron.z,p.finishApron.height]),'F')+pin(project([153,40]),'S');
+   out+=pin(project([p.resort.z,p.resort.height]),'R');
+   const old=project([115,2.8]);out+=pin(old,'O');
+   out+=text(...[project([65,2.8])[0],bottom+25],'Finish','middle')+text(...[project([p.resort.z,p.resort.height])[0],bottom+47],'Resort','middle');
+   const summit=project([153,40]);out+=text(summit[0],summit[1]-17,'40 m','middle');
+   out+=text(w-12,top+15,'32 m → 40 m','end');
+   out+=text(w/2,bottom+76,'← Longer sustained descent','middle');
+   out+=text(12,bottom+103,w>500?'Summit → finish F → base resort · O = current base':'Resort below F · O = current base');
+   fit(root.querySelector('#wm-section'),w,bottom+122,out);
+ }
+ function world(w){
+   const sx=(w-60)/108,sy=Math.min(sx,3.2),h=226.2*sy+100,project=([x,z])=>[w/2+x*sx,40+(176-z)*sy];
+   let out=`<rect width="${w}" height="${h}" class="water"/>`+underlay(current.terrain.paths,project,sx,sy);
+   out+=poly(p.mountainBoundary,project,'land')+poly(p.snowBoundary,project,'snow')+underlay(data.heightBands,project,sx,sy)+routes(project);
+   for(const run of metrics.runs)out+=pin(project(run.samples[Math.floor(run.samples.length*.33)]),String(run.number));
+   out+=stroke(p.mountainBoundary,project,'proposed');
+   for(const r of current.routes.filter(r=>!r.id.startsWith('ski-')&&!['cave','lighthouse-trail'].includes(r.id))){
+     const points=r.id==='resort-trail'?r.points.filter(pt=>pt[1]<=42).concat([[0,45]]):r.points.filter(pt=>pt[1]<65);if(points.length>1)out+=stroke(points,project,'route');
+   }
+   for(const link of p.pedestrianLinks)out+=stroke(link.points,project,'route');
+   for(const b of current.buildings.filter(b=>b.z<55)){
+     const a=project([b.x-b.width/2,b.z+b.depth/2]);out+=`<rect x="${a[0]}" y="${a[1]}" width="${b.width*sx}" height="${b.depth*sy}" class="rock"/>`;
+   }
+   out+=poly([[24,30],[51,30],[51,-45],[24,-45]],project,'snow')+poly([[24,30],[51,30],[51,-45],[24,-45]],project,'water')+poly(cove,project,'land')+poly(coveSand,project,'sand');
+   out+=`<path d="${line(cove.slice(1).map(project))}" fill="none" stroke="var(--green)" stroke-width="1.5"/>`;
+   out+=stroke([[20,4],[23,0],[27,-3],[29,-10],[30,-17],[31,-23],[33,-28],[33.2,-32]],project,'route');
+   out+=stroke([[28,-29],[31,-30.5],[34,-32],[36,-32],[37,-30],[38,-26],[38,-20]],project,'old');
+   out+=pin(project([36,-32]),'H')+pin(project([38,5]),'C');
+   out+=poly([[-1.9,-16],[1.9,-16],[1.9,-39],[4,-39],[4,-47],[-4,-47],[-4,-39],[-1.9,-39]],project,'sand');
+   out+=area(project,p.resortTerrace,'sand')+building(project,p.ticketHut,'',sx,sy)+building(project,p.lodge,'',sx,sy)+pin(project(xy(p.resort)),'R')+pin(project(xy(p.summit)),'S')+pin(project(xy(p.finishApron)),'F');
+   out+=pin(project([-27,15]),'K')+pin(project([0,8]),'A');
+   out+=text(12,20,w>500?'Full globe circuit · ocean seam wraps top ↔ bottom':'Globe circuit · top ↔ bottom');
+   if(w>500){out+=text(...project([-32,95]),'Longer snow area')+text(...project([-30,43]),'Remaining forest')+text(...project([5,6]),'Town / spawn')+text(...project([34,-46]),'Approved cove','middle');}
+   out+=text(12,h-17,w>500?'A · Courtyard   K · Skate   C · Cove   H · Lighthouse   S · Summit   R · Resort   F · Finish':'A · Arrival   K · Skate   C · Cove   H · Tower');
+   fit(root.querySelector('#wm-world'),w,h,out);
+ }
+ root.querySelector('#wm-run-key').innerHTML=metrics.runs.map(run=>`<span>${run.number} · ${run.name} · ${run.width} m wide · ~${Math.round(run.length)} m long</span>`).join('')+`<span>Compared with current runs: ~${Math.round(Math.min(...metrics.runs.map(r=>r.length/r.oldLength))*10)/10}–${Math.round(Math.max(...metrics.runs.map(r=>r.length/r.oldLength))*10)/10}× longer</span>`;
+ const draw=()=>{const w=Math.max(280,Math.floor(root.getBoundingClientRect().width));plan(w);resort(w);section(w);world(w);};
+ new ResizeObserver(draw).observe(root);draw();
+})();
+</script>

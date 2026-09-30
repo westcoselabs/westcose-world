@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>WestCose mountain approval blockout</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+      * { box-sizing: border-box; }
+      html, body, main { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+      body { background: #0b1820; }
+      main { display: grid; grid-template-rows: 106px minmax(0, 1fr) 76px; }
+      #stage { min-height: 0; }
+      canvas { display: block; width: 100%; height: 100%; }
+      .title { padding: 14px 34px; color: #f2eee3; background: #0b1820; }
+      .eyebrow { margin: 0 0 4px; color: #ffd372; font-weight: 700; font-size: 10px; letter-spacing: .13em; }
+      h1 { margin: 0; font-size: clamp(22px, 2.45vw, 34px); line-height: 1.03; letter-spacing: -.03em; }
+      .subtitle { margin: 6px 0 0; max-width: 880px; color: #c7d6d6; font-size: 12px; line-height: 1.35; }
+      .key { display: flex; align-items: center; gap: 14px 25px; padding: 12px 34px; border-top: 1px solid #d6e0df55; background: #071116; color: #dbe5e3; font-size: 11px; line-height: 1.3; }
+      .key strong { font-size: 11px; color: #ffd372; letter-spacing: .08em; }
+      .swatch { display: inline-block; width: 10px; height: 10px; margin-right: 7px; border-radius: 50%; vertical-align: -1px; }
+      @media (max-width: 620px) {
+        main { grid-template-rows: 130px minmax(0, 1fr) 100px; }
+        .title { padding: 14px 20px; }
+        .key { align-content: center; flex-wrap: wrap; gap: 7px 12px; padding: 10px 20px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="title">
+        <p class="eyebrow">WESTCOSE WORLD · MOUNTAIN APPROVAL · NOT IMPLEMENTED</p>
+        <h1 id="view-title">Loading proposed mountain…</h1>
+        <p id="view-subtitle" class="subtitle"></p>
+      </header>
+      <div id="stage"></div>
+      <aside class="key" aria-label="Approval drawing legend">
+        <strong>BLOCKOUT</strong>
+        <span><i class="swatch" style="background:#eaf0ef"></i>snow mass + distinct runs 1 / 2 / 3</span>
+        <span><i class="swatch" style="background:#c44f46"></i>summit spawn + three gates</span>
+        <span><i class="swatch" style="background:#a97d45"></i>base lodge / ticket / pedestrian approach + finish</span>
+        <span id="projection-note"></span>
+      </aside>
+    </main>
+    <script type="module">
+      import * as THREE from '/vendor/three.module.js';
+
+      const params = new URLSearchParams(location.search);
+      const requestedView = params.get('view') || 'front';
+      const isGlobe = requestedView !== 'front';
+      const viewText = {
+        front: {
+          title: 'UNWRAPPED TERRAIN — FRONT OBLIQUE',
+          subtitle: 'Route and massing approval drawing only: three distinct descents reach separate lower finishing lanes, with lodge and ticket at the foot of central F.',
+          note: 'Unwrapped approval projection · not gameplay.',
+        },
+        globe: {
+          title: 'R36 GLOBE — THREE-QUARTER',
+          subtitle: 'Exterior R36 projection of the summit, three unchanged routes, and the compact lodge/ticket cluster just below central F.',
+          note: 'Actual R36 globe · exterior approval view.',
+        },
+        rear: {
+          title: 'R36 GLOBE — REAR OCEAN SIDE',
+          subtitle: 'Exterior rear-ocean check of the silhouette, summit fan-out, lower finish connection, and base lodge/ticket cluster.',
+          note: 'Actual R36 globe · rear ocean-side approval view.',
+        },
+      }[requestedView] || null;
+
+      if (!viewText) throw new Error(`Unknown mountain approval view: ${requestedView}`);
+      document.querySelector('#view-title').textContent = viewText.title;
+      document.querySelector('#view-subtitle').textContent = viewText.subtitle;
+      document.querySelector('#projection-note').textContent = viewText.note;
+
+      const approval = await fetch('/preview-3d-data.json').then(response => {
+        if (!response.ok) throw new Error(`Could not load preview data: ${response.status}`);
+        return response.json();
+      });
+      const { proposal, terrain, anchors } = approval;
+      const resortTerrace = anchors.resortTerrace ?? null;
+      const terrainBaseHeight = proposal.resortTerrace?.height ?? proposal.resort?.height ?? 0;
+      const stage = document.querySelector('#stage');
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
+      stage.append(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(isGlobe ? '#102c3a' : '#9ac8d5');
+      // Approval views need the full proposed mass visible; atmospheric fog
+      // would wash the distant summit out of the unwrapped drawing.
+      scene.fog = null;
+      const approvalGeometry = new THREE.Group();
+      scene.add(approvalGeometry);
+      const camera = new THREE.PerspectiveCamera(isGlobe ? 40 : 43, 1, .1, 600);
+      scene.add(new THREE.HemisphereLight('#dceff3', '#26311f', 1.65));
+      const sun = new THREE.DirectionalLight('#fff3d6', 3.1);
+      sun.position.set(-65, 90, 42);
+      scene.add(sun);
+
+      const color = value => new THREE.Color(value);
+      const water = color('#155a75');
+      const rock = color('#657165');
+      const alpine = color('#aebbb6');
+      const snowLower = color('#d6e2df');
+      const snow = color('#eaf0ef');
+      const routeColors = { 1: '#398aa3', 2: '#4e9968', 3: '#b68a3d' };
+      const idColors = new Map(proposal.runs.map(run => [run.id, color(routeColors[run.number]) ]));
+      const sea = proposal.seaLevel;
+
+      function directionAt(x, z) {
+        const r = proposal.radius;
+        return new THREE.Vector3(
+          Math.sin(x / r),
+          Math.cos(x / r) * Math.sin(z / r),
+          Math.cos(x / r) * Math.cos(z / r),
+        ).normalize();
+      }
+
+      function pointAt(x, z, height, lift = 0) {
+        if (!isGlobe) return new THREE.Vector3(x, height + lift, -z);
+        return directionAt(x, z).multiplyScalar(proposal.radius + height + lift);
+      }
+
+      function basisAt(x, z, height) {
+        const origin = pointAt(x, z, height);
+        if (!isGlobe) {
+          return {
+            origin,
+            up: new THREE.Vector3(0, 1, 0),
+            east: new THREE.Vector3(1, 0, 0),
+            north: new THREE.Vector3(0, 0, -1),
+          };
+        }
+        const up = origin.clone().normalize();
+        const east = new THREE.Vector3(Math.cos(x / proposal.radius), -Math.sin(x / proposal.radius) * Math.sin(z / proposal.radius), -Math.sin(x / proposal.radius) * Math.cos(z / proposal.radius)).normalize();
+        const north = up.clone().cross(east).normalize();
+        return { origin, up, east, north };
+      }
+
+      function contains(point, polygon) {
+        let inside = false;
+        for (let index = 0, prior = polygon.length - 1; index < polygon.length; prior = index++) {
+          const [x, z] = polygon[index];
+          const [priorX, priorZ] = polygon[prior];
+          if ((z > point.z) !== (priorZ > point.z) && point.x < (priorX - x) * (point.z - z) / (priorZ - z) + x) inside = !inside;
+        }
+        return inside;
+      }
+
+      function terrainColor(x, z, height) {
+        // The approved snow bowl reaches down to the z60–70 footprint; an
+        // elevation-only cutoff would incorrectly turn that widened area rock.
+        if (contains({ x, z }, proposal.snowBoundary)) {
+          return snowLower.clone().lerp(snow, THREE.MathUtils.clamp((height - terrainBaseHeight) / (proposal.summit.height - terrainBaseHeight), 0, 1));
+        }
+        if (height > 12) return alpine;
+        return rock;
+      }
+
+      function createTerrain() {
+        const { xMin, zMin, step, columns, rows, heights } = terrain;
+        const positions = new Float32Array(columns * rows * 3);
+        const colors = new Float32Array(columns * rows * 3);
+        const indices = [];
+        for (let row = 0; row < rows; row++) {
+          for (let column = 0; column < columns; column++) {
+            const index = row * columns + column;
+            const x = xMin + column * step;
+            const z = zMin + row * step;
+            const h = heights[index];
+            const point = pointAt(x, z, Math.max(h, sea + .04));
+            positions.set(point.toArray(), index * 3);
+            const c = terrainColor(x, z, h);
+            colors.set([c.r, c.g, c.b], index * 3);
+          }
+        }
+        for (let row = 0; row < rows - 1; row++) {
+          for (let column = 0; column < columns - 1; column++) {
+            const a = row * columns + column;
+            const b = a + 1;
+            const c = a + columns;
+            const d = c + 1;
+            const highest = Math.max(heights[a], heights[b], heights[c], heights[d]);
+            if (highest < sea + .12) continue;
+            // x then increasing map-z produces the outward/top normal in both
+            // the unwrapped (x, h, -z) plane and the spherical map basis.
+            indices.push(a, b, c, b, d, c);
+          }
+        }
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        geometry.setIndex(indices);
+        geometry.computeVertexNormals();
+        return new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: .98, metalness: 0 }));
+      }
+
+      function sampledHeight(x, z) {
+        const { xMin, zMin, step, columns, rows, heights } = terrain;
+        const column = THREE.MathUtils.clamp((x - xMin) / step, 0, columns - 1);
+        const row = THREE.MathUtils.clamp((z - zMin) / step, 0, rows - 1);
+        const left = Math.floor(column), right = Math.min(columns - 1, left + 1);
+        const top = Math.floor(row), bottom = Math.min(rows - 1, top + 1);
+        const xBlend = column - left, zBlend = row - top;
+        const h00 = heights[top * columns + left], h10 = heights[top * columns + right];
+        const h01 = heights[bottom * columns + left], h11 = heights[bottom * columns + right];
+        // Match createTerrain's two authored triangles exactly. Bilinear
+        // interpolation can sit below a faceted triangle on steep slopes.
+        return xBlend + zBlend <= 1
+          ? h00 * (1 - xBlend - zBlend) + h10 * xBlend + h01 * zBlend
+          : h10 * (1 - zBlend) + h11 * (xBlend + zBlend - 1) + h01 * (1 - xBlend);
+      }
+
+      // Run points arrive as the authoritative sampled Hermite path. Densify
+      // only the existing segments for terrain draping; do not curve them a
+      // second time in the 3D preview.
+      function densePathPoints(points, spacing = .5) {
+        if (!points?.length) return [];
+        const output = [];
+        for (let index = 0; index < points.length - 1; index++) {
+          const [ax, az] = points[index];
+          const [bx, bz] = points[index + 1];
+          const samples = Math.max(1, Math.ceil(Math.hypot(bx - ax, bz - az) / spacing));
+          for (let sample = index ? 1 : 0; sample <= samples; sample++) {
+            const t = sample / samples;
+            const x = THREE.MathUtils.lerp(ax, bx, t);
+            const z = THREE.MathUtils.lerp(az, bz, t);
+            output.push({ x, z, h: sampledHeight(x, z) });
+          }
+        }
+        return output;
+      }
+
+      function createSurfaceRibbon(centers, width, lift, material) {
+        if (centers.length < 2) return new THREE.Group();
+        const positions = [];
+        for (let index = 0; index < centers.length; index++) {
+          const center = centers[index];
+          const previous = centers[Math.max(0, index - 1)];
+          const next = centers[Math.min(centers.length - 1, index + 1)];
+          const metricX = (proposal.radius + center.h) / proposal.radius;
+          const metricZ = Math.cos(center.x / proposal.radius) * metricX;
+          const tangentX = (next.x - previous.x) * metricX;
+          const tangentZ = (next.z - previous.z) * metricZ;
+          const tangentLength = Math.hypot(tangentX, tangentZ) || 1;
+          const sideX = (-tangentZ / tangentLength) / metricX;
+          const sideZ = (tangentX / tangentLength) / metricZ;
+          for (const side of [1, -1]) {
+            const x = center.x + sideX * width / 2 * side;
+            const z = center.z + sideZ * width / 2 * side;
+            // A thin approval-overlay lift keeps each curved ribbon draped
+            // over low-poly facets instead of bridging valleys between nodes.
+            positions.push(...pointAt(x, z, sampledHeight(x, z), lift).toArray());
+          }
+        }
+        const indices = [];
+        for (let index = 0; index < centers.length - 1; index++) {
+          const a = index * 2, b = a + 1, c = a + 2, d = a + 3;
+          indices.push(a, b, c, b, d, c);
+        }
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        geometry.setIndex(indices);
+        geometry.computeVertexNormals();
+        return new THREE.Mesh(geometry, material);
+      }
+
+      function createRibbon(run) {
+        return createSurfaceRibbon(
+          densePathPoints(run.points),
+          run.width,
+          .85,
+          new THREE.MeshStandardMaterial({
+            color: idColors.get(run.id), roughness: .72, side: THREE.DoubleSide,
+            polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2,
+          }),
+        );
+      }
+
+      function createPedestrianLink(link) {
+        return createSurfaceRibbon(
+          densePathPoints(link.points, .65),
+          link.width,
+          .34,
+          new THREE.MeshStandardMaterial({
+            color: '#50645d', roughness: .9, side: THREE.DoubleSide,
+            polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3,
+          }),
+        );
+      }
+
+      function orient(group, frame) {
+        group.position.copy(frame.origin);
+        group.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(frame.east, frame.up, frame.north));
+        return group;
+      }
+
+      function addPad(anchor, colorValue, thickness = .25) {
+        const frame = basisAt(anchor.x, anchor.z, anchor.surfaceHeight + .08);
+        const mesh = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, thickness, 32), new THREE.MeshStandardMaterial({ color: colorValue, roughness: .7 }));
+        orient(mesh, frame);
+        // Anchor width/depth are physical dimensions. Retaining both makes
+        // the compact base terrace visibly oval rather than a generic dot.
+        mesh.scale.set((anchor.width || 6) / 2, 1, (anchor.depth || 6) / 2);
+        mesh.position.addScaledVector(frame.up, thickness / 2);
+        approvalGeometry.add(mesh);
+      }
+
+      function addBox(anchor, width, depth, height, colorValue) {
+        const frame = basisAt(anchor.x, anchor.z, anchor.surfaceHeight + .12);
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), new THREE.MeshStandardMaterial({ color: colorValue, roughness: .82 }));
+        orient(mesh, frame);
+        mesh.position.addScaledVector(frame.up, height / 2);
+        approvalGeometry.add(mesh);
+      }
+
+      function addGate(run, colorValue) {
+        const [x, z, h] = run.points[0];
+        const [nextX, nextZ] = run.points[1];
+        const frame = basisAt(x, z, h + .22);
+        const downhill = pointAt(nextX, nextZ, run.points[1][2], .22).sub(pointAt(x, z, h, .22)).projectOnPlane(frame.up).normalize();
+        frame.east.copy(frame.up.clone().cross(downhill).normalize());
+        frame.north.copy(downhill);
+        const group = orient(new THREE.Group(), frame);
+        const postHeight = 2.5;
+        const postGeometry = new THREE.BoxGeometry(.18, postHeight, .18);
+        const material = new THREE.MeshStandardMaterial({ color: colorValue, roughness: .65 });
+        for (const side of [-1, 1]) {
+          const post = new THREE.Mesh(postGeometry, material);
+          post.position.set(side * run.gateWidth / 2, postHeight / 2, 0);
+          group.add(post);
+        }
+        const header = new THREE.Mesh(new THREE.BoxGeometry(run.gateWidth + .3, .18, .18), material);
+        header.position.set(0, postHeight, 0);
+        group.add(header);
+        approvalGeometry.add(group);
+      }
+
+      if (isGlobe) {
+        const ocean = new THREE.Mesh(new THREE.SphereGeometry(proposal.radius + proposal.seaLevel, 112, 80), new THREE.MeshBasicMaterial({ color: water }));
+        scene.add(ocean);
+      } else {
+        const waterPlane = new THREE.Mesh(new THREE.PlaneGeometry(105, 170), new THREE.MeshBasicMaterial({ color: water, side: THREE.DoubleSide }));
+        waterPlane.rotation.x = -Math.PI / 2;
+        waterPlane.position.set(0, sea, -112);
+        scene.add(waterPlane);
+      }
+
+      approvalGeometry.add(createTerrain());
+      for (const link of proposal.pedestrianLinks ?? []) approvalGeometry.add(createPedestrianLink(link));
+      for (const run of proposal.runs) approvalGeometry.add(createRibbon(run));
+      addPad(anchors.spawnPad, '#c44f46', .28);
+      addPad(anchors.decisionApron, '#b34942', .12);
+      if (resortTerrace) addPad(resortTerrace, '#d7af65', .22);
+      addPad(anchors.finishApron, '#e7d7a4', .16);
+      addBox(anchors.lodge, anchors.lodge.width, anchors.lodge.depth, 3.4, '#a97d45');
+      addBox(anchors.ticketHut, anchors.ticketHut.width, anchors.ticketHut.depth, 2.3, '#c99855');
+      addBox(anchors.pedestrianArrival, anchors.pedestrianArrival.width, anchors.pedestrianArrival.depth, .18, '#58675c');
+      for (const run of proposal.runs) addGate(run, idColors.get(run.id));
+
+      function configureCamera() {
+        const bounds = new THREE.Box3().setFromObject(approvalGeometry);
+        if (isGlobe) {
+          // Fit the actual mountain mesh plus the real sea sphere, not a
+          // fictional +/-76 cube around the globe.
+          const r = proposal.radius + proposal.seaLevel;
+          bounds.expandByPoint(new THREE.Vector3(-r, -r, -r));
+          bounds.expandByPoint(new THREE.Vector3(r, r, r));
+        }
+        const center = bounds.getCenter(new THREE.Vector3());
+        let direction;
+        let preferredUp;
+        if (!isGlobe) {
+          direction = new THREE.Vector3(.78, .56, .9).normalize();
+          preferredUp = new THREE.Vector3(0, 1, 0);
+        } else {
+          const frame = basisAt(0, requestedView === 'rear' ? 169 : 111, 0);
+          // Screen "up" should follow the actual summit direction for the
+          // ocean-side exterior view. Map-north at this rear latitude can
+          // invert the mountain in the approval frame.
+          preferredUp = requestedView === 'rear'
+            ? pointAt(proposal.summit.x, proposal.summit.z, proposal.summit.height).sub(center)
+            : frame.north;
+          direction = requestedView === 'globe'
+            ? frame.up.clone().addScaledVector(frame.east, .5).addScaledVector(frame.north, -.05).normalize()
+            // This is genuinely on the rear ocean side (z169), rather than
+            // another angle on the front/descent face.
+            : frame.up.clone().addScaledVector(frame.east, -.25).normalize();
+        }
+        const forward = direction.clone().negate().normalize();
+        const cameraUp = preferredUp.clone().projectOnPlane(forward).normalize();
+        const right = forward.clone().cross(cameraUp).normalize();
+        camera.up.copy(right.clone().cross(forward).normalize());
+        const verticalFov = THREE.MathUtils.degToRad(camera.fov);
+        const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
+        const corners = [
+          [bounds.min.x, bounds.min.y, bounds.min.z], [bounds.min.x, bounds.min.y, bounds.max.z],
+          [bounds.min.x, bounds.max.y, bounds.min.z], [bounds.min.x, bounds.max.y, bounds.max.z],
+          [bounds.max.x, bounds.min.y, bounds.min.z], [bounds.max.x, bounds.min.y, bounds.max.z],
+          [bounds.max.x, bounds.max.y, bounds.min.z], [bounds.max.x, bounds.max.y, bounds.max.z],
+        ];
+        let distance = 0;
+        for (const corner of corners) {
+          const offset = new THREE.Vector3(...corner).sub(center);
+          const depthTowardCamera = offset.dot(direction);
+          const width = Math.abs(offset.dot(right)) / Math.tan(horizontalFov / 2);
+          const height = Math.abs(offset.dot(camera.up)) / Math.tan(verticalFov / 2);
+          distance = Math.max(distance, depthTowardCamera + Math.max(width, height));
+        }
+        distance *= 1.07;
+        camera.position.copy(center).addScaledVector(direction, distance);
+        camera.far = Math.max(600, distance * 2.2);
+        camera.lookAt(center);
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+      }
+      function resizeRenderer() {
+        const { width, height } = stage.getBoundingClientRect();
+        if (!width || !height) return;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        configureCamera();
+        renderer.setSize(width, height, false);
+        render();
+      }
+      new ResizeObserver(resizeRenderer).observe(stage);
+      resizeRenderer();
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      window.__MOUNTAIN_APPROVAL_READY__ = requestedView;
+    </script>
+  </body>
+</html>

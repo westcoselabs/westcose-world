@@ -1,0 +1,74 @@
+{
+  "revision": 3,
+  "sourceBefore": "42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400",
+  "sourceAfter": "42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400",
+  "sourceUnchanged": true,
+  "approvalOnly": true,
+  "cove": "approved drawing retained; not implemented",
+  "errors": [],
+  "audits": [
+    {
+      "width": 320,
+      "overflow": false,
+      "outside": []
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "outside": []
+    },
+    {
+      "width": 736,
+      "overflow": false,
+      "outside": []
+    },
+    {
+      "width": 1100,
+      "overflow": false,
+      "outside": []
+    }
+  ],
+  "pictures": [
+    "mountain-unwrapped.jpg",
+    "mountain-globe.jpg",
+    "mountain-rear.jpg"
+  ],
+  "fragmentBytes": 364170,
+  "resortBuildingClearGap": 2.9999999999961107,
+  "resort": {
+    "x": 1,
+    "z": 53.7,
+    "height": 2.8
+  },
+  "finish": {
+    "x": 1,
+    "z": 65,
+    "height": 2.8,
+    "width": 42,
+    "depth": 14,
+    "treatment": "lower finishing area only; three separate run-out lanes, not the resort"
+  },
+  "runs": [
+    {
+      "number": 1,
+      "name": "Central S-run",
+      "width": 6.5,
+      "length": 138.43065218877302,
+      "oldLength": 62.63606774697004
+    },
+    {
+      "number": 2,
+      "name": "Eastern coastal sweep",
+      "width": 8,
+      "length": 134.9026331411011,
+      "oldLength": 85.49634670612318
+    },
+    {
+      "number": 3,
+      "name": "Western forest turns",
+      "width": 7,
+      "length": 140.11778969697667,
+      "oldLength": 85.3558440678645
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="510" viewBox="0 0 940 510"><style>:root{color-scheme:light;--background:#f5f2e8;--foreground:#273e43;--green:#286a51;--blue:#187fab;--yellow:#ba8d3e;--red:#b8453f;--orange:#b36d1c}body{margin:0;background:var(--background);color:var(--foreground);font:14px/1.5 system-ui,sans-serif}main{max-width:940px;margin:auto;padding:24px}h2{font-size:26px;font-weight:500}h3{font-size:19px;font-weight:500}.text-small{font-size:12px}.downloads{display:flex;gap:18px;flex-wrap:wrap}a{color:#176583}@media(max-width:450px){main{padding:14px}}
+svg{font:14px system-ui,sans-serif}svg text{fill:var(--foreground)}
+  #wc-mountain-approval{width:100%;color:var(--foreground)}
+  section{margin-block:24px 32px}
+  svg{display:block;width:100%;overflow:hidden}
+  .wm-key{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 20px;margin-block:12px}
+  figure{margin:20px 0}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{margin-top:8px}
+  svg text{font:inherit;fill:var(--foreground)}
+  svg .label{paint-order:stroke;stroke:var(--background);stroke-width:4;stroke-linejoin:round}
+  svg .water{fill:var(--blue);fill-opacity:.12}
+  svg .land{fill:var(--green);fill-opacity:.2}
+  svg .sand{fill:var(--yellow);fill-opacity:.32}
+  svg .rock{fill:var(--foreground);fill-opacity:.23}
+  svg .high{fill:var(--foreground);fill-opacity:.08}
+  svg .snow{fill:var(--background)}
+  svg .slope{fill:var(--blue);fill-opacity:.1}
+  svg .contour{fill:none;stroke:var(--foreground);stroke-width:1;stroke-opacity:.2}
+  svg .route{fill:none;stroke:var(--foreground);stroke-width:1.5;stroke-opacity:.65}
+  svg .old{fill:none;stroke:var(--foreground);stroke-width:1.5;stroke-dasharray:5 5;stroke-opacity:.5}
+  svg .proposed{fill:none;stroke:var(--orange);stroke-width:1.5;stroke-dasharray:7 4}
+  svg .pin{fill:var(--background);stroke:var(--foreground);stroke-width:1.2}
+  @media(max-width:450px){.wm-key{grid-template-columns:1fr}}
+</style><defs><clipPath id="crop"><rect width="940" height="275"/></clipPath></defs><rect width="100%" height="100%" fill="var(--background)"/><text x="18" y="28" style="font-size:21px;font-weight:500">01b · Compact lodge + ticket terrace</text><text x="18" y="54">WESTCOSE WORLD · MOUNTAIN APPROVAL DRAWING</text><g transform="translate(0 74)" clip-path="url(#crop)"><rect width="940" height="275" class="land"></rect><path d="M545.86 125L545.21 117.8L543.28 110.72L540.09 103.89L535.7 97.41L530.19 91.41L523.64 85.99L516.18 81.23L507.93 77.22L499.03 74.03L489.63 71.71L479.9 70.3L470 69.83L460.1 70.3L450.37 71.71L440.97 74.03L432.07 77.22L423.82 81.23L416.36 85.99L409.81 91.41L404.3 97.41L399.91 103.89L396.72 110.72L394.79 117.8L394.14 125L394.79 132.2L396.72 139.28L399.91 146.11L404.3 152.59L409.81 158.59L416.36 164.01L423.82 168.77L432.07 172.78L440.97 175.97L450.37 178.29L460.1 179.7L470 180.17L479.9 179.7L489.63 178.29L499.03 175.97L507.93 172.78L516.18 168.77L523.64 164.01L530.19 158.59L535.7 152.59L540.09 146.11L543.28 139.28L545.21 132.2Z" class="sand"></path><path d="M462.57 189.64L470 152.49" class="route"></path><path d="M470 152.49L440.27 136.15" class="route"></path><path d="M470 152.49L500.27 125.74" class="route"></path><path d="M478.18 70.76L478.18 107.91L478.18 137.63L470 152.49" class="route"></path><rect x="412.68199233716473" y="94.58719914882002" width="55.17241379310344" height="41.50738661626701" class="rock"></rect><circle class="pin" cx="440.27" cy="115.34" r="10"></circle><text x="440.27" y="119.34" text-anchor="middle" class="">L</text><rect x="488.54406130265517" y="104.89656200252097" width="23.44827586206896" height="20.88866090886512" class="rock"></rect><circle class="pin" cx="500.27" cy="115.34" r="10"></circle><text x="500.27" y="119.34" text-anchor="middle" class="">T</text><text x="12" y="20" text-anchor="start" class="label">Resort terrace · top view</text><text x="470" y="235" text-anchor="middle" class="label">Lodge ↔ ticket · ~3.0 m clear gap</text><text x="470" y="258" text-anchor="middle" class="label">One shared forecourt · no run crossings</text></g><text x="18" y="378">L · Lodge</text><text x="18" y="403">T · Ticket booth / future game start</text><text x="18" y="428">Shared forecourt · buildings grouped together</text><text x="18" y="453">No downhill race through the pedestrian terrace</text><text x="18" y="484">PROPOSAL ONLY · NOT IMPLEMENTED · COVE APPROVED / RETAINED</text></svg>

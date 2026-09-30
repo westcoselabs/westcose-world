@@ -2,6 +2,7 @@ import { MathUtils, Matrix4, Quaternion, Vector3 } from 'three';
 import { MAP_RADIUS, mapDirection, mapFrame, mapMetric, mapPoint } from './world-map';
 import { PENINSULA_CAVE, PENINSULA_LIGHTHOUSE } from './peninsula-layout';
 import { peninsulaCaveColliders } from './peninsula-cave';
+import { peninsulaCliffColliders } from './peninsula-cliffs';
 export { caveDistanceAt, caveBlendAt, caveHeightAt } from './peninsula-cave';
 
 /** Authoring data is shared by the walkable terrain, visible blockout, and OBB collision. */
@@ -126,4 +127,4 @@ const shopLink = solid('shop-connector:canopy', 'shop-connector', new Vector3(0,
 
 /** Render these exact boxes; do not make a separate hand-authored collision version. */
 export const landmarkSolids: LandmarkSolid[] = [...towerSolids, ...railSolids, ...artWallSolids, shopLink];
-export const landmarkColliders = [...landmarkSolids, ...peninsulaCaveColliders];
+export const landmarkColliders = [...landmarkSolids, ...peninsulaCaveColliders, ...peninsulaCliffColliders];

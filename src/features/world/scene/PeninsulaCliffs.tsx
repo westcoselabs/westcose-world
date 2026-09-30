@@ -2,13 +2,19 @@
 
 import { useEffect, useMemo } from 'react';
 import { BufferGeometry, Color, Float32BufferAttribute } from 'three';
-import { peninsulaCaveWedges } from '../data/peninsula-cave';
+import { peninsulaCaveFloor, peninsulaCaveWedges } from '../data/peninsula-cave';
+import { peninsulaCliffWedges } from '../data/peninsula-cliffs';
 
 /** True low rock prisms around a short pentagonal cave, not decorated tunnel boxes. */
 export default function PeninsulaCliffs() {
   const geometry = useMemo(() => {
     const positions: number[] = [], colors: number[] = [];
-    for (const wedge of peninsulaCaveWedges) {
+    const surfaces = [
+      ...peninsulaCaveWedges.map(wedge => ({ ...wedge, triangles: wedge.liningTriangles })),
+      ...peninsulaCliffWedges,
+      { ...peninsulaCaveFloor, color: '#D8BD8B' },
+    ];
+    for (const wedge of surfaces) {
       const color = new Color(wedge.color);
       for (const triangle of wedge.triangles) {
         for (const index of triangle) {
@@ -26,7 +32,7 @@ export default function PeninsulaCliffs() {
     return mesh;
   }, []);
   useEffect(() => () => geometry.dispose(), [geometry]);
-  return <mesh name="short-peninsula-cave" geometry={geometry} castShadow receiveShadow>
+  return <mesh name="peninsula-rock-edge-and-cave" geometry={geometry} castShadow receiveShadow>
     <meshStandardMaterial vertexColors roughness={1} flatShading />
   </mesh>;
 }

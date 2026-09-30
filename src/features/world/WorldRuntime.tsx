@@ -9,11 +9,12 @@ import { CONTENT, DESTINATIONS, type ContentId } from '@/content/registry';
 import Environment from './scene/Environment';
 import CoastalLighting from './scene/CoastalLighting';
 import PlayerController from './player/PlayerController';
-import { createRuntimeState, PLAYER_CENTER_HEIGHT, type WorldMode } from './runtime/types';
+import { createRuntimeState, PLAYER_CENTER_HEIGHT, type SupportLayer, type WorldMode } from './runtime/types';
 import { saveSession } from './runtime/session';
 import { clearWorldInput } from './runtime/input';
+import { supportAt } from './runtime/planet-collision';
 import { HOTSPOTS } from './data/hotspots';
-import { areaAt, coordinatesAt, heightAt, PLANET_FIXTURES, SEA_LEVEL } from './data/planet';
+import { areaAt, coordinatesAt, PLANET_FIXTURES } from './data/planet';
 import { mapCoordinates, mapDirection, mapFrame } from './data/world-map';
 import Modal from './ui/Modal';
 import './planet.css';
@@ -137,22 +138,24 @@ export default function WorldRuntime() {
   useEffect(() => {
     if (process.env.NODE_ENV !== 'development') return;
     const r = runtimeRef.current;
-    const spawnAt = (x: number, z: number, facing: MapFacing = 'south') => {
+    const spawnAt = (x: number, z: number, facing: MapFacing = 'south', layer: SupportLayer = 'upper') => {
       const direction = mapDirection(x, z);
-      const frame = mapFrame(x, z, Math.max(SEA_LEVEL, heightAt(direction)));
-      const position = frame.position.clone().addScaledVector(frame.up, PLAYER_CENTER_HEIGHT);
+      const support = supportAt(direction, { layer });
+      const frame = mapFrame(x, z);
+      const position = direction.clone().multiplyScalar(support.radius + PLAYER_CENTER_HEIGHT);
       const forward = typeof facing === 'object'
         ? frame.east.clone().multiplyScalar(facing.east).addScaledVector(frame.north, facing.north).normalize()
         : facing === 'east' ? frame.east : facing === 'west' ? frame.east.clone().negate() : facing === 'south' ? frame.north.clone().negate() : frame.north;
       r.teleportRequested = { x:position.x,y:position.y,z:position.z };
       r.forwardRequested = { x:forward.x,y:forward.y,z:forward.z };
+      r.teleportSupportLayer = layer;
       r.grounded = false;
       change({ type:'mode', mode:'exploring' });
     };
     const debug = {
       getState: () => {
         const map = mapCoordinates(r.position);
-        return { mode: r.mode, position: { ...r.position }, forward: { ...r.forward }, up: { ...r.up }, heading: r.heading, ...coordinatesAt(r.position), map, mapX:map.x, mapZ:map.z, radius: Math.hypot(r.position.x,r.position.y,r.position.z), travelDistance: r.travelDistance, lapCount: r.lapCount, currentArea: areaAt(r.position), hotspot: r.hotspot, grounded: r.grounded, swimming: r.swimming, interior:r.interior, supportKind:r.supportKind, cameraDistance: r.cameraDistance, desiredCameraDistance: r.desiredCameraDistance, overviewTransition: r.overviewTransition, landmarkFraming: { summitNdc: { ...r.landmarkFraming.summitNdc }, summitFraming: r.landmarkFraming.summitFraming, summitVisible: r.landmarkFraming.summitVisible }, counters: { ...r.counters } };
+        return { mode: r.mode, position: { ...r.position }, forward: { ...r.forward }, up: { ...r.up }, heading: r.heading, ...coordinatesAt(r.position), map, mapX:map.x, mapZ:map.z, radius: Math.hypot(r.position.x,r.position.y,r.position.z), travelDistance: r.travelDistance, lapCount: r.lapCount, currentArea: areaAt(r.position), hotspot: r.hotspot, grounded: r.grounded, swimming: r.swimming, interior:r.interior, supportKind:r.supportKind, supportLayer:r.supportLayer, cameraDistance: r.cameraDistance, desiredCameraDistance: r.desiredCameraDistance, overviewTransition: r.overviewTransition, landmarkFraming: { summitNdc: { ...r.landmarkFraming.summitNdc }, summitFraming: r.landmarkFraming.summitFraming, summitVisible: r.landmarkFraming.summitVisible }, counters: { ...r.counters } };
       },
       spawn: (name: string) => {
         if (!Object.hasOwn(PLANET_FIXTURES, name)) throw new Error('Unknown planet fixture');
@@ -160,6 +163,7 @@ export default function WorldRuntime() {
         spawnAt(f.x, f.z, f.facing);
       },
       spawnAt,
+      spawnTunnelAt: (x: number, z: number, facing: MapFacing = 'east') => spawnAt(x, z, facing, 'tunnel'),
     };
     Object.assign(window, { __WESTCOSE_WORLD__: debug });
     return () => { Reflect.deleteProperty(window, '__WESTCOSE_WORLD__'); };

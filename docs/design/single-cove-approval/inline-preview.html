@@ -1,0 +1,1588 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>One Cove Approval</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="One Cove Approval" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;One Cove Approval&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;wc-single-cove-approval&quot;&gt;
+  &lt;h2&gt;One cove · approval proposal&lt;/h2&gt;
+  &lt;p class=&quot;text-small&quot;&gt;Not implemented · only the lighthouse / hidden-beach region is proposed to change&lt;/p&gt;
+  &lt;section aria-labelledby=&quot;wc-plan-title&quot;&gt;
+    &lt;h3 id=&quot;wc-plan-title&quot;&gt;01 · Peninsula top view&lt;/h3&gt;
+    &lt;svg id=&quot;wc-plan&quot; role=&quot;img&quot; aria-label=&quot;Proposed top view: one broad hidden cove, no middle dividing spur, lighthouse at the peninsula tip and cave directly beneath it&quot;&gt;&lt;/svg&gt;
+    &lt;div class=&quot;wc-key text-small&quot;&gt;
+      &lt;span&gt;1 · Lighthouse on cliff terrace&lt;/span&gt;&lt;span&gt;2 · Public cave entrance&lt;/span&gt;
+      &lt;span&gt;3 · Tunnel exit onto the hidden beach&lt;/span&gt;&lt;span&gt;4 · One continuous crescent beach&lt;/span&gt;
+      &lt;span&gt;5 · Former narrow inlet, now part of the same cove&lt;/span&gt;&lt;span&gt;6 · Middle spur removed, not smoothed&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;wc-legend text-small&quot;&gt;&lt;span class=&quot;wc-green&quot;&gt;━━ Coast / land edge&lt;/span&gt;&lt;span class=&quot;wc-blue&quot;&gt;━━ Upper lighthouse trail&lt;/span&gt;&lt;span&gt;┄┄ Cave below ground&lt;/span&gt;&lt;span class=&quot;wc-red&quot;&gt;× Removed divider&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section aria-labelledby=&quot;wc-elevation-title&quot;&gt;
+    &lt;h3 id=&quot;wc-elevation-title&quot;&gt;02 · Elevation + tunnel section&lt;/h3&gt;
+    &lt;svg id=&quot;wc-elevation&quot; role=&quot;img&quot; aria-label=&quot;Public-beach elevation of the lighthouse on an exposed rocky cliff, and an unfolded section following the tunnel beneath the tower into the hidden beach&quot;&gt;&lt;/svg&gt;
+    &lt;div class=&quot;wc-key text-small&quot;&gt;&lt;span&gt;Sea: datum 0 m&lt;/span&gt;&lt;span&gt;Beach / tunnel floor: about +0.7 m&lt;/span&gt;&lt;span&gt;Terrace: about +7 m above sea&lt;/span&gt;&lt;span&gt;Existing tower: 12 m, unchanged&lt;/span&gt;&lt;span&gt;Tunnel: 4 m clear height × 3.4 m clear width&lt;/span&gt;&lt;span&gt;Rock over tunnel: about 2 m at lighthouse&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section aria-labelledby=&quot;wc-world-title&quot;&gt;
+    &lt;h3 id=&quot;wc-world-title&quot;&gt;03 · Whole WestCose World&lt;/h3&gt;
+    &lt;svg id=&quot;wc-world&quot; role=&quot;img&quot; aria-label=&quot;Complete unwrapped world with the current mountain, three ski trails, resort, forest, skate park, town, beach and pier; the proposed single-cove region is highlighted&quot;&gt;&lt;/svg&gt;
+    &lt;div class=&quot;wc-key text-small&quot;&gt;&lt;span&gt;1 · Summit + three snow trails&lt;/span&gt;&lt;span&gt;2 · Resort / lodge / ticket hut&lt;/span&gt;&lt;span&gt;3 · Forest and winding resort route&lt;/span&gt;&lt;span&gt;4 · Skate park + both approaches&lt;/span&gt;&lt;span&gt;5 · Downtown / courtyard spawn&lt;/span&gt;&lt;span&gt;6 · Public beach + boardwalk&lt;/span&gt;&lt;span&gt;7 · Pier / fishing head&lt;/span&gt;&lt;span&gt;8 · Proposed single-cove peninsula&lt;/span&gt;&lt;/div&gt;
+    &lt;h3&gt;Town + coast detail · positions retained&lt;/h3&gt;
+    &lt;svg id=&quot;wc-town&quot; role=&quot;img&quot; aria-label=&quot;Enlarged town map retaining gallery, courtyard, shop, connected skate shop, social club, motel, alley, boardwalk, pier and skate park&quot;&gt;&lt;/svg&gt;
+    &lt;div class=&quot;wc-key text-small&quot;&gt;&lt;span&gt;A · Gallery&lt;/span&gt;&lt;span&gt;B · Courtyard / spawn&lt;/span&gt;&lt;span&gt;C · Shop + connected skate shop&lt;/span&gt;&lt;span&gt;D · Social club / arcade&lt;/span&gt;&lt;span&gt;E · Motel&lt;/span&gt;&lt;span&gt;F · Graffiti alley / Labs&lt;/span&gt;&lt;span&gt;G · Boulevard corner / art wall&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;p class=&quot;text-small&quot;&gt;Approval basis: proposed shoreline and elevation relationship, not new terrain or camera screenshots. Current anchors outside the highlighted zone remain fixed. Vertical dimensions are relative to sea level; top views are unwrapped schematic charts, not equal-area surveys.&lt;/p&gt;
+&lt;/div&gt;
+&lt;style&gt;
+  #wc-single-cove-approval{color:var(--foreground);width:100%}
+  #wc-single-cove-approval section{margin-block:24px 36px}
+  #wc-single-cove-approval svg{display:block;width:100%;overflow:hidden}
+  #wc-single-cove-approval .wc-key{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin-block:12px}
+  #wc-single-cove-approval .wc-legend{display:flex;gap:10px 20px;flex-wrap:wrap;margin-block:16px}
+  #wc-single-cove-approval .wc-blue{color:var(--blue)}
+  #wc-single-cove-approval .wc-green{color:var(--green)}
+  #wc-single-cove-approval .wc-red{color:var(--red)}
+  #wc-single-cove-approval svg text{fill:var(--foreground);font:inherit}
+  #wc-single-cove-approval svg .halo{paint-order:stroke;stroke:var(--background);stroke-width:4;stroke-linejoin:round}
+  #wc-single-cove-approval svg .pin{fill:var(--background);stroke:var(--foreground);stroke-width:1.2}
+  #wc-single-cove-approval svg .water{fill:var(--blue);fill-opacity:.13}
+  #wc-single-cove-approval svg .land{fill:var(--green);fill-opacity:.19}
+  #wc-single-cove-approval svg .sand{fill:var(--yellow);fill-opacity:.34}
+  #wc-single-cove-approval svg .rock{fill:var(--foreground);fill-opacity:.25}
+  #wc-single-cove-approval svg .high{fill:var(--foreground);fill-opacity:.09}
+  #wc-single-cove-approval svg .coast{fill:none;stroke:var(--green);stroke-width:2.2}
+  #wc-single-cove-approval svg .trail{fill:none;stroke:var(--blue);stroke-width:3.2;stroke-linejoin:round;stroke-linecap:round}
+  #wc-single-cove-approval svg .cave{fill:none;stroke:var(--foreground);stroke-width:2;stroke-dasharray:5 4}
+  #wc-single-cove-approval svg .route{fill:none;stroke:var(--foreground);stroke-opacity:.6;stroke-width:2}
+  #wc-single-cove-approval svg .proposal{fill:none;stroke:var(--orange);stroke-width:1.5;stroke-dasharray:6 4}
+  @media(max-width:460px){#wc-single-cove-approval .wc-key{grid-template-columns:1fr}}
+&lt;/style&gt;
+&lt;script&gt;
+(() =&gt; {
+  const root = document.getElementById(&#x27;wc-single-cove-approval&#x27;);
+  const current = {&quot;schemaVersion&quot;:1,&quot;generatedAt&quot;:&quot;2026-09-12T23:05:31.059Z&quot;,&quot;status&quot;:&quot;Current live layout only; proposed single-cove geometry has not been applied.&quot;,&quot;source&quot;:{&quot;fingerprint&quot;:&quot;42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400&quot;,&quot;fileHashes&quot;:{&quot;WorldEntry.tsx&quot;:&quot;7efd0798361a95050047c534a98ee9ff15f240e665c879d293976a2000782fc3&quot;,&quot;WorldRuntime.tsx&quot;:&quot;92e03807a3331ade9a58e82f16f0c8ad531c0f9bbbe5b8aebcb98817ae1f74e1&quot;,&quot;data/building-shapes.ts&quot;:&quot;27343426dcff82f5a232f27656fd62edc42832bef71374af46e0896d80c45f17&quot;,&quot;data/coastal-regions.ts&quot;:&quot;e893a8c1702185ef32df307ae88f5ef5e3d7a4d6d840cac8d3502273ea33dd79&quot;,&quot;data/concept-landmarks.ts&quot;:&quot;274bb697d660a9e7afd11d1d61f283f499fbf73169ed89f17434a779c3564b9b&quot;,&quot;data/hotspots.ts&quot;:&quot;df79224cac956fae0797de50b968ce055ecb5f587b0d1bc09ce7bd3d60889121&quot;,&quot;data/peninsula-cave.ts&quot;:&quot;3eb9b4dbe06edaa5a5569b7e67e72a0d547dd01500150b3f8ae419d9ef5c308c&quot;,&quot;data/peninsula-cliffs.ts&quot;:&quot;f7dbd0f017a8520995d2c4c9f27dbda78a470be9ad0f6ac85c545e2c95e757b0&quot;,&quot;data/peninsula-layout.ts&quot;:&quot;5d755f702ff0722709a82d1e1e0f74d3f66c6a0509d3daa7197266de9120231c&quot;,&quot;data/pier-layout.ts&quot;:&quot;21a66ad7a41a1cb6901930c15eeb6386e47217ff935f2a33b1fc2fef2194df31&quot;,&quot;data/pier-rails.ts&quot;:&quot;1050918b8f108614cf148f98b726d8ad2e725d526b6773fde3f34fb6383e2e5d&quot;,&quot;data/planet.ts&quot;:&quot;2b21d0e18c64b96ce22d6d8c1c66b4cbb92954754062ab56822e7715bf871652&quot;,&quot;data/town-layout.ts&quot;:&quot;6b47acae07369724ffe2b7b94fb8d328b7590c91bcb01eeaffb7d03c357636ad&quot;,&quot;data/town-surfaces.ts&quot;:&quot;7a61f475ddb025e292fb103d46025551f459ee70a3d564c6fc2c222ea27c802c&quot;,&quot;data/town-types.ts&quot;:&quot;339d9528f7cc2116492f3f5b211ecee145ba4013f3accbee6f85da047b72d139&quot;,&quot;data/world-map.ts&quot;:&quot;d6fd3f8d50a677ca40cb221c12c65f381ae6573cb6d5bec1d4d030497322ad8f&quot;,&quot;graphify-out/cache/stat-index.json&quot;:&quot;5040c886d3cc5063038196936bb4f5b99f3efc864c3455e4fe2e83aafda55434&quot;,&quot;planet.css&quot;:&quot;0485a6461e9e3fd585206d543da16a177a3a3af123d791a3f8f24ac07dee0f50&quot;,&quot;player/PlayerController.tsx&quot;:&quot;4c7fca864881c51bf16cc42ca67e561bc0a3a873a73f21ca7796bf476a9aabf8&quot;,&quot;runtime/input.ts&quot;:&quot;ed235035d4c821b053eaec0058f0e0e7933998a5485f29a29bc0fec5c7d0eeb1&quot;,&quot;runtime/planet-collision.ts&quot;:&quot;44fb229d894e78c93b10008bf90091bab8a1bb342001d628cc3e64daf0285278&quot;,&quot;runtime/session.ts&quot;:&quot;763b97f8c1936c2a19e5ecc1648da185d41a2ab91fa3694dae63e48ab3412d2e&quot;,&quot;runtime/types.ts&quot;:&quot;214e94ee88531e5d72fbd1d7e3bba1a15d1865b19ecc01c28c4b40bb5f419ddf&quot;,&quot;scene/CoastalLighting.tsx&quot;:&quot;4e65a684434e4e2bbc2469fccfb1c996f49640a7a42fc4d6476a30b27af80b7f&quot;,&quot;scene/ConceptLandmarks.tsx&quot;:&quot;1ca9150cf8d03426635d7e070ec381712e6591c59edf1d4997451d0be2e8db89&quot;,&quot;scene/Environment.tsx&quot;:&quot;68f9238ac2751dff8138f5c38cd99e6c48a0acf67cfc5ebdb54d6fd5a05dcce9&quot;,&quot;scene/Ocean.tsx&quot;:&quot;ca7c993abb3982984311c724bdc54faa2f9fbac14b76ac0d38bd5a768ffdacd2&quot;,&quot;scene/PeninsulaCliffs.tsx&quot;:&quot;886cadf4ddd6bc06ac0a533024eb7909a28f0029525aca2a3091199642dbfc56&quot;,&quot;scene/Pier.tsx&quot;:&quot;63144514c71b75277be397ef83cadaec36b6e1070ee1b5d9e60ffaaf15ffa4aa&quot;,&quot;scene/StreetPatina.tsx&quot;:&quot;9149edd2de88273433d0e69868f8d955b9a948300a6760745703ad3eb5c4f79b&quot;,&quot;scene/TownLandscape.tsx&quot;:&quot;2d4985128d1328f4510acfdb5224ef20d17e2c78a2d240fdb878091d8c97ae89&quot;,&quot;scene/interiors/rooms.ts&quot;:&quot;32ea4d376c64eec9ea5b024a6b91ca1883507cca78449da5e248cc875197e082&quot;,&quot;scene/kit/SignAtlas.tsx&quot;:&quot;ce14c86648d48ec1b44a25e9497520de8135bc7e949df6ec7b4ee4257d86fac7&quot;,&quot;scene/kit/TownBuildings.tsx&quot;:&quot;0251f16512eb79527021c58d4d2dc8c199f6eef22f6a8ca5149b4396e4dfac18&quot;,&quot;scene/kit/architecturalDetails.ts&quot;:&quot;7d299a0f2c66b29320118bf7b065eaff3c61391c28563c18f5cb77b2e75d9e3e&quot;,&quot;scene/kit/buildings.ts&quot;:&quot;2a9ffea81b6a4ebd6b761c206c72970a3b3820b688f13617f8223bd30572d848&quot;,&quot;scene/kit/context.ts&quot;:&quot;8b30780dda48b99a35d994a9e028fff652dabc1f5355586049decb25f144f57d&quot;,&quot;scene/kit/foundations.ts&quot;:&quot;226901f776391db8dd9ff19c529cf9e222521b9d88b4adcffdcae343507dd2b8&quot;,&quot;scene/kit/materials.ts&quot;:&quot;b55b658fac9025265b15ff99ca641ec45f95ef1c8d0abe129ec67c86b6af728a&quot;,&quot;scene/lighting-anchors.ts&quot;:&quot;d8c082fd7abea58fd401cd804618f66622486073eef1c75073f73cea6800fe20&quot;,&quot;scene/materials/WeatheredMaterial.tsx&quot;:&quot;5ca15a07a46eaa1cab4a3a5f8decf77df487a9b7ac35ce524918ea9ea556f2bb&quot;,&quot;scene/materials/surface-types.ts&quot;:&quot;f99e03f4ef1f2a62825ed7f7ca360ae6bbaf9d0617d42fd43b337efaa174fcf7&quot;,&quot;scene/pierGeometry.ts&quot;:&quot;663256aca5ecc03fc30e69361006baa003172f34a6e8d55fa662dadabc6fb845&quot;,&quot;scene/sceneryGeometry.ts&quot;:&quot;7ec90474928d5351c0be92ab7a1ceb828dff4910d99554dad15b94b88b84329b&quot;,&quot;scene/vegetation/CoastalHinterland.tsx&quot;:&quot;c04c90d642bf9b26d60e28e9f79674105eed77ff644568ed32679ab96c257f9b&quot;,&quot;scene/vegetation/CoastalVegetation.tsx&quot;:&quot;dd1aa00f006ca67b5a1fcb11355c65de20b6a2ca8ec0132fdd295d5842979b84&quot;,&quot;scene/vegetation/coastalHinterlandGeometry.ts&quot;:&quot;1b6664bd010d23988214cbda55008f6c9b189980aea268d8f198db7408220540&quot;,&quot;scene/vegetation/coastalPlanting.ts&quot;:&quot;50aa50cbacbad9a0405912378ebdea302edb03e2817b6f445d653e3f6799950d&quot;,&quot;scene/vegetation/planetOcclusion.ts&quot;:&quot;4678ff284fcab20954734a68d960c2236730e16c16e56359693a2f834a452ac1&quot;,&quot;scene/vegetation/vegetationGeometry.ts&quot;:&quot;1504e6d1b97c5dee24e14763f7a8b90ee8a0ef264699067d524cc7f29af7d0af&quot;,&quot;ui/Modal.tsx&quot;:&quot;0c4a063122832218cc9b01d08c7552012b237444368111cf0d46930db526cd9e&quot;},&quot;root&quot;:&quot;src/features/world&quot;,&quot;fingerprintMethod&quot;:&quot;SHA256 of sorted native relative paths followed by raw file bytes; same convention as current-world captures.&quot;,&quot;loadMethod&quot;:&quot;Process-local TypeScript transpileModule + module._compile, entirely in memory; no compiled files or app writes.&quot;,&quot;loadedModules&quot;:[&quot;data/building-shapes.ts&quot;,&quot;data/concept-landmarks.ts&quot;,&quot;data/peninsula-cave.ts&quot;,&quot;data/peninsula-cliffs.ts&quot;,&quot;data/peninsula-layout.ts&quot;,&quot;data/pier-layout.ts&quot;,&quot;data/town-layout.ts&quot;,&quot;data/town-surfaces.ts&quot;,&quot;data/world-map.ts&quot;],&quot;unchanged&quot;:true,&quot;fingerprintAfter&quot;:&quot;42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400&quot;},&quot;map&quot;:{&quot;radius&quot;:36,&quot;seaLevel&quot;:-0.8,&quot;maxHeight&quot;:39,&quot;summit&quot;:{&quot;x&quot;:0,&quot;z&quot;:153,&quot;height&quot;:32},&quot;circumference&quot;:226.1946710584651,&quot;seam&quot;:176,&quot;minZ&quot;:-50.194671058465104,&quot;maxZExclusive&quot;:176,&quot;minX&quot;:-56.548667764616276,&quot;maxX&quot;:56.548667764616276,&quot;projection&quot;:&quot;(sin(x/R), cos(x/R)*sin(z/R), cos(x/R)*cos(z/R))&quot;,&quot;metricNote&quot;:&quot;Chart x/z are not uniformly physical metres. Use mapMetric or projected actual geometry; z scale is cos(x/R)*(R+height)/R.&quot;},&quot;buildings&quot;:[{&quot;id&quot;:&quot;studio&quot;,&quot;x&quot;:-9,&quot;z&quot;:7,&quot;lon&quot;:-0.2545986722398232,&quot;lat&quot;:0.18832593354953428,&quot;width&quot;:6.8,&quot;depth&quot;:7,&quot;height&quot;:5.2,&quot;archetype&quot;:&quot;studio&quot;,&quot;roof&quot;:&quot;sawtooth&quot;,&quot;district&quot;:&quot;studio-row&quot;,&quot;color&quot;:&quot;#E9DFCE&quot;,&quot;kind&quot;:&quot;studio&quot;,&quot;rotation&quot;:0,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:2.6,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:0.4,&quot;sign&quot;:&quot;PORTFOLIO GALLERY&quot;,&quot;subtitle&quot;:&quot;PROJECTS / WESTCOSE&quot;,&quot;interior&quot;:&quot;studio&quot;,&quot;awning&quot;:true},{&quot;id&quot;:&quot;workshop&quot;,&quot;x&quot;:8,&quot;z&quot;:7,&quot;lon&quot;:0.22634738929059556,&quot;lat&quot;:0.18960417559056922,&quot;width&quot;:6.4,&quot;depth&quot;:7,&quot;height&quot;:4.5,&quot;archetype&quot;:&quot;warehouse&quot;,&quot;roof&quot;:&quot;sawtooth&quot;,&quot;district&quot;:&quot;workshop&quot;,&quot;color&quot;:&quot;#5B7E8A&quot;,&quot;kind&quot;:&quot;workshop&quot;,&quot;rotation&quot;:0,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:3.2,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:0.4,&quot;sign&quot;:&quot;WESTCOSE SHOP&quot;,&quot;subtitle&quot;:&quot;SERVICES / MADE HERE&quot;,&quot;interior&quot;:&quot;workshop&quot;},{&quot;id&quot;:&quot;skate-shop&quot;,&quot;x&quot;:14.2,&quot;z&quot;:7,&quot;lon&quot;:0.4012393515435023,&quot;lat&quot;:0.17934390572662073,&quot;width&quot;:5,&quot;depth&quot;:6,&quot;height&quot;:3.8,&quot;archetype&quot;:&quot;market&quot;,&quot;roof&quot;:&quot;lean&quot;,&quot;district&quot;:&quot;workshop&quot;,&quot;color&quot;:&quot;#647778&quot;,&quot;kind&quot;:&quot;shop&quot;,&quot;rotation&quot;:0,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:2.6,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:0.4,&quot;sign&quot;:&quot;SKATE SHOP&quot;,&quot;subtitle&quot;:&quot;CONNECTED TO WESTCOSE SHOP&quot;,&quot;awning&quot;:true},{&quot;id&quot;:&quot;arcade&quot;,&quot;x&quot;:-8,&quot;z&quot;:-6,&quot;lon&quot;:-0.2252409134980704,&quot;lat&quot;:-0.16253140032429397,&quot;width&quot;:7.5,&quot;depth&quot;:6,&quot;height&quot;:4.6,&quot;archetype&quot;:&quot;arcade&quot;,&quot;roof&quot;:&quot;gable&quot;,&quot;district&quot;:&quot;studio-row&quot;,&quot;color&quot;:&quot;#39474A&quot;,&quot;kind&quot;:&quot;arcade&quot;,&quot;rotation&quot;:3.141592653589793,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#A66A45&quot;,&quot;entryWidth&quot;:2.8,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:0.4,&quot;sign&quot;:&quot;SOCIAL CLUB&quot;,&quot;subtitle&quot;:&quot;BAR / ARCADE / GAMES&quot;,&quot;interior&quot;:&quot;arcade&quot;,&quot;awning&quot;:true},{&quot;id&quot;:&quot;about&quot;,&quot;x&quot;:8,&quot;z&quot;:-6,&quot;lon&quot;:0.2252409134980704,&quot;lat&quot;:-0.16253140032429397,&quot;width&quot;:10,&quot;depth&quot;:6,&quot;height&quot;:5.6,&quot;archetype&quot;:&quot;motel&quot;,&quot;roof&quot;:&quot;flat&quot;,&quot;district&quot;:&quot;courtyard&quot;,&quot;color&quot;:&quot;#D1BA9E&quot;,&quot;kind&quot;:&quot;shop&quot;,&quot;rotation&quot;:3.141592653589793,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:2.6,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:0.4,&quot;sign&quot;:&quot;WESTCOSE MOTEL&quot;,&quot;subtitle&quot;:&quot;ABOUT / LOBBY&quot;,&quot;interior&quot;:&quot;about&quot;,&quot;balcony&quot;:true},{&quot;id&quot;:&quot;lab&quot;,&quot;x&quot;:19.5,&quot;z&quot;:-6,&quot;lon&quot;:0.5478508978930884,&quot;lat&quot;:-0.14263131662839698,&quot;width&quot;:4.8,&quot;depth&quot;:5,&quot;height&quot;:3.8,&quot;archetype&quot;:&quot;lab&quot;,&quot;roof&quot;:&quot;lean&quot;,&quot;district&quot;:&quot;back-alleys&quot;,&quot;color&quot;:&quot;#737E78&quot;,&quot;kind&quot;:&quot;shop&quot;,&quot;rotation&quot;:-1.5707963267948966,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:2.4,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:0.4,&quot;sign&quot;:&quot;ALLEY ROOM&quot;,&quot;subtitle&quot;:&quot;WESTCOSE LABS&quot;,&quot;interior&quot;:&quot;lab&quot;},{&quot;id&quot;:&quot;town-corner&quot;,&quot;x&quot;:-17,&quot;z&quot;:-6,&quot;lon&quot;:-0.47789771291975836,&quot;lat&quot;:-0.14828321506340025,&quot;width&quot;:6,&quot;depth&quot;:5.5,&quot;height&quot;:3.5,&quot;archetype&quot;:&quot;market&quot;,&quot;roof&quot;:&quot;flat&quot;,&quot;district&quot;:&quot;studio-row&quot;,&quot;color&quot;:&quot;#A3A58E&quot;,&quot;kind&quot;:&quot;shop&quot;,&quot;rotation&quot;:3.141592653589793,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:2.6,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:0.4,&quot;sign&quot;:&quot;THE BLVD&quot;,&quot;subtitle&quot;:&quot;WESTCOSE / CONCEPT&quot;,&quot;awning&quot;:true},{&quot;id&quot;:&quot;resort-lodge&quot;,&quot;x&quot;:-7,&quot;z&quot;:115,&quot;lon&quot;:-2.94688313609171,&quot;lat&quot;:-0.05185490536084876,&quot;width&quot;:7,&quot;depth&quot;:5,&quot;height&quot;:4.2,&quot;archetype&quot;:&quot;cottage&quot;,&quot;roof&quot;:&quot;gable&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;color&quot;:&quot;#A66A45&quot;,&quot;kind&quot;:&quot;shop&quot;,&quot;rotation&quot;:0,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:2.6,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:2.8,&quot;sign&quot;:&quot;WESTCOSE LODGE&quot;,&quot;subtitle&quot;:&quot;SKI RESORT / CONCEPT&quot;},{&quot;id&quot;:&quot;ticket-hut&quot;,&quot;x&quot;:6,&quot;z&quot;:116,&quot;lon&quot;:2.9743928068892354,&quot;lat&quot;:-0.07950992631117978,&quot;width&quot;:3,&quot;depth&quot;:3,&quot;height&quot;:2.5,&quot;archetype&quot;:&quot;shed&quot;,&quot;roof&quot;:&quot;gable&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;color&quot;:&quot;#5B7E8A&quot;,&quot;kind&quot;:&quot;shop&quot;,&quot;rotation&quot;:0,&quot;trim&quot;:&quot;#E9DFCE&quot;,&quot;accent&quot;:&quot;#5B7E8A&quot;,&quot;entryWidth&quot;:2.6,&quot;entryOffset&quot;:0,&quot;floorHeight&quot;:2.8,&quot;sign&quot;:&quot;LIFT TICKETS&quot;,&quot;subtitle&quot;:&quot;TRAILS 1 / 2 / 3&quot;}],&quot;buildingFootprints&quot;:[{&quot;id&quot;:&quot;studio&quot;,&quot;points&quot;:[[-12.294,10.647],[-5.621,10.479],[-5.621,3.521],[-12.294,3.353]],&quot;path&quot;:&quot;M-12.294,10.647L-5.621,10.479L-5.621,3.521L-12.294,3.353Z&quot;},{&quot;id&quot;:&quot;workshop&quot;,&quot;points&quot;:[[4.821,10.469],[11.104,10.609],[11.104,3.391],[4.821,3.531]],&quot;path&quot;:&quot;M4.821,10.469L11.104,10.609L11.104,3.391L4.821,3.531Z&quot;},{&quot;id&quot;:&quot;skate-shop&quot;,&quot;points&quot;:[[11.69,10.117],[16.608,10.299],[16.608,3.701],[11.69,3.883]],&quot;path&quot;:&quot;M11.69,10.117L16.608,10.299L16.608,3.701L11.69,3.883Z&quot;},{&quot;id&quot;:&quot;arcade&quot;,&quot;points&quot;:[[-4.29,-8.966],[-11.655,-9.107],[-11.655,-2.893],[-4.29,-3.034]],&quot;path&quot;:&quot;M-4.29,-8.966L-11.655,-9.107L-11.655,-2.893L-4.29,-3.034Z&quot;},{&quot;id&quot;:&quot;about&quot;,&quot;points&quot;:[[12.87,-9.131],[3.075,-8.944],[3.075,-3.056],[12.87,-2.869]],&quot;path&quot;:&quot;M12.87,-9.131L3.075,-8.944L3.075,-3.056L12.87,-2.869Z&quot;},{&quot;id&quot;:&quot;lab&quot;,&quot;points&quot;:[[21.914,-3.117],[21.914,-8.883],[16.992,-8.655],[16.992,-3.345]],&quot;path&quot;:&quot;M21.914,-3.117L21.914,-8.883L16.992,-8.655L16.992,-3.345Z&quot;},{&quot;id&quot;:&quot;town-corner&quot;,&quot;points&quot;:[[-13.998,-8.924],[-19.897,-9.18],[-19.897,-2.82],[-13.998,-3.076]],&quot;path&quot;:&quot;M-13.998,-8.924L-19.897,-9.18L-19.897,-2.82L-13.998,-3.076Z&quot;},{&quot;id&quot;:&quot;resort-lodge&quot;,&quot;points&quot;:[[-10.217,117.403],[-3.754,117.32],[-3.754,112.68],[-10.217,112.597]],&quot;path&quot;:&quot;M-10.217,117.403L-3.754,117.32L-3.754,112.68L-10.217,112.597Z&quot;},{&quot;id&quot;:&quot;ticket-hut&quot;,&quot;points&quot;:[[4.605,117.401],[7.385,117.42],[7.385,114.58],[4.605,114.599]],&quot;path&quot;:&quot;M4.605,117.401L7.385,117.42L7.385,114.58L4.605,114.599Z&quot;}],&quot;areas&quot;:[{&quot;id&quot;:&quot;courtyard&quot;,&quot;label&quot;:&quot;Courtyard / Arrival&quot;,&quot;district&quot;:&quot;courtyard&quot;,&quot;center&quot;:[0,8],&quot;width&quot;:10,&quot;depth&quot;:11,&quot;material&quot;:&quot;concrete&quot;,&quot;elevation&quot;:0.3},{&quot;id&quot;:&quot;resort&quot;,&quot;label&quot;:&quot;Ski Resort&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;center&quot;:[0,112],&quot;width&quot;:20,&quot;depth&quot;:8,&quot;material&quot;:&quot;gravel&quot;,&quot;elevation&quot;:2.5},{&quot;id&quot;:&quot;lighthouse-view&quot;,&quot;label&quot;:&quot;Lighthouse Peninsula Lookout&quot;,&quot;district&quot;:&quot;outskirts&quot;,&quot;center&quot;:[36,-32],&quot;width&quot;:6.5,&quot;depth&quot;:6.5,&quot;material&quot;:&quot;gravel&quot;}],&quot;routes&quot;:[{&quot;id&quot;:&quot;boulevard&quot;,&quot;label&quot;:&quot;The Boulevard&quot;,&quot;district&quot;:&quot;studio-row&quot;,&quot;points&quot;:[[-23,0],[-12,0],[0,0],[12,0],[20,0]],&quot;width&quot;:4,&quot;material&quot;:&quot;asphalt&quot;,&quot;category&quot;:&quot;primary&quot;,&quot;elevation&quot;:0.22},{&quot;id&quot;:&quot;main-street&quot;,&quot;label&quot;:&quot;Courtyard to Pier&quot;,&quot;district&quot;:&quot;courtyard&quot;,&quot;points&quot;:[[0,8],[0,0],[0,-16]],&quot;width&quot;:4,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;primary&quot;},{&quot;id&quot;:&quot;boardwalk&quot;,&quot;label&quot;:&quot;Beach Boardwalk&quot;,&quot;district&quot;:&quot;cove&quot;,&quot;points&quot;:[[-25,-16],[-12,-16],[0,-16],[12,-16],[24,-16]],&quot;width&quot;:4,&quot;material&quot;:&quot;timber&quot;,&quot;category&quot;:&quot;primary&quot;},{&quot;id&quot;:&quot;gallery-entry&quot;,&quot;label&quot;:&quot;Gallery Entrance&quot;,&quot;district&quot;:&quot;studio-row&quot;,&quot;points&quot;:[[-9,0],[-9,4]],&quot;width&quot;:2.8,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;shop-entry&quot;,&quot;label&quot;:&quot;Shop Entrance&quot;,&quot;district&quot;:&quot;workshop&quot;,&quot;points&quot;:[[8,0],[8,4]],&quot;width&quot;:3.2,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;shop-link&quot;,&quot;label&quot;:&quot;Connected Skate Shop&quot;,&quot;district&quot;:&quot;workshop&quot;,&quot;points&quot;:[[8,2],[14.2,2],[14.2,2.5]],&quot;width&quot;:2.4,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;social-entry&quot;,&quot;label&quot;:&quot;Social Club Entrance&quot;,&quot;district&quot;:&quot;studio-row&quot;,&quot;points&quot;:[[-8,0],[-8,-3]],&quot;width&quot;:2.8,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;motel-entry&quot;,&quot;label&quot;:&quot;Motel Lobby&quot;,&quot;district&quot;:&quot;courtyard&quot;,&quot;points&quot;:[[8,0],[8,-3]],&quot;width&quot;:2.8,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;alley&quot;,&quot;label&quot;:&quot;Graffiti Alley&quot;,&quot;district&quot;:&quot;back-alleys&quot;,&quot;points&quot;:[[20,4],[16.5,0],[16.5,-6],[16.5,-16]],&quot;width&quot;:2.4,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;lab-entry&quot;,&quot;label&quot;:&quot;Alley Room&quot;,&quot;district&quot;:&quot;back-alleys&quot;,&quot;points&quot;:[[16.5,-6],[17.5,-6]],&quot;width&quot;:2.4,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;forest-trail&quot;,&quot;label&quot;:&quot;Forest Trail to Skate Park&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;points&quot;:[[-25,-16],[-30,-11],[-33,-1],[-32,8],[-27,15]],&quot;width&quot;:2.4,&quot;material&quot;:&quot;dirt&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;skate-stairs&quot;,&quot;label&quot;:&quot;Skate Park Stairs&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;points&quot;:[[-23,0],[-24,5],[-27,9]],&quot;width&quot;:3,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;resort-trail&quot;,&quot;label&quot;:&quot;Forest Route to Resort&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;points&quot;:[[0,13],[0,20],[7,27],[8,34],[-6,42],[-9,49],[6,58],[10,68],[-5,79],[-8,87],[6,97],[7,103],[0,109],[0,115]],&quot;width&quot;:4,&quot;material&quot;:&quot;dirt&quot;,&quot;category&quot;:&quot;primary&quot;},{&quot;id&quot;:&quot;ski-central&quot;,&quot;label&quot;:&quot;1 / Central Snow Trail&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;points&quot;:[[0,115],[0,132],[4,139],[0,146],[0,153]],&quot;width&quot;:4,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;primary&quot;},{&quot;id&quot;:&quot;ski-west&quot;,&quot;label&quot;:&quot;2 / Western Forest Trail&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;points&quot;:[[0,115],[-7,122],[-12,130],[-16,139],[-9,149],[0,153]],&quot;width&quot;:4,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;primary&quot;},{&quot;id&quot;:&quot;ski-east&quot;,&quot;label&quot;:&quot;3 / Eastern Contour Trail&quot;,&quot;district&quot;:&quot;high-ground&quot;,&quot;points&quot;:[[0,115],[9,121],[14,131],[15,140],[9,148],[0,153]],&quot;width&quot;:4,&quot;material&quot;:&quot;concrete&quot;,&quot;category&quot;:&quot;primary&quot;},{&quot;id&quot;:&quot;lighthouse-trail&quot;,&quot;label&quot;:&quot;Lighthouse Upper Trail&quot;,&quot;district&quot;:&quot;outskirts&quot;,&quot;points&quot;:[[20,4],[23,0],[27,-3],[29,-10],[30,-17],[31,-23],[33,-28],[33.2,-32]],&quot;width&quot;:2.4,&quot;material&quot;:&quot;dirt&quot;,&quot;category&quot;:&quot;secondary&quot;,&quot;elevations&quot;:[0.2,0.2,0.4,1.35,2.95,4.8,6.3,6.32]},{&quot;id&quot;:&quot;beach-west&quot;,&quot;label&quot;:&quot;West Beach Ramp&quot;,&quot;district&quot;:&quot;cove&quot;,&quot;points&quot;:[[-20,-16],[-18,-22],[-10,-28],[-3,-28]],&quot;width&quot;:2.4,&quot;material&quot;:&quot;sand&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;beach-east&quot;,&quot;label&quot;:&quot;East Beach and Cave Access&quot;,&quot;district&quot;:&quot;cove&quot;,&quot;points&quot;:[[20,-16],[18,-23],[20,-28],[24,-29],[26,-29],[28,-29]],&quot;width&quot;:2.4,&quot;material&quot;:&quot;sand&quot;,&quot;category&quot;:&quot;secondary&quot;},{&quot;id&quot;:&quot;cave&quot;,&quot;label&quot;:&quot;Covered Cave to Hidden Beach&quot;,&quot;district&quot;:&quot;cove&quot;,&quot;points&quot;:[[28,-29],[31,-30.5],[34,-32],[36,-32],[37,-30],[38,-26],[38,-22],[38,-20]],&quot;width&quot;:3.4,&quot;material&quot;:&quot;sand&quot;,&quot;category&quot;:&quot;discovery&quot;}],&quot;pier&quot;:{&quot;radius&quot;:36,&quot;entrance&quot;:[0,-30],&quot;neckEnd&quot;:[0,-40],&quot;width&quot;:3.8,&quot;elevation&quot;:1.5,&quot;head&quot;:{&quot;center&quot;:[0,-43],&quot;width&quot;:8,&quot;depth&quot;:8},&quot;approach&quot;:{&quot;start&quot;:[0,-16],&quot;end&quot;:[0,-30],&quot;startElevation&quot;:0.1},&quot;railStartZ&quot;:-17,&quot;railHeight&quot;:1.12,&quot;boardThickness&quot;:0.18,&quot;plankPitch&quot;:0.24,&quot;pileBottom&quot;:-3.2,&quot;tip&quot;:[0,-47],&quot;outline&quot;:[[-1.895,-16],[-1.824,-39],[-3.84,-39],[-3.84,-47],[3.84,-47],[3.84,-39],[1.824,-39],[1.895,-16]],&quot;path&quot;:&quot;M-1.895,-16L-1.824,-39L-3.84,-39L-3.84,-47L3.84,-47L3.84,-39L1.824,-39L1.895,-16Z&quot;},&quot;skate&quot;:{&quot;center&quot;:[-27,15],&quot;elevation&quot;:2.5,&quot;size&quot;:[14,11],&quot;stairs&quot;:{&quot;points&quot;:[[-23,0],[-24,5],[-27,9]],&quot;width&quot;:3,&quot;count&quot;:12,&quot;rise&quot;:0.19,&quot;baseHeight&quot;:0.22}},&quot;artWalls&quot;:[{&quot;x&quot;:-23,&quot;z&quot;:-13,&quot;elevation&quot;:0.25,&quot;title&quot;:&quot;ART WALL&quot;},{&quot;x&quot;:22,&quot;z&quot;:-13,&quot;elevation&quot;:0.2,&quot;title&quot;:&quot;GRAFFITI WALL&quot;}],&quot;peninsula&quot;:{&quot;lighthouse&quot;:{&quot;x&quot;:36,&quot;z&quot;:-32,&quot;elevation&quot;:6.2,&quot;height&quot;:12},&quot;cave&quot;:{&quot;points&quot;:[[28,-29],[31,-30.5],[34,-32],[36,-32],[37,-30],[38,-26],[38,-22],[38,-20]],&quot;floor&quot;:-0.1,&quot;width&quot;:3.4,&quot;clearance&quot;:4},&quot;cove&quot;:{&quot;x&quot;:37,&quot;z&quot;:-11},&quot;coast&quot;:[[24,12],[29,14],[32,9],[34,4],[35,1],[40,-1],[45,-4],[45,-8],[42,-10],[40,-12],[39,-15],[39.5,-18],[41,-21],[44,-24],[45,-29],[43,-34],[40,-38],[36,-40],[32,-38],[29,-35],[27,-31],[21,-29],[23,-24],[24,-18]],&quot;sand&quot;:[[34.5,-5],[38,-4.5],[42,-7],[41,-10],[39,-14],[39.5,-18],[41,-21],[39.5,-23],[37,-22],[34,-18],[33.5,-14]],&quot;cap&quot;:[[26.8,-31],[26.9,-27.4],[29.5,-24.5],[33,-23],[35,-20],[37.5,-18.3],[40.5,-20],[43,-26],[41.5,-34],[37,-38],[32,-37],[29,-34]],&quot;terrace&quot;:[[31,-25],[33,-23],[36,-23],[39.5,-26],[40.5,-31],[39,-35],[36,-37],[33,-35],[30,-31],[29.5,-28]],&quot;upper&quot;:[[27,5],[30,7],[33,1],[34,-8],[34,-18],[32,-24],[29,-23],[27,-14],[26,-5]],&quot;cliffRim&quot;:[[33.4,-23,4.25,0.8,0.3],[33.2,-18,3.8,0.95,0.45],[33.2,-14,3.35,1.1,0.55],[33.8,-6,3.1,1.1,0.6],[36,-3,2.85,2.2,0.6],[40,-2.5,2.7,2.2,0.65],[44,-4,2.2,1.8,0.6],[46,-6,0.85,1.02,0.55]],&quot;cliffFootprints&quot;:[{&quot;id&quot;:&quot;peninsula-cliff:0:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.468,-21.426],[32.585,-23.063],[32.774,-23.049],[33.706,-22.975],[33.69,-21.293]],&quot;path&quot;:&quot;M32.468,-21.426L32.585,-23.063L32.774,-23.049L33.706,-22.975L33.69,-21.293Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:0:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[32.667,-21.405],[32.774,-23.049],[33.528,-22.99],[33.666,-22.978],[33.676,-21.295]],&quot;path&quot;:&quot;M32.667,-21.405L32.774,-23.049L33.528,-22.99L33.666,-22.978L33.676,-21.295Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:1:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.35,-19.764],[32.468,-21.426],[32.667,-21.405],[33.676,-21.295],[33.69,-21.293],[33.674,-19.621]],&quot;path&quot;:&quot;M32.35,-19.764L32.468,-21.426L32.667,-21.405L33.676,-21.295L33.69,-21.293L33.674,-19.621Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:1:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[32.556,-19.743],[32.667,-21.405],[32.802,-21.391],[33.452,-21.32],[33.676,-21.295],[33.607,-19.629]],&quot;path&quot;:&quot;M32.556,-19.743L32.667,-21.405L32.802,-21.391L33.452,-21.32L33.676,-21.295L33.607,-19.629Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:2:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.232,-18.063],[32.35,-19.764],[32.556,-19.743],[33.607,-19.629],[33.674,-19.621],[33.659,-17.969],[33.579,-17.974]],&quot;path&quot;:&quot;M32.232,-18.063L32.35,-19.764L32.556,-19.743L33.607,-19.629L33.674,-19.621L33.659,-17.969L33.579,-17.974Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:2:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[32.448,-18.049],[32.556,-19.743],[32.699,-19.728],[33.367,-19.656],[33.607,-19.629],[33.579,-17.974]],&quot;path&quot;:&quot;M32.448,-18.049L32.556,-19.743L32.699,-19.728L33.367,-19.656L33.607,-19.629L33.579,-17.974Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:3:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.18,-16.667],[32.232,-18.063],[32.448,-18.049],[33.659,-17.969],[33.693,-16.667]],&quot;path&quot;:&quot;M32.18,-16.667L32.232,-18.063L32.448,-18.049L33.659,-17.969L33.693,-16.667Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:3:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[32.411,-16.667],[32.448,-18.049],[32.598,-18.04],[33.329,-17.991],[33.579,-17.974],[33.661,-16.667]],&quot;path&quot;:&quot;M32.411,-16.667L32.448,-18.049L32.598,-18.04L33.329,-17.991L33.579,-17.974L33.661,-16.667Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:4:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.129,-15.333],[32.18,-16.667],[33.693,-16.667],[33.727,-15.333]],&quot;path&quot;:&quot;M32.129,-15.333L32.18,-16.667L33.693,-16.667L33.727,-15.333Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:4:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[32.37,-15.333],[32.411,-16.667],[33.661,-16.667],[33.672,-15.333]],&quot;path&quot;:&quot;M32.37,-15.333L32.411,-16.667L33.661,-16.667L33.672,-15.333Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:5:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.081,-13.874],[32.129,-15.333],[33.727,-15.333],[33.76,-14.067],[33.661,-14.055],[32.326,-13.901]],&quot;path&quot;:&quot;M32.081,-13.874L32.129,-15.333L33.727,-15.333L33.76,-14.067L33.661,-14.055L32.326,-13.901Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:5:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[32.326,-13.901],[32.37,-15.333],[33.672,-15.333],[33.661,-14.055],[33.37,-14.02],[32.495,-13.919]],&quot;path&quot;:&quot;M32.326,-13.901L32.37,-15.333L33.672,-15.333L33.661,-14.055L33.37,-14.02L32.495,-13.919Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:6:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.081,-13.874],[33.76,-14.067],[33.887,-12.52],[33.829,-12.508],[32.45,-12.225],[32.206,-12.178]],&quot;path&quot;:&quot;M32.081,-13.874L33.76,-14.067L33.887,-12.52L33.829,-12.508L32.45,-12.225L32.206,-12.178Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:6:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[32.326,-13.901],[33.661,-14.055],[33.829,-12.508],[33.472,-12.432],[32.62,-12.258],[32.45,-12.225]],&quot;path&quot;:&quot;M32.326,-13.901L33.661,-14.055L33.829,-12.508L33.472,-12.432L32.62,-12.258L32.45,-12.225Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:7:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.206,-12.178],[33.887,-12.52],[34.017,-10.923],[32.572,-10.624],[32.326,-10.576]],&quot;path&quot;:&quot;M32.206,-12.178L33.887,-12.52L34.017,-10.923L32.572,-10.624L32.326,-10.576Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:7:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[32.45,-12.225],[33.829,-12.508],[33.978,-10.915],[33.625,-10.839],[32.741,-10.657],[32.572,-10.624]],&quot;path&quot;:&quot;M32.45,-12.225L33.829,-12.508L33.978,-10.915L33.625,-10.839L32.741,-10.657L32.572,-10.624Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:8:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.326,-10.576],[33.978,-10.915],[34.017,-10.923],[34.147,-9.327],[34.055,-9.307],[32.693,-9.023],[32.446,-8.974]],&quot;path&quot;:&quot;M32.326,-10.576L33.978,-10.915L34.017,-10.923L34.147,-9.327L34.055,-9.307L32.693,-9.023L32.446,-8.974Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:8:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[32.572,-10.624],[33.978,-10.915],[34.055,-9.307],[33.782,-9.247],[32.858,-9.056],[32.693,-9.023]],&quot;path&quot;:&quot;M32.572,-10.624L33.978,-10.915L34.055,-9.307L33.782,-9.247L32.858,-9.056L32.693,-9.023Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:9:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.446,-8.974],[34.147,-9.327],[34.277,-7.73],[34.19,-7.711],[32.811,-7.421],[32.566,-7.372]],&quot;path&quot;:&quot;M32.446,-8.974L34.147,-9.327L34.277,-7.73L34.19,-7.711L32.811,-7.421L32.566,-7.372Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:9:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[32.693,-9.023],[34.055,-9.307],[34.19,-7.711],[33.888,-7.645],[32.977,-7.454],[32.811,-7.421]],&quot;path&quot;:&quot;M32.693,-9.023L34.055,-9.307L34.19,-7.711L33.888,-7.645L32.977,-7.454L32.811,-7.421Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:10:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.566,-7.372],[34.277,-7.73],[34.334,-6.512],[34.301,-6.48],[33.029,-5.301],[32.813,-5.113]],&quot;path&quot;:&quot;M32.566,-7.372L34.277,-7.73L34.334,-6.512L34.301,-6.48L33.029,-5.301L32.813,-5.113Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:10:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[32.811,-7.421],[34.19,-7.711],[34.301,-6.48],[33.951,-6.142],[33.178,-5.433],[33.029,-5.301]],&quot;path&quot;:&quot;M32.811,-7.421L34.19,-7.711L34.301,-6.48L33.951,-6.142L33.178,-5.433L33.029,-5.301Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:11:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[32.813,-5.113],[34.334,-6.512],[34.906,-5.852],[34.865,-5.756],[33.794,-3.437],[33.585,-3.022]],&quot;path&quot;:&quot;M32.813,-5.113L34.334,-6.512L34.906,-5.852L34.865,-5.756L33.794,-3.437L33.585,-3.022Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:11:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[33.029,-5.301],[34.301,-6.48],[34.865,-5.756],[34.641,-5.242],[33.938,-3.73],[33.794,-3.437]],&quot;path&quot;:&quot;M33.029,-5.301L34.301,-6.48L34.865,-5.756L34.641,-5.242L33.938,-3.73L33.794,-3.437Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:12:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[33.585,-3.022],[34.906,-5.852],[35.632,-4.888],[35.572,-4.738],[34.354,-1.985],[34.092,-1.451]],&quot;path&quot;:&quot;M33.585,-3.022L34.906,-5.852L35.632,-4.888L35.572,-4.738L34.354,-1.985L34.092,-1.451Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:12:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[33.794,-3.437],[34.865,-5.756],[35.572,-4.738],[35.397,-4.312],[34.53,-2.352],[34.354,-1.985]],&quot;path&quot;:&quot;M33.794,-3.437L34.865,-5.756L35.572,-4.738L35.397,-4.312L34.53,-2.352L34.354,-1.985Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:13:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[34.092,-1.451],[35.632,-4.888],[36.2,-4.075],[36.183,-3.979],[35.349,-0.03],[35.148,0.771]],&quot;path&quot;:&quot;M34.092,-1.451L35.632,-4.888L36.2,-4.075L36.183,-3.979L35.349,-0.03L35.148,0.771Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:13:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[34.354,-1.985],[35.572,-4.738],[36.183,-3.979],[36.077,-3.403],[35.48,-0.575],[35.349,-0.03]],&quot;path&quot;:&quot;M34.354,-1.985L35.572,-4.738L36.183,-3.979L36.077,-3.403L35.48,-0.575L35.349,-0.03Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:14:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[35.148,0.771],[36.2,-4.075],[37.031,-4.084],[37.03,-3.995],[36.816,0.495],[36.742,1.411]],&quot;path&quot;:&quot;M35.148,0.771L36.2,-4.075L37.031,-4.084L37.03,-3.995L36.816,0.495L36.742,1.411Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:14:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[35.349,-0.03],[36.183,-3.979],[37.03,-3.995],[37.012,-3.262],[36.862,-0.138],[36.816,0.495]],&quot;path&quot;:&quot;M35.349,-0.03L36.183,-3.979L37.03,-3.995L37.012,-3.262L36.862,-0.138L36.816,0.495Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:15:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[36.742,1.411],[37.031,-4.084],[38.029,-4.044],[38.026,-3.844],[37.816,0.8],[37.741,1.743]],&quot;path&quot;:&quot;M36.742,1.411L37.031,-4.084L38.029,-4.044L38.026,-3.844L37.816,0.8L37.741,1.743Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:15:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[36.816,0.495],[37.03,-3.995],[38.026,-3.844],[38.01,-3.109],[37.862,0.137],[37.816,0.8]],&quot;path&quot;:&quot;M36.816,0.495L37.03,-3.995L38.026,-3.844L38.01,-3.109L37.862,0.137L37.816,0.8Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:16:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[37.741,1.743],[38.029,-4.044],[39.027,-4.014],[39.025,-3.838],[38.817,1.101],[38.739,2.1]],&quot;path&quot;:&quot;M37.741,1.743L38.029,-4.044L39.027,-4.014L39.025,-3.838L38.817,1.101L38.739,2.1Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:16:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[37.816,0.8],[38.026,-3.844],[39.025,-3.838],[39.011,-3.062],[38.863,0.408],[38.817,1.101]],&quot;path&quot;:&quot;M37.816,0.8L38.026,-3.844L39.025,-3.838L39.011,-3.062L38.863,0.408L38.817,1.101Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:17:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[38.739,2.1],[39.027,-4.014],[39.955,-3.99],[39.959,-3.897],[40,1.456],[39.969,2.552]],&quot;path&quot;:&quot;M38.739,2.1L39.027,-4.014L39.955,-3.99L39.959,-3.897L40,1.456L39.969,2.552Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:17:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[38.817,1.101],[39.025,-3.838],[39.959,-3.897],[39.986,-3.054],[40.013,0.718],[40,1.456]],&quot;path&quot;:&quot;M38.817,1.101L39.025,-3.838L39.959,-3.897L39.986,-3.054L40.013,0.718L40,1.456Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:18:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[39.955,-3.99],[40.887,-4.4],[40.902,-4.217],[41.176,1.142],[41.195,2.251],[39.969,2.552]],&quot;path&quot;:&quot;M39.955,-3.99L40.887,-4.4L40.902,-4.217L41.176,1.142L41.195,2.251L39.969,2.552Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:18:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[39.959,-3.897],[40.902,-4.217],[40.962,-3.428],[41.157,0.395],[41.176,1.142],[40,1.456]],&quot;path&quot;:&quot;M39.959,-3.897L40.902,-4.217L40.962,-3.428L41.157,0.395L41.176,1.142L40,1.456Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:19:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[40.887,-4.4],[41.894,-4.844],[41.912,-4.601],[42.151,0.852],[42.163,1.949],[41.195,2.251]],&quot;path&quot;:&quot;M40.887,-4.4L41.894,-4.844L41.912,-4.601L42.151,0.852L42.163,1.949L41.195,2.251Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:19:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[40.902,-4.217],[41.912,-4.601],[41.971,-3.728],[42.136,0.09],[42.151,0.852],[41.176,1.142]],&quot;path&quot;:&quot;M40.902,-4.217L41.912,-4.601L41.971,-3.728L42.136,0.09L42.151,0.852L41.176,1.142Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:20:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[41.894,-4.844],[42.901,-5.298],[42.909,-5.183],[43.127,0.548],[43.133,1.661],[42.163,1.949]],&quot;path&quot;:&quot;M41.894,-4.844L42.901,-5.298L42.909,-5.183L43.127,0.548L43.133,1.661L42.163,1.949Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:20:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[41.912,-4.601],[42.909,-5.183],[42.975,-4.104],[43.116,-0.229],[43.127,0.548],[42.151,0.852]],&quot;path&quot;:&quot;M41.912,-4.601L42.909,-5.183L42.975,-4.104L43.116,-0.229L43.127,0.548L42.151,0.852Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:21:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[42.901,-5.298],[43.851,-5.729],[43.864,-5.6],[44.242,0.223],[44.279,1.372],[43.133,1.661]],&quot;path&quot;:&quot;M42.901,-5.298L43.851,-5.729L43.864,-5.6L44.242,0.223L44.279,1.372L43.133,1.661Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:21:upper&quot;,&quot;color&quot;:&quot;#96998B&quot;,&quot;points&quot;:[[42.909,-5.183],[43.864,-5.6],[43.951,-4.606],[44.209,-0.556],[44.242,0.223],[43.127,0.548]],&quot;path&quot;:&quot;M42.909,-5.183L43.864,-5.6L43.951,-4.606L44.209,-0.556L44.242,0.223L43.127,0.548Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:22:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[43.851,-5.729],[44.811,-6.747],[44.841,-6.484],[45.293,-1.446],[45.351,-0.508],[44.279,1.372]],&quot;path&quot;:&quot;M43.851,-5.729L44.811,-6.747L44.841,-6.484L45.293,-1.446L45.351,-0.508L44.279,1.372Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:22:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[43.864,-5.6],[44.841,-6.484],[44.928,-5.7],[45.25,-2.069],[45.293,-1.446],[44.242,0.223]],&quot;path&quot;:&quot;M43.864,-5.6L44.841,-6.484L44.928,-5.7L45.25,-2.069L45.293,-1.446L44.242,0.223Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:23:lower&quot;,&quot;color&quot;:&quot;#778279&quot;,&quot;points&quot;:[[44.811,-6.747],[45.818,-7.822],[45.836,-7.655],[46.223,-3.178],[46.268,-2.474],[45.351,-0.508]],&quot;path&quot;:&quot;M44.811,-6.747L45.818,-7.822L45.836,-7.655L46.223,-3.178L46.268,-2.474L45.351,-0.508Z&quot;},{&quot;id&quot;:&quot;peninsula-cliff:23:upper&quot;,&quot;color&quot;:&quot;#899185&quot;,&quot;points&quot;:[[44.841,-6.484],[45.836,-7.655],[45.939,-6.648],[46.19,-3.655],[46.223,-3.178],[45.293,-1.446]],&quot;path&quot;:&quot;M44.841,-6.484L45.836,-7.655L45.939,-6.648L46.19,-3.655L46.223,-3.178L45.293,-1.446Z&quot;}]},&quot;terrain&quot;:{&quot;grid&quot;:{&quot;minX&quot;:-42,&quot;maxX&quot;:52,&quot;minZ&quot;:-48,&quot;maxZ&quot;:176,&quot;step&quot;:1,&quot;sampling&quot;:&quot;1m cells within half-open bounds; groundSurfaceAt sampled at each cell center. SVG paths use unmodified x,z coordinates, so z increases inland/up only after the drawing transform.&quot;,&quot;columns&quot;:94,&quot;rows&quot;:224,&quot;sampleCount&quot;:21056},&quot;classes&quot;:{&quot;sand&quot;:{&quot;minimumExclusive&quot;:-0.8,&quot;maximumExclusive&quot;:0.35},&quot;land&quot;:{&quot;minimum&quot;:0.35,&quot;maximumExclusive&quot;:3},&quot;rock&quot;:{&quot;minimum&quot;:3,&quot;maximumExclusive&quot;:8},&quot;high&quot;:{&quot;minimum&quot;:8}},&quot;classNote&quot;:&quot;Height classes, not proposed art/materials; sand also includes low paved ground. Water at/below sea level is omitted.&quot;,&quot;paths&quot;:{&quot;sand&quot;:&quot;M35,-41h2v1h-2ZM33,-40h6v1h-6ZM32,-39h3v1h-3ZM39,-39h2v1h-2ZM31,-38h1v1h-1ZM39,-38h2v1h-2ZM30,-37h1v1h-1ZM40,-37h2v1h-2ZM29,-36h1v1h-1ZM41,-36h2v1h-2ZM-13,-35h4v1h-4ZM28,-35h1v1h-1ZM42,-35h2v1h-2ZM-16,-34h10v1h-10ZM19,-34h6v1h-6ZM42,-34h2v1h-2ZM-20,-33h17v1h-17ZM18,-33h8v1h-8ZM42,-33h2v1h-2ZM-33,-32h48v1h-48ZM16,-32h11v1h-11ZM43,-32h2v1h-2ZM-33,-31h59v1h-59ZM43,-31h2v1h-2ZM-33,-30h59v1h-59ZM43,-30h2v1h-2ZM-33,-29h59v1h-59ZM43,-29h2v1h-2ZM-33,-28h59v1h-59ZM43,-28h2v1h-2ZM-33,-27h59v1h-59ZM44,-27h1v1h-1ZM-33,-26h59v1h-59ZM44,-26h1v1h-1ZM-33,-25h57v1h-57ZM43,-25h2v1h-2ZM-33,-24h57v1h-57ZM43,-24h2v1h-2ZM-33,-23h57v1h-57ZM42,-23h2v1h-2ZM-33,-22h58v1h-58ZM42,-22h1v1h-1ZM-33,-21h58v1h-58ZM41,-21h1v1h-1ZM-34,-20h59v1h-59ZM-34,-19h59v1h-59ZM34,-19h2v1h-2ZM40,-19h1v1h-1ZM-34,-18h59v1h-59ZM34,-18h3v1h-3ZM38,-18h2v1h-2ZM-34,-17h59v1h-59ZM34,-17h6v1h-6ZM-34,-16h3v1h-3ZM-26,-16h51v1h-51ZM34,-16h6v1h-6ZM-35,-15h2v1h-2ZM-25,-15h50v1h-50ZM34,-15h6v1h-6ZM-35,-14h1v1h-1ZM-24,-14h49v1h-49ZM34,-14h6v1h-6ZM-36,-13h2v1h-2ZM-24,-13h49v1h-49ZM34,-13h7v1h-7ZM-36,-12h1v1h-1ZM-23,-12h48v1h-48ZM34,-12h8v1h-8ZM-37,-11h1v1h-1ZM-22,-11h47v1h-47ZM34,-11h10v1h-10ZM-37,-10h1v1h-1ZM-22,-10h47v1h-47ZM34,-10h11v1h-11ZM-38,-9h2v1h-2ZM-22,-9h47v1h-47ZM34,-9h11v1h-11ZM-38,-8h1v1h-1ZM-21,-8h46v1h-46ZM34,-8h12v1h-12ZM-38,-7h1v1h-1ZM-21,-7h46v1h-46ZM34,-7h12v1h-12ZM-38,-6h1v1h-1ZM-21,-6h46v1h-46ZM34,-6h12v1h-12ZM-39,-5h1v1h-1ZM-20,-5h45v1h-45ZM34,-5h12v1h-12ZM-39,-4h1v1h-1ZM-20,-4h45v1h-45ZM37,-4h8v1h-8ZM-39,-3h1v1h-1ZM-24,-3h50v1h-50ZM37,-3h8v1h-8ZM-39,-2h1v1h-1ZM-25,-2h51v1h-51ZM36,-2h7v1h-7ZM-25,-1h51v1h-51ZM34,-1h7v1h-7ZM-40,0h1v1h-1ZM-25,0h50v1h-50ZM34,0h5v1h-5ZM-40,1h1v1h-1ZM-21,1h46v1h-46ZM34,1h2v1h-2ZM-40,2h1v1h-1ZM-21,2h46v1h-46ZM33,2h2v1h-2ZM-40,3h1v1h-1ZM-19,3h44v1h-44ZM33,3h2v1h-2ZM-40,4h1v1h-1ZM-19,4h44v1h-44ZM32,4h2v1h-2ZM-40,5h1v1h-1ZM-19,5h44v1h-44ZM32,5h2v1h-2ZM-40,6h1v1h-1ZM-19,6h44v1h-44ZM32,6h2v1h-2ZM-40,7h1v1h-1ZM-19,7h44v1h-44ZM31,7h2v1h-2ZM-40,8h1v1h-1ZM-19,8h44v1h-44ZM31,8h2v1h-2ZM-40,9h1v1h-1ZM-19,9h44v1h-44ZM30,9h2v1h-2ZM-40,10h1v1h-1ZM-19,10h44v1h-44ZM29,10h3v1h-3ZM-40,11h1v1h-1ZM-19,11h44v1h-44ZM27,11h1v1h-1ZM29,11h2v1h-2ZM-40,12h1v1h-1ZM-19,12h44v1h-44ZM26,12h5v1h-5ZM-40,13h1v1h-1ZM-19,13h44v1h-44ZM26,13h5v1h-5ZM-40,14h1v1h-1ZM-19,14h44v1h-44ZM26,14h5v1h-5ZM-40,15h1v1h-1ZM-19,15h67v1h-67ZM-40,16h1v1h-1ZM-19,16h67v1h-67ZM-40,17h1v1h-1ZM-19,17h67v1h-67ZM-40,18h1v1h-1ZM-19,18h47v1h-47ZM38,18h10v1h-10ZM-40,19h1v1h-1ZM-19,19h48v1h-48ZM37,19h11v1h-11ZM-19,20h49v1h-49ZM36,20h12v1h-12ZM-39,21h1v1h-1ZM-20,21h51v1h-51ZM35,21h4v1h-4ZM-39,22h1v1h-1ZM-20,22h57v1h-57ZM-39,23h1v1h-1ZM-20,23h56v1h-56ZM-39,24h1v1h-1ZM-20,24h56v1h-56ZM-38,25h1v1h-1ZM-21,25h57v1h-57ZM-38,26h1v1h-1ZM-21,26h57v1h-57ZM-38,27h1v1h-1ZM-21,27h57v1h-57ZM-38,28h2v1h-2ZM-22,28h58v1h-58ZM-37,29h1v1h-1ZM-22,29h58v1h-58ZM-37,30h1v1h-1ZM-22,30h58v1h-58ZM-36,31h1v1h-1ZM-23,31h59v1h-59ZM-36,32h2v1h-2ZM-24,32h60v1h-60ZM-36,33h2v1h-2ZM-24,33h61v1h-61ZM-36,34h3v1h-3ZM-25,34h62v1h-62ZM-36,35h5v1h-5ZM-27,35h28v1h-28ZM9,35h28v1h-28ZM-36,36h3v1h-3ZM34,36h3v1h-3ZM-36,37h3v1h-3ZM35,37h2v1h-2ZM-36,38h3v1h-3ZM35,38h2v1h-2ZM-36,39h3v1h-3ZM35,39h2v1h-2ZM-35,40h2v1h-2ZM35,40h2v1h-2ZM-35,41h2v1h-2ZM35,41h2v1h-2ZM-35,42h2v1h-2ZM35,42h2v1h-2ZM-35,43h2v1h-2ZM35,43h2v1h-2ZM-35,44h2v1h-2ZM35,44h1v1h-1ZM-35,45h2v1h-2ZM34,45h2v1h-2ZM-34,46h2v1h-2ZM34,46h2v1h-2ZM-34,47h2v1h-2ZM34,47h2v1h-2ZM-34,48h2v1h-2ZM34,48h1v1h-1ZM-33,49h1v1h-1ZM33,49h2v1h-2ZM-33,50h2v1h-2ZM33,50h2v1h-2ZM-33,51h2v1h-2ZM33,51h1v1h-1ZM-33,52h2v1h-2ZM32,52h2v1h-2ZM-32,53h1v1h-1ZM32,53h2v1h-2ZM-32,54h1v1h-1ZM32,54h1v1h-1ZM-32,55h1v1h-1ZM32,55h1v1h-1ZM-32,56h2v1h-2ZM31,56h2v1h-2ZM-32,57h2v1h-2ZM31,57h2v1h-2ZM-32,58h2v1h-2ZM31,58h2v1h-2ZM-32,59h2v1h-2ZM31,59h1v1h-1ZM-32,60h1v1h-1ZM31,60h1v1h-1ZM-32,61h1v1h-1ZM31,61h1v1h-1ZM-32,62h1v1h-1ZM31,62h1v1h-1ZM-32,63h1v1h-1ZM31,63h1v1h-1ZM-33,64h2v1h-2ZM31,64h1v1h-1ZM-33,65h1v1h-1ZM31,65h2v1h-2ZM-33,66h1v1h-1ZM31,66h2v1h-2ZM-34,67h2v1h-2ZM32,67h1v1h-1ZM-34,68h1v1h-1ZM32,68h1v1h-1ZM-34,69h1v1h-1ZM32,69h1v1h-1ZM-35,70h2v1h-2ZM32,70h2v1h-2ZM-35,71h1v1h-1ZM33,71h1v1h-1ZM-35,72h1v1h-1ZM33,72h1v1h-1ZM-36,73h1v1h-1ZM33,73h1v1h-1ZM-36,74h1v1h-1ZM33,74h1v1h-1ZM-36,75h1v1h-1ZM33,75h2v1h-2ZM-37,76h1v1h-1ZM34,76h1v1h-1ZM-37,77h1v1h-1ZM34,77h1v1h-1ZM-37,78h1v1h-1ZM34,78h1v1h-1ZM-37,79h1v1h-1ZM34,79h1v1h-1ZM-38,80h2v1h-2ZM34,80h1v1h-1ZM-38,81h1v1h-1ZM34,81h1v1h-1ZM-38,82h1v1h-1ZM34,82h1v1h-1ZM-38,83h1v1h-1ZM34,83h1v1h-1ZM-38,84h1v1h-1ZM34,84h1v1h-1ZM-38,85h1v1h-1ZM34,85h1v1h-1ZM-38,86h1v1h-1ZM34,86h1v1h-1ZM-38,87h1v1h-1ZM34,87h1v1h-1ZM-38,88h1v1h-1ZM34,88h1v1h-1ZM-38,89h1v1h-1ZM34,89h1v1h-1ZM-38,90h1v1h-1ZM34,90h1v1h-1ZM-38,91h1v1h-1ZM34,91h1v1h-1ZM-38,92h1v1h-1ZM34,92h1v1h-1ZM-38,93h1v1h-1ZM34,93h1v1h-1ZM-38,94h1v1h-1ZM34,94h1v1h-1ZM-38,95h1v1h-1ZM34,95h1v1h-1ZM-38,96h1v1h-1ZM34,96h1v1h-1ZM-38,97h1v1h-1ZM34,97h1v1h-1ZM-38,98h1v1h-1ZM34,98h1v1h-1ZM-38,99h1v1h-1ZM34,99h1v1h-1ZM-38,100h1v1h-1ZM34,100h1v1h-1ZM-38,101h1v1h-1ZM34,101h1v1h-1ZM-39,102h1v1h-1ZM35,102h1v1h-1ZM-39,103h1v1h-1ZM35,103h1v1h-1ZM-39,104h1v1h-1ZM35,104h1v1h-1ZM-39,105h1v1h-1ZM35,105h1v1h-1ZM-39,106h1v1h-1ZM36,106h1v1h-1ZM-39,107h1v1h-1ZM36,107h1v1h-1ZM-39,108h1v1h-1ZM36,108h1v1h-1ZM-39,109h1v1h-1ZM36,109h1v1h-1ZM-39,110h1v1h-1ZM36,110h1v1h-1ZM-39,111h1v1h-1ZM36,111h1v1h-1ZM-39,112h1v1h-1ZM36,112h1v1h-1ZM-38,113h1v1h-1ZM35,113h1v1h-1ZM-38,114h1v1h-1ZM35,114h1v1h-1ZM-37,115h1v1h-1ZM35,115h1v1h-1ZM-37,116h1v1h-1ZM35,116h1v1h-1ZM-36,117h1v1h-1ZM34,117h1v1h-1ZM-36,118h1v1h-1ZM34,118h1v1h-1ZM-35,119h1v1h-1ZM33,119h1v1h-1ZM-35,120h1v1h-1ZM33,120h1v1h-1ZM-34,121h1v1h-1ZM33,121h1v1h-1ZM-34,122h1v1h-1ZM32,122h1v1h-1ZM-33,123h1v1h-1ZM32,123h1v1h-1ZM-33,124h1v1h-1ZM31,124h1v1h-1ZM-32,125h1v1h-1ZM31,125h1v1h-1ZM-32,126h1v1h-1ZM31,126h1v1h-1ZM-31,127h1v1h-1ZM31,127h1v1h-1ZM-31,128h1v1h-1ZM30,128h1v1h-1ZM-31,129h1v1h-1ZM30,129h1v1h-1ZM-30,130h1v1h-1ZM30,130h1v1h-1ZM-30,131h1v1h-1ZM30,131h1v1h-1ZM-30,132h1v1h-1ZM30,132h1v1h-1ZM-30,133h1v1h-1ZM30,133h1v1h-1ZM-29,134h1v1h-1ZM30,134h1v1h-1ZM-29,135h1v1h-1ZM30,135h1v1h-1ZM-29,136h1v1h-1ZM30,136h1v1h-1ZM-29,137h1v1h-1ZM30,137h1v1h-1ZM-29,138h1v1h-1ZM30,138h1v1h-1ZM-29,139h1v1h-1ZM30,139h1v1h-1ZM-29,140h1v1h-1ZM30,140h1v1h-1ZM-29,141h1v1h-1ZM30,141h1v1h-1ZM-29,142h1v1h-1ZM30,142h1v1h-1ZM-29,143h1v1h-1ZM30,143h1v1h-1ZM-29,144h1v1h-1ZM30,144h1v1h-1ZM-29,145h1v1h-1ZM30,145h1v1h-1ZM-29,146h1v1h-1ZM30,146h1v1h-1ZM-29,147h1v1h-1ZM30,147h1v1h-1ZM30,148h1v1h-1ZM30,149h1v1h-1ZM30,150h1v1h-1ZM-28,151h1v1h-1ZM30,151h1v1h-1ZM-28,152h1v1h-1ZM30,152h1v1h-1ZM-25,153h2v1h-2ZM23,153h2v1h-2ZM-24,154h1v1h-1ZM23,154h1v1h-1ZM-24,155h2v1h-2ZM22,155h2v1h-2ZM-23,156h2v1h-2ZM21,156h2v1h-2ZM-22,157h2v1h-2ZM20,157h2v1h-2ZM-21,158h3v1h-3ZM18,158h3v1h-3ZM-20,159h4v1h-4ZM16,159h4v1h-4ZM-18,160h5v1h-5ZM13,160h5v1h-5ZM-14,161h5v1h-5ZM9,161h5v1h-5ZM-9,162h7v1h-7ZM2,162h7v1h-7Z&quot;,&quot;land&quot;:&quot;M35,-39h4v1h-4ZM32,-38h1v1h-1ZM39,-37h1v1h-1ZM40,-36h1v1h-1ZM41,-35h1v1h-1ZM28,-34h1v1h-1ZM27,-33h1v1h-1ZM42,-32h1v1h-1ZM26,-31h1v1h-1ZM42,-31h1v1h-1ZM26,-30h1v1h-1ZM42,-30h1v1h-1ZM26,-29h1v1h-1ZM26,-28h1v1h-1ZM26,-27h1v1h-1ZM43,-27h1v1h-1ZM26,-26h2v1h-2ZM43,-26h1v1h-1ZM24,-25h5v1h-5ZM24,-24h5v1h-5ZM42,-24h1v1h-1ZM24,-23h5v1h-5ZM25,-22h3v1h-3ZM41,-22h1v1h-1ZM25,-21h3v1h-3ZM33,-21h1v1h-1ZM25,-20h3v1h-3ZM33,-20h2v1h-2ZM40,-20h1v1h-1ZM25,-19h3v1h-3ZM33,-19h1v1h-1ZM36,-19h1v1h-1ZM38,-19h2v1h-2ZM25,-18h3v1h-3ZM29,-18h1v1h-1ZM33,-18h1v1h-1ZM37,-18h1v1h-1ZM25,-17h6v1h-6ZM33,-17h1v1h-1ZM-31,-16h5v1h-5ZM25,-16h7v1h-7ZM33,-16h1v1h-1ZM-33,-15h8v1h-8ZM25,-15h9v1h-9ZM-34,-14h10v1h-10ZM25,-14h9v1h-9ZM-34,-13h10v1h-10ZM25,-13h9v1h-9ZM-35,-12h12v1h-12ZM25,-12h9v1h-9ZM-36,-11h14v1h-14ZM25,-11h9v1h-9ZM-36,-10h14v1h-14ZM25,-10h9v1h-9ZM-36,-9h14v1h-14ZM25,-9h9v1h-9ZM-37,-8h16v1h-16ZM25,-8h9v1h-9ZM-37,-7h16v1h-16ZM25,-7h9v1h-9ZM-37,-6h16v1h-16ZM25,-6h9v1h-9ZM-38,-5h18v1h-18ZM25,-5h9v1h-9ZM-38,-4h18v1h-18ZM25,-4h12v1h-12ZM-38,-3h14v1h-14ZM26,-3h11v1h-11ZM-38,-2h13v1h-13ZM26,-2h10v1h-10ZM-39,-1h14v1h-14ZM26,-1h8v1h-8ZM-39,0h14v1h-14ZM25,0h9v1h-9ZM-39,1h18v1h-18ZM25,1h9v1h-9ZM-39,2h18v1h-18ZM25,2h8v1h-8ZM-39,3h20v1h-20ZM25,3h8v1h-8ZM-39,4h20v1h-20ZM25,4h7v1h-7ZM-39,5h20v1h-20ZM25,5h7v1h-7ZM-39,6h20v1h-20ZM25,6h7v1h-7ZM-39,7h20v1h-20ZM25,7h6v1h-6ZM-39,8h20v1h-20ZM25,8h6v1h-6ZM-39,9h20v1h-20ZM25,9h5v1h-5ZM-39,10h7v1h-7ZM-31,10h12v1h-12ZM25,10h4v1h-4ZM-39,11h20v1h-20ZM25,11h2v1h-2ZM28,11h1v1h-1ZM-39,12h16v1h-16ZM-21,12h2v1h-2ZM25,12h1v1h-1ZM-39,13h16v1h-16ZM-21,13h2v1h-2ZM25,13h1v1h-1ZM-39,14h16v1h-16ZM-21,14h2v1h-2ZM25,14h1v1h-1ZM-39,15h16v1h-16ZM-21,15h2v1h-2ZM-39,16h16v1h-16ZM-21,16h2v1h-2ZM-39,17h16v1h-16ZM-21,17h2v1h-2ZM-39,18h20v1h-20ZM28,18h10v1h-10ZM-39,19h20v1h-20ZM29,19h8v1h-8ZM-39,20h11v1h-11ZM-24,20h5v1h-5ZM30,20h6v1h-6ZM-38,21h18v1h-18ZM31,21h4v1h-4ZM-38,22h18v1h-18ZM-38,23h18v1h-18ZM-38,24h18v1h-18ZM-37,25h16v1h-16ZM-37,26h16v1h-16ZM-37,27h16v1h-16ZM-36,28h14v1h-14ZM-36,29h14v1h-14ZM-36,30h14v1h-14ZM-35,31h12v1h-12ZM-34,32h10v1h-10ZM-34,33h10v1h-10ZM-33,34h8v1h-8ZM-31,35h4v1h-4ZM1,35h8v1h-8ZM-33,36h67v1h-67ZM-33,37h68v1h-68ZM-33,38h68v1h-68ZM-33,39h68v1h-68ZM-33,40h68v1h-68ZM-33,41h68v1h-68ZM-33,42h68v1h-68ZM-33,43h68v1h-68ZM-33,44h68v1h-68ZM-33,45h67v1h-67ZM-32,46h66v1h-66ZM-32,47h66v1h-66ZM-32,48h66v1h-66ZM-32,49h65v1h-65ZM-31,50h64v1h-64ZM-31,51h64v1h-64ZM-31,52h63v1h-63ZM-31,53h63v1h-63ZM-31,54h63v1h-63ZM-31,55h63v1h-63ZM-30,56h61v1h-61ZM-30,57h61v1h-61ZM-30,58h61v1h-61ZM-30,59h61v1h-61ZM-31,60h62v1h-62ZM-31,61h62v1h-62ZM-31,62h62v1h-62ZM-31,63h62v1h-62ZM-31,64h62v1h-62ZM-32,65h63v1h-63ZM-32,66h63v1h-63ZM-32,67h64v1h-64ZM-33,68h65v1h-65ZM-33,69h65v1h-65ZM-33,70h65v1h-65ZM-34,71h67v1h-67ZM-34,72h67v1h-67ZM-35,73h68v1h-68ZM-35,74h68v1h-68ZM-35,75h68v1h-68ZM-36,76h70v1h-70ZM-36,77h70v1h-70ZM-36,78h70v1h-70ZM-36,79h70v1h-70ZM-36,80h70v1h-70ZM-37,81h71v1h-71ZM-37,82h71v1h-71ZM-37,83h71v1h-71ZM-37,84h71v1h-71ZM-37,85h71v1h-71ZM-37,86h71v1h-71ZM-37,87h71v1h-71ZM-37,88h71v1h-71ZM-37,89h71v1h-71ZM-37,90h71v1h-71ZM-37,91h71v1h-71ZM-37,92h71v1h-71ZM-37,93h71v1h-71ZM-37,94h71v1h-71ZM-37,95h71v1h-71ZM-37,96h71v1h-71ZM-37,97h71v1h-71ZM-37,98h71v1h-71ZM-37,99h71v1h-71ZM-37,100h71v1h-71ZM-37,101h71v1h-71ZM-38,102h73v1h-73ZM-38,103h73v1h-73ZM-38,104h73v1h-73ZM-38,105h73v1h-73ZM-38,106h74v1h-74ZM-38,107h74v1h-74ZM-38,108h74v1h-74ZM-38,109h74v1h-74ZM-38,110h74v1h-74ZM-38,111h74v1h-74ZM-38,112h74v1h-74ZM-37,113h72v1h-72ZM-37,114h72v1h-72ZM-36,115h71v1h-71ZM-36,116h71v1h-71ZM-35,117h69v1h-69ZM-35,118h69v1h-69ZM-34,119h67v1h-67ZM-34,120h28v1h-28ZM-4,120h37v1h-37ZM-33,121h27v1h-27ZM-4,121h37v1h-37ZM-33,122h26v1h-26ZM-3,122h35v1h-35ZM-32,123h20v1h-20ZM-10,123h2v1h-2ZM-2,123h11v1h-11ZM11,123h21v1h-21ZM-32,124h20v1h-20ZM-10,124h2v1h-2ZM-2,124h11v1h-11ZM11,124h20v1h-20ZM-31,125h18v1h-18ZM-1,125h9v1h-9ZM12,125h19v1h-19ZM-31,126h17v1h-17ZM-1,126h9v1h-9ZM12,126h19v1h-19ZM-30,127h16v1h-16ZM3,127h4v1h-4ZM13,127h18v1h-18ZM-30,128h15v1h-15ZM14,128h16v1h-16ZM-30,129h14v1h-14ZM14,129h16v1h-16ZM-29,130h13v1h-13ZM15,130h15v1h-15ZM-29,131h12v1h-12ZM17,131h13v1h-13ZM-29,132h11v1h-11ZM19,132h11v1h-11ZM-29,133h10v1h-10ZM20,133h10v1h-10ZM-28,134h7v1h-7ZM21,134h9v1h-9ZM-28,135h6v1h-6ZM22,135h8v1h-8ZM-28,136h5v1h-5ZM22,136h8v1h-8ZM-28,137h5v1h-5ZM23,137h7v1h-7ZM-28,138h4v1h-4ZM23,138h7v1h-7ZM-28,139h3v1h-3ZM24,139h6v1h-6ZM-28,140h3v1h-3ZM24,140h6v1h-6ZM-28,141h3v1h-3ZM24,141h6v1h-6ZM-28,142h3v1h-3ZM24,142h6v1h-6ZM-28,143h3v1h-3ZM25,143h5v1h-5ZM-28,144h3v1h-3ZM25,144h5v1h-5ZM-28,145h2v1h-2ZM25,145h5v1h-5ZM-28,146h2v1h-2ZM26,146h4v1h-4ZM-28,147h2v1h-2ZM26,147h4v1h-4ZM-28,148h2v1h-2ZM26,148h4v1h-4ZM-28,149h2v1h-2ZM26,149h4v1h-4ZM-28,150h2v1h-2ZM26,150h4v1h-4ZM-27,151h1v1h-1ZM27,151h3v1h-3ZM-27,152h1v1h-1ZM27,152h3v1h-3ZM-23,153h2v1h-2ZM21,153h2v1h-2ZM-23,154h3v1h-3ZM20,154h3v1h-3ZM-22,155h3v1h-3ZM19,155h3v1h-3ZM-21,156h4v1h-4ZM17,156h4v1h-4ZM-20,157h5v1h-5ZM15,157h5v1h-5ZM-18,158h5v1h-5ZM13,158h5v1h-5ZM-16,159h7v1h-7ZM9,159h7v1h-7ZM-13,160h8v1h-8ZM5,160h8v1h-8ZM-9,161h18v1h-18ZM-2,162h4v1h-4Z&quot;,&quot;rock&quot;:&quot;M33,-38h6v1h-6ZM31,-37h8v1h-8ZM30,-36h10v1h-10ZM29,-35h12v1h-12ZM29,-34h13v1h-13ZM28,-33h14v1h-14ZM27,-32h15v1h-15ZM27,-31h15v1h-15ZM27,-30h15v1h-15ZM27,-29h16v1h-16ZM27,-28h16v1h-16ZM27,-27h16v1h-16ZM28,-26h15v1h-15ZM29,-25h14v1h-14ZM29,-24h13v1h-13ZM29,-23h13v1h-13ZM28,-22h13v1h-13ZM28,-21h5v1h-5ZM34,-21h7v1h-7ZM28,-20h5v1h-5ZM35,-20h5v1h-5ZM28,-19h5v1h-5ZM37,-19h1v1h-1ZM28,-18h1v1h-1ZM30,-18h3v1h-3ZM31,-17h2v1h-2ZM32,-16h1v1h-1ZM-32,10h1v1h-1ZM-23,12h2v1h-2ZM-23,13h2v1h-2ZM-23,14h2v1h-2ZM-23,15h2v1h-2ZM-23,16h2v1h-2ZM-23,17h2v1h-2ZM-28,20h4v1h-4ZM-6,120h2v1h-2ZM-6,121h2v1h-2ZM-7,122h4v1h-4ZM-12,123h2v1h-2ZM-8,123h6v1h-6ZM9,123h2v1h-2ZM-12,124h2v1h-2ZM-8,124h6v1h-6ZM9,124h2v1h-2ZM-13,125h12v1h-12ZM8,125h4v1h-4ZM-14,126h13v1h-13ZM8,126h4v1h-4ZM-14,127h17v1h-17ZM7,127h6v1h-6ZM-15,128h3v1h-3ZM-10,128h4v1h-4ZM-4,128h18v1h-18ZM-16,129h4v1h-4ZM-10,129h3v1h-3ZM-3,129h12v1h-12ZM11,129h3v1h-3ZM-16,130h3v1h-3ZM-9,130h2v1h-2ZM-3,130h11v1h-11ZM12,130h3v1h-3ZM-17,131h3v1h-3ZM-2,131h10v1h-10ZM12,131h5v1h-5ZM-18,132h4v1h-4ZM-2,132h9v1h-9ZM13,132h6v1h-6ZM-19,133h4v1h-4ZM-1,133h8v1h-8ZM13,133h7v1h-7ZM-21,134h5v1h-5ZM-1,134h7v1h-7ZM14,134h7v1h-7ZM-22,135h6v1h-6ZM0,135h5v1h-5ZM15,135h7v1h-7ZM-23,136h6v1h-6ZM0,136h5v1h-5ZM15,136h7v1h-7ZM-23,137h5v1h-5ZM-1,137h5v1h-5ZM16,137h7v1h-7ZM-24,138h6v1h-6ZM2,138h2v1h-2ZM16,138h7v1h-7ZM-25,139h6v1h-6ZM17,139h7v1h-7ZM-25,140h5v1h-5ZM18,140h6v1h-6ZM-25,141h5v1h-5ZM18,141h6v1h-6ZM-25,142h4v1h-4ZM19,142h5v1h-5ZM-25,143h3v1h-3ZM19,143h6v1h-6ZM-25,144h3v1h-3ZM20,144h5v1h-5ZM-26,145h5v1h-5ZM21,145h4v1h-4ZM-26,146h6v1h-6ZM21,146h5v1h-5ZM-26,147h6v1h-6ZM21,147h5v1h-5ZM-26,148h7v1h-7ZM21,148h5v1h-5ZM-26,149h7v1h-7ZM20,149h6v1h-6ZM-26,150h7v1h-7ZM19,150h7v1h-7ZM-26,151h6v1h-6ZM20,151h7v1h-7ZM-26,152h6v1h-6ZM20,152h7v1h-7ZM-21,153h5v1h-5ZM16,153h5v1h-5ZM-20,154h5v1h-5ZM15,154h5v1h-5ZM-19,155h6v1h-6ZM13,155h6v1h-6ZM-17,156h7v1h-7ZM10,156h7v1h-7ZM-15,157h8v1h-8ZM7,157h8v1h-8ZM-13,158h10v1h-10ZM3,158h10v1h-10ZM-9,159h18v1h-18ZM-5,160h10v1h-10Z&quot;,&quot;high&quot;:&quot;M-12,128h2v1h-2ZM-6,128h2v1h-2ZM-12,129h2v1h-2ZM-7,129h4v1h-4ZM9,129h2v1h-2ZM-13,130h4v1h-4ZM-7,130h4v1h-4ZM8,130h4v1h-4ZM-14,131h12v1h-12ZM8,131h4v1h-4ZM-14,132h12v1h-12ZM7,132h6v1h-6ZM-15,133h14v1h-14ZM7,133h6v1h-6ZM-16,134h15v1h-15ZM6,134h8v1h-8ZM-16,135h16v1h-16ZM5,135h10v1h-10ZM-17,136h17v1h-17ZM5,136h10v1h-10ZM-18,137h17v1h-17ZM4,137h12v1h-12ZM-18,138h20v1h-20ZM4,138h12v1h-12ZM-19,139h36v1h-36ZM-20,140h38v1h-38ZM-20,141h38v1h-38ZM-21,142h40v1h-40ZM-22,143h41v1h-41ZM-22,144h42v1h-42ZM-21,145h42v1h-42ZM-20,146h41v1h-41ZM-20,147h41v1h-41ZM-19,148h40v1h-40ZM-19,149h39v1h-39ZM-19,150h38v1h-38ZM-20,151h40v1h-40ZM-20,152h40v1h-40ZM-16,153h32v1h-32ZM-15,154h30v1h-30ZM-13,155h26v1h-26ZM-10,156h20v1h-20ZM-7,157h14v1h-14ZM-3,158h6v1h-6Z&quot;},&quot;rectangles&quot;:{&quot;sand&quot;:443,&quot;land&quot;:312,&quot;rock&quot;:127,&quot;high&quot;:44},&quot;counts&quot;:{&quot;water&quot;:7265,&quot;sand&quot;:4326,&quot;land&quot;:7730,&quot;rock&quot;:836,&quot;high&quot;:899},&quot;coastlinePath&quot;:&quot;M35,-41h2M33,-40h2M37,-40h2M32,-39h1M39,-39h2M31,-38h1M30,-37h1M41,-37h1M29,-36h1M42,-36h1M-13,-35h4M28,-35h1M43,-35h1M-16,-34h3M-9,-34h3M19,-34h6M-20,-33h4M-6,-33h3M18,-33h1M25,-33h1M27,-33h1M-33,-32h13M-3,-32h18M16,-32h2M26,-32h1M44,-32h1M15,-31h1M44,-23h1M43,-22h1M42,-21h1M-34,-20h1M41,-20h1M40,-18h1M-35,-15h1M-36,-13h1M40,-13h1M41,-12h1M-37,-11h1M42,-11h2M44,-10h1M-38,-9h1M45,-8h1M-39,-5h1M45,-4h1M43,-2h2M41,-1h2M-40,0h1M39,0h2M36,1h3M35,2h1M34,4h1M33,7h1M32,9h1M31,11h1M31,15h17M-40,20h1M39,21h9M37,22h2M36,23h1M-39,25h1M-38,29h1M-37,31h1M36,33h1M-36,40h1M36,44h1M-35,46h1M35,48h1M-34,49h1M34,51h1M-33,53h1M33,54h1M32,59h1M-33,64h1M32,65h1M-34,67h1M-35,70h1M33,70h1M-36,73h1M34,75h1M-37,76h1M-38,80h1M-39,102h1M35,102h1M36,106h1M-39,113h1M36,113h1M-38,115h1M-37,117h1M35,117h1M-36,119h1M34,119h1M-35,121h1M33,122h1M-34,123h1M32,124h1M-33,125h1M-32,127h1M31,128h1M-31,130h1M-30,134h1M-29,148h1M-28,153h3M25,153h6M-25,154h1M24,154h1M-24,156h1M23,156h1M-23,157h1M22,157h1M-22,158h1M21,158h1M-21,159h1M20,159h1M-20,160h2M18,160h2M-18,161h4M14,161h4M-14,162h5M9,162h5M-9,163h18M-40,0v20M-39,-5v5M-39,20v5M-39,102v11M-38,-9v4M-38,25v4M-38,80v22M-38,113v2M-37,-11v2M-37,29v2M-37,76v4M-37,115v2M-36,-13v2M-36,31v9M-36,73v3M-36,117v2M-35,-15v2M-35,40v6M-35,70v3M-35,119v2M-34,-20v5M-34,46v3M-34,67v3M-34,121v2M-33,-32v12M-33,49v4M-33,64v3M-33,123v2M-32,53v11M-32,125v2M-31,127v3M-30,130v4M-29,134v14M-28,148v5M-25,153v1M-24,154v2M-23,156v1M-22,157v1M-21,158v1M-20,-33v1M-20,159v1M-18,160v1M-16,-34v1M-14,161v1M-13,-35v1M-9,-35v1M-9,162v1M-6,-34v1M-3,-33v1M9,162v1M14,161v1M15,-32v1M16,-32v1M18,-33v1M18,160v1M19,-34v1M20,159v1M21,158v1M22,157v1M23,156v1M24,154v2M25,-34v1M25,153v1M26,-33v1M27,-33v1M28,-35v2M29,-36v1M30,-37v1M31,-38v1M31,11v4M31,128v25M32,-39v1M32,9v2M32,59v6M32,124v4M33,-40v1M33,7v2M33,54v5M33,65v5M33,122v2M34,4v3M34,51v3M34,70v5M34,119v3M35,-41v1M35,2v2M35,48v3M35,75v27M35,117v2M36,1v1M36,23v10M36,44v4M36,102v4M36,113v4M37,-41v1M37,22v1M37,33v11M37,106v7M39,-40v1M39,0v1M39,21v1M40,-18v5M41,-39v2M41,-20v2M41,-13v1M41,-1v1M42,-37v1M42,-21v1M42,-12v1M43,-36v1M43,-22v1M43,-2v1M44,-35v3M44,-23v1M44,-11v1M45,-32v9M45,-10v2M45,-4v2M46,-8v4M48,15v6&quot;,&quot;coastlineRuns&quot;:240,&quot;drySampleBounds&quot;:{&quot;minX&quot;:-39.5,&quot;maxX&quot;:47.5,&quot;minZ&quot;:-40.5,&quot;maxZ&quot;:162.5},&quot;heightRange&quot;:{&quot;minimum&quot;:-3,&quot;maximum&quot;:30.16014530280995},&quot;note&quot;:&quot;Upper ground only. Draw the physical pier, actual cliff footprints and lower tunnel separately; this underlay must not be replaced by proposed coast geometry.&quot;}};
+  // DRAWING DATA ONLY. These points are not imported by the live world.
+  const coast = [[24,30],[37,30],[40,27],[40,24],[37,21],[35,16],[34,10],[34,4],[35,-3],[37,-11],[41,-19],[44,-24],[45,-29],[43,-34],[40,-38],[36,-40],[32,-38],[29,-35],[27,-31],[24,-32]];
+  const sand = [[36,26],[33,22],[30,17],[29,10],[29.5,3],[31,-5],[33,-13],[36,-20],[38,-23],[41,-20],[38,-14],[36,-7],[34,2],[34,10],[35,17],[37,22],[40,25]];
+  const innerCliff = [[36,28],[32,23],[28.5,18],[27.8,12],[28.5,5],[29.8,-3],[32,-12],[35,-20],[38,-24]];
+  const terrace = [[29.5,-28],[31,-24],[34,-22.5],[38,-24],[41,-28],[40,-33],[37,-36],[33,-35],[30,-32]];
+  const trail = [[20,4],[23,0],[27,-3],[29,-10],[30,-17],[31,-23],[33,-28],[33.2,-32]];
+  const cave = [[28,-29],[31,-30.5],[34,-32],[36,-32],[37,-30],[38,-26],[38,-22],[38,-20]];
+  const tower = [36,-32];
+  const fmt = n =&gt; Math.round(n*100)/100;
+  const line = points =&gt; points.map(p=&gt;p.map(fmt).join(&#x27;,&#x27;)).join(&#x27; &#x27;);
+  const dline = (points, closed=false) =&gt; &#x27;M&#x27;+points.map(p=&gt;p.map(fmt).join(&#x27; &#x27;)).join(&#x27;L&#x27;)+(closed?&#x27;Z&#x27;:&#x27;&#x27;);
+  const smooth = (points, closed=false) =&gt; {
+    let d=&#x27;M&#x27;+points[0].map(fmt).join(&#x27; &#x27;);
+    for(let i=0;i&lt;points.length-(closed?0:1);i++){
+      const p=points[i],q=points[(i+1)%points.length],a=points[i-1]|| (closed?points.at(-1):p),b=closed?points[(i+2)%points.length]:(points[i+2]||q);
+      d+=&#x27;C&#x27;+[p[0]+(q[0]-a[0])/6,p[1]+(q[1]-a[1])/6,q[0]-(b[0]-p[0])/6,q[1]-(b[1]-p[1])/6,...q].map(fmt).join(&#x27; &#x27;);
+    }
+    return d+(closed?&#x27;Z&#x27;:&#x27;&#x27;);
+  };
+  const text = (x,y,label,anchor=&#x27;start&#x27;,cls=&#x27;halo&#x27;) =&gt; `&lt;text x=&quot;${fmt(x)}&quot; y=&quot;${fmt(y)}&quot; text-anchor=&quot;${anchor}&quot; class=&quot;${cls}&quot;&gt;${label}&lt;/text&gt;`;
+  const pin = (p,label) =&gt; `&lt;circle class=&quot;pin&quot; cx=&quot;${fmt(p[0])}&quot; cy=&quot;${fmt(p[1])}&quot; r=&quot;10&quot;/&gt;`+text(p[0],p[1]+4,label,&#x27;middle&#x27;,&#x27;&#x27;);
+  const path = (points,p,cls,closed=false) =&gt; `&lt;path class=&quot;${cls}&quot; d=&quot;${smooth(points.map(p),closed)}&quot;/&gt;`;
+  const leader = (a,b,label,anchor=&#x27;start&#x27;) =&gt; {
+    const end=[b[0]+(anchor===&#x27;end&#x27;?-1:1)*(label.length*7.2+12),b[1]];
+    return `&lt;path d=&quot;M${line([a,end])}&quot; fill=&quot;none&quot; stroke=&quot;var(--foreground)&quot; stroke-width=&quot;1&quot;/&gt;`+text(b[0]+(anchor===&#x27;end&#x27;?-5:5),b[1]+4,label,anchor);
+  };
+  const bg = (w,h) =&gt; `&lt;rect width=&quot;${w}&quot; height=&quot;${h}&quot; class=&quot;water&quot;/&gt;`;
+  const projectedPath = (d,sx,sy,ox,oy,cls,extra=&#x27;&#x27;) =&gt; `&lt;path d=&quot;${d}&quot; transform=&quot;translate(${ox} ${oy}) scale(${sx} ${-sy})&quot; class=&quot;${cls}&quot; ${extra}/&gt;`;
+  const worldBands = (p,sx,sy) =&gt; Object.entries(current.terrain.paths).map(([cls,d])=&gt;projectedPath(d,sx,sy,...p([0,0]),cls)).join(&#x27;&#x27;);
+  function proposal(p,sx,sy,showRoutes=true){
+    let out=`&lt;path d=&quot;${dline([[24,30],[51,30],[51,-45],[24,-45]].map(p),true)}&quot; fill=&quot;var(--background)&quot;/&gt;`;
+    out+=`&lt;path class=&quot;water&quot; d=&quot;${dline([[24,30],[51,30],[51,-45],[24,-45]].map(p),true)}&quot;/&gt;`;
+    out+=path(coast,p,&#x27;land&#x27;,true)+path(sand,p,&#x27;sand&#x27;,true)+path(terrace,p,&#x27;rock&#x27;,true)+path(coast.slice(1),p,&#x27;coast&#x27;);
+    out+=path(innerCliff,p,&#x27;route&#x27;);
+    for(let i=0;i&lt;innerCliff.length-1;i++){
+      const a=p(innerCliff[i]),b=p([innerCliff[i][0]+1.2,innerCliff[i][1]-.7]);
+      out+=`&lt;path d=&quot;${dline([a,b])}&quot; stroke=&quot;var(--foreground)&quot; stroke-opacity=&quot;.5&quot;/&gt;`;
+    }
+    if(showRoutes)out+=path(trail,p,&#x27;trail&#x27;)+path(cave,p,&#x27;cave&#x27;);
+    const [tx,ty]=p(tower);
+    out+=`&lt;circle cx=&quot;${tx}&quot; cy=&quot;${ty}&quot; r=&quot;${Math.max(5,2.4*sx)}&quot; fill=&quot;var(--background)&quot; stroke=&quot;var(--red)&quot; stroke-width=&quot;2&quot;/&gt;`;
+    return out;
+  }
+  function renderPlan(w){
+    const svg=root.querySelector(&#x27;#wc-plan&#x27;),sx=(w-40)/40,sy=sx*.63,h=82*sy+70;
+    const p=([x,z])=&gt;[20+(x-12)*sx,32+(34-z)*sy];
+    let out=bg(w,h)+worldBands(p,sx,sy)+proposal(p,sx,sy);
+    // The removed spur is ghosted, not retained as land in the proposal.
+    const removed=[[34,2],[40,1],[45,-3],[44,-7],[39,-5],[34,-5]];
+    out+=`&lt;path d=&quot;${smooth(removed.map(p),true)}&quot; fill=&quot;var(--red)&quot; fill-opacity=&quot;.09&quot; stroke=&quot;var(--red)&quot; stroke-dasharray=&quot;4 4&quot;/&gt;`;
+    const cross=p([40,-2]),cs=8;
+    out+=`&lt;path d=&quot;M${cross[0]-cs} ${cross[1]-cs}l${cs*2} ${cs*2}m0 ${-cs*2}l${-cs*2} ${cs*2}&quot; stroke=&quot;var(--red)&quot; stroke-width=&quot;2&quot;/&gt;`;
+    for(const route of current.routes.filter(r=&gt;[&#x27;boardwalk&#x27;,&#x27;alley&#x27;,&#x27;beach-east&#x27;].includes(r.id)))out+=`&lt;polyline points=&quot;${line(route.points.map(p))}&quot; class=&quot;route&quot;/&gt;`;
+    out+=path([[27,-34],[26.8,-30.5],[27.6,-27.3],[29,-25.5]],p,&#x27;route&#x27;);
+    const mouth=p(cave[0]);out+=`&lt;rect x=&quot;${mouth[0]-3}&quot; y=&quot;${mouth[1]-9}&quot; width=&quot;6&quot; height=&quot;18&quot; fill=&quot;var(--blue)&quot;/&gt;`;
+    for(const b of current.buildings.filter(b=&gt;b.x&gt;12&amp;&amp;b.z&lt;20)){
+      const xy=p([b.x-b.width/2,b.z+b.depth/2]);out+=`&lt;rect x=&quot;${xy[0]}&quot; y=&quot;${xy[1]}&quot; width=&quot;${b.width*sx}&quot; height=&quot;${b.depth*sy}&quot; class=&quot;rock&quot;/&gt;`;
+    }
+    out+=pin(p(tower),&#x27;1&#x27;)+pin([mouth[0]-18,mouth[1]],&#x27;2&#x27;)+pin(p(cave.at(-1)),&#x27;3&#x27;)+pin(p([32,11]),&#x27;4&#x27;)+pin(p([39,17]),&#x27;5&#x27;)+pin(p([45,-5]),&#x27;6&#x27;);
+    out+=text(...p([41,10]),&#x27;ONE COVE&#x27;,&#x27;middle&#x27;);
+    if(w&gt;500){out+=text(...p([18,14]),&#x27;Town&#x27;,&#x27;middle&#x27;)+text(...p([18,-25]),&#x27;Public beach&#x27;,&#x27;middle&#x27;)+text(...p([42,-15]),&#x27;Open sea →&#x27;,&#x27;middle&#x27;)+text(...p([37,-43]),&#x27;Outer tip&#x27;,&#x27;middle&#x27;);}
+    out+=text(12,18,&#x27;↑ Inland&#x27;)+text(w-12,18,&#x27;East →&#x27;,&#x27;end&#x27;);
+    out+=text(12,h-12,w&gt;500?&#x27;Proposed single shoreline · no dividing headland&#x27;:&#x27;Single shoreline · divider removed&#x27;);
+    svg.setAttribute(&#x27;viewBox&#x27;,`0 0 ${w} ${h}`);svg.style.height=h+&#x27;px&#x27;;svg.innerHTML=out;
+  }
+  function towerElevation(cx,base,scale){
+    const top=base-12*scale,bw=3.1*scale,tw=2.1*scale;
+    let out=`&lt;path d=&quot;M${cx-bw/2} ${base}L${cx-tw/2} ${top+scale}H${cx+tw/2}L${cx+bw/2} ${base}Z&quot; fill=&quot;var(--background)&quot; stroke=&quot;var(--foreground)&quot; stroke-width=&quot;1.5&quot;/&gt;`;
+    out+=`&lt;path d=&quot;M${cx-bw*.44} ${base-scale*3}H${cx+bw*.44}L${cx+bw*.37} ${base-scale*5.7}H${cx-bw*.37}Z&quot; fill=&quot;var(--red)&quot; fill-opacity=&quot;.65&quot;/&gt;`;
+    out+=`&lt;rect x=&quot;${cx-tw*.7}&quot; y=&quot;${top+scale*.4}&quot; width=&quot;${tw*1.4}&quot; height=&quot;${scale*1.5}&quot; fill=&quot;var(--yellow)&quot; stroke=&quot;var(--foreground)&quot;/&gt;`;
+    out+=`&lt;path d=&quot;M${cx-tw} ${top+scale*.4}L${cx} ${top-scale*.15}L${cx+tw} ${top+scale*.4}Z&quot; class=&quot;rock&quot;/&gt;`;
+    return out;
+  }
+  function renderElevation(w){
+    const svg=root.querySelector(&#x27;#wc-elevation&#x27;),s=Math.min(15,(w-60)/25),sea=22*s+45,base=sea-7*s,cx=w*.62;
+    let out=text(12,20,&#x27;A · From the public beach&#x27;);
+    out+=`&lt;rect x=&quot;0&quot; y=&quot;${sea}&quot; width=&quot;${w}&quot; height=&quot;28&quot; class=&quot;water&quot;/&gt;`;
+    out+=`&lt;path d=&quot;M0 ${sea-.7*s}H${w*.33}L${w*.38} ${sea-1.2*s}L${w*.39} ${sea-3.2*s}L${w*.385} ${base+.6*s}L${w*.44} ${base}H${w*.73}L${w*.78} ${base+.6*s}L${w*.79} ${sea-3.7*s}L${w*.83} ${sea-3.4*s}L${w*.84} ${sea-1.2*s}L${w*.91} ${sea-.8*s}H${w}V${sea+16}H0Z&quot; class=&quot;rock&quot;/&gt;`;
+    out+=`&lt;path d=&quot;M0 ${sea-.7*s}H${w*.36}L${w*.4} ${sea+8}H0Z&quot; class=&quot;sand&quot;/&gt;`;
+    const mouthX=w*.49,mouthY=sea-.7*s;
+    out+=`&lt;path d=&quot;M${mouthX-1.5*s} ${mouthY}V${mouthY-3.1*s}Q${mouthX} ${mouthY-4.7*s} ${mouthX+1.5*s} ${mouthY-3.1*s}V${mouthY}Z&quot; fill=&quot;var(--foreground)&quot; fill-opacity=&quot;.85&quot;/&gt;`;
+    out+=`&lt;path d=&quot;M${w*.42} ${base+s*.2}l${-s*.3} ${s*2.1}l${s*.4} ${s*2.5}M${w*.58} ${base+s*.3}l${s*.4} ${s*3}l${-s*.5} ${s*2.6}M${w*.73} ${base+s*.5}l${-s*.4} ${s*2.8}l${s*.5} ${s*1.8}M${w*.39} ${sea-2*s}l${s*.7} ${s*.6}&quot; stroke=&quot;var(--foreground)&quot; stroke-opacity=&quot;.45&quot; fill=&quot;none&quot;/&gt;`;
+    out+=towerElevation(cx,base,s);
+    out+=text(12,sea-1.6*s,&#x27;Public beach&#x27;)+text(w-12,sea+22,&#x27;Sea level&#x27;,&#x27;end&#x27;);
+    out+=leader([cx-1.6*s,base-8*s],[12,base-8*s],&#x27;12 m tower&#x27;);
+    out+=leader([w*.73,base],[w-12,base-1.3*s],&#x27;Terrace +7 m&#x27;,&#x27;end&#x27;);
+    out+=pin([mouthX,mouthY-2*s],&#x27;2&#x27;);
+    out+=text(12,sea+55,w&gt;500?&#x27;Exposed cliff below tower · not a beach-level mound&#x27;:&#x27;Tower above an exposed coastal cliff&#x27;);
+    // Unfolded longitudinal section: follows the bend, not a straight false cut.
+    const y0=sea+105,ss=Math.min(12,(w-70)/26),floor=y0+20*ss+26,bt=floor-6.3*ss,tc=w*.51;
+    out+=text(12,y0,&#x27;B · Unfolded section along the cave&#x27;);
+    out+=`&lt;path d=&quot;M0 ${floor}H${w*.19}V${bt+.65*ss}L${w*.28} ${bt+.15*ss}L${w*.34} ${bt}H${w*.63}L${w*.74} ${bt+.25*ss}L${w*.81} ${bt+.7*ss}V${floor}H${w}V${floor+16}H0Z&quot; class=&quot;rock&quot;/&gt;`;
+    out+=`&lt;path d=&quot;M${w*.19} ${floor}H${w*.81}V${floor-4*ss}Q${w*.51} ${floor-4.6*ss} ${w*.19} ${floor-4*ss}Z&quot; fill=&quot;var(--background)&quot; stroke=&quot;var(--foreground)&quot; stroke-width=&quot;1.5&quot;/&gt;`;
+    out+=`&lt;path d=&quot;M0 ${floor}H${w*.19}M${w*.81} ${floor}H${w}&quot; stroke=&quot;var(--yellow)&quot; stroke-width=&quot;6&quot;/&gt;`;
+    out+=towerElevation(tc,bt,ss);
+    out+=`&lt;path d=&quot;M${tc} ${bt+ss*.3}V${floor+6}&quot; class=&quot;cave&quot;/&gt;`;
+    out+=text(w*.5,floor-1.5*ss,&#x27;4 m clear&#x27;,&#x27;middle&#x27;)+text(w*.5,floor+38,&#x27;Tunnel passes directly beneath tower&#x27;,&#x27;middle&#x27;);
+    out+=text(12,floor+18,&#x27;Public side&#x27;)+text(w-12,floor+18,&#x27;Hidden beach&#x27;,&#x27;end&#x27;);
+    out+=pin([w*.19,floor-ss*2],&#x27;2&#x27;)+pin([w*.81,floor-ss*2],&#x27;3&#x27;);
+    out+=text(12,floor+67,w&gt;500?&#x27;Section follows tunnel bends; horizontal spacing is illustrative.&#x27;:&#x27;Unfolded tunnel · horizontal scale illustrative&#x27;);
+    const h=floor+85;svg.setAttribute(&#x27;viewBox&#x27;,`0 0 ${w} ${h}`);svg.style.height=h+&#x27;px&#x27;;svg.innerHTML=out;
+  }
+  function renderWorld(w){
+    const svg=root.querySelector(&#x27;#wc-world&#x27;),s=(w-72)/106,sy=Math.min(s,3.3),h=226.2*sy+100;
+    const p=([x,z])=&gt;[w/2+x*s,40+(176-z)*sy];
+    let out=bg(w,h)+worldBands(p,s,sy)+proposal(p,s,sy,false);
+    for(const r of current.routes.filter(r=&gt;![&#x27;cave&#x27;,&#x27;lighthouse-trail&#x27;].includes(r.id)))out+=`&lt;polyline points=&quot;${line(r.points.map(p))}&quot; class=&quot;route&quot;/&gt;`;
+    out+=path(trail,p,&#x27;trail&#x27;)+path(cave,p,&#x27;cave&#x27;);
+    for(const b of current.buildings){const a=p([b.x-b.width/2,b.z+b.depth/2]);out+=`&lt;rect x=&quot;${a[0]}&quot; y=&quot;${a[1]}&quot; width=&quot;${b.width*s}&quot; height=&quot;${b.depth*sy}&quot; class=&quot;rock&quot; stroke=&quot;var(--foreground)&quot;/&gt;`;}
+    out+=`&lt;path d=&quot;${dline([[-1.9,-16],[1.9,-16],[1.9,-39],[4,-39],[4,-47],[-4,-47],[-4,-39],[-1.9,-39]].map(p),true)}&quot; class=&quot;sand&quot; stroke=&quot;var(--foreground)&quot;/&gt;`;
+    out+=`&lt;ellipse cx=&quot;${p([-27,15])[0]}&quot; cy=&quot;${p([-27,15])[1]}&quot; rx=&quot;${7*s}&quot; ry=&quot;${5.5*sy}&quot; class=&quot;rock&quot;/&gt;`;
+    const pts=[[0,153],[0,115],[-17,71],[-27,15],[0,8],[-13,-27],[0,-45],[38,-15]];
+    pts.forEach((pt,i)=&gt;out+=pin(p(pt),String(i+1)));
+    const a=p([24,30]),b=p([51,-42]);out+=`&lt;rect x=&quot;${a[0]}&quot; y=&quot;${a[1]}&quot; width=&quot;${b[0]-a[0]}&quot; height=&quot;${b[1]-a[1]}&quot; class=&quot;proposal&quot;/&gt;`;
+    if(w&gt;500){out+=text(...p([-29,150]),&#x27;Mountain&#x27;)+text(...p([11,112]),&#x27;Resort&#x27;)+text(...p([11,69]),&#x27;Forest route&#x27;);}
+    out+=text(12,21,w&gt;500?&#x27;One complete globe circuit · inland ↑&#x27;:&#x27;Whole globe circuit · inland ↑&#x27;);
+    out+=`&lt;path d=&quot;M12 33H${w-12}M12 ${h-43}H${w-12}&quot; stroke=&quot;var(--foreground)&quot; stroke-dasharray=&quot;3 4&quot; stroke-opacity=&quot;.5&quot;/&gt;`;
+    out+=text(12,h-17,&#x27;Ocean seam: top and bottom connect&#x27;);
+    svg.setAttribute(&#x27;viewBox&#x27;,`0 0 ${w} ${h}`);svg.style.height=h+&#x27;px&#x27;;svg.innerHTML=out;
+  }
+  function renderTown(w){
+    const svg=root.querySelector(&#x27;#wc-town&#x27;),sx=(w-40)/95,sy=sx*.72,h=78*sy+70,p=([x,z])=&gt;[20+(x+42)*sx,35+(30-z)*sy];
+    let out=bg(w,h)+worldBands(p,sx,sy)+proposal(p,sx,sy);
+    for(const r of current.routes.filter(r=&gt;r.points.every(pt=&gt;pt[1]&lt;32)&amp;&amp;![&#x27;lighthouse-trail&#x27;,&#x27;cave&#x27;].includes(r.id)))out+=`&lt;polyline points=&quot;${line(r.points.map(p))}&quot; class=&quot;route&quot;/&gt;`;
+    out+=`&lt;path d=&quot;${dline([[-1.9,-16],[1.9,-16],[1.9,-39],[4,-39],[4,-47],[-4,-47],[-4,-39],[-1.9,-39]].map(p),true)}&quot; class=&quot;sand&quot; stroke=&quot;var(--foreground)&quot;/&gt;`;
+    for(const b of current.buildings.filter(b=&gt;b.z&lt;30)){const a=p([b.x-b.width/2,b.z+b.depth/2]);out+=`&lt;rect x=&quot;${a[0]}&quot; y=&quot;${a[1]}&quot; width=&quot;${b.width*sx}&quot; height=&quot;${b.depth*sy}&quot; class=&quot;rock&quot;/&gt;`;}
+    out+=`&lt;ellipse cx=&quot;${p([-27,15])[0]}&quot; cy=&quot;${p([-27,15])[1]}&quot; rx=&quot;${7*sx}&quot; ry=&quot;${5.5*sy}&quot; class=&quot;rock&quot;/&gt;`;
+    const letters=[[-9,7,&#x27;A&#x27;],[0,8,&#x27;B&#x27;],[11,7,&#x27;C&#x27;],[-8,-6,&#x27;D&#x27;],[8,-6,&#x27;E&#x27;],[20,-6,&#x27;F&#x27;],[-20,-8,&#x27;G&#x27;]];
+    letters.forEach(([x,z,l])=&gt;out+=pin(p([x,z]),l));
+    out+=text(...p([-27,26]),&#x27;Skate park&#x27;,&#x27;middle&#x27;);
+    if(w&gt;500){out+=text(...p([-17,-26]),&#x27;Public beach&#x27;,&#x27;middle&#x27;)+text(...p([0,-45]),&#x27;Pier&#x27;,&#x27;middle&#x27;)+text(...p([37,-43]),&#x27;Lighthouse&#x27;,&#x27;middle&#x27;)+text(...p([40,11]),&#x27;One cove&#x27;,&#x27;middle&#x27;);}
+    out+=text(12,18,w&gt;500?&#x27;Existing town retained · proposed peninsula at right&#x27;:&#x27;Town retained · proposal at right&#x27;);
+    svg.setAttribute(&#x27;viewBox&#x27;,`0 0 ${w} ${h}`);svg.style.height=h+&#x27;px&#x27;;svg.innerHTML=out;
+  }
+  const draw=()=&gt;{const w=Math.max(280,Math.floor(root.getBoundingClientRect().width));renderPlan(w);renderElevation(w);renderWorld(w);renderTown(w);};
+  if(!current){root.insertAdjacentHTML(&#x27;beforeend&#x27;,&#x27;&lt;p role=&quot;alert&quot;&gt;Current-world snapshot is missing.&lt;/p&gt;&#x27;);return;}
+  new ResizeObserver(draw).observe(root);draw();
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
+    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
+    document.removeEventListener(&quot;click&quot;, handleTouchClick);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
+  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
+  document.addEventListener(&quot;click&quot;, handleTouchClick);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

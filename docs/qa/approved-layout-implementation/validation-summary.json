@@ -1,0 +1,29 @@
+{
+  "milestone": "Approved mountain revision 3 and single-cove live structural implementation",
+  "worldSourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3",
+  "typecheck": "passed",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "browserTests": { "passed": 18, "failed": 0, "output": ".next/approved-final-tests" },
+  "planetTests": { "passed": 27, "failed": 0 },
+  "mountainApprovalParityTests": { "passed": 7, "failed": 0 },
+  "cove": { "approvedPolygonsMatch": true, "formerDividerSamplesUnderwater": 725, "crescentWalkingMetres": 30.28, "layerTransitionsEachDirection": 1 },
+  "preservation": { "townBuildings": 7, "routes": 13, "terrainSamples": 1023, "protectedHeightDelta": 0, "authorizedForestJunctionSkinDelta": 0.025 },
+  "visualReview": { "liveCaptures": 47, "captureSourceMatches": true, "pageOrWebglErrors": 0, "genericConsoleWarnings": "One unlocated resource 404 retained in the mountain capture manifest", "galleryImagesIncludingMaps": 49, "galleryWidthsChecked": [390, 1100], "brokenImages": 0, "horizontalOverflow": false },
+  "performance": {
+    "report": "performance.json",
+    "desktopRafPerSecond": 60.01,
+    "phoneEmulatedRafPerSecond": 60.01,
+    "walkingP95Ms": 17,
+    "renderingErrors": false,
+    "sourceChangedDuringMeasurement": false,
+    "sameBrowserCpuRendererAndViewportAsBaseline": true,
+    "comparisonCaveat": "Historical September 12 baseline, not an immediate pre-edit run; phone emulation is not a physical-device measurement."
+  },
+  "reviewCaveats": [
+    "The enlarged same mountain dominates the pier's normal seaward view and leaves very little visible water band.",
+    "The approved low base/F lies around the tiny globe from the summit; the solid globe correctly occludes that summit.",
+    "The sampled concept terrain retains stepped run margins in the globe view."
+  ],
+  "notImplemented": ["snowboard gameplay", "ticket-triggered game transfer", "timing or scoring", "environment-art pass", "new textures or artwork"]
+}

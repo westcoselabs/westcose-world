@@ -1,0 +1,32 @@
+{
+  "errors": [],
+  "layouts": [
+    {
+      "width": 390,
+      "overflow": false,
+      "images": 49,
+      "broken": []
+    },
+    {
+      "width": 1100,
+      "overflow": false,
+      "images": 49,
+      "broken": []
+    }
+  ],
+  "captureSets": [
+    {
+      "name": "mountain",
+      "count": 27,
+      "source": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3",
+      "errors": []
+    },
+    {
+      "name": "cove",
+      "count": 20,
+      "source": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3",
+      "errors": []
+    }
+  ],
+  "passed": true
+}

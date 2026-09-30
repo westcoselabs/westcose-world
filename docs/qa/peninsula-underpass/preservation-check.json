@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-09-12T22:25:36.687Z",
+  "passed": true,
+  "snapshotChanges": [],
+  "fixedFileChanges": [
+    {
+      "file": "runtime/planet-collision.ts",
+      "before": "706cd0c701358d4c286ad9acf93044be8683b22662971d390f18eeec8f6b2fbb",
+      "after": "44fb229d894e78c93b10008bf90091bab8a1bb342001d628cc3e64daf0285278",
+      "authorized": true,
+      "purpose": "Adds layered support, finite geometric portal transfers and lower camera-void checks while retaining outdoor support as the default."
+    },
+    {
+      "file": "runtime/types.ts",
+      "before": "4484d69a9a1fb170102708ff2dca854098fa685ae6b1be5c5e0719c5075a30a0",
+      "after": "214e94ee88531e5d72fbd1d7e3bba1a15d1865b19ecc01c28c4b40bb5f419ddf",
+      "authorized": true,
+      "purpose": "Adds explicit supportLayer and teleportSupportLayer state for upper versus tunnel support."
+    },
+    {
+      "file": "player/PlayerController.tsx",
+      "before": "0a2d80f62b5192f21e4d0b0c96a02b050a59f19759e02838fc012dee31855ccb",
+      "after": "4c7fca864881c51bf16cc42ca67e561bc0a3a873a73f21ca7796bf476a9aabf8",
+      "authorized": true,
+      "purpose": "Carries current support layer through walking, grounding and reset; passes layer to matching camera collision. Ordinary camera framing is unchanged."
+    },
+    {
+      "file": "WorldRuntime.tsx",
+      "before": "d142104241e647debc63e83f45928794d8ac7ed5722d9b53d195bed90b67f3af",
+      "after": "92e03807a3331ade9a58e82f16f0c8ad531c0f9bbbe5b8aebcb98817ae1f74e1",
+      "authorized": true,
+      "purpose": "Exposes development-only spawnTunnelAt, fourth spawnAt layer argument and diagnostic supportLayer state."
+    }
+  ],
+  "lighthousePreserved": {
+    "components": true,
+    "visibleDetails": true
+  },
+  "protectedSampleCount": 122869,
+  "changedSampleCount": 0,
+  "maximumDelta": 0,
+  "firstTerrainChanges": []
+}

@@ -1,0 +1,3585 @@
+{
+  "generatedAt": "2026-09-12T21:45:34.566Z",
+  "method": "Current ordinary third-person camera, no changes: height3, shoulder.55, distance4.8. Grid includes requested x34..37,z-19..-13 plus eastern/southern edge candidates to x38,z-21.",
+  "results": [
+    {
+      "x": 34,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 3.5744823828140437,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 3.6254892341005607,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999991,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -19,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999969,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -18.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -18,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -17.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 0.9844964320338111,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 1.3341498973211534,
+        "south": 2.9788929254390033
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 1.6834765473644728,
+        "south": 2.583154275269691
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.650126044460465,
+        "west": 4.8,
+        "north": 2.0326880861819685,
+        "south": 2.1911775321343088
+      },
+      "minimumCamera": 2.0326880861819685
+    },
+    {
+      "x": 34,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.5933259478257566,
+        "west": 4.8,
+        "north": 2.3819911380295387,
+        "south": 1.802753503172677
+      },
+      "minimumCamera": 1.802753503172677
+    },
+    {
+      "x": 34,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.523418664303719,
+        "west": 4.8,
+        "north": 2.731587875773223,
+        "south": 1.4176787028550781
+      },
+      "minimumCamera": 1.4176787028550781
+    },
+    {
+      "x": 34,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.354576205813057,
+        "west": 4.8,
+        "north": 3.0816766121534633,
+        "south": 1.0357549264297234
+      },
+      "minimumCamera": 1.0357549264297234
+    },
+    {
+      "x": 34.5,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.2809525835183893,
+        "west": 0.7,
+        "north": 3.5144172984282966,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.8179332096039418,
+        "west": 0.7,
+        "north": 3.5570566545692848,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 3.6023431641985555,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -19,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999996,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -18.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999976,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 0.7,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -18,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -17.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 0.7,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 1.0336867995097754,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 1.374923742099026,
+        "south": 4.8
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 1.7155730227473036,
+        "south": 4.8
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 2.0558504622617155,
+        "south": 3.3554021133804883
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 34.5,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.9149837462097764,
+        "west": 4.8,
+        "north": 2.395965734820756,
+        "south": 2.7676858949786167
+      },
+      "minimumCamera": 0.9149837462097764
+    },
+    {
+      "x": 34.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.3497156986781786,
+        "west": 4.8,
+        "north": 2.7361230653898674,
+        "south": 2.381693477394752
+      },
+      "minimumCamera": 2.381693477394752
+    },
+    {
+      "x": 34.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.076521880958287,
+        "south": 1.9991742634367933
+      },
+      "minimumCamera": 1.9991742634367933
+    },
+    {
+      "x": 34.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.4173574208439694,
+        "south": 1.6199286844659198
+      },
+      "minimumCamera": 1.6199286844659198
+    },
+    {
+      "x": 34.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.170980104728198,
+        "west": 4.8,
+        "north": 3.7588213107878268,
+        "south": 1.2437622816007532
+      },
+      "minimumCamera": 1.2437622816007532
+    },
+    {
+      "x": 35,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.88743589778151,
+        "west": 4.8,
+        "north": 3.416103305233519,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.4159049753459134,
+        "west": 0.7,
+        "north": 3.4993971528654186,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.9795301466013738,
+        "west": 0.7,
+        "north": 3.543497008497224,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.590131677341691,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -19,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.6392475295009574,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -18.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999999,
+      "support": "ground",
+      "contact": "cave-rock",
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.718782217745876,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -18,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999978,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.7713372250326125,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -17.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.7964020296124668,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.739466300224311,
+        "south": 4.8
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.6658371315217413,
+        "south": 4.8
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.8648392650657476,
+        "west": 4.8,
+        "north": 3.59935775103413,
+        "south": 4.8
+      },
+      "minimumCamera": 0.8648392650657476
+    },
+    {
+      "x": 35,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.539723939438713,
+        "south": 4.8
+      },
+      "minimumCamera": 3.539723939438713
+    },
+    {
+      "x": 35,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.4866494145420392,
+        "south": 2.9523442516814273
+      },
+      "minimumCamera": 2.9523442516814273
+    },
+    {
+      "x": 35,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.4525210636435664,
+        "south": 2.5451747633520467
+      },
+      "minimumCamera": 2.5451747633520467
+    },
+    {
+      "x": 35,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.783532323534009,
+        "south": 2.164703410929207
+      },
+      "minimumCamera": 2.164703410929207
+    },
+    {
+      "x": 35,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.115136341663311,
+        "south": 1.7881490190743194
+      },
+      "minimumCamera": 1.7881490190743194
+    },
+    {
+      "x": 35,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.4475173244169195,
+        "south": 1.4153045917741502
+      },
+      "minimumCamera": 1.4153045917741502
+    },
+    {
+      "x": 35.5,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.504321267745105,
+        "west": 4.8,
+        "north": 2.9621637468762225,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.023870906103171,
+        "west": 4.8,
+        "north": 3.343237851030826,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.5910588233636411,
+        "west": 4.8,
+        "north": 3.514123321738009,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.060261670657294,
+        "west": 4.8,
+        "north": 3.5582689590169534,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -19,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.5821497830841316,
+        "south": 0.7
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -18.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.6258390255537916,
+        "south": 4.8
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -18,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999995,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.6718880351521554,
+        "south": 4.8
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -17.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999971,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.7,
+        "west": 4.8,
+        "north": 3.72024971808756,
+        "south": 4.8
+      },
+      "minimumCamera": 0.7
+    },
+    {
+      "x": 35.5,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.8873469733819338,
+        "west": 4.8,
+        "north": 3.770879086521425,
+        "south": 4.8
+      },
+      "minimumCamera": 0.8873469733819338
+    },
+    {
+      "x": 35.5,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.1944702013185897,
+        "west": 4.8,
+        "north": 3.766120759230986,
+        "south": 4.8
+      },
+      "minimumCamera": 1.1944702013185897
+    },
+    {
+      "x": 35.5,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.698378232651483,
+        "south": 4.8
+      },
+      "minimumCamera": 3.698378232651483
+    },
+    {
+      "x": 35.5,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.637425389359061,
+        "south": 4.8
+      },
+      "minimumCamera": 3.637425389359061
+    },
+    {
+      "x": 35.5,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.8615684336138227,
+        "south": 4.8
+      },
+      "minimumCamera": 3.8615684336138227
+    },
+    {
+      "x": 35.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.182104240945981,
+        "south": 2.634465308078204
+      },
+      "minimumCamera": 2.634465308078204
+    },
+    {
+      "x": 35.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.503223891451428,
+        "south": 2.2607525536266686
+      },
+      "minimumCamera": 2.2607525536266686
+    },
+    {
+      "x": 35.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.890841666984815
+      },
+      "minimumCamera": 1.890841666984815
+    },
+    {
+      "x": 35.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.5245307617199948
+      },
+      "minimumCamera": 1.5245307617199948
+    },
+    {
+      "x": 36,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.132103286951551,
+        "west": 4.8,
+        "north": 2.463455730453878,
+        "south": 4.8
+      },
+      "minimumCamera": 2.463455730453878
+    },
+    {
+      "x": 36,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.642304845707759,
+        "west": 4.8,
+        "north": 2.826707531005035,
+        "south": 4.8
+      },
+      "minimumCamera": 2.642304845707759
+    },
+    {
+      "x": 36,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.200836570363335,
+        "west": 4.8,
+        "north": 3.197457071206496,
+        "south": 4.8
+      },
+      "minimumCamera": 2.200836570363335
+    },
+    {
+      "x": 36,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.661252929385015,
+        "west": 4.8,
+        "north": 3.480876895572089,
+        "south": 4.8
+      },
+      "minimumCamera": 1.661252929385015
+    },
+    {
+      "x": 36,
+      "z": -19,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.1993160471619517,
+        "west": 4.8,
+        "north": 3.520994891824888,
+        "south": 4.8
+      },
+      "minimumCamera": 1.1993160471619517
+    },
+    {
+      "x": 36,
+      "z": -18.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.759904500445184,
+        "west": 4.8,
+        "north": 3.56346781929267,
+        "south": 4.8
+      },
+      "minimumCamera": 0.759904500445184
+    },
+    {
+      "x": 36,
+      "z": -18,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999999,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 0.9493906582971484,
+        "west": 4.8,
+        "north": 3.608247274526935,
+        "south": 4.8
+      },
+      "minimumCamera": 0.9493906582971484
+    },
+    {
+      "x": 36,
+      "z": -17.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999978,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.2372449345816288,
+        "west": 4.8,
+        "north": 3.6552869914795547,
+        "south": 4.8
+      },
+      "minimumCamera": 1.2372449345816288
+    },
+    {
+      "x": 36,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.5375587444794718,
+        "west": 4.8,
+        "north": 3.7045427593915177,
+        "south": 4.8
+      },
+      "minimumCamera": 1.5375587444794718
+    },
+    {
+      "x": 36,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.8509910356060733,
+        "west": 4.8,
+        "north": 3.755972344828677,
+        "south": 4.8
+      },
+      "minimumCamera": 1.8509910356060733
+    },
+    {
+      "x": 36,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.996967130558328,
+        "south": 4.8
+      },
+      "minimumCamera": 3.996967130558328
+    },
+    {
+      "x": 36,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.3058554095278545,
+        "south": 4.8
+      },
+      "minimumCamera": 4.3058554095278545
+    },
+    {
+      "x": 36,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.6151734202139245,
+        "south": 4.8
+      },
+      "minimumCamera": 4.6151734202139245
+    },
+    {
+      "x": 36,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.572400367666664
+      },
+      "minimumCamera": 2.572400367666664
+    },
+    {
+      "x": 36,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.199645509697149
+      },
+      "minimumCamera": 2.199645509697149
+    },
+    {
+      "x": 36,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.8318012534503736
+      },
+      "minimumCamera": 1.8318012534503736
+    },
+    {
+      "x": 36,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.4686278084079636
+      },
+      "minimumCamera": 1.4686278084079636
+    },
+    {
+      "x": 36.5,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4639170393594685,
+        "west": 4.8,
+        "north": 2.0220283522038507,
+        "south": 4.8
+      },
+      "minimumCamera": 2.0220283522038507
+    },
+    {
+      "x": 36.5,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.271704254395213,
+        "west": 4.8,
+        "north": 2.369636104372245,
+        "south": 4.8
+      },
+      "minimumCamera": 2.369636104372245
+    },
+    {
+      "x": 36.5,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.821161864123089,
+        "west": 4.8,
+        "north": 2.7241934075678906,
+        "south": 4.8
+      },
+      "minimumCamera": 2.7241934075678906
+    },
+    {
+      "x": 36.5,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.272376247793861,
+        "west": 4.8,
+        "north": 3.0860826518504405,
+        "south": 4.8
+      },
+      "minimumCamera": 2.272376247793861
+    },
+    {
+      "x": 36.5,
+      "z": -19,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.8032602950432777,
+        "west": 4.8,
+        "north": 3.4557110990053626,
+        "south": 4.8
+      },
+      "minimumCamera": 1.8032602950432777
+    },
+    {
+      "x": 36.5,
+      "z": -18.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.3571646585736168,
+        "west": 4.8,
+        "north": 3.51239816136369,
+        "south": 4.8
+      },
+      "minimumCamera": 1.3571646585736168
+    },
+    {
+      "x": 36.5,
+      "z": -18,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999998,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.6004014298920013,
+        "west": 4.8,
+        "north": 3.618036287513231,
+        "south": 4.8
+      },
+      "minimumCamera": 1.6004014298920013
+    },
+    {
+      "x": 36.5,
+      "z": -17.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999976,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.8941810126851926,
+        "west": 4.8,
+        "north": 3.9142040658498236,
+        "south": 4.8
+      },
+      "minimumCamera": 1.8941810126851926
+    },
+    {
+      "x": 36.5,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.200762368852478,
+        "west": 4.8,
+        "north": 4.210342712122476,
+        "south": 4.8
+      },
+      "minimumCamera": 2.200762368852478
+    },
+    {
+      "x": 36.5,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.5208295390515874,
+        "west": 4.8,
+        "north": 4.506634554921269,
+        "south": 4.8
+      },
+      "minimumCamera": 2.5208295390515874
+    },
+    {
+      "x": 36.5,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 36.5,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 36.5,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 36.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.482622657578614
+      },
+      "minimumCamera": 2.482622657578614
+    },
+    {
+      "x": 36.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.115586210000647
+      },
+      "minimumCamera": 2.115586210000647
+    },
+    {
+      "x": 36.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.7538788891601593
+      },
+      "minimumCamera": 1.7538788891601593
+    },
+    {
+      "x": 36.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.3972411204783008
+      },
+      "minimumCamera": 1.3972411204783008
+    },
+    {
+      "x": 37,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5308157416912316,
+        "west": 4.8,
+        "north": 2.8255765443088783,
+        "south": 4.8
+      },
+      "minimumCamera": 2.8255765443088783
+    },
+    {
+      "x": 37,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4849691845994504,
+        "west": 4.8,
+        "north": 3.109829181916499,
+        "south": 4.8
+      },
+      "minimumCamera": 3.109829181916499
+    },
+    {
+      "x": 37,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4443509979367652,
+        "west": 4.8,
+        "north": 3.360039467188074,
+        "south": 4.8
+      },
+      "minimumCamera": 3.360039467188074
+    },
+    {
+      "x": 37,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.8941117390477467,
+        "west": 4.8,
+        "north": 3.628417801594596,
+        "south": 4.8
+      },
+      "minimumCamera": 2.8941117390477467
+    },
+    {
+      "x": 37,
+      "z": -19,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.417479803879941,
+        "west": 4.8,
+        "north": 3.9113516799470935,
+        "south": 4.8
+      },
+      "minimumCamera": 2.417479803879941
+    },
+    {
+      "x": 37,
+      "z": -18.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 1.9769316356732527,
+        "west": 4.8,
+        "north": 4.194036701450282,
+        "south": 4.8
+      },
+      "minimumCamera": 1.9769316356732527
+    },
+    {
+      "x": 37,
+      "z": -18,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999987,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.26444006502759,
+        "west": 4.8,
+        "north": 4.476657130479815,
+        "south": 4.8
+      },
+      "minimumCamera": 2.26444006502759
+    },
+    {
+      "x": 37,
+      "z": -17.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999966,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.5644509530506276,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 2.5644509530506276
+    },
+    {
+      "x": 37,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.877624584724316,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 2.877624584724316
+    },
+    {
+      "x": 37,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.204671618127281,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.204671618127281
+    },
+    {
+      "x": 37,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.7589501167818073
+      },
+      "minimumCamera": 2.7589501167818073
+    },
+    {
+      "x": 37,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.3114826604968854
+      },
+      "minimumCamera": 2.3114826604968854
+    },
+    {
+      "x": 37,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.9544292550589928
+      },
+      "minimumCamera": 1.9544292550589928
+    },
+    {
+      "x": 37,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.6024493199988483
+      },
+      "minimumCamera": 1.6024493199988483
+    },
+    {
+      "x": 37,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.255294878777842
+      },
+      "minimumCamera": 1.255294878777842
+    },
+    {
+      "x": 37.5,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.6125585912398193,
+        "west": 4.8,
+        "north": 3.7973047931340247,
+        "south": 4.8
+      },
+      "minimumCamera": 3.6125585912398193
+    },
+    {
+      "x": 37.5,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5326553262209317,
+        "west": 4.8,
+        "north": 4.064840855487686,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5326553262209317
+    },
+    {
+      "x": 37.5,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4814490161776432,
+        "west": 4.8,
+        "north": 4.332030512405639,
+        "south": 4.8
+      },
+      "minimumCamera": 3.4814490161776432
+    },
+    {
+      "x": 37.5,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.434588276823542,
+        "west": 4.8,
+        "north": 4.599056307702382,
+        "south": 4.8
+      },
+      "minimumCamera": 3.434588276823542
+    },
+    {
+      "x": 37.5,
+      "z": -19,
+      "height": -0.09993596720702413,
+      "groundHeight": -0.09993596720702348,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.04246078539812,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.04246078539812
+    },
+    {
+      "x": 37.5,
+      "z": -18.5,
+      "height": -0.09955156867578552,
+      "groundHeight": -0.09955156867578896,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.648519005092283,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 2.648519005092283
+    },
+    {
+      "x": 37.5,
+      "z": -18,
+      "height": -0.19764409524003668,
+      "groundHeight": -0.19764409524004342,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.9299032376163567,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 2.9299032376163567
+    },
+    {
+      "x": 37.5,
+      "z": -17.5,
+      "height": -0.1349717534051038,
+      "groundHeight": -0.13497175340511092,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.24402981424899,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.24402981424899
+    },
+    {
+      "x": 37.5,
+      "z": -17,
+      "height": -0.0984373415657771,
+      "groundHeight": -0.0984373415657771,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5690765106667373,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5690765106667373
+    },
+    {
+      "x": 37.5,
+      "z": -16.5,
+      "height": -0.0982755330134708,
+      "groundHeight": -0.09827553301347258,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.903509406257299,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.903509406257299
+    },
+    {
+      "x": 37.5,
+      "z": -16,
+      "height": -0.09971782590814371,
+      "groundHeight": -0.09971782590814637,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37.5,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37.5,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.4427060979046695
+      },
+      "minimumCamera": 2.4427060979046695
+    },
+    {
+      "x": 37.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.0913273953822573
+      },
+      "minimumCamera": 2.0913273953822573
+    },
+    {
+      "x": 37.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.744940120812944
+      },
+      "minimumCamera": 1.744940120812944
+    },
+    {
+      "x": 37.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.4033000941224127
+      },
+      "minimumCamera": 1.4033000941224127
+    },
+    {
+      "x": 37.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 1.8866710197485435,
+        "north": 4.8,
+        "south": 1.0661740463222997
+      },
+      "minimumCamera": 1.0661740463222997
+    },
+    {
+      "x": 38,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.6402552425258246,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.6402552425258246
+    },
+    {
+      "x": 38,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5864036684127885,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5864036684127885
+    },
+    {
+      "x": 38,
+      "z": -20,
+      "height": -0.09996380604734156,
+      "groundHeight": -0.09996380604734484,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5367359940412415,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5367359940412415
+    },
+    {
+      "x": 38,
+      "z": -19.5,
+      "height": -0.15177547703159888,
+      "groundHeight": -0.1517754770315755,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5698105405111344,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5698105405111344
+    },
+    {
+      "x": 38,
+      "z": -19,
+      "height": -0.3082553072138623,
+      "groundHeight": -0.3082553072138596,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.6798398295546586,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.6798398295546586
+    },
+    {
+      "x": 38,
+      "z": -18.5,
+      "height": -0.4956310089714364,
+      "groundHeight": -0.4956310089714382,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.280337783378662,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.280337783378662
+    },
+    {
+      "x": 38,
+      "z": -18,
+      "height": -0.6644305921609828,
+      "groundHeight": -0.6644305921609828,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5526388772186412,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5526388772186412
+    },
+    {
+      "x": 38,
+      "z": -17.5,
+      "height": -0.6398891605376065,
+      "groundHeight": -0.63988916053761,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.8646644635788197,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.8646644635788197
+    },
+    {
+      "x": 38,
+      "z": -17,
+      "height": -0.5427733846991458,
+      "groundHeight": -0.5427733846991476,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.202754260758969,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.202754260758969
+    },
+    {
+      "x": 38,
+      "z": -16.5,
+      "height": -0.45013807293474883,
+      "groundHeight": -0.4501380729347524,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.556507448542777,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.556507448542777
+    },
+    {
+      "x": 38,
+      "z": -16,
+      "height": -0.36251973303583895,
+      "groundHeight": -0.3625197330358265,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.9393303906854276
+      },
+      "minimumCamera": 2.9393303906854276
+    },
+    {
+      "x": 38,
+      "z": -15.5,
+      "height": -0.2804548727937828,
+      "groundHeight": -0.2804548727937757,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.5984339567986385
+      },
+      "minimumCamera": 2.5984339567986385
+    },
+    {
+      "x": 38,
+      "z": -15,
+      "height": -0.20448000000000377,
+      "groundHeight": -0.20448000000000022,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.260667598886884
+      },
+      "minimumCamera": 2.260667598886884
+    },
+    {
+      "x": 38,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.928782278255988
+      },
+      "minimumCamera": 1.928782278255988
+    },
+    {
+      "x": 38,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.5922156390538946
+      },
+      "minimumCamera": 1.5922156390538946
+    },
+    {
+      "x": 38,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 2.3661447382228267,
+        "north": 4.8,
+        "south": 1.2601567700006655
+      },
+      "minimumCamera": 1.2601567700006655
+    },
+    {
+      "x": 38,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 1.1766590389467366,
+        "north": 4.8,
+        "south": 0.9323830718771394
+      },
+      "minimumCamera": 0.9323830718771394
+    }
+  ],
+  "viable": [
+    {
+      "x": 36.5,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 36.5,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 36.5,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37.5,
+      "z": -16,
+      "height": -0.09971782590814371,
+      "groundHeight": -0.09971782590814637,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 37.5,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    },
+    {
+      "x": 36,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.6151734202139245,
+        "south": 4.8
+      },
+      "minimumCamera": 4.6151734202139245
+    },
+    {
+      "x": 38,
+      "z": -16.5,
+      "height": -0.45013807293474883,
+      "groundHeight": -0.4501380729347524,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.556507448542777,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.556507448542777
+    },
+    {
+      "x": 36,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.3058554095278545,
+        "south": 4.8
+      },
+      "minimumCamera": 4.3058554095278545
+    },
+    {
+      "x": 38,
+      "z": -17,
+      "height": -0.5427733846991458,
+      "groundHeight": -0.5427733846991476,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.202754260758969,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.202754260758969
+    },
+    {
+      "x": 36,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.996967130558328,
+        "south": 4.8
+      },
+      "minimumCamera": 3.996967130558328
+    },
+    {
+      "x": 37.5,
+      "z": -16.5,
+      "height": -0.0982755330134708,
+      "groundHeight": -0.09827553301347258,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.903509406257299,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.903509406257299
+    },
+    {
+      "x": 38,
+      "z": -17.5,
+      "height": -0.6398891605376065,
+      "groundHeight": -0.63988916053761,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.8646644635788197,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.8646644635788197
+    },
+    {
+      "x": 35.5,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.8615684336138227,
+        "south": 4.8
+      },
+      "minimumCamera": 3.8615684336138227
+    },
+    {
+      "x": 35.5,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.698378232651483,
+        "south": 4.8
+      },
+      "minimumCamera": 3.698378232651483
+    },
+    {
+      "x": 38,
+      "z": -19,
+      "height": -0.3082553072138623,
+      "groundHeight": -0.3082553072138596,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.6798398295546586,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.6798398295546586
+    },
+    {
+      "x": 38,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.6402552425258246,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.6402552425258246
+    },
+    {
+      "x": 35.5,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.637425389359061,
+        "south": 4.8
+      },
+      "minimumCamera": 3.637425389359061
+    },
+    {
+      "x": 37.5,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.6125585912398193,
+        "west": 4.8,
+        "north": 3.7973047931340247,
+        "south": 4.8
+      },
+      "minimumCamera": 3.6125585912398193
+    },
+    {
+      "x": 38,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5864036684127885,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5864036684127885
+    },
+    {
+      "x": 38,
+      "z": -19.5,
+      "height": -0.15177547703159888,
+      "groundHeight": -0.1517754770315755,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5698105405111344,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5698105405111344
+    },
+    {
+      "x": 37.5,
+      "z": -17,
+      "height": -0.0984373415657771,
+      "groundHeight": -0.0984373415657771,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5690765106667373,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5690765106667373
+    },
+    {
+      "x": 38,
+      "z": -18,
+      "height": -0.6644305921609828,
+      "groundHeight": -0.6644305921609828,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5526388772186412,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5526388772186412
+    },
+    {
+      "x": 35,
+      "z": -15.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.539723939438713,
+        "south": 4.8
+      },
+      "minimumCamera": 3.539723939438713
+    },
+    {
+      "x": 38,
+      "z": -20,
+      "height": -0.09996380604734156,
+      "groundHeight": -0.09996380604734484,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5367359940412415,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5367359940412415
+    },
+    {
+      "x": 37.5,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5326553262209317,
+        "west": 4.8,
+        "north": 4.064840855487686,
+        "south": 4.8
+      },
+      "minimumCamera": 3.5326553262209317
+    },
+    {
+      "x": 37.5,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4814490161776432,
+        "west": 4.8,
+        "north": 4.332030512405639,
+        "south": 4.8
+      },
+      "minimumCamera": 3.4814490161776432
+    },
+    {
+      "x": 37.5,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.434588276823542,
+        "west": 4.8,
+        "north": 4.599056307702382,
+        "south": 4.8
+      },
+      "minimumCamera": 3.434588276823542
+    },
+    {
+      "x": 37,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4443509979367652,
+        "west": 4.8,
+        "north": 3.360039467188074,
+        "south": 4.8
+      },
+      "minimumCamera": 3.360039467188074
+    },
+    {
+      "x": 38,
+      "z": -18.5,
+      "height": -0.4956310089714364,
+      "groundHeight": -0.4956310089714382,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.280337783378662,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.280337783378662
+    },
+    {
+      "x": 37.5,
+      "z": -17.5,
+      "height": -0.1349717534051038,
+      "groundHeight": -0.13497175340511092,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.24402981424899,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.24402981424899
+    },
+    {
+      "x": 37,
+      "z": -16.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.204671618127281,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.204671618127281
+    },
+    {
+      "x": 37,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4849691845994504,
+        "west": 4.8,
+        "north": 3.109829181916499,
+        "south": 4.8
+      },
+      "minimumCamera": 3.109829181916499
+    },
+    {
+      "x": 37.5,
+      "z": -19,
+      "height": -0.09993596720702413,
+      "groundHeight": -0.09993596720702348,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.04246078539812,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 3.04246078539812
+    },
+    {
+      "x": 35,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.4866494145420392,
+        "south": 2.9523442516814273
+      },
+      "minimumCamera": 2.9523442516814273
+    },
+    {
+      "x": 38,
+      "z": -16,
+      "height": -0.36251973303583895,
+      "groundHeight": -0.3625197330358265,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.9393303906854276
+      },
+      "minimumCamera": 2.9393303906854276
+    },
+    {
+      "x": 37.5,
+      "z": -18,
+      "height": -0.19764409524003668,
+      "groundHeight": -0.19764409524004342,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.9299032376163567,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 2.9299032376163567
+    },
+    {
+      "x": 37,
+      "z": -19.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.8941117390477467,
+        "west": 4.8,
+        "north": 3.628417801594596,
+        "south": 4.8
+      },
+      "minimumCamera": 2.8941117390477467
+    },
+    {
+      "x": 37,
+      "z": -17,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.877624584724316,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 2.877624584724316
+    },
+    {
+      "x": 37,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.5308157416912316,
+        "west": 4.8,
+        "north": 2.8255765443088783,
+        "south": 4.8
+      },
+      "minimumCamera": 2.8255765443088783
+    },
+    {
+      "x": 37,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.7589501167818073
+      },
+      "minimumCamera": 2.7589501167818073
+    },
+    {
+      "x": 36.5,
+      "z": -20,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.821161864123089,
+        "west": 4.8,
+        "north": 2.7241934075678906,
+        "south": 4.8
+      },
+      "minimumCamera": 2.7241934075678906
+    },
+    {
+      "x": 37.5,
+      "z": -18.5,
+      "height": -0.09955156867578552,
+      "groundHeight": -0.09955156867578896,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.648519005092283,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 2.648519005092283
+    },
+    {
+      "x": 36,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.642304845707759,
+        "west": 4.8,
+        "north": 2.826707531005035,
+        "south": 4.8
+      },
+      "minimumCamera": 2.642304845707759
+    },
+    {
+      "x": 35.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.182104240945981,
+        "south": 2.634465308078204
+      },
+      "minimumCamera": 2.634465308078204
+    },
+    {
+      "x": 38,
+      "z": -15.5,
+      "height": -0.2804548727937828,
+      "groundHeight": -0.2804548727937757,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.5984339567986385
+      },
+      "minimumCamera": 2.5984339567986385
+    },
+    {
+      "x": 36,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.572400367666664
+      },
+      "minimumCamera": 2.572400367666664
+    },
+    {
+      "x": 35,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.4525210636435664,
+        "south": 2.5451747633520467
+      },
+      "minimumCamera": 2.5451747633520467
+    },
+    {
+      "x": 36.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.482622657578614
+      },
+      "minimumCamera": 2.482622657578614
+    },
+    {
+      "x": 36,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.132103286951551,
+        "west": 4.8,
+        "north": 2.463455730453878,
+        "south": 4.8
+      },
+      "minimumCamera": 2.463455730453878
+    },
+    {
+      "x": 37.5,
+      "z": -15,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.4427060979046695
+      },
+      "minimumCamera": 2.4427060979046695
+    },
+    {
+      "x": 34.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.3497156986781786,
+        "west": 4.8,
+        "north": 2.7361230653898674,
+        "south": 2.381693477394752
+      },
+      "minimumCamera": 2.381693477394752
+    },
+    {
+      "x": 36.5,
+      "z": -20.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.271704254395213,
+        "west": 4.8,
+        "north": 2.369636104372245,
+        "south": 4.8
+      },
+      "minimumCamera": 2.369636104372245
+    },
+    {
+      "x": 37,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.3114826604968854
+      },
+      "minimumCamera": 2.3114826604968854
+    },
+    {
+      "x": 35.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.503223891451428,
+        "south": 2.2607525536266686
+      },
+      "minimumCamera": 2.2607525536266686
+    },
+    {
+      "x": 38,
+      "z": -15,
+      "height": -0.20448000000000377,
+      "groundHeight": -0.20448000000000022,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.260667598886884
+      },
+      "minimumCamera": 2.260667598886884
+    },
+    {
+      "x": 36,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.199645509697149
+      },
+      "minimumCamera": 2.199645509697149
+    },
+    {
+      "x": 35,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.783532323534009,
+        "south": 2.164703410929207
+      },
+      "minimumCamera": 2.164703410929207
+    },
+    {
+      "x": 36.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.115586210000647
+      },
+      "minimumCamera": 2.115586210000647
+    },
+    {
+      "x": 37.5,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 2.0913273953822573
+      },
+      "minimumCamera": 2.0913273953822573
+    },
+    {
+      "x": 34,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 2.650126044460465,
+        "west": 4.8,
+        "north": 2.0326880861819685,
+        "south": 2.1911775321343088
+      },
+      "minimumCamera": 2.0326880861819685
+    },
+    {
+      "x": 36.5,
+      "z": -21,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.1,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.4639170393594685,
+        "west": 4.8,
+        "north": 2.0220283522038507,
+        "south": 4.8
+      },
+      "minimumCamera": 2.0220283522038507
+    },
+    {
+      "x": 34.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.076521880958287,
+        "south": 1.9991742634367933
+      },
+      "minimumCamera": 1.9991742634367933
+    },
+    {
+      "x": 37,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.9544292550589928
+      },
+      "minimumCamera": 1.9544292550589928
+    },
+    {
+      "x": 38,
+      "z": -14.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.928782278255988
+      },
+      "minimumCamera": 1.928782278255988
+    },
+    {
+      "x": 35.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.890841666984815
+      },
+      "minimumCamera": 1.890841666984815
+    },
+    {
+      "x": 36,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.8318012534503736
+      },
+      "minimumCamera": 1.8318012534503736
+    },
+    {
+      "x": 35,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.115136341663311,
+        "south": 1.7881490190743194
+      },
+      "minimumCamera": 1.7881490190743194
+    },
+    {
+      "x": 36.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.7538788891601593
+      },
+      "minimumCamera": 1.7538788891601593
+    },
+    {
+      "x": 37.5,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.744940120812944
+      },
+      "minimumCamera": 1.744940120812944
+    },
+    {
+      "x": 34.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 3.4173574208439694,
+        "south": 1.6199286844659198
+      },
+      "minimumCamera": 1.6199286844659198
+    },
+    {
+      "x": 37,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.6024493199988483
+      },
+      "minimumCamera": 1.6024493199988483
+    },
+    {
+      "x": 38,
+      "z": -14,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.5922156390538946
+      },
+      "minimumCamera": 1.5922156390538946
+    },
+    {
+      "x": 35.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.5245307617199948
+      },
+      "minimumCamera": 1.5245307617199948
+    },
+    {
+      "x": 36,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.4686278084079636
+      },
+      "minimumCamera": 1.4686278084079636
+    },
+    {
+      "x": 35,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.4475173244169195,
+        "south": 1.4153045917741502
+      },
+      "minimumCamera": 1.4153045917741502
+    },
+    {
+      "x": 37.5,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.4033000941224127
+      },
+      "minimumCamera": 1.4033000941224127
+    },
+    {
+      "x": 36.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.3972411204783008
+      },
+      "minimumCamera": 1.3972411204783008
+    },
+    {
+      "x": 38,
+      "z": -13.5,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 2.3661447382228267,
+        "north": 4.8,
+        "south": 1.2601567700006655
+      },
+      "minimumCamera": 1.2601567700006655
+    },
+    {
+      "x": 37,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 1.255294878777842
+      },
+      "minimumCamera": 1.255294878777842
+    },
+    {
+      "x": 34.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 3.170980104728198,
+        "west": 4.8,
+        "north": 3.7588213107878268,
+        "south": 1.2437622816007532
+      },
+      "minimumCamera": 1.2437622816007532
+    },
+    {
+      "x": 37.5,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 1.8866710197485435,
+        "north": 4.8,
+        "south": 1.0661740463222997
+      },
+      "minimumCamera": 1.0661740463222997
+    },
+    {
+      "x": 38,
+      "z": -13,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 1.1766590389467366,
+        "north": 4.8,
+        "south": 0.9323830718771394
+      },
+      "minimumCamera": 0.9323830718771394
+    }
+  ],
+  "acceptance": {
+    "point": {
+      "x": 36.5,
+      "z": -16
+    },
+    "passed": true,
+    "evidence": {
+      "x": 36.5,
+      "z": -16,
+      "height": -0.10000000000000142,
+      "groundHeight": -0.09999999999999964,
+      "support": "ground",
+      "contact": null,
+      "cameras": {
+        "east": 4.8,
+        "west": 4.8,
+        "north": 4.8,
+        "south": 4.8
+      },
+      "minimumCamera": 4.8
+    }
+  }
+}

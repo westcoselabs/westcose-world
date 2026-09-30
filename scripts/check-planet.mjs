@@ -38,38 +38,49 @@ try {
   const shapes = require(path.join(output, 'data/building-shapes.js'));
   const pier = require(path.join(output, 'data/pier-layout.js'));
   const map = require(path.join(output, 'data/world-map.js'));
+  const mountain = require(path.join(output, 'data/mountain-layout.js'));
   const landmarks = require(path.join(output, 'data/concept-landmarks.js'));
   const peninsula = require(path.join(output, 'data/peninsula-layout.js'));
   const cave = require(path.join(output, 'data/peninsula-cave.js'));
   const surfaces = require(path.join(output, 'data/town-surfaces.js'));
-  const { makeTerrain } = require(path.join(output, 'scene/TownLandscape.js'));
+  const { makeTerrain, makeTerrainPartition } = require(path.join(output, 'scene/TownLandscape.js'));
   const { Vector3 } = require('three');
   const summitChart = [map.MAP_SUMMIT.x, map.MAP_SUMMIT.z];
   const pierTip = [pier.PIER_LAYOUT.entrance[0], pier.PIER_LAYOUT.head.center[1] - pier.PIER_LAYOUT.head.depth / 2];
   const openSeaX = Math.PI * map.MAP_RADIUS * .45;
 
-  function resortRayClearance() {
-    const resort = town.TOWN_ROUTES.find(route => route.id === 'resort-trail').points.at(-1);
-    const up = map.mapDirection(...resort), frame = map.mapFrame(...resort, collision.supportRadius(up) - planet.RADIUS);
-    const right = frame.north.clone().cross(frame.up).normalize();
-    const target = frame.position.clone().addScaledVector(frame.up, runtimeTypes.PLAYER_CENTER_HEIGHT + .55).addScaledVector(right, .55);
-    const camera = target.clone().addScaledVector(frame.north.clone().multiplyScalar(-runtimeTypes.CAMERA_FOLLOW_DISTANCE).addScaledVector(frame.up, 3).normalize(), runtimeTypes.CAMERA_FOLLOW_DISTANCE);
-    const peak = map.mapPoint(...summitChart, map.MAP_SUMMIT.height);
-    let minimum = { clearance: Infinity };
-    for (let index = 1; index < 500; index++) {
-      const point = camera.clone().lerp(peak, index / 500), direction = point.clone().normalize();
-      const height = planet.terrainHeightAt(direction), clearance = point.length() - planet.RADIUS - height;
-      if (clearance < minimum.clearance) minimum = { clearance, chart: map.mapCoordinates(direction), terrainHeight: height, rayHeight: point.length() - planet.RADIUS };
-    }
-    return minimum;
+  function baseSummitOcclusion() {
+    const base = mountain.MOUNTAIN_LAYOUT.resort;
+    const baseUp = map.mapDirection(base.x, base.z);
+    const baseEye = baseUp.clone().multiplyScalar(collision.supportRadius(baseUp) + runtimeTypes.PLAYER_CENTER_HEIGHT + .55);
+    const peakUp = map.mapDirection(...summitChart);
+    const peak = peakUp.clone().multiplyScalar(collision.supportRadius(peakUp));
+    const line = peak.clone().sub(baseEye);
+    const nearestT = Math.max(0, Math.min(1, -baseEye.dot(line) / line.lengthSq()));
+    return {
+      base,
+      angularDistance: baseUp.angleTo(peakUp),
+      nearestRadius: baseEye.clone().addScaledVector(line, nearestT).length(),
+      peakRadius: peak.length(),
+    };
   }
-  if (process.env.WORLD_DIAGNOSE_VIEWS) console.log('RESORT_CAMERA_RAY', JSON.stringify(resortRayClearance()));
+  if (process.env.WORLD_DIAGNOSE_VIEWS) console.log('BASE_SUMMIT_OCCLUSION', JSON.stringify(baseSummitOcclusion()));
 
   function close(actual, expected, tolerance = 1e-9, message = 'Values must agree within floating-point tolerance') {
     assert.ok(Math.abs(actual - expected) < tolerance, `${message}: ${actual} versus ${expected}`);
   }
   function pointDistance(first, second) {
     return Math.hypot(first.x - second.x, first.y - second.y, first.z - second.z);
+  }
+
+  /** The browser registers these exact detailed portal triangles after terrain creation. */
+  function detailedPortalTriangles(geometry) {
+    const positions = geometry.getAttribute('position'), indices = geometry.getIndex(), triangles = [];
+    if (!indices) return triangles;
+    for (let index = 0; index < indices.count; index += 3) {
+      triangles.push([0, 1, 2].map(offset => new Vector3().fromBufferAttribute(positions, indices.getX(index + offset))));
+    }
+    return triangles;
   }
   function walk(lon, lat, facing, steps, metres = 4.8 / 60) {
     return walkFrame(planet.frameAt(lon, lat), facing, steps, metres);
@@ -221,7 +232,7 @@ try {
     assert.deepEqual(session.getSafePosition(shapes.buildingLocalPoint(solid, [0, runtimeTypes.PLAYER_CENTER_HEIGHT, 0])), runtimeTypes.DEFAULT_SPAWN);
   });
 
-  await test('the default load point is the dry courtyard and summit checkpoints remain valid', () => {
+  await test('the default load point is the dry courtyard and the 40m summit checkpoint remains valid', () => {
     const courtyard = town.TOWN_AREAS.find(area => area.id === 'courtyard');
     const coordinates = map.mapCoordinates(runtimeTypes.DEFAULT_SPAWN);
     assert.ok(Math.abs(coordinates.x - courtyard.center[0]) < courtyard.width / 2 - 1);
@@ -230,8 +241,9 @@ try {
     assert.equal(collision.buildingContact(runtimeTypes.DEFAULT_SPAWN), null);
     const summit = map.mapDirection(...summitChart);
     const position = summit.clone().multiplyScalar(collision.supportRadius(summit) + runtimeTypes.PLAYER_CENTER_HEIGHT);
-    assert.ok(position.length() > planet.RADIUS + 31);
-    assert.ok(pointDistance(session.getSafePosition(position), position) < 1e-8, 'The taller mountain must fit the valid checkpoint envelope');
+    close(collision.supportRadius(summit), planet.RADIUS + 40, 1e-8);
+    close(position.length(), planet.RADIUS + 40 + runtimeTypes.PLAYER_CENTER_HEIGHT, 1e-8);
+    assert.ok(pointDistance(session.getSafePosition(position), position) < 1e-8, 'The 40m summit must fit the valid checkpoint envelope');
   });
 
   await test('the real mountain rear is visible across ocean from the pier follow camera', () => {
@@ -262,12 +274,17 @@ try {
     assert.ok(minimumTerrainClearance > 0, `Mountain back must not obscure its summit; minimum ray clearance ${minimumTerrainClearance}`);
   });
 
-  await test('refinement retains the taller varied mountain, deeper beach and longer pier', () => {
-    close(map.MAP_SUMMIT.height, 32);
+  await test('mountain v3 retains its 40m same-mountain envelope, separated runs, and longer pier', () => {
+    close(map.MAP_RADIUS, 36);
+    close(map.MAP_SUMMIT.height, 40);
+    close(mountain.MOUNTAIN_LAYOUT.summit.height, 40);
+    close(mountain.MOUNTAIN_LAYOUT.summit.x, map.MAP_SUMMIT.x);
+    close(mountain.MOUNTAIN_LAYOUT.summit.z, map.MAP_SUMMIT.z);
     close(surfaces.naturalTerrainAt(...summitChart), map.MAP_SUMMIT.height, 1e-8);
-    assert.ok(surfaces.naturalTerrainAt(-11, 144) >= 23.9, 'The western shoulder is real terrain, not a painted snow patch');
-    assert.ok(surfaces.naturalTerrainAt(10, 147) >= 26.9, 'The eastern shoulder has a distinct higher profile');
+    close(map.MAP_MAX_HEIGHT, 42);
     assert.ok(map.MAP_MAX_HEIGHT >= map.MAP_SUMMIT.height + runtimeTypes.PLAYER_CENTER_HEIGHT);
+    assert.ok(surfaces.naturalTerrainAt(-14, 132) >= 31.5, 'The western shoulder is real terrain, not a painted snow patch');
+    assert.ok(surfaces.naturalTerrainAt(16, 137) >= 33, 'The eastern shoulder has a distinct higher profile');
     close(map.MAP_SEAM, 176); close(map.MAP_MIN_Z, map.MAP_SEAM - 2 * Math.PI * map.MAP_RADIUS);
     close(pierTip[1], -47); close(pier.PIER_LAYOUT.entrance[1], -30);
     close(pier.PIER_LAYOUT.head.center[1], -43); close(pier.PIER_LAYOUT.head.depth, 8);
@@ -278,21 +295,44 @@ try {
     }
     assert.ok(surfaces.naturalTerrainAt(0, -30) > map.MAP_SEA_LEVEL, 'The beach beneath the pier entrance remains dry');
     for (const x of [-30, 30]) assert.ok(surfaces.naturalTerrainAt(x, 40) > map.MAP_SEA_LEVEL, 'Wide mainland remains continuous beside the inland route');
-    for (const route of town.TOWN_ROUTES.filter(item => item.id.startsWith('ski-'))) {
-      assert.deepEqual(route.points.at(-1), summitChart, `${route.id} must reach the same real summit`);
+    assert.deepEqual(mountain.MOUNTAIN_RUNS.map(run => run.id), ['ski-central', 'ski-west', 'ski-east']);
+    assert.equal(mountain.MOUNTAIN_RUNS.length, 3);
+    for (const run of mountain.MOUNTAIN_RUNS) {
+      const route = town.TOWN_ROUTES.find(item => item.id === run.id);
+      assert.ok(route, `${run.id} is an authored physical route`);
+      assert.deepEqual(route.points, run.points.map(point => [point[0], point[1]]), `${run.id} uses the exact approved sampled curve`);
+      assert.ok(run.points.length > run.controls.length, `${run.id} is a sampled smooth curve, not its sparse control polygon`);
+      close(run.points[0][1], 148); close(run.points.at(-1)[1], 64);
+      assert.ok(run.points.every(point => point.every(Number.isFinite)), `${run.id} samples remain finite`);
+      assert.ok(!route.points.some(point => point[0] === map.MAP_SUMMIT.x && point[1] === map.MAP_SUMMIT.z),
+        `${run.id} begins at its own gate rather than collapsing into the summit`);
+      const gate = town.TOWN_ROUTES.find(item => item.id === `${run.id}-gate`);
+      const finishReturn = town.TOWN_ROUTES.find(item => item.id === `${run.id}-return`);
+      assert.deepEqual(gate?.points.at(-1), [run.points[0][0], 148], `${run.id} gate connector reaches the approved start`);
+      assert.deepEqual(finishReturn?.points[0], [run.points.at(-1)[0], 64], `${run.id} run-out starts at its approved finish`);
     }
+    assert.deepEqual(town.TOWN_ROUTES.find(item => item.id === 'ski-summit-walk')?.points, [[0, 153], [0, 151]],
+      'The summit walk bridges the peak to the three independent gate connectors');
+    assert.deepEqual(town.TOWN_ROUTES.find(item => item.id === 'finish-return')?.points[0], [2.1, 61],
+      'The common return begins below the separate run-outs');
   });
 
-  await test('the real summit clears its foreground ridges from the resort follow camera', () => {
-    const result = resortRayClearance();
-    assert.ok(result.clearance > 0, `The resort camera-to-summit ray must not intersect the front slope: ${JSON.stringify(result)}`);
+  await test('the base resort correctly cannot see the summit through the solid tiny planet', () => {
+    const result = baseSummitOcclusion();
+    close(result.base.z, 53.7);
+    assert.ok(result.angularDistance > Math.PI / 2, `Base and summit must occupy opposite sides of the globe: ${JSON.stringify(result)}`);
+    assert.ok(result.nearestRadius < planet.RADIUS + planet.SEA_LEVEL,
+      `The direct base-to-summit sightline must be occluded by the solid globe: ${JSON.stringify(result)}`);
+    close(result.peakRadius, planet.RADIUS + map.MAP_SUMMIT.height, 1e-8);
   });
 
-  await test('the unchanged lighthouse is anchored to its lower peninsula with a clear route destination', () => {
+  await test('the unchanged lighthouse stands at the outer tip above the tunnel, with a clear upper route destination', () => {
     assert.deepEqual(landmarks.LIGHTHOUSE, peninsula.PENINSULA_LIGHTHOUSE);
-    close(landmarks.LIGHTHOUSE.height, 12); close(landmarks.LIGHTHOUSE.elevation, 2.8);
+    close(landmarks.LIGHTHOUSE.height, 12); close(landmarks.LIGHTHOUSE.elevation, 6.2);
     const { x, z, elevation, height } = landmarks.LIGHTHOUSE;
     close(surfaces.groundSurfaceAt(x, z).height, elevation, 1e-8);
+    assert.ok(cave.caveDistanceAt(x,z)<1, 'The actual passage passes underneath the lighthouse footprint');
+    close(collision.supportRadius(map.mapDirection(x,z),{layer:'tunnel'}),planet.RADIUS+landmarks.CAVE_FLOOR);
     const frame = map.mapFrame(x, z, elevation);
     const tower = landmarks.landmarkSolids.filter(solid => solid.buildingId === 'lighthouse');
     assert.equal(tower.length, 6, 'The existing tower model retains its six shared render/collision pieces');
@@ -319,7 +359,7 @@ try {
   });
 
   await test('rendered terrain has outward faces, finite normals and a complete periodic seam', () => {
-    const geometry = makeTerrain();
+    const geometry = makeTerrain(), overviewGeometry = makeTerrain(126);
     try {
       const positions = geometry.getAttribute('position'), normals = geometry.getAttribute('normal'), indices = geometry.getIndex();
       assert.ok(positions.array.every(Number.isFinite));
@@ -346,7 +386,33 @@ try {
           points.push(a.clone()); seam.set(key, points);
         }
       }
-      assert.ok(maximumRadius >= planet.RADIUS + 31, 'Rendered vertices include the taller mountain');
+      const peakChart = map.mapCoordinates(peak);
+      let overviewMaximumRadius = 0;
+      const overviewPeak = new Vector3();
+      const overviewPositions = overviewGeometry.getAttribute('position');
+      for (let index = 0; index < overviewPositions.count; index++) {
+        a.fromBufferAttribute(overviewPositions, index);
+        if (a.length() > overviewMaximumRadius) {
+          overviewMaximumRadius = a.length();
+          overviewPeak.copy(a);
+        }
+      }
+      // The analytic summit is at z153; the two periodic render grids have a
+      // crest row at z152.662 instead. A 0.2m allowance is the measured,
+      // bounded rasterization error at this sharp small summit, not a height
+      // clamp: exact terrain remains 40m and each mesh peak matches the
+      // surface sampled at its own vertex.
+      const MESH_SUMMIT_SAMPLE_ALLOWANCE = .2;
+      const minimumSampledSummitRadius = planet.RADIUS + map.MAP_SUMMIT.height - MESH_SUMMIT_SAMPLE_ALLOWANCE;
+      const overviewPeakChart = map.mapCoordinates(overviewPeak);
+      assert.ok(maximumRadius >= minimumSampledSummitRadius,
+        `Full terrain samples the approved 40m mountain within ${MESH_SUMMIT_SAMPLE_ALLOWANCE}m (observed ${(maximumRadius - planet.RADIUS).toFixed(4)}m at ${peakChart.x.toFixed(3)}, ${peakChart.z.toFixed(3)})`);
+      assert.ok(overviewMaximumRadius >= minimumSampledSummitRadius,
+        `Overview terrain samples the approved 40m mountain within ${MESH_SUMMIT_SAMPLE_ALLOWANCE}m (observed ${(overviewMaximumRadius - planet.RADIUS).toFixed(4)}m at ${overviewPeakChart.x.toFixed(3)}, ${overviewPeakChart.z.toFixed(3)})`);
+      close(maximumRadius, planet.RADIUS + surfaces.groundSurfaceAt(peakChart.x, peakChart.z).height, 1e-4,
+        'The full terrain peak is the actual sampled terrain, not an independently clipped proxy');
+      close(overviewMaximumRadius, planet.RADIUS + surfaces.groundSurfaceAt(overviewPeakChart.x, overviewPeakChart.z).height, 1e-4,
+        'The overview terrain peak is the actual sampled terrain, not an independently clipped proxy');
       assert.ok(geometry.boundingSphere.center.distanceTo(peak) <= geometry.boundingSphere.radius + 1e-4,
         'The computed bounding sphere includes the mountain even when its center is offset');
       assert.ok(seam.size > 150, 'The complete latitude width reaches the periodic chart cut');
@@ -354,61 +420,97 @@ try {
         assert.equal(pair.length, 2, 'Both copies of the chart seam must exist');
         assert.ok(pair[0].distanceTo(pair[1]) < 1e-4, 'Periodic render vertices meet without a crack');
       }
-    } finally { geometry.dispose(); }
+    } finally { geometry.dispose(); overviewGeometry.dispose(); }
   });
 
-  function walkTo(up, target, label, maxSteps = 2500) {
+  function walkTo(up, target, label, maxSteps = 2500, hint = {}) {
     let blocked = 0;
     let distance = 0;
     let steps = 0;
     const supportKinds = new Set();
+    let support = collision.supportAt(up, hint);
     while (up.angleTo(target) * planet.RADIUS > 0.035) {
       const tangent = target.clone().addScaledVector(up, -target.dot(up)).normalize();
       const amount = Math.min(0.06, up.angleTo(target) * planet.RADIUS);
       if (++steps > maxSteps) {
         const candidate = collision.advanceOnSphere(up, tangent, amount).up;
-        const currentRadius = collision.supportRadius(up), candidateRadius = collision.supportRadius(candidate);
+        const currentRadius = support.radius, candidateRadius = collision.supportRadius(candidate,{footRadius:support.radius,layer:support.layer});
         const center = candidate.clone().multiplyScalar(Math.max(currentRadius, candidateRadius) + runtimeTypes.PLAYER_CENTER_HEIGHT);
         assert.fail(`${label}: could not reach target; ${JSON.stringify({ remaining: up.angleTo(target) * planet.RADIUS, chart: map.mapCoordinates(up), target: map.mapCoordinates(target), height: currentRadius - planet.RADIUS, nextHeight: candidateRadius - planet.RADIUS, contact: collision.buildingContact(center)?.segmentId ?? null })}`);
       }
-      const movement = collision.moveOnSurface(up, tangent, amount);
+      const movement = collision.moveOnSurface(up, tangent, amount, support.radius, support.layer);
       blocked += Number(movement.blocked);
       distance += movement.distance;
       up = movement.up;
-      supportKinds.add(collision.supportAt(up).kind);
+      support = movement.support;
+      supportKinds.add(support.kind);
     }
-    return { up, blocked, distance, supportKinds };
+    return { up, blocked, distance, supportKinds, footRadius:support.radius, layer:support.layer };
   }
+
+  function walkAuthoredRoute(route, reverse, label = route.id) {
+    const points = reverse ? [...route.points].reverse() : route.points;
+    let up = map.mapDirection(...points[0]);
+    let hint = route.id === 'cave' || (route.id === 'beach-east' && reverse) ? { layer:'tunnel' } : {};
+    let distance = 0;
+    let blocked = 0;
+    const supportKinds = new Set();
+    for (let index = 1; index < points.length; index++) {
+      const a = points[index - 1], b = points[index];
+      const count = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / .5));
+      for (let sample = 1; sample <= count; sample++) {
+        // Routes use sufficiently dense sampled points that a short segment is
+        // the actual approved curve, never a long great-circle shortcut.
+        const t = sample / count;
+        const target = map.mapDirection(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t);
+        const result = walkTo(up, target, `${label} ${reverse ? 'reverse' : 'forward'} segment ${index}`, 120, hint);
+        assert.ok(result.blocked < 5, `${label} ${reverse ? 'reverse' : 'forward'} centerline should not require wall sliding`);
+        assert.ok(!result.supportKinds.has('water'), `${label} must remain dry`);
+        up = result.up;
+        hint = { footRadius:result.footRadius, layer:result.layer };
+        distance += result.distance;
+        blocked += result.blocked;
+        for (const kind of result.supportKinds) supportKinds.add(kind);
+      }
+    }
+    return { up, distance, blocked, supportKinds };
+  }
+
+  await test('mountain v3 moves every approved run and its summit/base connectors in both directions', () => {
+    const runIds = mountain.MOUNTAIN_RUNS.map(run => run.id);
+    const connectorIds = [
+      'resort-trail', 'resort-approach', 'lodge-walk', 'ticket-walk', 'finish-return', 'ski-summit-walk',
+      ...runIds.flatMap(id => [`${id}-gate`, `${id}-return`]),
+      ...runIds,
+    ];
+    assert.equal(new Set(connectorIds).size, connectorIds.length, 'The approved route matrix must not accidentally duplicate a connector');
+    for (const id of connectorIds) {
+      const route = town.TOWN_ROUTES.find(candidate => candidate.id === id);
+      assert.ok(route, `Mountain v3 route ${id} is present in the live layout`);
+      for (const reverse of [false, true]) {
+        const result = walkAuthoredRoute(route, reverse, `mountain ${id}`);
+        assert.ok(result.distance > .2, `${id} has physical length in both directions`);
+        assert.equal(result.blocked, 0, `${id} remains an unobstructed walking centerline`);
+      }
+    }
+  });
 
   await test('every authored route is physically connected in both walking directions', () => {
     const failures = [];
     for (const route of town.TOWN_ROUTES) {
       for (const reverse of [false, true]) {
         try {
-          const points = reverse ? [...route.points].reverse() : route.points;
-          let up = map.mapDirection(...points[0]);
-          for (let index = 1; index < points.length; index++) {
-            const a = points[index - 1], b = points[index];
-            const count = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / .5));
-            for (let sample = 1; sample <= count; sample++) {
-              // Follow the actual authored chart curve; a single great-circle
-              // chord between distant endpoints cuts across forest and slopes.
-              const t = sample / count;
-              const target = map.mapDirection(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t);
-              const result = walkTo(up, target, `${route.id} ${reverse ? 'reverse' : 'forward'} segment ${index}`, 120);
-              assert.ok(result.blocked < 5, `${route.id} ${reverse ? 'reverse' : 'forward'}: centerline should not require wall sliding`);
-              assert.ok(!result.supportKinds.has('water'), `${route.id}: a walkable route must not require swimming`);
-              up = result.up;
-            }
-          }
+          const result = walkAuthoredRoute(route, reverse);
+          assert.ok(result.blocked < 5, `${route.id} ${reverse ? 'reverse' : 'forward'}: centerline should not require wall sliding`);
+          assert.ok(!result.supportKinds.has('water'), `${route.id}: a walkable route must not require swimming`);
         } catch (error) { failures.push(error.message); }
       }
     }
     assert.deepEqual(failures, [], 'Every route and its reverse must remain reachable through actual controller steps');
   });
 
-  await test('the short arched cave is closed wedge geometry with solid walls and camera-safe roof', () => {
-    assert.ok(cave.PENINSULA_CAVE_LENGTH > 5 && cave.PENINSULA_CAVE_LENGTH < 10, 'This is a short real passage, not the former long retaining wall');
+  await test('the lighthouse underpass has solid lining and a camera-safe roof beneath the cape', () => {
+    assert.ok(cave.PENINSULA_CAVE_LENGTH > 12 && cave.PENINSULA_CAVE_LENGTH < 22, 'The short passage turns beneath the tower and reaches the rear cove');
     assert.equal(landmarks.landmarkSolids.filter(solid => solid.buildingId === 'cave-rock').length, 0,
       'The old rendered cave boxes and crown masses have been removed');
     const roofs = cave.peninsulaCaveWedges.filter(wedge => wedge.kind === 'roof');
@@ -426,7 +528,7 @@ try {
       assert.ok([...edges.values()].every(count => count === 2), `${wedge.id} has no open mesh edges`);
       for (const vertex of wedge.vertices) {
         assert.ok(vertex.toArray().every(Number.isFinite));
-        assert.ok(vertex.length() - planet.RADIUS <= 4.7, 'Rock shelves stay low instead of rebuilding the old8m wall');
+        assert.ok(vertex.length() - planet.RADIUS <= 5.15, 'The tunnel lining stays buried below the5.2m cape');
         const box = wedge.collider, local = vertex.clone().sub(box.center).applyQuaternion(box.inverse);
         for (const axis of ['x', 'y', 'z']) assert.ok(Math.abs(local[axis]) <= box.half[axis] + 1e-8,
           `${wedge.id}: conservative camera collision encloses every rendered vertex`);
@@ -434,28 +536,54 @@ try {
       }
     }
     assert.ok(checkedVertices >= 400, 'Validate the complete wedge kit, not a representative proxy');
-    const middle = peninsula.PENINSULA_CAVE.points[1], first = peninsula.PENINSULA_CAVE.points[0], last = peninsula.PENINSULA_CAVE.points.at(-1);
+    const middle = peninsula.PENINSULA_CAVE.points[1], first = peninsula.PENINSULA_CAVE.points[0], last = peninsula.PENINSULA_CAVE.points[2];
     const up = map.mapDirection(...middle);
     const forward = map.mapDirection(...last).sub(map.mapDirection(...first)).projectOnPlane(up).normalize();
     const across = forward.clone().cross(up).normalize();
     let direction = up.clone();
-    close(collision.supportRadius(direction), planet.RADIUS + landmarks.CAVE_FLOOR, .04);
-    const player = direction.clone().multiplyScalar(collision.supportRadius(direction) + runtimeTypes.PLAYER_CENTER_HEIGHT);
+    let lower = collision.supportAt(direction,{layer:'tunnel'});
+    close(lower.radius, planet.RADIUS + landmarks.CAVE_FLOOR, .04);
+    const player = direction.clone().multiplyScalar(lower.radius + runtimeTypes.PLAYER_CENTER_HEIGHT);
     assert.equal(collision.buildingContact(player), null, 'The passage center is open for the visitor');
-    const cameraOrigin = direction.clone().multiplyScalar(collision.supportRadius(direction) + 1.4);
+    const cameraOrigin = direction.clone().multiplyScalar(lower.radius + 1.4);
     const roofDistance = collision.cameraClearDistance(cameraOrigin, up, 6);
-    assert.ok(roofDistance > .7 && roofDistance < landmarks.CAVE_CLEARANCE - 1.4, 'Camera ray must shorten before the visible ceiling');
+    assert.ok(roofDistance > .7 && roofDistance < landmarks.CAVE_CLEARANCE - 1.1,
+      `Camera ray must shorten before the pitched ceiling (distance ${roofDistance})`);
     let blocked = 0;
     for (let index = 0; index < 130; index++) {
       const tangent = across.clone().addScaledVector(direction, -across.dot(direction)).normalize();
-      const moved = collision.moveOnSurface(direction, tangent, .06);
-      direction = moved.up; blocked += Number(moved.blocked);
+      const moved = collision.moveOnSurface(direction, tangent, .06, lower.radius, lower.layer);
+      direction = moved.up; lower=moved.support; blocked += Number(moved.blocked);
     }
     assert.ok(blocked > 60, 'The actual cave OBBs must prevent walking through the rock sides');
-    const stopped = direction.clone().multiplyScalar(collision.supportRadius(direction) + runtimeTypes.PLAYER_CENTER_HEIGHT);
+    const stopped = direction.clone().multiplyScalar(lower.radius + runtimeTypes.PLAYER_CENTER_HEIGHT);
     assert.equal(collision.buildingContact(stopped), null, 'The stopped capsule stays outside the wall volume');
     const roofContact = collision.buildingContact(roofs[Math.floor(roofs.length / 2)].collider.center);
     assert.equal(roofContact?.id, 'cave-rock', 'The visible roof participates in the same collision set');
+  });
+
+  await test('exact rendered portal collars stop the camera after detailed terrain registers', () => {
+    // The portal panels are generated from clipped terrain, so first make the
+    // detailed partition exactly as TownLandscape does before querying camera
+    // collision. This guards against a mesh-visible but camera-passable mouth.
+    const terrain = makeTerrainPartition();
+    const release = cave.registerCavePortalTriangles({}, detailedPortalTriangles(terrain.portal));
+    try {
+      const stats = cave.cavePortalCollisionStats();
+      assert.equal(stats.registered, true);
+      assert.ok(stats.triangles > 100, 'The detailed portal collar registry must contain the rendered mesh, not a proxy');
+      const frame = map.mapFrame(27, -29);
+      const forward = frame.east.clone().multiplyScalar(Math.cos(5 * Math.PI / 16)).addScaledVector(frame.north, Math.sin(5 * Math.PI / 16)).normalize();
+      const right = forward.clone().cross(frame.up).normalize();
+      const origin = frame.up.clone().multiplyScalar(37.3).addScaledVector(right, .55);
+      const direction = forward.multiplyScalar(-4.8).addScaledVector(frame.up, 3).normalize();
+      const clearance = collision.cameraClearDistance(origin, direction, 4.8, null, 'tunnel');
+      assert.ok(clearance >= .7 && clearance < 2.2,
+        `The exact portal collar must shorten its reproduced camera ray (received ${clearance})`);
+    } finally {
+      release();
+      terrain.baseWorld.dispose(); terrain.localPatch.dispose(); terrain.portal.dispose();
+    }
   });
 
   await test('the complete short cave width stays low and traversable beneath the lighthouse foundation', () => {
@@ -476,17 +604,17 @@ try {
       for (const direction of lane) {
         const chart = map.mapCoordinates(direction);
         close(landmarks.caveBlendAt(chart.x, chart.z), 1, 1e-8);
-        close(surfaces.groundSurfaceAt(chart.x, chart.z).height, landmarks.CAVE_FLOOR, 1e-8,
-          `Cave floor overrides foundation/area support across its full width at ${chart.x},${chart.z}`);
-        close(collision.supportRadius(direction), planet.RADIUS + landmarks.CAVE_FLOOR, .04);
-        assert.equal(collision.buildingContact(direction.clone().multiplyScalar(collision.supportRadius(direction) + runtimeTypes.PLAYER_CENTER_HEIGHT)), null);
+        const lower=collision.supportAt(direction,{layer:'tunnel'});
+        close(lower.radius, planet.RADIUS + landmarks.CAVE_FLOOR, .04);
+        assert.equal(collision.buildingContact(direction.clone().multiplyScalar(lower.radius + runtimeTypes.PLAYER_CENTER_HEIGHT)), null,
+          `Clear full-width lane at ${chart.x},${chart.z}, lateral ${lateral}`);
         checked++;
       }
       for (const reverse of [false, true]) {
         const targets = reverse ? [...lane].reverse() : lane;
         let up = targets[0];
         for (const target of targets.slice(1)) {
-          const result = walkTo(up, target, `cave offset${lateral} ${reverse ? 'reverse' : 'forward'}`, 120);
+          const result = walkTo(up, target, `cave offset${lateral} ${reverse ? 'reverse' : 'forward'}`, 120, {layer:'tunnel'});
           assert.equal(result.blocked, 0, 'Every full-width lane is reachable through actual controller steps');
           assert.ok(!result.supportKinds.has('water'), 'The cave is a dry passage in both directions');
           up = result.up;
@@ -509,8 +637,10 @@ try {
     }
     assert.ok(checked >= 180, 'Densely sample both edges and center over the whole short passage');
     assert.ok(cameraRays >= 2500 && clippedRays > 1000, 'Exercise overhead and side-wall camera collision throughout the cave');
-    close(surfaces.groundSurfaceAt(29.6069, -26.6150).height, landmarks.CAVE_FLOOR, 1e-8,
-      'Regression: the lighthouse foundation blend cannot lift a cave visitor into its roof');
+    const beneath=map.mapDirection(landmarks.LIGHTHOUSE.x,landmarks.LIGHTHOUSE.z);
+    close(collision.supportRadius(beneath,{layer:'tunnel'}),planet.RADIUS+landmarks.CAVE_FLOOR,1e-8);
+    close(collision.supportRadius(beneath),planet.RADIUS+landmarks.LIGHTHOUSE.elevation,1e-8,
+      'The same map coordinate has a real upper terrace as well as the lower tunnel');
   });
 
   await test('skate bowl and quarter pipe are traversable changes in the actual ground', () => {
@@ -526,12 +656,6 @@ try {
         assert.equal(walked.blocked, 0, 'Both climbing and descending the skate terrain remain walkable');
         assert.ok(!walked.supportKinds.has('water')); up = walked.up;
       }
-    }
-    const skiRoutes = town.TOWN_ROUTES.filter(item => item.id.startsWith('ski-'));
-    assert.equal(skiRoutes.length, 3, 'Three separate snow routes connect resort to summit');
-    for (const route of skiRoutes) {
-      const start = map.mapDirection(...route.points[0]), end = map.mapDirection(...route.points.at(-1));
-      assert.ok(collision.supportRadius(end) - collision.supportRadius(start) > 25, `${route.id} reaches the taller mountain summit`);
     }
   });
 

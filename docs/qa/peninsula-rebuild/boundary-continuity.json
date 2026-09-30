@@ -1,0 +1,8 @@
+{
+  "checkedAt": "2026-09-12T21:46:05.746Z",
+  "passed": true,
+  "method": "Entire editable-polygon boundary sampled every.05 chart metres, comparing final ground at±.001 across the boundary; normal gradients permitted, steps above.08m reported.",
+  "sampleCount": 3124,
+  "maximumJump": 0.02087040436975221,
+  "failures": []
+}

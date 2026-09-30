@@ -5,6 +5,11 @@ import { MAP_SEA_LEVEL, mapCoordinates, mapDirection, mapFrame } from "../data/w
 
 export type WorldMode = "loading" | "intro" | "exploring" | "reading" | "menu" | "paused" | "overview" | "error";
 export type WorldPosition = { x: number; y: number; z: number };
+/**
+ * A map direction can have the normal outdoor support and a lower cave floor.
+ * This state selects the radial layer without changing the globe coordinate.
+ */
+export type SupportLayer = "upper" | "tunnel";
 
 /** Mutable simulation data. Coordinates are planet-centered, never a wrapped flat map. */
 export interface WorldRuntimeState {
@@ -21,6 +26,8 @@ export interface WorldRuntimeState {
   grounded: boolean;
   swimming: boolean;
   supportKind: "ground" | "floor" | "pier" | "water";
+  /** The selected radial support at the current map direction. */
+  supportLayer: SupportLayer;
   interior: InteriorId | null;
   travelDistance: number;
   lapCount: number;
@@ -29,6 +36,8 @@ export interface WorldRuntimeState {
   resetRequested: boolean;
   teleportRequested?: WorldPosition;
   forwardRequested?: WorldPosition;
+  /** Development fixtures can deliberately enter the cave; ordinary teleports stay above it. */
+  teleportSupportLayer?: SupportLayer;
   keys: Set<string>;
   /** Screen right is +x; screen forward is +y. Shared with accessible touch controls. */
   touch: { x: number; y: number; active: boolean };
@@ -60,7 +69,7 @@ export function createRuntimeState(): WorldRuntimeState {
     mode: "loading", position: { ...DEFAULT_SPAWN }, forward: { ...DEFAULT_FORWARD },
     up: { x: entryFrame.up.x, y: entryFrame.up.y, z: entryFrame.up.z }, heading: DEFAULT_HEADING,
     hotspot: null, cameraDistance: CAMERA_FOLLOW_DISTANCE, desiredCameraDistance: CAMERA_FOLLOW_DISTANCE,
-    grounded: false, swimming: false, supportKind:"ground", interior:null, travelDistance: 0, lapCount: 0, reducedMotion: false,
+    grounded: false, swimming: false, supportKind:"ground", supportLayer:"upper", interior:null, travelDistance: 0, lapCount: 0, reducedMotion: false,
     overviewTransition: 1, resetRequested: false, keys: new Set(),
     touch: { x: 0, y: 0, active: false }, pointer: { x: 0, y: 0, originX: 0, originY: 0, active: false },
     landmarkFraming: { summitNdc: { x: 0, y: 0, z: 0 }, summitFraming: 0, summitVisible: false },

@@ -1,9 +1,10 @@
 'use client';
 import { useEffect,useMemo,useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Box3, BufferGeometry, Color, Float32BufferAttribute, Mesh, Sphere, Vector3 } from 'three';
+import { Box3, BufferGeometry, Color, Float32BufferAttribute, Mesh, Sphere, Triangle, Vector3 } from 'three';
 import { MAP_RADIUS, MAP_MIN_Z, MAP_CIRCUMFERENCE, mapCoordinates, mapDirection } from '../data/world-map';
 import { inPeninsulaRegion } from '../data/peninsula-layout';
+import { cavePortalLining, cavePortalSeals, clipTerrainOutsideCave, registerCavePortalTriangles } from '../data/peninsula-cave';
 import { skateStairSurfaceAt } from '../data/concept-landmarks';
 import { TOWN_INTERIORS } from '../data/town-layout';
 import { groundSurfaceAt,terrainColorAt } from '../data/town-surfaces';
@@ -18,7 +19,8 @@ export function terrainVisibleHeight(d:Vector3,h:number){
  return h;
 }
 /** A complete periodic grid, not a latitude shoreline or a finite town rectangle.
- * Rendering samples the same support function as walking, including the cave floor.
+ * The upper cape stays continuous; only triangles crossing the actual cave void
+ * are clipped. The separate underground floor never replaces the cape above it.
  */
 type TerrainGrid={
  positions:Float32BufferAttribute;
@@ -27,8 +29,9 @@ type TerrainGrid={
  whole:number[];
  baseWorld:number[];
  localPatch:number[];
+ portal:number[];
 };
-export type TerrainPartition={baseWorld:BufferGeometry;localPatch:BufferGeometry};
+export type TerrainPartition={baseWorld:BufferGeometry;localPatch:BufferGeometry;portal:BufferGeometry};
 
 function boundsFor(position:Float32BufferAttribute,indices:number[]){
  const box=new Box3(),point=new Vector3();
@@ -65,13 +68,55 @@ function makeTerrainGrid(columns:number):TerrainGrid{
    (inPeninsulaRegion(centerX,centerZ)?localPatch:baseWorld).push(...cell);
   }
  }
- const positionAttribute=new Float32BufferAttribute(positions,3),colorAttribute=new Float32BufferAttribute(colors,3);
+ // Subtract the 3D cave void from local coastal triangles. Unlike flattening a
+ // strip, this leaves every high roof/cape triangle in its original position.
+ const addedPositions:number[]=[],addedColors:number[]=[],clippedLocal:number[]=[],portal:number[]=[];
+ const portalRock=new Color('#899185');
+ const addPortal=(point:Vector3)=>{
+  portal.push(count+addedPositions.length/3);
+  addedPositions.push(point.x,point.y,point.z);
+  addedColors.push(portalRock.r,portalRock.g,portalRock.b);
+ };
+ const vertex=(index:number)=>new Vector3(positions[index*3],positions[index*3+1],positions[index*3+2]);
+ for(let offset=0;offset<localPatch.length;offset+=3){
+  const indices=localPatch.slice(offset,offset+3),points=indices.map(vertex);
+  const fragments=clipTerrainOutsideCave(points[0],points[1],points[2]);
+  if(fragments===undefined){clippedLocal.push(...indices);continue;}
+  const triangle=new Triangle(points[0],points[1],points[2]);
+  for(const polygon of fragments){
+   const polygonIndices=polygon.map(point=>{
+    const bary=triangle.getBarycoord(point,new Vector3());
+    const index=count+addedPositions.length/3;
+    addedPositions.push(point.x,point.y,point.z);
+    for(let axis=0;axis<3;axis++)addedColors.push(bary
+     ?colors[indices[0]*3+axis]*bary.x+colors[indices[1]*3+axis]*bary.y+colors[indices[2]*3+axis]*bary.z
+     :colors[indices[0]*3+axis]);
+    return index;
+   });
+   for(let i=1;i<polygonIndices.length-1;i++)clippedLocal.push(polygonIndices[0],polygonIndices[i],polygonIndices[i+1]);
+  }
+  // Match the exact clipped boundary to the buried lining. Without this collar,
+  // the heightfield is an open sheet and sky/ocean is visible behind its mouth.
+  for(const panel of cavePortalSeals(fragments))for(const point of panel)addPortal(point);
+ }
+ for(const panel of cavePortalLining((x,z)=>terrainVisibleHeight(mapDirection(x,z),groundSurfaceAt(x,z).height)))for(const point of panel)addPortal(point);
+ localPatch.length=0;
+ for(const index of clippedLocal)localPatch.push(index);
+ whole.length=0;
+ for(const index of baseWorld)whole.push(index);
+ // Avoid spreading the complete globe's index buffer into a single call.
+ for(const index of localPatch)whole.push(index);
+ const joinedPositions=new Float32Array(positions.length+addedPositions.length);
+ joinedPositions.set(positions);joinedPositions.set(addedPositions,positions.length);
+ const joinedColors=new Float32Array(colors.length+addedColors.length);
+ joinedColors.set(colors);joinedColors.set(addedColors,colors.length);
+ const positionAttribute=new Float32BufferAttribute(joinedPositions,3),colorAttribute=new Float32BufferAttribute(joinedColors,3);
  // Compute normals once across the complete manifold before splitting indices,
  // so the two meshes share a continuous lighting seam at the patch edge.
  const normalSource=new BufferGeometry();
- normalSource.setAttribute('position',positionAttribute);normalSource.setAttribute('color',colorAttribute);normalSource.setIndex(whole);normalSource.computeVertexNormals();
+ normalSource.setAttribute('position',positionAttribute);normalSource.setAttribute('color',colorAttribute);normalSource.setIndex(whole.concat(portal));normalSource.computeVertexNormals();
  const normals=normalSource.getAttribute('normal') as Float32BufferAttribute;
- return {positions:positionAttribute,colors:colorAttribute,normals,whole,baseWorld,localPatch};
+ return {positions:positionAttribute,colors:colorAttribute,normals,whole,baseWorld,localPatch,portal};
 }
 /** Full unpartitioned terrain is retained as the stable, test-facing geometry API. */
 export function makeTerrain(columns=252){
@@ -80,25 +125,34 @@ export function makeTerrain(columns=252){
 /** Runtime rendering partitions complete cells; their shared border vertices cannot crack or overlap. */
 export function makeTerrainPartition(columns=252):TerrainPartition{
  const grid=makeTerrainGrid(columns);
- return {baseWorld:terrainGeometry(grid,grid.baseWorld),localPatch:terrainGeometry(grid,grid.localPatch)};
+ return {baseWorld:terrainGeometry(grid,grid.baseWorld),localPatch:terrainGeometry(grid,grid.localPatch),portal:terrainGeometry(grid,grid.portal)};
 }
 export default function TownLandscape({runtime}:{runtime:WorldRuntimeState}){
  const terrain=useMemo(()=>makeTerrainPartition(),[]);
  const overviewTerrain=useMemo(()=>makeTerrainPartition(126),[]);
- const baseMesh=useRef<Mesh>(null),localMesh=useRef<Mesh>(null);
+ const baseMesh=useRef<Mesh>(null),localMesh=useRef<Mesh>(null),portalMesh=useRef<Mesh>(null);
  useFrame(()=>{
   const active=runtime.overviewTransition>.65?overviewTerrain:terrain;
   if(baseMesh.current&&baseMesh.current.geometry!==active.baseWorld)baseMesh.current.geometry=active.baseWorld;
   if(localMesh.current&&localMesh.current.geometry!==active.localPatch)localMesh.current.geometry=active.localPatch;
+  if(portalMesh.current&&portalMesh.current.geometry!==active.portal)portalMesh.current.geometry=active.portal;
  });
- useEffect(()=>()=>{
-  terrain.baseWorld.dispose();terrain.localPatch.dispose();
-  overviewTerrain.baseWorld.dispose();overviewTerrain.localPatch.dispose();
+ useEffect(()=>{
+  const geometry=terrain.portal,positions=geometry.getAttribute('position'),indices=geometry.getIndex();
+  const triangles:Vector3[][]=[];
+  if(indices)for(let index=0;index<indices.count;index+=3)triangles.push([0,1,2].map(offset=>new Vector3().fromBufferAttribute(positions,indices.getX(index+offset))));
+  const release=registerCavePortalTriangles(geometry,triangles);
+  return ()=>{
+   release();
+   terrain.baseWorld.dispose();terrain.localPatch.dispose();terrain.portal.dispose();
+   overviewTerrain.baseWorld.dispose();overviewTerrain.localPatch.dispose();overviewTerrain.portal.dispose();
+  };
  },[terrain,overviewTerrain]);
  // Terrain receives landmark shadows but does not duplicate the complete
  // globe in the dynamic shadow map. Surface normals describe its own slopes.
  return <group name="terrain-partition">
   <mesh ref={baseMesh} name="terrain-base-world" geometry={terrain.baseWorld} receiveShadow><meshStandardMaterial vertexColors roughness={1}/></mesh>
   <mesh ref={localMesh} name="terrain-local-patch" geometry={terrain.localPatch} receiveShadow><meshStandardMaterial vertexColors roughness={1}/></mesh>
+  <mesh ref={portalMesh} name="terrain-cave-portals" geometry={terrain.portal} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={1} flatShading/></mesh>
  </group>;
 }

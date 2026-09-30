@@ -1,0 +1,145 @@
+{
+  "capturedAt": "2026-09-12T21:37:16.013Z",
+  "base": "http://127.0.0.1:3000",
+  "sourceBefore": "881665fe291102085e5a7613fa09989153498f717d06926c635a1a0630a97984",
+  "method": "Actual current third-person camera, ordinary heading turns only; no pitch/framing workaround or scene edits. Debug placement positions the visitor; independent preservation and physical route checks establish geometry safety.",
+  "errors": [],
+  "views": [
+    {
+      "filename": "desktop-fresh-courtyard.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "fresh-load",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.18777616939494,
+          "z": 36.236484672217976
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894475,
+          "z": 0.22039774345612217
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612223,
+          "z": 0.9754100853894476
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222218,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.15,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.008073921932348137,
+            "y": -1.1814388993398957,
+            "z": 0.9984577644020052
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 72,
+          "triangles": 458030,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-route-approach.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "lighthouse-route-approach",
+        "x": 28,
+        "z": -8,
+        "facing": {
+          "east": 0.0380462739131214,
+          "north": -0.9992759784170375
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 26.629434399768606,
+          "y": -5.959204991708688,
+          "z": 26.37353975891774
+        },
+        "forward": {
+          "x": 0.027107004721336994,
+          "y": -0.9688199111704452,
+          "z": -0.24627868363853195
+        },
+        "up": {
+          "x": 0.7016978761467353,
+          "y": -0.1570277995180155,
+          "z": 0.6949549343588337
+        },
+        "heading": 2.9462946986732184,
+        "lon": 0.790226055732404,
+        "lat": -0.15768039176369134,
+        "map": {
+          "x": 28,
+          "z": -8
+        },
+        "mapX": 28,
+        "mapZ": -8,
+        "radius": 37.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Graffiti Alley",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.13918972799011217,
+            "y": -0.3964040244718519,
+            "z": 0.9984376372968621
+          },
+          "summitFraming": 0,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 66,
+          "triangles": 454282,
+          "geometries": 46,
+          "textures": 7
+        }
+      }
+    }
+  ],
+  "sourceAfter": "881665fe291102085e5a7613fa09989153498f717d06926c635a1a0630a97984",
+  "sourceUnchanged": true
+}

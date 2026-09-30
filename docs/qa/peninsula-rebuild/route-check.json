@@ -1,0 +1,482 @@
+{
+  "script": "check-peninsula-routes",
+  "status": "failed",
+  "passes": [
+    {
+      "name": "all peninsula surface and collider samples remain finite",
+      "detail": {
+        "samples": 9849,
+        "colliders": 182
+      }
+    },
+    {
+      "name": "cove cliff rim blocks the non-route bypass from both sides",
+      "detail": {
+        "bypass": [
+          [
+            24.5,
+            -10
+          ],
+          [
+            27,
+            -8
+          ],
+          [
+            30,
+            -7
+          ],
+          [
+            33,
+            -11
+          ],
+          [
+            35,
+            -13
+          ],
+          [
+            37,
+            -15
+          ],
+          [
+            37,
+            -19
+          ]
+        ],
+        "forward": {
+          "blockedAt": {
+            "x": 30.977,
+            "z": -8.397
+          },
+          "target": {
+            "x": 31.2,
+            "z": -8.6
+          },
+          "distance": 7.383,
+          "steps": 150,
+          "softBlocks": 9,
+          "contact": {
+            "buildingId": "peninsula-cliff",
+            "segmentId": "peninsula-cliff:8:lower"
+          }
+        },
+        "reverse": {
+          "blockedAt": {
+            "x": 34.0239,
+            "z": -11.9808
+          },
+          "target": {
+            "x": 33.8889,
+            "z": -11.8889
+          },
+          "distance": 5.4968,
+          "steps": 109,
+          "softBlocks": 4,
+          "contact": {
+            "buildingId": "peninsula-cliff",
+            "segmentId": "peninsula-cliff:7:lower"
+          }
+        }
+      }
+    },
+    {
+      "name": "lighthouse foot is fully supported by its local foundation",
+      "detail": {
+        "tower": {
+          "x": 36,
+          "z": -32,
+          "elevation": 6.2,
+          "height": 12
+        },
+        "samples": [
+          {
+            "chart": {
+              "x": 36,
+              "z": -32
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 34.148,
+              "z": -28.9303
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 34.148,
+              "z": -35.0697
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 37.7128,
+              "z": -28.4176
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 37.7128,
+              "z": -35.5824
+            },
+            "blend": 1,
+            "mismatch": 0
+          }
+        ]
+      }
+    }
+  ],
+  "failures": [
+    {
+      "name": "42 local cliff wedges are finite, closed, and contained by their collision OBBs",
+      "message": "unexpected cliff wedge/collider count",
+      "detail": {
+        "wedges": 44,
+        "colliders": 44,
+        "runtimeColliders": 44
+      }
+    },
+    {
+      "name": "lighthouse trail walks from [20, 4] in both directions",
+      "message": "lighthouse route edge lane is not safely walkable",
+      "detail": {
+        "edgeLane": 0.65,
+        "edgeClearance": 0.24,
+        "edgeReports": [
+          {
+            "name": "lighthouse lane -0.65 forward",
+            "status": "failed",
+            "message": "lighthouse lane -0.65 forward @ target 51: movement stopped",
+            "detail": {
+              "chart": {
+                "x": 30.3898,
+                "z": -15.157
+              },
+              "target": {
+                "x": 30.4792,
+                "z": -15.7025
+              },
+              "support": {
+                "radius": 38.5921,
+                "kind": "ground",
+                "id": "lighthouse-trail"
+              },
+              "last": {
+                "blocked": true,
+                "distance": 0,
+                "ground": 38.5921,
+                "contact": null
+              }
+            }
+          },
+          {
+            "name": "lighthouse lane -0.65 reverse",
+            "status": "passed",
+            "report": {
+              "lane": -0.65,
+              "distance": 29.5791,
+              "steps": 544,
+              "end": {
+                "x": 19.5333,
+                "z": 3.4693
+              },
+              "maxPathHeightGradient": {
+                "name": "lighthouse lane -0.65 reverse",
+                "lane": -0.65,
+                "ratio": 0.9261,
+                "verticalDelta": -0.0509,
+                "sampleDistance": 0.055,
+                "from": {
+                  "x": 31.3943,
+                  "z": -25.8706
+                },
+                "to": {
+                  "x": 31.3656,
+                  "z": -25.7977
+                }
+              }
+            }
+          },
+          {
+            "name": "lighthouse lane 0.65 forward",
+            "status": "passed",
+            "report": {
+              "lane": 0.65,
+              "distance": 29.5813,
+              "steps": 544,
+              "end": {
+                "x": 32.5505,
+                "z": -32.0399
+              },
+              "maxPathHeightGradient": {
+                "name": "lighthouse lane 0.65 forward",
+                "lane": 0.65,
+                "ratio": 0.9261,
+                "verticalDelta": 0.0509,
+                "sampleDistance": 0.055,
+                "from": {
+                  "x": 31.3643,
+                  "z": -25.7942
+                },
+                "to": {
+                  "x": 31.393,
+                  "z": -25.8671
+                }
+              }
+            }
+          },
+          {
+            "name": "lighthouse lane 0.65 reverse",
+            "status": "failed",
+            "message": "lighthouse lane 0.65 reverse @ target 17: movement stopped",
+            "detail": {
+              "chart": {
+                "x": 31.6035,
+                "z": -22.6767
+              },
+              "target": {
+                "x": 31.6,
+                "z": -22.6124
+              },
+              "support": {
+                "radius": 40.0578,
+                "kind": "ground",
+                "id": "lighthouse-trail"
+              },
+              "last": {
+                "blocked": true,
+                "distance": 0,
+                "ground": 40.0578,
+                "contact": null
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "beach-east joins cave and remains walkable both ways at full width",
+      "message": "beach-to-cave forward @ target 48: movement stopped",
+      "detail": {
+        "chart": {
+          "x": 26.255,
+          "z": -29
+        },
+        "target": {
+          "x": 26.3333,
+          "z": -29
+        },
+        "support": {
+          "radius": 35.925,
+          "kind": "ground",
+          "id": "beach-east"
+        },
+        "last": {
+          "blocked": true,
+          "distance": 0,
+          "ground": 35.925,
+          "contact": null
+        }
+      }
+    },
+    {
+      "name": "cove is dry sand with an actual eastward ocean opening",
+      "message": "cove to cave exit @ target 7: movement stopped",
+      "detail": {
+        "chart": {
+          "x": 37.6667,
+          "z": -18
+        },
+        "target": {
+          "x": 37.7778,
+          "z": -18.6667
+        },
+        "support": {
+          "radius": 38.2612,
+          "kind": "ground"
+        },
+        "last": {
+          "blocked": true,
+          "distance": 0,
+          "ground": 38.2612,
+          "contact": null
+        }
+      }
+    },
+    {
+      "name": "normal follow camera stays clear in four cardinal cove views",
+      "message": "normal cove follow camera is too collision-shortened",
+      "detail": {
+        "cove": {
+          "x": 37,
+          "z": -14
+        },
+        "minimum": 2.43,
+        "views": [
+          {
+            "heading": "north",
+            "available": 2.43,
+            "target": {
+              "x": 37.5308,
+              "z": -14
+            },
+            "cameraDirection": {
+              "x": 0.4538,
+              "y": -0.8885,
+              "z": -0.0681
+            }
+          },
+          {
+            "heading": "east",
+            "available": 4.8,
+            "target": {
+              "x": 36.9935,
+              "z": -15.027
+            },
+            "cameraDirection": {
+              "x": 0.0156,
+              "y": -0.3791,
+              "z": 0.9252
+            }
+          },
+          {
+            "heading": "south",
+            "available": 2.9516,
+            "target": {
+              "x": 36.4692,
+              "z": -14
+            },
+            "cameraDirection": {
+              "x": 0.4538,
+              "y": 0.6808,
+              "z": 0.5749
+            }
+          },
+          {
+            "heading": "west",
+            "available": 4.8,
+            "target": {
+              "x": 36.9935,
+              "z": -12.973
+            },
+            "cameraDirection": {
+              "x": 0.8919,
+              "y": 0.1714,
+              "z": -0.4184
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "outside-cave peninsula terrain remains modest",
+      "message": "outside-cave terrain is still a giant cliff",
+      "detail": {
+        "height": 6.2,
+        "x": 33.4,
+        "z": -25.4,
+        "blend": 1
+      }
+    }
+  ],
+  "reports": {
+    "maximumPathHeightGradient": {
+      "name": "cave exit to cove",
+      "lane": 0,
+      "ratio": 5.9787169806980955,
+      "verticalDelta": -0.32882943393839525,
+      "sampleDistance": 0.055,
+      "from": {
+        "x": 37.6735,
+        "z": -18.0397
+      },
+      "to": {
+        "x": 37.6565,
+        "z": -17.9352
+      }
+    },
+    "pathHeightGradients": [
+      {
+        "name": "lighthouse forward",
+        "lane": 0,
+        "ratio": 1.0129299398563127,
+        "verticalDelta": 0.0557111466920972,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 31.8592,
+          "z": -25.1463
+        },
+        "to": {
+          "x": 31.8886,
+          "z": -25.2197
+        }
+      },
+      {
+        "name": "lighthouse reverse",
+        "lane": 0,
+        "ratio": 1.0131928157470973,
+        "verticalDelta": -0.05572560486609035,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 31.8828,
+          "z": -25.2052
+        },
+        "to": {
+          "x": 31.8533,
+          "z": -25.1318
+        }
+      },
+      {
+        "name": "lighthouse lane -0.65 reverse",
+        "lane": -0.65,
+        "ratio": 0.9260677846432425,
+        "verticalDelta": -0.05093372815537833,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 31.3943,
+          "z": -25.8706
+        },
+        "to": {
+          "x": 31.3656,
+          "z": -25.7977
+        }
+      },
+      {
+        "name": "lighthouse lane 0.65 forward",
+        "lane": 0.65,
+        "ratio": 0.9260992019221703,
+        "verticalDelta": 0.05093545610571937,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 31.3643,
+          "z": -25.7942
+        },
+        "to": {
+          "x": 31.393,
+          "z": -25.8671
+        }
+      },
+      {
+        "name": "cave exit to cove",
+        "lane": 0,
+        "ratio": 5.9787169806980955,
+        "verticalDelta": -0.32882943393839525,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 37.6735,
+          "z": -18.0397
+        },
+        "to": {
+          "x": 37.6565,
+          "z": -17.9352
+        }
+      }
+    ]
+  }
+}

@@ -1,7 +1,11 @@
 {
-  "checkedAt": "2026-09-12T21:18:51.908Z",
+  "checkedAt": "2026-09-12T21:46:05.092Z",
   "passed": true,
   "snapshotChanges": [],
+  "lighthousePreserved": {
+    "components": true,
+    "visibleDetails": true
+  },
   "protectedSampleCount": 123654,
   "changedSampleCount": 0,
   "maximumDelta": 0,

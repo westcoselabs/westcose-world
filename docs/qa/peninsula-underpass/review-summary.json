@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-09-12T22:30:21.946Z",
+  "captureDirectory": "C:\\Users\\citry\\OneDrive\\Desktop\\westcose-world\\docs\\qa\\peninsula-underpass\\final",
+  "isFinal": true,
+  "viewCount": 20,
+  "preservationPassed": true,
+  "focusedTraversalStatus": "passed",
+  "renderAcceptance": {
+    "passed": true,
+    "method": "All actual fixtures are grounded/dry and source remains stable during capture. Camera distances are observations; topology is never relocated to satisfy framing. Images still require human structural review.",
+    "failures": [],
+    "coveCameraObservations": [
+      {
+        "view": "desktop-hidden-beach-ocean.jpg",
+        "distance": 3.5830648909239464,
+        "desired": 4.8
+      },
+      {
+        "view": "desktop-globe-hidden-beach-ocean.jpg",
+        "distance": 3.5830648909239464,
+        "desired": 4.8
+      },
+      {
+        "view": "phone-hidden-beach-ocean.jpg",
+        "distance": 3.5830648909239464,
+        "desired": 4.8
+      },
+      {
+        "view": "phone-globe-hidden-beach-ocean.jpg",
+        "distance": 3.5830648909239464,
+        "desired": 4.8
+      }
+    ]
+  },
+  "coastSampleRange": {
+    "minimum": -3,
+    "maximum": 6.402550384614762
+  },
+  "lighthouse": {
+    "x": 36,
+    "z": -32,
+    "elevation": 6.2,
+    "height": 12
+  },
+  "cave": {
+    "points": [
+      [
+        28,
+        -29
+      ],
+      [
+        31,
+        -30.5
+      ],
+      [
+        34,
+        -32
+      ],
+      [
+        36,
+        -32
+      ],
+      [
+        37,
+        -30
+      ],
+      [
+        38,
+        -26
+      ],
+      [
+        38,
+        -22
+      ],
+      [
+        38,
+        -20
+      ]
+    ],
+    "floor": -0.1,
+    "width": 3.4,
+    "clearance": 4
+  },
+  "cove": {
+    "x": 37,
+    "z": -11
+  }
+}

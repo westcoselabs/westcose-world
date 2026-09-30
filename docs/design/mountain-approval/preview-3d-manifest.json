@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-13T18:58:05.243Z",
+  "status": "APPROVAL ONLY — NOT IMPLEMENTED",
+  "proposal": {
+    "source": "docs/design/mountain-approval/proposal-data.mjs",
+    "sha256": "f11967aea16408bd4cf3326eeb43552e07aa49ad446ae496d1c41986c7500066",
+    "radius": 36,
+    "seaLevel": -0.8,
+    "summit": {
+      "x": 0,
+      "z": 153,
+      "height": 40
+    },
+    "runIds": [
+      "ski-central",
+      "ski-west",
+      "ski-east"
+    ]
+  },
+  "preview": {
+    "source": "docs/design/mountain-approval/preview-3d.html",
+    "data": "docs/design/mountain-approval/preview-3d-data.json",
+    "terrainSamples": 9525,
+    "domain": {
+      "x": [
+        -37,
+        37
+      ],
+      "z": [
+        45,
+        171
+      ],
+      "height": [
+        -3,
+        40
+      ]
+    },
+    "loopbackOnly": true,
+    "liveApplicationStarted": false
+  },
+  "sourceIntegrity": {
+    "sourceBefore": "292038c37676065ef96f88b8ca9676a3d41b84b75dc9d74af97e3a97758feb63",
+    "sourceAfter": "292038c37676065ef96f88b8ca9676a3d41b84b75dc9d74af97e3a97758feb63",
+    "sourceUnchanged": true
+  },
+  "errors": [],
+  "views": [
+    {
+      "view": "front",
+      "projection": "Unwrapped terrain (explicitly not a globe)",
+      "png": {
+        "file": "mountain-front-unwrapped.png",
+        "bytes": 135205,
+        "sha256": "6f11dd550abd7b54df8e988bbc0d3e0ea42150c68f32898221911db5bdab31cc",
+        "width": 1600,
+        "height": 1000
+      },
+      "inlineJpeg": {
+        "file": "mountain-unwrapped.jpg",
+        "bytes": 47900,
+        "sha256": "bebfeeab7e69888d0dfae18968dc5fd764526a2cd2d2d05163990612f540295e",
+        "width": 940,
+        "height": 588,
+        "quality": 82
+      }
+    },
+    {
+      "view": "globe",
+      "projection": "Actual radius-36 globe exterior view",
+      "png": {
+        "file": "mountain-globe-three-quarter.png",
+        "bytes": 132976,
+        "sha256": "ee38eef42b694981c2c472a1917721b2b146c824d5befd6ea92b1c934120eb63",
+        "width": 1600,
+        "height": 1000
+      },
+      "inlineJpeg": {
+        "file": "mountain-globe.jpg",
+        "bytes": 38685,
+        "sha256": "f62c74513330311f8689cf17581448cc8454200aedbfe1a3958dca087f7fdd80",
+        "width": 940,
+        "height": 588,
+        "quality": 82
+      }
+    },
+    {
+      "view": "rear",
+      "projection": "Actual radius-36 globe exterior rear view",
+      "png": {
+        "file": "mountain-globe-rear.png",
+        "bytes": 99983,
+        "sha256": "00c97e7a169504d235017b7fa544fd4c8823ece2d10c44c923672c510526d551",
+        "width": 1600,
+        "height": 1000
+      },
+      "inlineJpeg": {
+        "file": "mountain-rear.jpg",
+        "bytes": 36525,
+        "sha256": "b60099537f1dae6d379b2283804a5a956496ab46b4d27671fad0a418f10428be",
+        "width": 940,
+        "height": 588,
+        "quality": 82
+      }
+    }
+  ]
+}

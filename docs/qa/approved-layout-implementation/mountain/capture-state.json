@@ -1,0 +1,1983 @@
+{
+  "capturedAt": "2026-09-13T19:36:46.681Z",
+  "base": "http://127.0.0.1:3000",
+  "sourceBefore": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3",
+  "settleMilliseconds": 1800,
+  "method": "Actual live third-person and globe cameras. Debug placement changes player position and ordinary heading only; no camera pitch override, isolated proposal renderer, generated artwork, or live-source mutation. Geometry and movement validation are separate.",
+  "errors": [],
+  "consoleErrors": [
+    {
+      "profile": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "observations": [],
+  "views": [
+    {
+      "filename": "desktop-resort-pair.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "resort-pair",
+        "x": 1,
+        "z": 50,
+        "facing": "north",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 1.1012472548356718,
+          "y": 38.98074776660904,
+          "z": 7.1701504893356764
+        },
+        "forward": {
+          "x": -7.708890656518349e-19,
+          "y": 0.18090586735779426,
+          "z": -0.9835004154323089
+        },
+        "up": {
+          "x": 0.027774205670508745,
+          "y": 0.9831210029409595,
+          "z": 0.18083607791514947
+        },
+        "heading": 0.1498632421120266,
+        "lon": 0.15239688586610867,
+        "lat": 1.386803417283527,
+        "map": {
+          "x": 0.9999999999999997,
+          "z": 50
+        },
+        "mapX": 0.9999999999999997,
+        "mapZ": 50,
+        "radius": 39.65,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.025976853645129933,
+            "y": -2.6237168773141635,
+            "z": 0.9980966646467105
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 399567,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-resort-building-gap.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "resort-building-gap",
+        "x": 2.1,
+        "z": 53,
+        "facing": "north"
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 2.313062672661241,
+          "y": 39.415242073039785,
+          "z": 3.8979556688109964
+        },
+        "forward": {
+          "x": 8.090785874573129e-19,
+          "y": 0.0984145437486329,
+          "z": -0.9951455057320756
+        },
+        "up": {
+          "x": 0.058300256399779225,
+          "y": 0.9934528562832964,
+          "z": 0.09824714981250147
+        },
+        "heading": 0.5326771968192567,
+        "lon": 0.5355554194156914,
+        "lat": 1.4563035287866017,
+        "map": {
+          "x": 2.1,
+          "z": 53
+        },
+        "mapX": 2.1,
+        "mapZ": 53,
+        "radius": 39.675,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.059422679615193166,
+            "y": -2.352439385545496,
+            "z": 0.9982244043566237
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 57,
+          "triangles": 373731,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-finish-uphill.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "finish-uphill",
+        "x": 1,
+        "z": 65,
+        "facing": "north",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 1.1025196963410788,
+          "y": 38.59207879333111,
+          "z": -9.23003449799243
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.23260882528239368,
+          "z": -0.972570375037583
+        },
+        "up": {
+          "x": 0.027774205670508745,
+          "y": 0.9721951791116683,
+          "z": -0.23251908999349555
+        },
+        "heading": 3.025982611809578,
+        "lon": 3.022706801698497,
+        "lat": 1.3344295091580884,
+        "map": {
+          "x": 1,
+          "z": 65
+        },
+        "mapX": 1,
+        "mapZ": 65,
+        "radius": 39.69581378565789,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "F / Run Finish",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.014957038971087739,
+            "y": -1.5234360238349576,
+            "z": 0.9985426155418573
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 54,
+          "triangles": 370498,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-finish-toward-resort.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "finish-toward-resort",
+        "x": 1,
+        "z": 65,
+        "facing": "south",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 1.102519696341079,
+          "y": 38.59207879333112,
+          "z": -9.230034497992431
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.23260882528239368,
+          "z": 0.972570375037583
+        },
+        "up": {
+          "x": 0.027774205670508752,
+          "y": 0.9721951791116685,
+          "z": -0.2325190899934956
+        },
+        "heading": -0.11561004178021535,
+        "lon": 3.022706801698497,
+        "lat": 1.3344295091580884,
+        "map": {
+          "x": 1,
+          "z": 65
+        },
+        "mapX": 1,
+        "mapZ": 65,
+        "radius": 39.6958137856579,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "F / Run Finish",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.7627881455776234,
+            "y": -62.15689451711911,
+            "z": 0.9563607343683773
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 62,
+          "triangles": 404394,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-summit-decision.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "summit-decision",
+        "x": 0,
+        "z": 151,
+        "facing": "south",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -66.42271593816007,
+          "z": -37.85003708582722
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.49509531832344306,
+          "z": -0.8688386649857432
+        },
+        "up": {
+          "x": 0,
+          "y": -0.8688386649857432,
+          "z": -0.49509531832344306
+        },
+        "heading": 1.06402049005025e-16,
+        "lon": 3.141592653589793,
+        "lat": -1.0528517908546513,
+        "map": {
+          "x": 0,
+          "z": 151
+        },
+        "mapX": 0,
+        "mapZ": 151,
+        "radius": 76.45,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Mountain Summit",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.4838021768979243,
+            "y": -4.732158100471778,
+            "z": 0.8904434853222121
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 51,
+          "triangles": 343522,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-1-upper.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-1-upper",
+        "x": 2.480955930109533,
+        "z": 141.125,
+        "facing": {
+          "east": 0.0146757691948151,
+          "north": -0.08639572472657425
+        },
+        "run": "ski-central",
+        "critical": false
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 5.015453187920776,
+          "y": -51.02630213812501,
+          "z": -51.730394655004346
+        },
+        "forward": {
+          "x": 0.16707038194207988,
+          "y": 0.7099791900063487,
+          "z": -0.6841177071496225
+        },
+        "up": {
+          "x": 0.06886090499805476,
+          "y": -0.7005782353622413,
+          "z": -0.710245247713476
+        },
+        "heading": -0.10044125699441889,
+        "lon": 3.0449410400888377,
+        "lat": -0.7762075097246699,
+        "map": {
+          "x": 2.4809559301095336,
+          "z": 141.125
+        },
+        "mapX": 2.4809559301095336,
+        "mapZ": 141.125,
+        "radius": 72.83455232054321,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Central S-run",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.015631191083975676,
+            "y": 1.547962164506043,
+            "z": 1.0096417252385887
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 50,
+          "triangles": 338294,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-1-middle.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-1-middle",
+        "x": -3.5101681826267415,
+        "z": 109.92,
+        "facing": {
+          "east": -0.018542011386577448,
+          "north": -0.08872842011688438
+        },
+        "run": "ski-central",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -5.520397678568925,
+          "y": 4.974645871955114,
+          "z": -56.21754317053186
+        },
+        "forward": {
+          "x": -0.20358447528781462,
+          "y": 0.9732895456867297,
+          "z": 0.10611701879861149
+        },
+        "up": {
+          "x": -0.09735024639631662,
+          "y": 0.08772610771309367,
+          "z": -0.991376346072513
+        },
+        "heading": 0.21462440827147403,
+        "lon": -3.043709403166802,
+        "lat": 0.08783902063832816,
+        "map": {
+          "x": -3.5101681826267415,
+          "z": 109.92000000000002
+        },
+        "mapX": -3.5101681826267415,
+        "mapZ": 109.92000000000002,
+        "radius": 56.70656092738761,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Central S-run",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.31951682304608325,
+            "y": 2.6088395050219266,
+            "z": 1.0038300763547219
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 53,
+          "triangles": 365106,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-1-lower.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-1-lower",
+        "x": -0.8452644873699852,
+        "z": 79.7,
+        "facing": {
+          "east": 0.009859377625925533,
+          "north": -0.09014695423722557
+        },
+        "run": "ski-central",
+        "critical": false
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -1.0403607649886466,
+          "y": 35.45169692556822,
+          "z": -26.56614888482436
+        },
+        "forward": {
+          "x": 0.1086917695554349,
+          "y": 0.5981610134240088,
+          "z": 0.7939707181316394
+        },
+        "up": {
+          "x": -0.023477411810490078,
+          "y": 0.8000244877663502,
+          "z": -0.5995078232257439
+        },
+        "heading": -0.07761744458360362,
+        "lon": -3.1024515109428754,
+        "lat": 0.9273360320560652,
+        "map": {
+          "x": -0.8452644873699852,
+          "z": 79.69999999999999
+        },
+        "mapX": -0.8452644873699852,
+        "mapZ": 79.69999999999999,
+        "radius": 44.313264740868796,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Central S-run",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.41982712280805007,
+            "y": 9.505360220047667,
+            "z": 1.0076352396250423
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 55,
+          "triangles": 398158,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-3-upper.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-3-upper",
+        "x": -14.28290328080385,
+        "z": 141.07142857142858,
+        "facing": {
+          "east": -0.09988742363725406,
+          "north": -0.07844561040179565
+        },
+        "run": "ski-west",
+        "critical": false
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -27.811466463953664,
+          "y": -46.54568380992325,
+          "z": -47.32861581208429
+        },
+        "forward": {
+          "x": -0.7253711125209746,
+          "y": 0.6534577073345658,
+          "z": -0.21640188041035316
+        },
+        "up": {
+          "x": -0.3864203647821776,
+          "y": -0.6467188682832775,
+          "z": -0.657597146502329
+        },
+        "heading": 0.5418869268277516,
+        "lon": -2.6103222925152245,
+        "lat": -0.7032747144140578,
+        "map": {
+          "x": -14.28290328080385,
+          "z": 141.07142857142858
+        },
+        "mapX": -14.28290328080385,
+        "mapZ": 141.07142857142858,
+        "radius": 71.97205167908474,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Western forest turns",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.08608867468590709,
+            "y": 1.7605445025983388,
+            "z": 1.0064604511932473
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 50,
+          "triangles": 338294,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-3-middle.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-3-middle",
+        "x": -21.139087330514652,
+        "z": 109.73684210526316,
+        "facing": {
+          "east": -0.036259608774901864,
+          "north": -0.0712130653482526
+        },
+        "run": "ski-west",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -31.466489054368495,
+          "y": 4.407249361750151,
+          "z": -47.07638115806731
+        },
+        "forward": {
+          "x": -0.3777367840646495,
+          "y": 0.8638226530225709,
+          "z": 0.3333546851171338
+        },
+        "up": {
+          "x": -0.5540296056480167,
+          "y": 0.07759831806033415,
+          "z": -0.8288725457509799
+        },
+        "heading": 0.5227785780709616,
+        "lon": -2.552381673459044,
+        "lat": 0.07767640620471784,
+        "map": {
+          "x": -21.13908733051465,
+          "z": 109.73684210526318
+        },
+        "mapX": -21.13908733051465,
+        "mapZ": 109.73684210526318,
+        "radius": 56.79568155489442,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Western forest turns",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.5348201250381915,
+            "y": 2.937987506462027,
+            "z": 1.0039854663726084
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 53,
+          "triangles": 365106,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-3-lower.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-3-lower",
+        "x": -17.676056411192555,
+        "z": 80.05263157894737,
+        "facing": {
+          "east": 0.044505199050450556,
+          "north": -0.07908077383176243
+        },
+        "run": "ski-west",
+        "critical": false
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -20.99774134635461,
+          "y": 31.19499356991744,
+          "z": -23.85703455552412
+        },
+        "forward": {
+          "x": 0.43250664102384156,
+          "y": 0.7130934778155658,
+          "z": 0.551756918730681
+        },
+        "up": {
+          "x": -0.4715093674268575,
+          "y": 0.7004911358044814,
+          "z": -0.5357154889379925
+        },
+        "heading": 0.03988671410643692,
+        "lon": -2.419853925707249,
+        "lat": 0.776085456308363,
+        "map": {
+          "x": -17.676056411192558,
+          "z": 80.05263157894734
+        },
+        "mapX": -17.676056411192558,
+        "mapZ": 80.05263157894734,
+        "radius": 44.53303114834058,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Western forest turns",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 1.113639468309034,
+            "y": 8.511008738869025,
+            "z": 1.0071467654838901
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 55,
+          "triangles": 398158,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-2-upper.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-2-upper",
+        "x": 15.434402832112736,
+        "z": 141.07142857142858,
+        "facing": {
+          "east": 0.10460813002191607,
+          "north": -0.07683926782032413
+        },
+        "run": "ski-east",
+        "critical": false
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 30.16072474708159,
+          "y": -46.26724915140079,
+          "z": -47.04549768160858
+        },
+        "forward": {
+          "x": 0.7329963238858369,
+          "y": 0.6570105149105627,
+          "z": -0.17622023852783422
+        },
+        "up": {
+          "x": 0.4157191832474944,
+          "y": -0.6377228395411751,
+          "z": -0.6484497980627157
+        },
+        "heading": -0.549155088571565,
+        "lon": 2.5715016554828534,
+        "lat": -0.6915383041315049,
+        "map": {
+          "x": 15.434402832112738,
+          "z": 141.07142857142858
+        },
+        "mapX": 15.434402832112738,
+        "mapZ": 141.07142857142858,
+        "radius": 72.55071683599863,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Eastern coastal sweep",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.13373889637367514,
+            "y": 1.8655188400395093,
+            "z": 1.0062776278919754
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 51,
+          "triangles": 343522,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-2-middle.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-2-middle",
+        "x": 25.463575988467873,
+        "z": 109.75,
+        "facing": {
+          "east": 0.002840713403732542,
+          "north": -0.06584312392194923
+        },
+        "run": "ski-east",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 36.73593189920246,
+          "y": 3.9898412560730794,
+          "z": -42.78630328561349
+        },
+        "forward": {
+          "x": 0.03276323646392293,
+          "y": 0.9921544125156117,
+          "z": 0.12064904501159823
+        },
+        "up": {
+          "x": 0.6498002049057102,
+          "y": 0.07057394577198213,
+          "z": -0.7568216513041037
+        },
+        "heading": -0.10363707423610206,
+        "lon": 2.4321322075153926,
+        "lat": 0.0706326618629909,
+        "map": {
+          "x": 25.463575988467866,
+          "z": 109.75
+        },
+        "mapX": 25.463575988467866,
+        "mapZ": 109.75,
+        "radius": 56.5341956217651,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Eastern coastal sweep",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.414398496849815,
+            "y": 2.9984752777011803,
+            "z": 1.0039328028047338
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 54,
+          "triangles": 370334,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-run-2-lower.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "run-2-lower",
+        "x": 18.696099546501657,
+        "z": 80.25,
+        "facing": {
+          "east": -0.054982459774693876,
+          "north": -0.07758237929144529
+        },
+        "run": "ski-east",
+        "critical": false
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 22.35454504191561,
+          "y": 30.930258817821286,
+          "z": -23.92446059079329
+        },
+        "forward": {
+          "x": -0.5019769789769392,
+          "y": 0.726172213267925,
+          "z": 0.4697797667575189
+        },
+        "up": {
+          "x": 0.49630388193930863,
+          "y": 0.6866973804158795,
+          "z": -0.5311583233857317
+        },
+        "heading": 0.04606627056571928,
+        "lon": 2.3901043321281548,
+        "lat": 0.7569360869325438,
+        "map": {
+          "x": 18.696099546501657,
+          "z": 80.25
+        },
+        "mapX": 18.696099546501657,
+        "mapZ": 80.25,
+        "radius": 45.04205156438666,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Eastern coastal sweep",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -1.5095381321491137,
+            "y": 9.029225882511943,
+            "z": 1.007645329272984
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 55,
+          "triangles": 371858,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-pier-seaward.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "pier-seaward",
+        "fixture": "pieroutward",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -36.715383039107245,
+          "z": 11.077145313285197
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.2888434240752333,
+          "z": -0.9573763504330441
+        },
+        "up": {
+          "x": 0,
+          "y": -0.9573763504330441,
+          "z": 0.2888434240752333
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -1.2777777777777777,
+        "map": {
+          "x": 0,
+          "z": -46
+        },
+        "mapX": 0,
+        "mapZ": -46,
+        "radius": 38.35,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.01268812896733208,
+            "y": 0.5984334294252488,
+            "z": 0.9974101069605845
+          },
+          "summitFraming": 0.9515142066672151,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 43,
+          "triangles": 417182,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-globe-mountain-front.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "globe-mountain-front",
+        "x": 0,
+        "z": 118,
+        "facing": "north",
+        "globe": true,
+        "critical": true
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -8.200353116825092,
+          "z": -59.84203289020696
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9907411291388822,
+          "z": 0.1357645573506309
+        },
+        "up": {
+          "x": 0,
+          "y": -0.13576455735063087,
+          "z": -0.990741129138882
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -0.13618512418798437,
+        "map": {
+          "x": 0,
+          "z": 117.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 117.99999999999997,
+        "radius": 60.401280546634396,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Central S-run",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0,
+            "y": 0.7374555374971479,
+            "z": 0.9994778543192475
+          },
+          "summitFraming": 0.000003892808626640799,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 75,
+          "triangles": 272529,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-globe-resort-base.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "globe-resort-base",
+        "x": 1,
+        "z": 53.7,
+        "facing": "north",
+        "globe": true
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 1.1019416099774335,
+          "y": 39.535594396280096,
+          "z": 3.1349841181458196
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.07904710754210832,
+          "z": -0.9968708817039579
+        },
+        "up": {
+          "x": 0.027774205670508718,
+          "y": 0.9964863111853836,
+          "z": 0.07901661293373205
+        },
+        "heading": 0.33690932247060856,
+        "lon": 0.33800898994777523,
+        "lat": 1.486942305865911,
+        "map": {
+          "x": 0.9999999999999986,
+          "z": 53.69999999999999
+        },
+        "mapX": 0.9999999999999986,
+        "mapZ": 53.69999999999999,
+        "radius": 39.67500000000001,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.008376102415066441,
+            "y": 0.08148720181178808,
+            "z": 0.9997566567996292
+          },
+          "summitFraming": 2.8065940128287027e-14,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 75,
+          "triangles": 272529,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "desktop-globe-mountain-rear.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "globe-mountain-rear",
+        "x": 0,
+        "z": 160,
+        "facing": "south",
+        "globe": true
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -42.80796545470233,
+          "z": -11.75277659232117
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.2647498781834829,
+          "z": -0.9643171169287784
+        },
+        "up": {
+          "x": 0,
+          "y": -0.9643171169287782,
+          "z": -0.26474987818348283
+        },
+        "heading": 1.1809478706098322e-16,
+        "lon": 3.141592653589793,
+        "lat": -1.3028517908546513,
+        "map": {
+          "x": 0,
+          "z": 160
+        },
+        "mapX": 0,
+        "mapZ": 160,
+        "radius": 44.392,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Mountain Summit",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0,
+            "y": 0.41016235499721004,
+            "z": 0.9992591321156243
+          },
+          "summitFraming": 1.9773793292435543e-22,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 75,
+          "triangles": 272529,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-resort-pair.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "resort-pair",
+        "x": 1,
+        "z": 50,
+        "facing": "north",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 1.1012472548356718,
+          "y": 38.98074776660904,
+          "z": 7.1701504893356764
+        },
+        "forward": {
+          "x": -7.708890656518349e-19,
+          "y": 0.18090586735779426,
+          "z": -0.9835004154323089
+        },
+        "up": {
+          "x": 0.027774205670508745,
+          "y": 0.9831210029409595,
+          "z": 0.18083607791514947
+        },
+        "heading": 0.1498632421120266,
+        "lon": 0.15239688586610867,
+        "lat": 1.386803417283527,
+        "map": {
+          "x": 0.9999999999999997,
+          "z": 50
+        },
+        "mapX": 0.9999999999999997,
+        "mapZ": 50,
+        "radius": 39.65,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Ski Resort",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.08994652092918837,
+            "y": -2.6237168773141635,
+            "z": 0.9980966646467105
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 58,
+          "triangles": 399567,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-finish-uphill.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "finish-uphill",
+        "x": 1,
+        "z": 65,
+        "facing": "north",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 1.102519696341079,
+          "y": 38.59207879333112,
+          "z": -9.230034497992431
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.23260882528239368,
+          "z": -0.972570375037583
+        },
+        "up": {
+          "x": 0.027774205670508752,
+          "y": 0.9721951791116685,
+          "z": -0.2325190899934956
+        },
+        "heading": 3.025982611809578,
+        "lon": 3.022706801698497,
+        "lat": 1.3344295091580884,
+        "map": {
+          "x": 1,
+          "z": 65
+        },
+        "mapX": 1,
+        "mapZ": 65,
+        "radius": 39.6958137856579,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "F / Run Finish",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0.05178970622194083,
+            "y": -1.5234360238349576,
+            "z": 0.9985426155418573
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 54,
+          "triangles": 370498,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-finish-toward-resort.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "finish-toward-resort",
+        "x": 1,
+        "z": 65,
+        "facing": "south",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 1.102519696341079,
+          "y": 38.59207879333112,
+          "z": -9.230034497992431
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.23260882528239368,
+          "z": 0.972570375037583
+        },
+        "up": {
+          "x": 0.027774205670508752,
+          "y": 0.9721951791116685,
+          "z": -0.2325190899934956
+        },
+        "heading": -0.11561004178021535,
+        "lon": 3.022706801698497,
+        "lat": 1.3344295091580884,
+        "map": {
+          "x": 1,
+          "z": 65
+        },
+        "mapX": 1,
+        "mapZ": 65,
+        "radius": 39.6958137856579,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "F / Run Finish",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -2.6412028507385195,
+            "y": -62.15689451711911,
+            "z": 0.9563607343683773
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 61,
+          "triangles": 402870,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-summit-decision.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "summit-decision",
+        "x": 0,
+        "z": 151,
+        "facing": "south",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -66.42271593816007,
+          "z": -37.85003708582722
+        },
+        "forward": {
+          "x": 0,
+          "y": 0.49509531832344306,
+          "z": -0.8688386649857432
+        },
+        "up": {
+          "x": 0,
+          "y": -0.8688386649857432,
+          "z": -0.49509531832344306
+        },
+        "heading": 1.06402049005025e-16,
+        "lon": 3.141592653589793,
+        "lat": -1.0528517908546513,
+        "map": {
+          "x": 0,
+          "z": 151
+        },
+        "mapX": 0,
+        "mapZ": 151,
+        "radius": 76.45,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Mountain Summit",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -1.6751960504691206,
+            "y": -4.732158100471778,
+            "z": 0.8904434853222121
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 51,
+          "triangles": 343522,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-run-1-middle.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "run-1-middle",
+        "x": -3.5101681826267415,
+        "z": 109.92,
+        "facing": {
+          "east": -0.018542011386577448,
+          "north": -0.08872842011688438
+        },
+        "run": "ski-central",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -5.520397678568925,
+          "y": 4.974645871955114,
+          "z": -56.21754317053187
+        },
+        "forward": {
+          "x": -0.20358447528781462,
+          "y": 0.9732895456867297,
+          "z": 0.1061170187986115
+        },
+        "up": {
+          "x": -0.09735024639631663,
+          "y": 0.08772610771309368,
+          "z": -0.9913763460725131
+        },
+        "heading": 0.21462440827147403,
+        "lon": -3.043709403166802,
+        "lat": 0.08783902063832814,
+        "map": {
+          "x": -3.510168182626741,
+          "z": 109.92000000000002
+        },
+        "mapX": -3.510168182626741,
+        "mapZ": 109.92000000000002,
+        "radius": 56.70656092738762,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Central S-run",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -1.1063474816446945,
+            "y": 2.608839505021927,
+            "z": 1.0038300763547219
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 53,
+          "triangles": 365106,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-run-3-middle.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "run-3-middle",
+        "x": -21.139087330514652,
+        "z": 109.73684210526316,
+        "facing": {
+          "east": -0.036259608774901864,
+          "north": -0.0712130653482526
+        },
+        "run": "ski-west",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": -31.466489054368495,
+          "y": 4.407249361750151,
+          "z": -47.07638115806731
+        },
+        "forward": {
+          "x": -0.3777367840646495,
+          "y": 0.8638226530225709,
+          "z": 0.3333546851171338
+        },
+        "up": {
+          "x": -0.5540296056480167,
+          "y": 0.07759831806033415,
+          "z": -0.8288725457509799
+        },
+        "heading": 0.5227785780709616,
+        "lon": -2.552381673459044,
+        "lat": 0.07767640620471784,
+        "map": {
+          "x": -21.13908733051465,
+          "z": 109.73684210526318
+        },
+        "mapX": -21.13908733051465,
+        "mapZ": 109.73684210526318,
+        "radius": 56.79568155489442,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Western forest turns",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -1.851848966286087,
+            "y": 2.937987506462027,
+            "z": 1.0039854663726084
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 53,
+          "triangles": 365106,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-run-2-middle.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "run-2-middle",
+        "x": 25.463575988467873,
+        "z": 109.75,
+        "facing": {
+          "east": 0.002840713403732542,
+          "north": -0.06584312392194923
+        },
+        "run": "ski-east",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 36.73593189920246,
+          "y": 3.9898412560730794,
+          "z": -42.78630328561349
+        },
+        "forward": {
+          "x": 0.03276323646392293,
+          "y": 0.9921544125156117,
+          "z": 0.12064904501159823
+        },
+        "up": {
+          "x": 0.6498002049057102,
+          "y": 0.07057394577198213,
+          "z": -0.7568216513041037
+        },
+        "heading": -0.10363707423610206,
+        "lon": 2.4321322075153926,
+        "lat": 0.0706326618629909,
+        "map": {
+          "x": 25.463575988467866,
+          "z": 109.75
+        },
+        "mapX": 25.463575988467866,
+        "mapZ": 109.75,
+        "radius": 56.5341956217651,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Eastern coastal sweep",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -1.4348813593486924,
+            "y": 2.9984752777011803,
+            "z": 1.0039328028047338
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 54,
+          "triangles": 370334,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-pier-seaward.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "pier-seaward",
+        "fixture": "pieroutward",
+        "critical": true
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -36.715383039107245,
+          "z": 11.077145313285197
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.2888434240752333,
+          "z": -0.9573763504330441
+        },
+        "up": {
+          "x": 0,
+          "y": -0.9573763504330441,
+          "z": 0.2888434240752333
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": -1.2777777777777777,
+        "map": {
+          "x": 0,
+          "z": -46
+        },
+        "mapX": 0,
+        "mapZ": -46,
+        "radius": 38.35,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.04393827310779603,
+            "y": 0.599268047857356,
+            "z": 0.9974097913439915
+          },
+          "summitFraming": 0.9506395105429986,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 43,
+          "triangles": 417182,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    },
+    {
+      "filename": "phone-globe-mountain-front.jpg",
+      "profile": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fixture": {
+        "id": "globe-mountain-front",
+        "x": 0,
+        "z": 118,
+        "facing": "north",
+        "globe": true,
+        "critical": true
+      },
+      "state": {
+        "mode": "overview",
+        "position": {
+          "x": 0,
+          "y": -8.200353116825093,
+          "z": -59.84203289020697
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9907411291388822,
+          "z": 0.1357645573506309
+        },
+        "up": {
+          "x": 0,
+          "y": -0.1357645573506309,
+          "z": -0.9907411291388822
+        },
+        "heading": -3.141592653589793,
+        "lon": 3.141592653589793,
+        "lat": -0.13618512418798437,
+        "map": {
+          "x": 0,
+          "z": 117.99999999999997
+        },
+        "mapX": 0,
+        "mapZ": 117.99999999999997,
+        "radius": 60.40128054663441,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Central S-run",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 1,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 0,
+            "y": 0.34564674430151815,
+            "z": 0.9999098513334627
+          },
+          "summitFraming": 0.000005296004262922451,
+          "summitVisible": true
+        },
+        "counters": {
+          "drawCalls": 75,
+          "triangles": 272529,
+          "geometries": 48,
+          "textures": 7
+        }
+      },
+      "sourceFingerprint": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3"
+    }
+  ],
+  "sourceAfter": "c3289e43793c0fb85ce84eac092d078db1cb1ef831d62332db6f7464288490e3",
+  "sourceUnchanged": true,
+  "browserClosed": true
+}

@@ -1,0 +1,30 @@
+{
+  "sourceBefore": "42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400",
+  "sourceAfter": "42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400",
+  "sourceUnchanged": true,
+  "snapshotFingerprint": "42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400",
+  "errors": [],
+  "audits": [
+    {
+      "width": 320,
+      "horizontalOverflow": false,
+      "outside": []
+    },
+    {
+      "width": 390,
+      "horizontalOverflow": false,
+      "outside": []
+    },
+    {
+      "width": 736,
+      "horizontalOverflow": false,
+      "outside": []
+    },
+    {
+      "width": 1100,
+      "horizontalOverflow": false,
+      "outside": []
+    }
+  ],
+  "proposalOnly": true
+}

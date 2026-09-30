@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-09-12T21:46:06.458Z",
+  "captureDirectory": "C:\\Users\\citry\\OneDrive\\Desktop\\westcose-world\\docs\\qa\\peninsula-rebuild\\rejected-geography",
+  "isFinal": false,
+  "reviewStatus": "Rejected geography; historical evidence only, not an approved design",
+  "viewCount": 36,
+  "preservationPassed": true,
+  "currentSightlinesPassed": true,
+  "renderAcceptance": {
+    "passed": true,
+    "method": "Actual rendered cove fixture is dry and retains the ordinary4.8m follow distance in all four cardinal views, on desktop and phone.",
+    "failures": []
+  },
+  "coastSampleRange": {
+    "minimum": -3,
+    "maximum": 3.25
+  },
+  "lighthouse": {
+    "x": 27,
+    "z": -22,
+    "elevation": 2.8,
+    "height": 12
+  },
+  "cave": {
+    "points": [
+      [
+        30,
+        -29
+      ],
+      [
+        33,
+        -25.5
+      ],
+      [
+        36,
+        -22
+      ]
+    ],
+    "floor": -0.1,
+    "width": 3.4,
+    "clearance": 3.6
+  },
+  "cove": {
+    "x": 36.5,
+    "z": -16
+  }
+}

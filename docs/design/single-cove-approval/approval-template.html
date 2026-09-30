@@ -1,0 +1,195 @@
+<div id="wc-single-cove-approval">
+  <h2>One cove · approval proposal</h2>
+  <p class="text-small">Not implemented · only the lighthouse / hidden-beach region is proposed to change</p>
+  <section aria-labelledby="wc-plan-title">
+    <h3 id="wc-plan-title">01 · Peninsula top view</h3>
+    <svg id="wc-plan" role="img" aria-label="Proposed top view: one broad hidden cove, no middle dividing spur, lighthouse at the peninsula tip and cave directly beneath it"></svg>
+    <div class="wc-key text-small">
+      <span>1 · Lighthouse on cliff terrace</span><span>2 · Public cave entrance</span>
+      <span>3 · Tunnel exit onto the hidden beach</span><span>4 · One continuous crescent beach</span>
+      <span>5 · Former narrow inlet, now part of the same cove</span><span>6 · Middle spur removed, not smoothed</span>
+    </div>
+    <div class="wc-legend text-small"><span class="wc-green">━━ Coast / land edge</span><span class="wc-blue">━━ Upper lighthouse trail</span><span>┄┄ Cave below ground</span><span class="wc-red">× Removed divider</span></div>
+  </section>
+  <section aria-labelledby="wc-elevation-title">
+    <h3 id="wc-elevation-title">02 · Elevation + tunnel section</h3>
+    <svg id="wc-elevation" role="img" aria-label="Public-beach elevation of the lighthouse on an exposed rocky cliff, and an unfolded section following the tunnel beneath the tower into the hidden beach"></svg>
+    <div class="wc-key text-small"><span>Sea: datum 0 m</span><span>Beach / tunnel floor: about +0.7 m</span><span>Terrace: about +7 m above sea</span><span>Existing tower: 12 m, unchanged</span><span>Tunnel: 4 m clear height × 3.4 m clear width</span><span>Rock over tunnel: about 2 m at lighthouse</span></div>
+  </section>
+  <section aria-labelledby="wc-world-title">
+    <h3 id="wc-world-title">03 · Whole WestCose World</h3>
+    <svg id="wc-world" role="img" aria-label="Complete unwrapped world with the current mountain, three ski trails, resort, forest, skate park, town, beach and pier; the proposed single-cove region is highlighted"></svg>
+    <div class="wc-key text-small"><span>1 · Summit + three snow trails</span><span>2 · Resort / lodge / ticket hut</span><span>3 · Forest and winding resort route</span><span>4 · Skate park + both approaches</span><span>5 · Downtown / courtyard spawn</span><span>6 · Public beach + boardwalk</span><span>7 · Pier / fishing head</span><span>8 · Proposed single-cove peninsula</span></div>
+    <h3>Town + coast detail · positions retained</h3>
+    <svg id="wc-town" role="img" aria-label="Enlarged town map retaining gallery, courtyard, shop, connected skate shop, social club, motel, alley, boardwalk, pier and skate park"></svg>
+    <div class="wc-key text-small"><span>A · Gallery</span><span>B · Courtyard / spawn</span><span>C · Shop + connected skate shop</span><span>D · Social club / arcade</span><span>E · Motel</span><span>F · Graffiti alley / Labs</span><span>G · Boulevard corner / art wall</span></div>
+  </section>
+  <p class="text-small">Approval basis: proposed shoreline and elevation relationship, not new terrain or camera screenshots. Current anchors outside the highlighted zone remain fixed. Vertical dimensions are relative to sea level; top views are unwrapped schematic charts, not equal-area surveys.</p>
+</div>
+<style>
+  #wc-single-cove-approval{color:var(--foreground);width:100%}
+  #wc-single-cove-approval section{margin-block:24px 36px}
+  #wc-single-cove-approval svg{display:block;width:100%;overflow:hidden}
+  #wc-single-cove-approval .wc-key{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin-block:12px}
+  #wc-single-cove-approval .wc-legend{display:flex;gap:10px 20px;flex-wrap:wrap;margin-block:16px}
+  #wc-single-cove-approval .wc-blue{color:var(--blue)}
+  #wc-single-cove-approval .wc-green{color:var(--green)}
+  #wc-single-cove-approval .wc-red{color:var(--red)}
+  #wc-single-cove-approval svg text{fill:var(--foreground);font:inherit}
+  #wc-single-cove-approval svg .halo{paint-order:stroke;stroke:var(--background);stroke-width:4;stroke-linejoin:round}
+  #wc-single-cove-approval svg .pin{fill:var(--background);stroke:var(--foreground);stroke-width:1.2}
+  #wc-single-cove-approval svg .water{fill:var(--blue);fill-opacity:.13}
+  #wc-single-cove-approval svg .land{fill:var(--green);fill-opacity:.19}
+  #wc-single-cove-approval svg .sand{fill:var(--yellow);fill-opacity:.34}
+  #wc-single-cove-approval svg .rock{fill:var(--foreground);fill-opacity:.25}
+  #wc-single-cove-approval svg .high{fill:var(--foreground);fill-opacity:.09}
+  #wc-single-cove-approval svg .coast{fill:none;stroke:var(--green);stroke-width:2.2}
+  #wc-single-cove-approval svg .trail{fill:none;stroke:var(--blue);stroke-width:3.2;stroke-linejoin:round;stroke-linecap:round}
+  #wc-single-cove-approval svg .cave{fill:none;stroke:var(--foreground);stroke-width:2;stroke-dasharray:5 4}
+  #wc-single-cove-approval svg .route{fill:none;stroke:var(--foreground);stroke-opacity:.6;stroke-width:2}
+  #wc-single-cove-approval svg .proposal{fill:none;stroke:var(--orange);stroke-width:1.5;stroke-dasharray:6 4}
+  @media(max-width:460px){#wc-single-cove-approval .wc-key{grid-template-columns:1fr}}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('wc-single-cove-approval');
+  const current = /* CURRENT_WORLD_SNAPSHOT */ null;
+  // DRAWING DATA ONLY. These points are not imported by the live world.
+  const coast = [[24,30],[37,30],[40,27],[40,24],[37,21],[35,16],[34,10],[34,4],[35,-3],[37,-11],[41,-19],[44,-24],[45,-29],[43,-34],[40,-38],[36,-40],[32,-38],[29,-35],[27,-31],[24,-32]];
+  const sand = [[36,26],[33,22],[30,17],[29,10],[29.5,3],[31,-5],[33,-13],[36,-20],[38,-23],[41,-20],[38,-14],[36,-7],[34,2],[34,10],[35,17],[37,22],[40,25]];
+  const innerCliff = [[36,28],[32,23],[28.5,18],[27.8,12],[28.5,5],[29.8,-3],[32,-12],[35,-20],[38,-24]];
+  const terrace = [[29.5,-28],[31,-24],[34,-22.5],[38,-24],[41,-28],[40,-33],[37,-36],[33,-35],[30,-32]];
+  const trail = [[20,4],[23,0],[27,-3],[29,-10],[30,-17],[31,-23],[33,-28],[33.2,-32]];
+  const cave = [[28,-29],[31,-30.5],[34,-32],[36,-32],[37,-30],[38,-26],[38,-22],[38,-20]];
+  const tower = [36,-32];
+  const fmt = n => Math.round(n*100)/100;
+  const line = points => points.map(p=>p.map(fmt).join(',')).join(' ');
+  const dline = (points, closed=false) => 'M'+points.map(p=>p.map(fmt).join(' ')).join('L')+(closed?'Z':'');
+  const smooth = (points, closed=false) => {
+    let d='M'+points[0].map(fmt).join(' ');
+    for(let i=0;i<points.length-(closed?0:1);i++){
+      const p=points[i],q=points[(i+1)%points.length],a=points[i-1]|| (closed?points.at(-1):p),b=closed?points[(i+2)%points.length]:(points[i+2]||q);
+      d+='C'+[p[0]+(q[0]-a[0])/6,p[1]+(q[1]-a[1])/6,q[0]-(b[0]-p[0])/6,q[1]-(b[1]-p[1])/6,...q].map(fmt).join(' ');
+    }
+    return d+(closed?'Z':'');
+  };
+  const text = (x,y,label,anchor='start',cls='halo') => `<text x="${fmt(x)}" y="${fmt(y)}" text-anchor="${anchor}" class="${cls}">${label}</text>`;
+  const pin = (p,label) => `<circle class="pin" cx="${fmt(p[0])}" cy="${fmt(p[1])}" r="10"/>`+text(p[0],p[1]+4,label,'middle','');
+  const path = (points,p,cls,closed=false) => `<path class="${cls}" d="${smooth(points.map(p),closed)}"/>`;
+  const leader = (a,b,label,anchor='start') => {
+    const end=[b[0]+(anchor==='end'?-1:1)*(label.length*7.2+12),b[1]];
+    return `<path d="M${line([a,end])}" fill="none" stroke="var(--foreground)" stroke-width="1"/>`+text(b[0]+(anchor==='end'?-5:5),b[1]+4,label,anchor);
+  };
+  const bg = (w,h) => `<rect width="${w}" height="${h}" class="water"/>`;
+  const projectedPath = (d,sx,sy,ox,oy,cls,extra='') => `<path d="${d}" transform="translate(${ox} ${oy}) scale(${sx} ${-sy})" class="${cls}" ${extra}/>`;
+  const worldBands = (p,sx,sy) => Object.entries(current.terrain.paths).map(([cls,d])=>projectedPath(d,sx,sy,...p([0,0]),cls)).join('');
+  function proposal(p,sx,sy,showRoutes=true){
+    let out=`<path d="${dline([[24,30],[51,30],[51,-45],[24,-45]].map(p),true)}" fill="var(--background)"/>`;
+    out+=`<path class="water" d="${dline([[24,30],[51,30],[51,-45],[24,-45]].map(p),true)}"/>`;
+    out+=path(coast,p,'land',true)+path(sand,p,'sand',true)+path(terrace,p,'rock',true)+path(coast.slice(1),p,'coast');
+    out+=path(innerCliff,p,'route');
+    for(let i=0;i<innerCliff.length-1;i++){
+      const a=p(innerCliff[i]),b=p([innerCliff[i][0]+1.2,innerCliff[i][1]-.7]);
+      out+=`<path d="${dline([a,b])}" stroke="var(--foreground)" stroke-opacity=".5"/>`;
+    }
+    if(showRoutes)out+=path(trail,p,'trail')+path(cave,p,'cave');
+    const [tx,ty]=p(tower);
+    out+=`<circle cx="${tx}" cy="${ty}" r="${Math.max(5,2.4*sx)}" fill="var(--background)" stroke="var(--red)" stroke-width="2"/>`;
+    return out;
+  }
+  function renderPlan(w){
+    const svg=root.querySelector('#wc-plan'),sx=(w-40)/40,sy=sx*.63,h=82*sy+70;
+    const p=([x,z])=>[20+(x-12)*sx,32+(34-z)*sy];
+    let out=bg(w,h)+worldBands(p,sx,sy)+proposal(p,sx,sy);
+    // The removed spur is ghosted, not retained as land in the proposal.
+    const removed=[[34,2],[40,1],[45,-3],[44,-7],[39,-5],[34,-5]];
+    out+=`<path d="${smooth(removed.map(p),true)}" fill="var(--red)" fill-opacity=".09" stroke="var(--red)" stroke-dasharray="4 4"/>`;
+    const cross=p([40,-2]),cs=8;
+    out+=`<path d="M${cross[0]-cs} ${cross[1]-cs}l${cs*2} ${cs*2}m0 ${-cs*2}l${-cs*2} ${cs*2}" stroke="var(--red)" stroke-width="2"/>`;
+    for(const route of current.routes.filter(r=>['boardwalk','alley','beach-east'].includes(r.id)))out+=`<polyline points="${line(route.points.map(p))}" class="route"/>`;
+    out+=path([[27,-34],[26.8,-30.5],[27.6,-27.3],[29,-25.5]],p,'route');
+    const mouth=p(cave[0]);out+=`<rect x="${mouth[0]-3}" y="${mouth[1]-9}" width="6" height="18" fill="var(--blue)"/>`;
+    for(const b of current.buildings.filter(b=>b.x>12&&b.z<20)){
+      const xy=p([b.x-b.width/2,b.z+b.depth/2]);out+=`<rect x="${xy[0]}" y="${xy[1]}" width="${b.width*sx}" height="${b.depth*sy}" class="rock"/>`;
+    }
+    out+=pin(p(tower),'1')+pin([mouth[0]-18,mouth[1]],'2')+pin(p(cave.at(-1)),'3')+pin(p([32,11]),'4')+pin(p([39,17]),'5')+pin(p([45,-5]),'6');
+    out+=text(...p([41,10]),'ONE COVE','middle');
+    if(w>500){out+=text(...p([18,14]),'Town','middle')+text(...p([18,-25]),'Public beach','middle')+text(...p([42,-15]),'Open sea →','middle')+text(...p([37,-43]),'Outer tip','middle');}
+    out+=text(12,18,'↑ Inland')+text(w-12,18,'East →','end');
+    out+=text(12,h-12,w>500?'Proposed single shoreline · no dividing headland':'Single shoreline · divider removed');
+    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.style.height=h+'px';svg.innerHTML=out;
+  }
+  function towerElevation(cx,base,scale){
+    const top=base-12*scale,bw=3.1*scale,tw=2.1*scale;
+    let out=`<path d="M${cx-bw/2} ${base}L${cx-tw/2} ${top+scale}H${cx+tw/2}L${cx+bw/2} ${base}Z" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/>`;
+    out+=`<path d="M${cx-bw*.44} ${base-scale*3}H${cx+bw*.44}L${cx+bw*.37} ${base-scale*5.7}H${cx-bw*.37}Z" fill="var(--red)" fill-opacity=".65"/>`;
+    out+=`<rect x="${cx-tw*.7}" y="${top+scale*.4}" width="${tw*1.4}" height="${scale*1.5}" fill="var(--yellow)" stroke="var(--foreground)"/>`;
+    out+=`<path d="M${cx-tw} ${top+scale*.4}L${cx} ${top-scale*.15}L${cx+tw} ${top+scale*.4}Z" class="rock"/>`;
+    return out;
+  }
+  function renderElevation(w){
+    const svg=root.querySelector('#wc-elevation'),s=Math.min(15,(w-60)/25),sea=22*s+45,base=sea-7*s,cx=w*.62;
+    let out=text(12,20,'A · From the public beach');
+    out+=`<rect x="0" y="${sea}" width="${w}" height="28" class="water"/>`;
+    out+=`<path d="M0 ${sea-.7*s}H${w*.33}L${w*.38} ${sea-1.2*s}L${w*.39} ${sea-3.2*s}L${w*.385} ${base+.6*s}L${w*.44} ${base}H${w*.73}L${w*.78} ${base+.6*s}L${w*.79} ${sea-3.7*s}L${w*.83} ${sea-3.4*s}L${w*.84} ${sea-1.2*s}L${w*.91} ${sea-.8*s}H${w}V${sea+16}H0Z" class="rock"/>`;
+    out+=`<path d="M0 ${sea-.7*s}H${w*.36}L${w*.4} ${sea+8}H0Z" class="sand"/>`;
+    const mouthX=w*.49,mouthY=sea-.7*s;
+    out+=`<path d="M${mouthX-1.5*s} ${mouthY}V${mouthY-3.1*s}Q${mouthX} ${mouthY-4.7*s} ${mouthX+1.5*s} ${mouthY-3.1*s}V${mouthY}Z" fill="var(--foreground)" fill-opacity=".85"/>`;
+    out+=`<path d="M${w*.42} ${base+s*.2}l${-s*.3} ${s*2.1}l${s*.4} ${s*2.5}M${w*.58} ${base+s*.3}l${s*.4} ${s*3}l${-s*.5} ${s*2.6}M${w*.73} ${base+s*.5}l${-s*.4} ${s*2.8}l${s*.5} ${s*1.8}M${w*.39} ${sea-2*s}l${s*.7} ${s*.6}" stroke="var(--foreground)" stroke-opacity=".45" fill="none"/>`;
+    out+=towerElevation(cx,base,s);
+    out+=text(12,sea-1.6*s,'Public beach')+text(w-12,sea+22,'Sea level','end');
+    out+=leader([cx-1.6*s,base-8*s],[12,base-8*s],'12 m tower');
+    out+=leader([w*.73,base],[w-12,base-1.3*s],'Terrace +7 m','end');
+    out+=pin([mouthX,mouthY-2*s],'2');
+    out+=text(12,sea+55,w>500?'Exposed cliff below tower · not a beach-level mound':'Tower above an exposed coastal cliff');
+    // Unfolded longitudinal section: follows the bend, not a straight false cut.
+    const y0=sea+105,ss=Math.min(12,(w-70)/26),floor=y0+20*ss+26,bt=floor-6.3*ss,tc=w*.51;
+    out+=text(12,y0,'B · Unfolded section along the cave');
+    out+=`<path d="M0 ${floor}H${w*.19}V${bt+.65*ss}L${w*.28} ${bt+.15*ss}L${w*.34} ${bt}H${w*.63}L${w*.74} ${bt+.25*ss}L${w*.81} ${bt+.7*ss}V${floor}H${w}V${floor+16}H0Z" class="rock"/>`;
+    out+=`<path d="M${w*.19} ${floor}H${w*.81}V${floor-4*ss}Q${w*.51} ${floor-4.6*ss} ${w*.19} ${floor-4*ss}Z" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/>`;
+    out+=`<path d="M0 ${floor}H${w*.19}M${w*.81} ${floor}H${w}" stroke="var(--yellow)" stroke-width="6"/>`;
+    out+=towerElevation(tc,bt,ss);
+    out+=`<path d="M${tc} ${bt+ss*.3}V${floor+6}" class="cave"/>`;
+    out+=text(w*.5,floor-1.5*ss,'4 m clear','middle')+text(w*.5,floor+38,'Tunnel passes directly beneath tower','middle');
+    out+=text(12,floor+18,'Public side')+text(w-12,floor+18,'Hidden beach','end');
+    out+=pin([w*.19,floor-ss*2],'2')+pin([w*.81,floor-ss*2],'3');
+    out+=text(12,floor+67,w>500?'Section follows tunnel bends; horizontal spacing is illustrative.':'Unfolded tunnel · horizontal scale illustrative');
+    const h=floor+85;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.style.height=h+'px';svg.innerHTML=out;
+  }
+  function renderWorld(w){
+    const svg=root.querySelector('#wc-world'),s=(w-72)/106,sy=Math.min(s,3.3),h=226.2*sy+100;
+    const p=([x,z])=>[w/2+x*s,40+(176-z)*sy];
+    let out=bg(w,h)+worldBands(p,s,sy)+proposal(p,s,sy,false);
+    for(const r of current.routes.filter(r=>!['cave','lighthouse-trail'].includes(r.id)))out+=`<polyline points="${line(r.points.map(p))}" class="route"/>`;
+    out+=path(trail,p,'trail')+path(cave,p,'cave');
+    for(const b of current.buildings){const a=p([b.x-b.width/2,b.z+b.depth/2]);out+=`<rect x="${a[0]}" y="${a[1]}" width="${b.width*s}" height="${b.depth*sy}" class="rock" stroke="var(--foreground)"/>`;}
+    out+=`<path d="${dline([[-1.9,-16],[1.9,-16],[1.9,-39],[4,-39],[4,-47],[-4,-47],[-4,-39],[-1.9,-39]].map(p),true)}" class="sand" stroke="var(--foreground)"/>`;
+    out+=`<ellipse cx="${p([-27,15])[0]}" cy="${p([-27,15])[1]}" rx="${7*s}" ry="${5.5*sy}" class="rock"/>`;
+    const pts=[[0,153],[0,115],[-17,71],[-27,15],[0,8],[-13,-27],[0,-45],[38,-15]];
+    pts.forEach((pt,i)=>out+=pin(p(pt),String(i+1)));
+    const a=p([24,30]),b=p([51,-42]);out+=`<rect x="${a[0]}" y="${a[1]}" width="${b[0]-a[0]}" height="${b[1]-a[1]}" class="proposal"/>`;
+    if(w>500){out+=text(...p([-29,150]),'Mountain')+text(...p([11,112]),'Resort')+text(...p([11,69]),'Forest route');}
+    out+=text(12,21,w>500?'One complete globe circuit · inland ↑':'Whole globe circuit · inland ↑');
+    out+=`<path d="M12 33H${w-12}M12 ${h-43}H${w-12}" stroke="var(--foreground)" stroke-dasharray="3 4" stroke-opacity=".5"/>`;
+    out+=text(12,h-17,'Ocean seam: top and bottom connect');
+    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.style.height=h+'px';svg.innerHTML=out;
+  }
+  function renderTown(w){
+    const svg=root.querySelector('#wc-town'),sx=(w-40)/95,sy=sx*.72,h=78*sy+70,p=([x,z])=>[20+(x+42)*sx,35+(30-z)*sy];
+    let out=bg(w,h)+worldBands(p,sx,sy)+proposal(p,sx,sy);
+    for(const r of current.routes.filter(r=>r.points.every(pt=>pt[1]<32)&&!['lighthouse-trail','cave'].includes(r.id)))out+=`<polyline points="${line(r.points.map(p))}" class="route"/>`;
+    out+=`<path d="${dline([[-1.9,-16],[1.9,-16],[1.9,-39],[4,-39],[4,-47],[-4,-47],[-4,-39],[-1.9,-39]].map(p),true)}" class="sand" stroke="var(--foreground)"/>`;
+    for(const b of current.buildings.filter(b=>b.z<30)){const a=p([b.x-b.width/2,b.z+b.depth/2]);out+=`<rect x="${a[0]}" y="${a[1]}" width="${b.width*sx}" height="${b.depth*sy}" class="rock"/>`;}
+    out+=`<ellipse cx="${p([-27,15])[0]}" cy="${p([-27,15])[1]}" rx="${7*sx}" ry="${5.5*sy}" class="rock"/>`;
+    const letters=[[-9,7,'A'],[0,8,'B'],[11,7,'C'],[-8,-6,'D'],[8,-6,'E'],[20,-6,'F'],[-20,-8,'G']];
+    letters.forEach(([x,z,l])=>out+=pin(p([x,z]),l));
+    out+=text(...p([-27,26]),'Skate park','middle');
+    if(w>500){out+=text(...p([-17,-26]),'Public beach','middle')+text(...p([0,-45]),'Pier','middle')+text(...p([37,-43]),'Lighthouse','middle')+text(...p([40,11]),'One cove','middle');}
+    out+=text(12,18,w>500?'Existing town retained · proposed peninsula at right':'Town retained · proposal at right');
+    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.style.height=h+'px';svg.innerHTML=out;
+  }
+  const draw=()=>{const w=Math.max(280,Math.floor(root.getBoundingClientRect().width));renderPlan(w);renderElevation(w);renderWorld(w);renderTown(w);};
+  if(!current){root.insertAdjacentHTML('beforeend','<p role="alert">Current-world snapshot is missing.</p>');return;}
+  new ResizeObserver(draw).observe(root);draw();
+})();
+</script>

@@ -1,0 +1,296 @@
+{
+  "capturedAt": "2026-09-12T22:25:23.064Z",
+  "base": "http://127.0.0.1:3000",
+  "sourceBefore": "42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400",
+  "method": "Actual current third-person camera, ordinary heading turns only; no pitch/framing workaround or scene edits. Debug placement positions the visitor; independent preservation and physical route checks establish geometry safety.",
+  "errors": [
+    {
+      "type": "capture",
+      "message": "expect(received).toBe(expected) // Object.is equality\n\nExpected: \"upper\"\nReceived: \"tunnel\"\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate"
+    }
+  ],
+  "views": [
+    {
+      "filename": "desktop-fresh-courtyard.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": "fresh-load",
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": 8.187776169394938,
+          "z": 36.23648467221797
+        },
+        "forward": {
+          "x": 0,
+          "y": -0.9754100853894477,
+          "z": 0.22039774345612226
+        },
+        "up": {
+          "x": 0,
+          "y": 0.22039774345612217,
+          "z": 0.9754100853894474
+        },
+        "heading": 3.141592653589793,
+        "lon": 0,
+        "lat": 0.22222222222222215,
+        "map": {
+          "x": 0,
+          "z": 8
+        },
+        "mapX": 0,
+        "mapZ": 8,
+        "radius": 37.14999999999999,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "WestCose Courtyard",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -0.00807392193234814,
+            "y": -1.1814388993398959,
+            "z": 0.9984577644020052
+          },
+          "summitFraming": 0,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 74,
+          "triangles": 461494,
+          "geometries": 48,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-boardwalk-center-lighthouse.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "boardwalk-center-lighthouse",
+        "x": 0,
+        "z": -16,
+        "facing": {
+          "east": 0.9639407717985078,
+          "north": -0.26611686993593103
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 0,
+          "y": -15.886887632372739,
+          "z": 33.36029528281131
+        },
+        "forward": {
+          "x": 0.9639407717985078,
+          "y": -0.24026352803248038,
+          "z": -0.11441864167120128
+        },
+        "up": {
+          "x": 0,
+          "y": -0.42995636352835553,
+          "z": 0.9028496693588987
+        },
+        "heading": 1.8401587140831737,
+        "lon": 0,
+        "lat": -0.4444444444444444,
+        "map": {
+          "x": 0,
+          "z": -16
+        },
+        "mapX": 0,
+        "mapZ": -16,
+        "radius": 36.95,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "The Pier",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "pier",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 2.1974422708539727,
+            "y": -1.4892434052877266,
+            "z": 0.99606841796984
+          },
+          "summitFraming": 0.020283290019523288,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 71,
+          "triangles": 459726,
+          "geometries": 48,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-terrace.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "lighthouse-terrace",
+        "x": 33.2,
+        "z": -32,
+        "facing": {
+          "east": 0.9999999999999998,
+          "north": 2.220446049250313e-16
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 34.408200803871715,
+          "y": -20.247727808682335,
+          "z": 16.437531195501695
+        },
+        "forward": {
+          "x": 0.6040506586469057,
+          "y": 0.6187264362441517,
+          "z": -0.502295131253381
+        },
+        "up": {
+          "x": 0.7969459214954547,
+          "y": -0.46896797041662747,
+          "z": 0.380718059638717
+        },
+        "heading": 0.7946441776762496,
+        "lon": 1.1251299783006208,
+        "lat": -0.48812192334951815,
+        "map": {
+          "x": 33.199999999999996,
+          "z": -32
+        },
+        "mapX": 33.199999999999996,
+        "mapZ": -32,
+        "radius": 43.17507609463054,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 4.8,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": -20.706152776073278,
+            "y": 18.542513173648818,
+            "z": 1.0424324061600905
+          },
+          "summitFraming": 0.000055769809485791244,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 65,
+          "triangles": 431858,
+          "geometries": 48,
+          "textures": 7
+        }
+      }
+    },
+    {
+      "filename": "desktop-lighthouse-toward-town.jpg",
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fixture": {
+        "id": "lighthouse-toward-town",
+        "x": 33.2,
+        "z": -32,
+        "facing": {
+          "east": -0.8584163472216916,
+          "north": 0.5129535795981619
+        }
+      },
+      "state": {
+        "mode": "exploring",
+        "position": {
+          "x": 34.408200803871715,
+          "y": -20.247727808682335,
+          "z": 16.437531195501695
+        },
+        "forward": {
+          "x": -0.5185269599325338,
+          "y": -0.20782304382786101,
+          "z": 0.829421107928444
+        },
+        "up": {
+          "x": 0.7969459214954547,
+          "y": -0.46896797041662747,
+          "z": 0.380718059638717
+        },
+        "heading": -1.8083264779217303,
+        "lon": 1.1251299783006208,
+        "lat": -0.48812192334951815,
+        "map": {
+          "x": 33.199999999999996,
+          "z": -32
+        },
+        "mapX": 33.199999999999996,
+        "mapZ": -32,
+        "radius": 43.17507609463054,
+        "travelDistance": 0,
+        "lapCount": 0,
+        "currentArea": "Lighthouse Point",
+        "hotspot": null,
+        "grounded": true,
+        "swimming": false,
+        "interior": null,
+        "supportKind": "ground",
+        "supportLayer": "upper",
+        "cameraDistance": 1.8164470904356622,
+        "desiredCameraDistance": 4.8,
+        "overviewTransition": 0,
+        "landmarkFraming": {
+          "summitNdc": {
+            "x": 71.31702031497606,
+            "y": 52.099957408627056,
+            "z": 1.1368992614850917
+          },
+          "summitFraming": 1.4704636618218091e-7,
+          "summitVisible": false
+        },
+        "counters": {
+          "drawCalls": 67,
+          "triangles": 460906,
+          "geometries": 48,
+          "textures": 7
+        }
+      }
+    }
+  ],
+  "sourceAfter": "42d61032e0b2a6e1436a700f395df05d90a8a6bfc30259a5367062260f7c9400",
+  "sourceUnchanged": true
+}

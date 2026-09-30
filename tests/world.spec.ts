@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { PLANET_PLACES, SPAWN_COORDS } from '../src/features/world/data/planet';
 import { mapCoordinates } from '../src/features/world/data/world-map';
 import { PIER_LAYOUT } from '../src/features/world/data/pier-layout';
+import { MOUNTAIN_LAYOUT } from '../src/features/world/data/mountain-layout';
 
 type Vec = { x: number; y: number; z: number };
 type WorldState = {
@@ -66,7 +67,10 @@ test('real keyboard movement crosses the ocean map seam without a position jump'
 test('keyboard traversal remains stable crossing a pole', async ({ page }) => {
   await enter(page); await spawn(page,'pole');
   const start=await state(page);
-  await hold(page,'w',2700);
+  // The frozen polar-ocean fixture crosses the actual antipodal pole. Keep
+  // this long enough to verify meaningful post-pole travel at normal walk
+  // speed rather than merely reaching the singularity.
+  await hold(page,'w',3600);
   const end=await state(page);
   expect(distance(start.position,end.position)).toBeGreaterThan(8);
   expect(Math.abs(end.lon-start.lon)).toBeGreaterThan(3);
@@ -107,17 +111,30 @@ test('camera shortens at obstructions and globe view returns to the same place',
   expect(distance(initial.position,(await state(page)).position)).toBeLessThan(.05);
 });
 
-test('the actual follow-camera frustum frames the summit from the pier and resort', async ({ page }) => {
+test('the pier follow-camera frames the real summit while the globe-occluded base stays unassisted', async ({ page }) => {
   await enter(page);
-  for (const fixture of ['pieroutward', 'resort']) {
-    await spawn(page, fixture);
-    await page.waitForTimeout(1600);
-    const framed = await state(page);
-    expect(framed.landmarkFraming.summitFraming).toBeGreaterThan(.5);
-    expect(framed.landmarkFraming.summitVisible).toBe(true);
-    expect(Math.abs(framed.landmarkFraming.summitNdc.x)).toBeLessThan(.98);
-    expect(Math.abs(framed.landmarkFraming.summitNdc.y)).toBeLessThan(.98);
-  }
+  await spawn(page, 'pieroutward');
+  await page.waitForTimeout(1600);
+  const framed = await state(page);
+  expect(framed.landmarkFraming.summitFraming).toBeGreaterThan(.5);
+  expect(framed.landmarkFraming.summitVisible).toBe(true);
+  expect(Math.abs(framed.landmarkFraming.summitNdc.x)).toBeLessThan(.98);
+  expect(Math.abs(framed.landmarkFraming.summitNdc.y)).toBeLessThan(.98);
+
+  // The compact base lies on the opposite side of this tiny solid planet.
+  // It is an intentionally globe-occluded location, not a second summit-view
+  // camera. Verify its actual approved placement without demanding a fake view.
+  await spawn(page, 'resort');
+  // This transition starts with the pier's damped camera assistance. Wait for
+  // the actual state to settle instead of assuming a particular frame cadence.
+  await expect.poll(async () => (await state(page)).landmarkFraming.summitFraming).toBeLessThan(.05);
+  const base = await state(page);
+  const baseMap = mapCoordinates(base.position);
+  expect(baseMap.x).toBeCloseTo(MOUNTAIN_LAYOUT.pedestrianArrival.x, 1);
+  expect(baseMap.z).toBeCloseTo(MOUNTAIN_LAYOUT.pedestrianArrival.z, 1);
+  expect(base.grounded).toBe(true);
+  expect(base.swimming).toBe(false);
+  expect(base.landmarkFraming.summitFraming).toBeLessThan(.05);
 
   // A deliberate vertical right-drag must take precedence over convenience
   // framing, without moving the visitor or changing collision support.

@@ -1,0 +1,2759 @@
+{
+  "script": "check-peninsula-routes",
+  "status": "passed",
+  "passes": [
+    {
+      "name": "the authored topology places the tunnel directly under the outer-tip lighthouse",
+      "detail": {
+        "tower": {
+          "x": 36,
+          "z": -32,
+          "elevation": 6.2,
+          "height": 12
+        },
+        "tunnelUnderFootprint": {
+          "x": 0,
+          "y": -6.3,
+          "z": 0
+        },
+        "exit": [
+          38,
+          -20
+        ],
+        "cove": {
+          "x": 37,
+          "z": -11
+        },
+        "placementCriterion": "Reference topology, never town-camera framing"
+      }
+    },
+    {
+      "name": "all peninsula surface and collider samples remain finite",
+      "detail": {
+        "samples": 10385,
+        "colliders": 208
+      }
+    },
+    {
+      "name": "one map direction supports two real levels under the lighthouse without implicit switching",
+      "detail": {
+        "upper": {
+          "radius": 42.2,
+          "kind": "ground",
+          "layer": "upper"
+        },
+        "lower": {
+          "radius": 35.9,
+          "kind": "ground",
+          "layer": "tunnel",
+          "id": "cave"
+        },
+        "radialSeparation": 6.3,
+        "forward": {
+          "lane": 0,
+          "distance": 3.4491,
+          "steps": 63,
+          "end": {
+            "x": 37,
+            "z": -30
+          },
+          "initialLayer": "tunnel",
+          "finalLayer": "tunnel",
+          "transitions": [],
+          "maxPathHeightGradient": {
+            "name": "under-foundation lower forward",
+            "lane": 0,
+            "ratio": 0,
+            "verticalDelta": 0,
+            "sampleDistance": 0,
+            "from": {
+              "x": 34,
+              "z": -32
+            },
+            "to": {
+              "x": 34,
+              "z": -32
+            }
+          }
+        },
+        "reverse": {
+          "lane": 0,
+          "distance": 3.4352,
+          "steps": 63,
+          "end": {
+            "x": 34.02,
+            "z": -32
+          },
+          "initialLayer": "tunnel",
+          "finalLayer": "tunnel",
+          "transitions": [],
+          "maxPathHeightGradient": {
+            "name": "under-foundation lower reverse",
+            "lane": 0,
+            "ratio": 0,
+            "verticalDelta": 0,
+            "sampleDistance": 0,
+            "from": {
+              "x": 37,
+              "z": -30
+            },
+            "to": {
+              "x": 37,
+              "z": -30
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "rendered lower floor and roof enclose the passage directly below the foundation",
+      "detail": {
+        "floorVertices": 252,
+        "floorTriangles": 432,
+        "floorElevation": -0.1,
+        "roofElevation": 4.1954,
+        "clearance": 4.2954,
+        "rockAboveRoof": 2.0046
+      }
+    },
+    {
+      "name": "the lower visitor cannot cross a side wall or snap onto the headland",
+      "detail": {
+        "blockedAt": {
+          "x": 39.055,
+          "z": -31.8132
+        },
+        "target": {
+          "x": 39.3333,
+          "z": -32
+        },
+        "layer": "tunnel",
+        "distance": 3.1173,
+        "steps": 68,
+        "softBlocks": 12,
+        "contact": {
+          "buildingId": "cave-rock",
+          "segmentId": "cave:short:13:wall:4"
+        }
+      }
+    },
+    {
+      "name": "local cliff wedges are finite, closed, and matched to their collision OBBs",
+      "detail": {
+        "wedges": 70,
+        "vertices": 560,
+        "triangles": 840,
+        "maximumContainment": 0.9917
+      }
+    },
+    {
+      "name": "lighthouse trail walks from [20, 4] in both directions",
+      "detail": {
+        "forward": {
+          "lane": 0,
+          "distance": 29.593,
+          "steps": 550,
+          "end": {
+            "x": 33.2,
+            "z": -32
+          },
+          "initialLayer": "upper",
+          "finalLayer": "upper",
+          "transitions": [],
+          "maxPathHeightGradient": {
+            "name": "lighthouse forward",
+            "lane": 0,
+            "ratio": 0.7178,
+            "verticalDelta": 0.0395,
+            "sampleDistance": 0.055,
+            "from": {
+              "x": 32.6603,
+              "z": -27.1492
+            },
+            "to": {
+              "x": 32.6904,
+              "z": -27.224
+            }
+          }
+        },
+        "reverse": {
+          "lane": 0,
+          "distance": 29.5965,
+          "steps": 550,
+          "end": {
+            "x": 20,
+            "z": 4
+          },
+          "initialLayer": "upper",
+          "finalLayer": "upper",
+          "transitions": [],
+          "maxPathHeightGradient": {
+            "name": "lighthouse reverse",
+            "lane": 0,
+            "ratio": 0.7187,
+            "verticalDelta": -0.0395,
+            "sampleDistance": 0.055,
+            "from": {
+              "x": 32.7105,
+              "z": -27.2742
+            },
+            "to": {
+              "x": 32.6805,
+              "z": -27.1993
+            }
+          }
+        },
+        "edgeLane": 0.65,
+        "edgeClearance": 0.24,
+        "edgeReports": [
+          {
+            "name": "lighthouse lane -0.65 forward",
+            "status": "passed",
+            "report": {
+              "lane": -0.65,
+              "distance": 29.5886,
+              "steps": 550,
+              "end": {
+                "x": 33.8495,
+                "z": -31.9581
+              },
+              "initialLayer": "upper",
+              "finalLayer": "upper",
+              "transitions": [],
+              "maxPathHeightGradient": {
+                "name": "lighthouse lane -0.65 forward",
+                "lane": -0.65,
+                "ratio": 0.8634,
+                "verticalDelta": 0.0475,
+                "sampleDistance": 0.055,
+                "from": {
+                  "x": 31.3662,
+                  "z": -21.1892
+                },
+                "to": {
+                  "x": 31.3799,
+                  "z": -21.272
+                }
+              }
+            }
+          },
+          {
+            "name": "lighthouse lane -0.65 reverse",
+            "status": "passed",
+            "report": {
+              "lane": -0.65,
+              "distance": 29.5791,
+              "steps": 544,
+              "end": {
+                "x": 19.5333,
+                "z": 3.4693
+              },
+              "initialLayer": "upper",
+              "finalLayer": "upper",
+              "transitions": [],
+              "maxPathHeightGradient": {
+                "name": "lighthouse lane -0.65 reverse",
+                "lane": -0.65,
+                "ratio": 0.8331,
+                "verticalDelta": -0.0458,
+                "sampleDistance": 0.055,
+                "from": {
+                  "x": 30.1291,
+                  "z": -21.7754
+                },
+                "to": {
+                  "x": 30.1154,
+                  "z": -21.6958
+                }
+              }
+            }
+          },
+          {
+            "name": "lighthouse lane 0.65 forward",
+            "status": "passed",
+            "report": {
+              "lane": 0.65,
+              "distance": 29.5813,
+              "steps": 544,
+              "end": {
+                "x": 32.5505,
+                "z": -32.0399
+              },
+              "initialLayer": "upper",
+              "finalLayer": "upper",
+              "transitions": [],
+              "maxPathHeightGradient": {
+                "name": "lighthouse lane 0.65 forward",
+                "lane": 0.65,
+                "ratio": 0.83,
+                "verticalDelta": 0.0457,
+                "sampleDistance": 0.055,
+                "from": {
+                  "x": 30.1115,
+                  "z": -21.6718
+                },
+                "to": {
+                  "x": 30.1252,
+                  "z": -21.7514
+                }
+              }
+            }
+          },
+          {
+            "name": "lighthouse lane 0.65 reverse",
+            "status": "passed",
+            "report": {
+              "lane": 0.65,
+              "distance": 29.5972,
+              "steps": 550,
+              "end": {
+                "x": 20.4661,
+                "z": 4.5354
+              },
+              "initialLayer": "upper",
+              "finalLayer": "upper",
+              "transitions": [],
+              "maxPathHeightGradient": {
+                "name": "lighthouse lane 0.65 reverse",
+                "lane": 0.65,
+                "ratio": 0.8682,
+                "verticalDelta": -0.0478,
+                "sampleDistance": 0.055,
+                "from": {
+                  "x": 31.3716,
+                  "z": -21.2217
+                },
+                "to": {
+                  "x": 31.3579,
+                  "z": -21.139
+                }
+              }
+            }
+          }
+        ],
+        "endpoint": {
+          "x": 33.2,
+          "z": -32
+        },
+        "townLookout": [
+          33.1,
+          -35.5
+        ],
+        "lookoutSupport": {
+          "radius": 42.0388,
+          "kind": "ground",
+          "layer": "upper"
+        },
+        "lookoutWalk": {
+          "lane": 0,
+          "distance": 2.1204,
+          "steps": 39,
+          "end": {
+            "x": 33.1,
+            "z": -35.5
+          },
+          "initialLayer": "upper",
+          "finalLayer": "upper",
+          "transitions": [],
+          "maxPathHeightGradient": {
+            "name": "upper terrace to town-facing lookout",
+            "lane": 0,
+            "ratio": 0.3795,
+            "verticalDelta": -0.0209,
+            "sampleDistance": 0.055,
+            "from": {
+              "x": 33.1208,
+              "z": -34.7869
+            },
+            "to": {
+              "x": 33.1179,
+              "z": -34.8776
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "cove cliff rim blocks the non-route bypass from both sides",
+      "detail": {
+        "bypass": [
+          [
+            24.5,
+            -10
+          ],
+          [
+            27,
+            -8
+          ],
+          [
+            30,
+            -7
+          ],
+          [
+            33,
+            -11
+          ],
+          [
+            35,
+            -13
+          ],
+          [
+            37,
+            -15
+          ],
+          [
+            37,
+            -19
+          ]
+        ],
+        "forward": {
+          "blockedAt": {
+            "x": 29.5605,
+            "z": -7.1766
+          },
+          "target": {
+            "x": 29.75,
+            "z": -7.0833
+          },
+          "layer": "upper",
+          "distance": 5.5642,
+          "steps": 112,
+          "softBlocks": 5,
+          "contact": {
+            "buildingId": "peninsula-cliff",
+            "segmentId": "peninsula-cliff:8:lower"
+          }
+        },
+        "reverse": {
+          "blockedAt": {
+            "x": 32.0693,
+            "z": -9.6263
+          },
+          "target": {
+            "x": 32,
+            "z": -9.6667
+          },
+          "layer": "upper",
+          "distance": 7.9352,
+          "steps": 155,
+          "softBlocks": 5,
+          "contact": {
+            "buildingId": "peninsula-cliff",
+            "segmentId": "peninsula-cliff:6:lower"
+          }
+        }
+      }
+    },
+    {
+      "name": "beach-east joins cave and remains walkable both ways at full width",
+      "detail": {
+        "gap": 0,
+        "forward": {
+          "lane": 0,
+          "distance": 34.1771,
+          "steps": 634,
+          "end": {
+            "x": 38,
+            "z": -20
+          },
+          "initialLayer": "upper",
+          "finalLayer": "tunnel",
+          "transitions": [
+            {
+              "at": {
+                "x": 24.055,
+                "z": -29
+              },
+              "before": {
+                "x": 24,
+                "z": -29
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.925,
+              "toRadius": 35.9
+            }
+          ],
+          "maxPathHeightGradient": {
+            "name": "beach-to-cave forward",
+            "lane": 0,
+            "ratio": 0.4545,
+            "verticalDelta": -0.025,
+            "sampleDistance": 0.055,
+            "from": {
+              "x": 24,
+              "z": -29
+            },
+            "to": {
+              "x": 24.055,
+              "z": -29
+            }
+          }
+        },
+        "reverse": {
+          "lane": 0,
+          "distance": 34.1843,
+          "steps": 634,
+          "end": {
+            "x": 20,
+            "z": -16
+          },
+          "initialLayer": "tunnel",
+          "finalLayer": "upper",
+          "transitions": [
+            {
+              "at": {
+                "x": 23.9726,
+                "z": -28.9873
+              },
+              "before": {
+                "x": 24.0267,
+                "z": -29
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.925
+            }
+          ],
+          "maxPathHeightGradient": {
+            "name": "beach-to-cave reverse",
+            "lane": 0,
+            "ratio": 0.4545,
+            "verticalDelta": 0.025,
+            "sampleDistance": 0.055,
+            "from": {
+              "x": 24.0267,
+              "z": -29
+            },
+            "to": {
+              "x": 23.9726,
+              "z": -28.9873
+            }
+          }
+        },
+        "beachLane": 0.67,
+        "caveLane": 1.17,
+        "laneReports": [
+          {
+            "lane": -0.67,
+            "distance": 17.8757,
+            "steps": 330,
+            "end": {
+              "x": 27.9742,
+              "z": -28.0602
+            },
+            "initialLayer": "upper",
+            "finalLayer": "tunnel",
+            "transitions": [
+              {
+                "at": {
+                  "x": 24.0028,
+                  "z": -28.1338
+                },
+                "before": {
+                  "x": 23.9487,
+                  "z": -28.121
+                },
+                "from": "upper",
+                "to": "tunnel",
+                "fromRadius": 35.925,
+                "toRadius": 35.9
+              }
+            ],
+            "maxPathHeightGradient": {
+              "name": "beach-east lane -0.67 forward",
+              "lane": -0.67,
+              "ratio": 0.4545,
+              "verticalDelta": -0.025,
+              "sampleDistance": 0.055,
+              "from": {
+                "x": 23.9487,
+                "z": -28.121
+              },
+              "to": {
+                "x": 24.0028,
+                "z": -28.1338
+              }
+            }
+          },
+          {
+            "lane": -0.67,
+            "distance": 20.5178,
+            "steps": 377,
+            "end": {
+              "x": 19.3524,
+              "z": -15.7976
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "upper",
+            "transitions": [
+              {
+                "at": {
+                  "x": 24.3427,
+                  "z": -29.8537
+                },
+                "before": {
+                  "x": 24.3977,
+                  "z": -29.8551
+                },
+                "from": "tunnel",
+                "to": "upper",
+                "fromRadius": 35.9,
+                "toRadius": 35.9257
+              }
+            ],
+            "maxPathHeightGradient": {
+              "name": "beach-east lane -0.67 reverse",
+              "lane": -0.67,
+              "ratio": 0.4681,
+              "verticalDelta": 0.0257,
+              "sampleDistance": 0.055,
+              "from": {
+                "x": 24.3977,
+                "z": -29.8551
+              },
+              "to": {
+                "x": 24.3427,
+                "z": -29.8537
+              }
+            }
+          },
+          {
+            "lane": 0.67,
+            "distance": 20.5202,
+            "steps": 377,
+            "end": {
+              "x": 27.9906,
+              "z": -29.9402
+            },
+            "initialLayer": "upper",
+            "finalLayer": "tunnel",
+            "transitions": [
+              {
+                "at": {
+                  "x": 24.4148,
+                  "z": -29.8555
+                },
+                "before": {
+                  "x": 24.3598,
+                  "z": -29.8541
+                },
+                "from": "upper",
+                "to": "tunnel",
+                "fromRadius": 35.9258,
+                "toRadius": 35.9
+              }
+            ],
+            "maxPathHeightGradient": {
+              "name": "beach-east lane 0.67 forward",
+              "lane": 0.67,
+              "ratio": 0.4696,
+              "verticalDelta": -0.0258,
+              "sampleDistance": 0.055,
+              "from": {
+                "x": 24.3598,
+                "z": -29.8541
+              },
+              "to": {
+                "x": 24.4148,
+                "z": -29.8555
+              }
+            }
+          },
+          {
+            "lane": 0.67,
+            "distance": 17.88,
+            "steps": 330,
+            "end": {
+              "x": 20.6448,
+              "z": -16.2148
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "upper",
+            "transitions": [
+              {
+                "at": {
+                  "x": 23.9812,
+                  "z": -28.1286
+                },
+                "before": {
+                  "x": 24.0353,
+                  "z": -28.1414
+                },
+                "from": "tunnel",
+                "to": "upper",
+                "fromRadius": 35.9,
+                "toRadius": 35.925
+              }
+            ],
+            "maxPathHeightGradient": {
+              "name": "beach-east lane 0.67 reverse",
+              "lane": 0.67,
+              "ratio": 0.4545,
+              "verticalDelta": 0.025,
+              "sampleDistance": 0.055,
+              "from": {
+                "x": 24.0353,
+                "z": -28.1414
+              },
+              "to": {
+                "x": 23.9812,
+                "z": -28.1286
+              }
+            }
+          },
+          {
+            "lane": -1.17,
+            "distance": 13.0502,
+            "steps": 240,
+            "end": {
+              "x": 36.8303,
+              "z": -20.0543
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "tunnel",
+            "transitions": [],
+            "maxPathHeightGradient": {
+              "name": "cave lane -1.17 forward",
+              "lane": -1.17,
+              "ratio": 0,
+              "verticalDelta": 0,
+              "sampleDistance": 0,
+              "from": {
+                "x": 28.344,
+                "z": -27.4229
+              },
+              "to": {
+                "x": 28.344,
+                "z": -27.4229
+              }
+            }
+          },
+          {
+            "lane": -1.17,
+            "distance": 16.879,
+            "steps": 312,
+            "end": {
+              "x": 27.6477,
+              "z": -30.56
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "tunnel",
+            "transitions": [],
+            "maxPathHeightGradient": {
+              "name": "cave lane -1.17 reverse",
+              "lane": -1.17,
+              "ratio": 0,
+              "verticalDelta": 0,
+              "sampleDistance": 0,
+              "from": {
+                "x": 39.1696,
+                "z": -19.9391
+              },
+              "to": {
+                "x": 39.1696,
+                "z": -19.9391
+              }
+            }
+          },
+          {
+            "lane": 0,
+            "distance": 14.9693,
+            "steps": 276,
+            "end": {
+              "x": 38,
+              "z": -20
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "tunnel",
+            "transitions": [],
+            "maxPathHeightGradient": {
+              "name": "cave lane 0.00 forward",
+              "lane": 0,
+              "ratio": 0,
+              "verticalDelta": 0,
+              "sampleDistance": 0,
+              "from": {
+                "x": 28,
+                "z": -29
+              },
+              "to": {
+                "x": 28,
+                "z": -29
+              }
+            }
+          },
+          {
+            "lane": 0,
+            "distance": 14.9508,
+            "steps": 276,
+            "end": {
+              "x": 28.0223,
+              "z": -29.0111
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "tunnel",
+            "transitions": [],
+            "maxPathHeightGradient": {
+              "name": "cave lane 0.00 reverse",
+              "lane": 0,
+              "ratio": 0,
+              "verticalDelta": 0,
+              "sampleDistance": 0,
+              "from": {
+                "x": 38,
+                "z": -20
+              },
+              "to": {
+                "x": 38,
+                "z": -20
+              }
+            }
+          },
+          {
+            "lane": 1.17,
+            "distance": 16.8751,
+            "steps": 312,
+            "end": {
+              "x": 39.1699,
+              "z": -20.0134
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "tunnel",
+            "transitions": [],
+            "maxPathHeightGradient": {
+              "name": "cave lane 1.17 forward",
+              "lane": 1.17,
+              "ratio": 0,
+              "verticalDelta": 0,
+              "sampleDistance": 0,
+              "from": {
+                "x": 27.6221,
+                "z": -30.5463
+              },
+              "to": {
+                "x": 27.6221,
+                "z": -30.5463
+              }
+            }
+          },
+          {
+            "lane": 1.17,
+            "distance": 13.0319,
+            "steps": 240,
+            "end": {
+              "x": 28.344,
+              "z": -27.4229
+            },
+            "initialLayer": "tunnel",
+            "finalLayer": "tunnel",
+            "transitions": [],
+            "maxPathHeightGradient": {
+              "name": "cave lane 1.17 reverse",
+              "lane": 1.17,
+              "ratio": 0,
+              "verticalDelta": 0,
+              "sampleDistance": 0,
+              "from": {
+                "x": 36.8303,
+                "z": -20.0543
+              },
+              "to": {
+                "x": 36.8303,
+                "z": -20.0543
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cove is dry sand with an actual eastward ocean opening",
+      "detail": {
+        "cove": {
+          "x": 37,
+          "z": -11
+        },
+        "color": "#D7BB85",
+        "caveToCove": {
+          "lane": 0,
+          "distance": 4.6373,
+          "steps": 85,
+          "end": {
+            "x": 37.0031,
+            "z": -11.027
+          },
+          "initialLayer": "tunnel",
+          "finalLayer": "upper",
+          "transitions": [
+            {
+              "at": {
+                "x": 37.6454,
+                "z": -16.8015
+              },
+              "before": {
+                "x": 37.6573,
+                "z": -16.9087
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.6333,
+                "z": -16.6945
+              },
+              "before": {
+                "x": 37.6454,
+                "z": -16.8015
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.6211,
+                "z": -16.5876
+              },
+              "before": {
+                "x": 37.6333,
+                "z": -16.6945
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.6096,
+                "z": -16.4805
+              },
+              "before": {
+                "x": 37.6211,
+                "z": -16.5876
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5979,
+                "z": -16.3735
+              },
+              "before": {
+                "x": 37.6096,
+                "z": -16.4805
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5862,
+                "z": -16.2666
+              },
+              "before": {
+                "x": 37.5979,
+                "z": -16.3735
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5743,
+                "z": -16.1598
+              },
+              "before": {
+                "x": 37.5862,
+                "z": -16.2666
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5623,
+                "z": -16.0531
+              },
+              "before": {
+                "x": 37.5743,
+                "z": -16.1598
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5501,
+                "z": -15.9466
+              },
+              "before": {
+                "x": 37.5623,
+                "z": -16.0531
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5385,
+                "z": -15.8462
+              },
+              "before": {
+                "x": 37.5501,
+                "z": -15.9466
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.527,
+                "z": -15.7394
+              },
+              "before": {
+                "x": 37.5385,
+                "z": -15.8462
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5154,
+                "z": -15.6328
+              },
+              "before": {
+                "x": 37.527,
+                "z": -15.7394
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5037,
+                "z": -15.5263
+              },
+              "before": {
+                "x": 37.5154,
+                "z": -15.6328
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4919,
+                "z": -15.4199
+              },
+              "before": {
+                "x": 37.5037,
+                "z": -15.5263
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4799,
+                "z": -15.3136
+              },
+              "before": {
+                "x": 37.4919,
+                "z": -15.4199
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4677,
+                "z": -15.2075
+              },
+              "before": {
+                "x": 37.4799,
+                "z": -15.3136
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4563,
+                "z": -15.1011
+              },
+              "before": {
+                "x": 37.4677,
+                "z": -15.2075
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4448,
+                "z": -14.9948
+              },
+              "before": {
+                "x": 37.4563,
+                "z": -15.1011
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4331,
+                "z": -14.8887
+              },
+              "before": {
+                "x": 37.4448,
+                "z": -14.9948
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4213,
+                "z": -14.7826
+              },
+              "before": {
+                "x": 37.4331,
+                "z": -14.8887
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4093,
+                "z": -14.6767
+              },
+              "before": {
+                "x": 37.4213,
+                "z": -14.7826
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3973,
+                "z": -14.5709
+              },
+              "before": {
+                "x": 37.4093,
+                "z": -14.6767
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.385,
+                "z": -14.4652
+              },
+              "before": {
+                "x": 37.3973,
+                "z": -14.5709
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3737,
+                "z": -14.3592
+              },
+              "before": {
+                "x": 37.385,
+                "z": -14.4652
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3622,
+                "z": -14.2533
+              },
+              "before": {
+                "x": 37.3737,
+                "z": -14.3592
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3505,
+                "z": -14.1475
+              },
+              "before": {
+                "x": 37.3622,
+                "z": -14.2533
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3388,
+                "z": -14.0419
+              },
+              "before": {
+                "x": 37.3505,
+                "z": -14.1475
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3269,
+                "z": -13.9363
+              },
+              "before": {
+                "x": 37.3388,
+                "z": -14.0419
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3148,
+                "z": -13.8309
+              },
+              "before": {
+                "x": 37.3269,
+                "z": -13.9363
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3035,
+                "z": -13.7252
+              },
+              "before": {
+                "x": 37.3148,
+                "z": -13.8309
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.292,
+                "z": -13.6197
+              },
+              "before": {
+                "x": 37.3035,
+                "z": -13.7252
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2804,
+                "z": -13.5143
+              },
+              "before": {
+                "x": 37.292,
+                "z": -13.6197
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2687,
+                "z": -13.4089
+              },
+              "before": {
+                "x": 37.2804,
+                "z": -13.5143
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2568,
+                "z": -13.3037
+              },
+              "before": {
+                "x": 37.2687,
+                "z": -13.4089
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2448,
+                "z": -13.1986
+              },
+              "before": {
+                "x": 37.2568,
+                "z": -13.3037
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2327,
+                "z": -13.0936
+              },
+              "before": {
+                "x": 37.2448,
+                "z": -13.1986
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2214,
+                "z": -12.9884
+              },
+              "before": {
+                "x": 37.2327,
+                "z": -13.0936
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.21,
+                "z": -12.8832
+              },
+              "before": {
+                "x": 37.2214,
+                "z": -12.9884
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1985,
+                "z": -12.7782
+              },
+              "before": {
+                "x": 37.21,
+                "z": -12.8832
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1868,
+                "z": -12.6732
+              },
+              "before": {
+                "x": 37.1985,
+                "z": -12.7782
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1749,
+                "z": -12.5684
+              },
+              "before": {
+                "x": 37.1868,
+                "z": -12.6732
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.163,
+                "z": -12.4637
+              },
+              "before": {
+                "x": 37.1749,
+                "z": -12.5684
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1538,
+                "z": -12.3846
+              },
+              "before": {
+                "x": 37.163,
+                "z": -12.4637
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1426,
+                "z": -12.2797
+              },
+              "before": {
+                "x": 37.1538,
+                "z": -12.3846
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1312,
+                "z": -12.1749
+              },
+              "before": {
+                "x": 37.1426,
+                "z": -12.2797
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1197,
+                "z": -12.0702
+              },
+              "before": {
+                "x": 37.1312,
+                "z": -12.1749
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1081,
+                "z": -11.9656
+              },
+              "before": {
+                "x": 37.1197,
+                "z": -12.0702
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            }
+          ],
+          "maxPathHeightGradient": {
+            "name": "cave exit to cove",
+            "lane": 0,
+            "ratio": 0.4687,
+            "verticalDelta": -0.0258,
+            "sampleDistance": 0.055,
+            "from": {
+              "x": 37.0151,
+              "z": -11.131
+            },
+            "to": {
+              "x": 37.0031,
+              "z": -11.027
+            }
+          }
+        },
+        "coveToCave": {
+          "lane": 0,
+          "distance": 4.6313,
+          "steps": 85,
+          "end": {
+            "x": 37.9957,
+            "z": -19.9597
+          },
+          "initialLayer": "upper",
+          "finalLayer": "tunnel",
+          "transitions": [
+            {
+              "at": {
+                "x": 37.1125,
+                "z": -12.0055
+              },
+              "before": {
+                "x": 37.1008,
+                "z": -11.901
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1241,
+                "z": -12.1101
+              },
+              "before": {
+                "x": 37.1125,
+                "z": -12.0055
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1356,
+                "z": -12.2148
+              },
+              "before": {
+                "x": 37.1241,
+                "z": -12.1101
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1469,
+                "z": -12.3197
+              },
+              "before": {
+                "x": 37.1356,
+                "z": -12.2148
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1589,
+                "z": -12.4243
+              },
+              "before": {
+                "x": 37.1469,
+                "z": -12.3197
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1709,
+                "z": -12.529
+              },
+              "before": {
+                "x": 37.1589,
+                "z": -12.4243
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1826,
+                "z": -12.6338
+              },
+              "before": {
+                "x": 37.1709,
+                "z": -12.529
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.1943,
+                "z": -12.7387
+              },
+              "before": {
+                "x": 37.1826,
+                "z": -12.6338
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2058,
+                "z": -12.8438
+              },
+              "before": {
+                "x": 37.1943,
+                "z": -12.7387
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2171,
+                "z": -12.949
+              },
+              "before": {
+                "x": 37.2058,
+                "z": -12.8438
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2284,
+                "z": -13.0542
+              },
+              "before": {
+                "x": 37.2171,
+                "z": -12.949
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2404,
+                "z": -13.1592
+              },
+              "before": {
+                "x": 37.2284,
+                "z": -13.0542
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2524,
+                "z": -13.2643
+              },
+              "before": {
+                "x": 37.2404,
+                "z": -13.1592
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2642,
+                "z": -13.3695
+              },
+              "before": {
+                "x": 37.2524,
+                "z": -13.2643
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2759,
+                "z": -13.4749
+              },
+              "before": {
+                "x": 37.2642,
+                "z": -13.3695
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2874,
+                "z": -13.5803
+              },
+              "before": {
+                "x": 37.2759,
+                "z": -13.4749
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.2988,
+                "z": -13.6859
+              },
+              "before": {
+                "x": 37.2874,
+                "z": -13.5803
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3077,
+                "z": -13.7692
+              },
+              "before": {
+                "x": 37.2988,
+                "z": -13.6859
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3198,
+                "z": -13.8746
+              },
+              "before": {
+                "x": 37.3077,
+                "z": -13.7692
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3318,
+                "z": -13.98
+              },
+              "before": {
+                "x": 37.3198,
+                "z": -13.8746
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3436,
+                "z": -14.0856
+              },
+              "before": {
+                "x": 37.3318,
+                "z": -13.98
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3554,
+                "z": -14.1913
+              },
+              "before": {
+                "x": 37.3436,
+                "z": -14.0856
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3669,
+                "z": -14.2972
+              },
+              "before": {
+                "x": 37.3554,
+                "z": -14.1913
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3784,
+                "z": -14.4031
+              },
+              "before": {
+                "x": 37.3669,
+                "z": -14.2972
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.3905,
+                "z": -14.5088
+              },
+              "before": {
+                "x": 37.3784,
+                "z": -14.4031
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4026,
+                "z": -14.6146
+              },
+              "before": {
+                "x": 37.3905,
+                "z": -14.5088
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4144,
+                "z": -14.7205
+              },
+              "before": {
+                "x": 37.4026,
+                "z": -14.6146
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4262,
+                "z": -14.8265
+              },
+              "before": {
+                "x": 37.4144,
+                "z": -14.7205
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4378,
+                "z": -14.9327
+              },
+              "before": {
+                "x": 37.4262,
+                "z": -14.8265
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4493,
+                "z": -15.039
+              },
+              "before": {
+                "x": 37.4378,
+                "z": -14.9327
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4606,
+                "z": -15.1454
+              },
+              "before": {
+                "x": 37.4493,
+                "z": -15.039
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4728,
+                "z": -15.2514
+              },
+              "before": {
+                "x": 37.4606,
+                "z": -15.1454
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4849,
+                "z": -15.3576
+              },
+              "before": {
+                "x": 37.4728,
+                "z": -15.2514
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.4968,
+                "z": -15.464
+              },
+              "before": {
+                "x": 37.4849,
+                "z": -15.3576
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5086,
+                "z": -15.5704
+              },
+              "before": {
+                "x": 37.4968,
+                "z": -15.464
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5203,
+                "z": -15.6769
+              },
+              "before": {
+                "x": 37.5086,
+                "z": -15.5704
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5318,
+                "z": -15.7836
+              },
+              "before": {
+                "x": 37.5203,
+                "z": -15.6769
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.544,
+                "z": -15.89
+              },
+              "before": {
+                "x": 37.5318,
+                "z": -15.7836
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5561,
+                "z": -15.9966
+              },
+              "before": {
+                "x": 37.544,
+                "z": -15.89
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5681,
+                "z": -16.1032
+              },
+              "before": {
+                "x": 37.5561,
+                "z": -15.9966
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5799,
+                "z": -16.21
+              },
+              "before": {
+                "x": 37.5681,
+                "z": -16.1032
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.5916,
+                "z": -16.3169
+              },
+              "before": {
+                "x": 37.5799,
+                "z": -16.21
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.6032,
+                "z": -16.4239
+              },
+              "before": {
+                "x": 37.5916,
+                "z": -16.3169
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.6146,
+                "z": -16.5311
+              },
+              "before": {
+                "x": 37.6032,
+                "z": -16.4239
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.6269,
+                "z": -16.6379
+              },
+              "before": {
+                "x": 37.6146,
+                "z": -16.5311
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.639,
+                "z": -16.7448
+              },
+              "before": {
+                "x": 37.6269,
+                "z": -16.6379
+              },
+              "from": "tunnel",
+              "to": "upper",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            },
+            {
+              "at": {
+                "x": 37.651,
+                "z": -16.8519
+              },
+              "before": {
+                "x": 37.639,
+                "z": -16.7448
+              },
+              "from": "upper",
+              "to": "tunnel",
+              "fromRadius": 35.9,
+              "toRadius": 35.9
+            }
+          ],
+          "maxPathHeightGradient": {
+            "name": "cove to cave exit",
+            "lane": 0,
+            "ratio": 0.4735,
+            "verticalDelta": 0.026,
+            "sampleDistance": 0.055,
+            "from": {
+              "x": 37,
+              "z": -11
+            },
+            "to": {
+              "x": 37.012,
+              "z": -11.1039
+            }
+          }
+        },
+        "maximumDryHeight": -0.2045,
+        "waterAt": {
+          "index": 13,
+          "distance": 0.77,
+          "chart": {
+            "x": 37.77,
+            "z": -11
+          }
+        }
+      }
+    },
+    {
+      "name": "normal follow camera stays clear in four cardinal cove views",
+      "detail": {
+        "cove": {
+          "x": 37,
+          "z": -11
+        },
+        "minimum": 4.6425,
+        "views": [
+          {
+            "heading": "north",
+            "available": 4.6425,
+            "target": {
+              "x": 37.5323,
+              "z": -11
+            },
+            "cameraDirection": {
+              "x": 0.4538,
+              "y": -0.8911,
+              "z": 0.0061
+            }
+          },
+          {
+            "heading": "east",
+            "available": 4.8,
+            "target": {
+              "x": 36.9935,
+              "z": -12.0299
+            },
+            "cameraDirection": {
+              "x": 0.0156,
+              "y": -0.3008,
+              "z": 0.9536
+            }
+          },
+          {
+            "heading": "south",
+            "available": 4.8,
+            "target": {
+              "x": 36.4677,
+              "z": -11
+            },
+            "cameraDirection": {
+              "x": 0.4538,
+              "y": 0.7263,
+              "z": 0.5163
+            }
+          },
+          {
+            "heading": "west",
+            "available": 4.8,
+            "target": {
+              "x": 36.9935,
+              "z": -9.9701
+            },
+            "cameraDirection": {
+              "x": 0.8919,
+              "y": 0.136,
+              "z": -0.4312
+            }
+          }
+        ],
+        "registeredPortalTriangles": 1617
+      }
+    },
+    {
+      "name": "lighthouse foot is fully supported by its local foundation",
+      "detail": {
+        "tower": {
+          "x": 36,
+          "z": -32,
+          "elevation": 6.2,
+          "height": 12
+        },
+        "samples": [
+          {
+            "chart": {
+              "x": 36,
+              "z": -32
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 34.148,
+              "z": -28.9303
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 34.148,
+              "z": -35.0697
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 37.7128,
+              "z": -28.4176
+            },
+            "blend": 1,
+            "mismatch": 0
+          },
+          {
+            "chart": {
+              "x": 37.7128,
+              "z": -35.5824
+            },
+            "blend": 1,
+            "mismatch": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "the upper headland stays within the declared lighthouse foundation envelope",
+      "detail": {
+        "samples": 12144,
+        "highest": {
+          "height": 6.2,
+          "x": 33,
+          "z": -27,
+          "blend": 1
+        },
+        "maximumHeight": 6.75
+      }
+    }
+  ],
+  "failures": [],
+  "reports": {
+    "maximumPathHeightGradient": {
+      "name": "lighthouse lane 0.65 reverse",
+      "lane": 0.65,
+      "ratio": 0.8682465815465693,
+      "verticalDelta": -0.04775356198506131,
+      "sampleDistance": 0.055,
+      "from": {
+        "x": 31.3716,
+        "z": -21.2217
+      },
+      "to": {
+        "x": 31.3579,
+        "z": -21.139
+      }
+    },
+    "pathHeightGradients": [
+      {
+        "name": "under-foundation lower forward",
+        "lane": 0,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 34,
+          "z": -32
+        },
+        "to": {
+          "x": 34,
+          "z": -32
+        }
+      },
+      {
+        "name": "under-foundation lower reverse",
+        "lane": 0,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 37,
+          "z": -30
+        },
+        "to": {
+          "x": 37,
+          "z": -30
+        }
+      },
+      {
+        "name": "lighthouse forward",
+        "lane": 0,
+        "ratio": 0.7177511099878974,
+        "verticalDelta": 0.039476311049334356,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 32.6603,
+          "z": -27.1492
+        },
+        "to": {
+          "x": 32.6904,
+          "z": -27.224
+        }
+      },
+      {
+        "name": "lighthouse reverse",
+        "lane": 0,
+        "ratio": 0.7186546965252721,
+        "verticalDelta": -0.03952600830888997,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 32.7105,
+          "z": -27.2742
+        },
+        "to": {
+          "x": 32.6805,
+          "z": -27.1993
+        }
+      },
+      {
+        "name": "lighthouse lane -0.65 forward",
+        "lane": -0.65,
+        "ratio": 0.8633928239588458,
+        "verticalDelta": 0.04748660531773652,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 31.3662,
+          "z": -21.1892
+        },
+        "to": {
+          "x": 31.3799,
+          "z": -21.272
+        }
+      },
+      {
+        "name": "lighthouse lane -0.65 reverse",
+        "lane": -0.65,
+        "ratio": 0.8331301595699291,
+        "verticalDelta": -0.0458221587763461,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 30.1291,
+          "z": -21.7754
+        },
+        "to": {
+          "x": 30.1154,
+          "z": -21.6958
+        }
+      },
+      {
+        "name": "lighthouse lane 0.65 forward",
+        "lane": 0.65,
+        "ratio": 0.8300195604100871,
+        "verticalDelta": 0.04565107582255479,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 30.1115,
+          "z": -21.6718
+        },
+        "to": {
+          "x": 30.1252,
+          "z": -21.7514
+        }
+      },
+      {
+        "name": "lighthouse lane 0.65 reverse",
+        "lane": 0.65,
+        "ratio": 0.8682465815465693,
+        "verticalDelta": -0.04775356198506131,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 31.3716,
+          "z": -21.2217
+        },
+        "to": {
+          "x": 31.3579,
+          "z": -21.139
+        }
+      },
+      {
+        "name": "upper terrace to town-facing lookout",
+        "lane": 0,
+        "ratio": 0.37950075657316906,
+        "verticalDelta": -0.020872541611524298,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 33.1208,
+          "z": -34.7869
+        },
+        "to": {
+          "x": 33.1179,
+          "z": -34.8776
+        }
+      },
+      {
+        "name": "beach-to-cave forward",
+        "lane": 0,
+        "ratio": 0.4545454545454287,
+        "verticalDelta": -0.02499999999999858,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 24,
+          "z": -29
+        },
+        "to": {
+          "x": 24.055,
+          "z": -29
+        }
+      },
+      {
+        "name": "beach-to-cave reverse",
+        "lane": 0,
+        "ratio": 0.4545454545454287,
+        "verticalDelta": 0.02499999999999858,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 24.0267,
+          "z": -29
+        },
+        "to": {
+          "x": 23.9726,
+          "z": -28.9873
+        }
+      },
+      {
+        "name": "beach-east lane -0.67 forward",
+        "lane": -0.6699999999999999,
+        "ratio": 0.4545454545454287,
+        "verticalDelta": -0.02499999999999858,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 23.9487,
+          "z": -28.121
+        },
+        "to": {
+          "x": 24.0028,
+          "z": -28.1338
+        }
+      },
+      {
+        "name": "beach-east lane -0.67 reverse",
+        "lane": -0.6699999999999999,
+        "ratio": 0.4680734678301364,
+        "verticalDelta": 0.025744040730657503,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 24.3977,
+          "z": -29.8551
+        },
+        "to": {
+          "x": 24.3427,
+          "z": -29.8537
+        }
+      },
+      {
+        "name": "beach-east lane 0.67 forward",
+        "lane": 0.6699999999999999,
+        "ratio": 0.4695724156916144,
+        "verticalDelta": -0.02582648286303879,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 24.3598,
+          "z": -29.8541
+        },
+        "to": {
+          "x": 24.4148,
+          "z": -29.8555
+        }
+      },
+      {
+        "name": "beach-east lane 0.67 reverse",
+        "lane": 0.6699999999999999,
+        "ratio": 0.4545454545454287,
+        "verticalDelta": 0.02499999999999858,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 24.0353,
+          "z": -28.1414
+        },
+        "to": {
+          "x": 23.9812,
+          "z": -28.1286
+        }
+      },
+      {
+        "name": "cave lane -1.17 forward",
+        "lane": -1.17,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 28.344,
+          "z": -27.4229
+        },
+        "to": {
+          "x": 28.344,
+          "z": -27.4229
+        }
+      },
+      {
+        "name": "cave lane -1.17 reverse",
+        "lane": -1.17,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 39.1696,
+          "z": -19.9391
+        },
+        "to": {
+          "x": 39.1696,
+          "z": -19.9391
+        }
+      },
+      {
+        "name": "cave lane 0.00 forward",
+        "lane": 0,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 28,
+          "z": -29
+        },
+        "to": {
+          "x": 28,
+          "z": -29
+        }
+      },
+      {
+        "name": "cave lane 0.00 reverse",
+        "lane": 0,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 38,
+          "z": -20
+        },
+        "to": {
+          "x": 38,
+          "z": -20
+        }
+      },
+      {
+        "name": "cave lane 1.17 forward",
+        "lane": 1.17,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 27.6221,
+          "z": -30.5463
+        },
+        "to": {
+          "x": 27.6221,
+          "z": -30.5463
+        }
+      },
+      {
+        "name": "cave lane 1.17 reverse",
+        "lane": 1.17,
+        "ratio": 0,
+        "verticalDelta": 0,
+        "sampleDistance": 0,
+        "from": {
+          "x": 36.8303,
+          "z": -20.0543
+        },
+        "to": {
+          "x": 36.8303,
+          "z": -20.0543
+        }
+      },
+      {
+        "name": "cave exit to cove",
+        "lane": 0,
+        "ratio": 0.46870372472111205,
+        "verticalDelta": -0.02577870485966116,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 37.0151,
+          "z": -11.131
+        },
+        "to": {
+          "x": 37.0031,
+          "z": -11.027
+        }
+      },
+      {
+        "name": "cove to cave exit",
+        "lane": 0,
+        "ratio": 0.47352137115811127,
+        "verticalDelta": 0.02604367541369612,
+        "sampleDistance": 0.055,
+        "from": {
+          "x": 37,
+          "z": -11
+        },
+        "to": {
+          "x": 37.012,
+          "z": -11.1039
+        }
+      }
+    ]
+  }
+}

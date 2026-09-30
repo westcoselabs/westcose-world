@@ -8,7 +8,7 @@ import { areaAt, frameAt, RADIUS } from "../data/planet";
 import { PIER_LAYOUT } from "../data/pier-layout";
 import { MAP_MAX_HEIGHT, MAP_SUMMIT, mapCoordinates, mapPoint } from "../data/world-map";
 import { clearWorldInput, isEditableTarget, MOVEMENT_CODES } from "../runtime/input";
-import { activeInteriorAt, cameraClearDistance, moveOnSurface, supportAt, supportRadius } from "../runtime/planet-collision";
+import { activeInteriorAt, cameraClearDistance, moveOnSurface, supportAt } from "../runtime/planet-collision";
 import {
   CAMERA_FOLLOW_DISTANCE, DEFAULT_FORWARD, DEFAULT_HEADING, DEFAULT_SPAWN, PLAYER_CENTER_HEIGHT,
   type WorldRuntimeState,
@@ -154,18 +154,23 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     if (runtime.resetRequested || runtime.teleportRequested) {
       const reset = runtime.resetRequested;
       const destination = reset ? DEFAULT_SPAWN : runtime.teleportRequested!;
+      const requestedLayer = reset ? 'upper' : runtime.teleportSupportLayer ?? 'upper';
       state.up.set(destination.x, destination.y, destination.z).normalize();
       if (state.up.lengthSq() < 0.5) state.up.set(DEFAULT_SPAWN.x, DEFAULT_SPAWN.y, DEFAULT_SPAWN.z).normalize();
       const forward = reset ? DEFAULT_FORWARD : runtime.forwardRequested ?? frameAt(Math.atan2(state.up.x, state.up.z), Math.asin(state.up.y)).east;
       state.forward.set(forward.x, forward.y, forward.z).addScaledVector(state.up, -(forward.x * state.up.x + forward.y * state.up.y + forward.z * state.up.z));
       if (state.forward.lengthSq() < 0.001) state.forward.copy(frameAt(Math.atan2(state.up.x, state.up.z), Math.asin(state.up.y)).east);
       state.forward.normalize();
-      copyPoint(runtime.position, state.up.clone().multiplyScalar(supportRadius(state.up) + PLAYER_CENTER_HEIGHT));
+      const resetSupport = supportAt(state.up, { layer:requestedLayer });
+      copyPoint(runtime.position, state.up.clone().multiplyScalar(resetSupport.radius + PLAYER_CENTER_HEIGHT));
       copyPoint(runtime.up, state.up); copyPoint(runtime.forward, state.forward);
       state.inputForward.copy(state.forward); state.facing.copy(state.forward);
       state.verticalVelocity = 0; state.inputActive = false; state.cameraInitialized = false; state.accumulator = 0;
+      runtime.supportKind = resetSupport.kind;
+      runtime.supportLayer = resetSupport.layer;
+      runtime.swimming = resetSupport.kind === 'water';
       if (reset) { runtime.heading = DEFAULT_HEADING; runtime.travelDistance = 0; runtime.lapCount = 0; }
-      runtime.resetRequested = false; runtime.teleportRequested = undefined; runtime.forwardRequested = undefined;
+      runtime.resetRequested = false; runtime.teleportRequested = undefined; runtime.forwardRequested = undefined; runtime.teleportSupportLayer = undefined;
       clearWorldInput(runtime);
     }
 
@@ -188,14 +193,20 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
         state.inputActive = true;
         state.right.crossVectors(state.inputForward, state.up).normalize();
         state.wish.copy(state.inputForward).multiplyScalar(y).addScaledVector(state.right, x).normalize();
-        const water = supportAt(state.up).kind === "water";
+        const currentFootRadius = radius - PLAYER_CENTER_HEIGHT;
+        const currentSupport = supportAt(state.up, { footRadius:currentFootRadius, layer:runtime.supportLayer });
+        const water = currentSupport.kind === "water";
         const speed = (water ? 2.5 : keys.has("ShiftLeft") || keys.has("ShiftRight") ? RUN_SPEED : WALK_SPEED) * Math.min(inputLength, 1);
-        const movement = moveOnSurface(state.up, state.wish, speed * FIXED_STEP, radius - PLAYER_CENTER_HEIGHT);
+        const movement = moveOnSurface(state.up, state.wish, speed * FIXED_STEP, currentFootRadius, currentSupport.layer);
         state.inputForward.applyQuaternion(movement.rotation).normalize();
         state.forward.applyQuaternion(movement.rotation).normalize();
         state.facing.applyQuaternion(movement.rotation).normalize();
         state.wish.applyQuaternion(movement.rotation).normalize();
         state.up.copy(movement.up);
+        // Entering a low portal is an intentional layer handoff. Persist it
+        // before grounding at the advanced map direction so the next fixed
+        // step cannot resolve the same tunnel point back to the terrace.
+        runtime.supportLayer = movement.support.layer;
         if (movement.distance > 0.001) {
           // The input basis is latched for a gesture and transported too: holding diagonally
           // traces a geodesic instead of feeding camera turn back into endless circles.
@@ -214,9 +225,13 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
         state.gait = MathUtils.damp(state.gait, 0, 12, FIXED_STEP);
       }
 
-      const surface = supportAt(state.up);
+      const surface = supportAt(state.up, {
+        footRadius:radius - PLAYER_CENTER_HEIGHT,
+        layer:runtime.supportLayer,
+      });
       const support = surface.radius + PLAYER_CENTER_HEIGHT;
       runtime.supportKind = surface.kind;
+      runtime.supportLayer = surface.layer;
       runtime.swimming = surface.kind === "water";
       if (radius <= support + 0.22) {
         radius = support;
@@ -264,7 +279,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     // or changing the user's right-drag pitch control.
     state.target.addScaledVector(state.right, 0.55);
     state.cameraDirection.copy(state.forward).multiplyScalar(-CAMERA_FOLLOW_DISTANCE).addScaledVector(state.up, state.cameraHeight).normalize();
-    const availableDistance = cameraClearDistance(state.target, state.cameraDirection, CAMERA_FOLLOW_DISTANCE, runtime.interior);
+    const availableDistance = cameraClearDistance(state.target, state.cameraDirection, CAMERA_FOLLOW_DISTANCE, runtime.interior, runtime.supportLayer);
     runtime.desiredCameraDistance = CAMERA_FOLLOW_DISTANCE;
     if (!state.cameraInitialized || availableDistance < runtime.cameraDistance) runtime.cameraDistance = availableDistance;
     else runtime.cameraDistance = MathUtils.damp(runtime.cameraDistance, availableDistance, 5, dt);

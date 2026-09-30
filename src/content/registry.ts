@@ -1,4 +1,4 @@
-export type ContentId = 'world' | 'services' | 'about' | 'contact' | 'fightclub' | 'frequency' | 'labs';
+export type ContentId = 'world' | 'services' | 'about' | 'contact' | 'fightclub' | 'frequency' | 'labs' | 'snowboard';
 export type ContentEntry = {
   id: ContentId; title: string; eyebrow: string; summary: string; paragraphs: string[];
   status: string; href: string; linkLabel: string;
@@ -40,6 +40,12 @@ export const CONTENT: Record<ContentId, ContentEntry> = {
     summary: 'An old workshop for new experiments. Some ideas need a little room.',
     paragraphs: ['This converted workshop is the home for future WebGL studies, prototypes, and unfinished WestCose ideas.', 'The room is explorable now. Individual experiments will be connected here when their real content and destinations are available.'],
     status: 'Experiments coming soon', href: '/labs', linkLabel: 'Visit Labs',
+  },
+  snowboard: {
+    id: 'snowboard', title: 'Four runs from the summit.', eyebrow: 'Ski Resort / Snowboard',
+    summary: 'Find the lift-ticket booth at the ski resort, at the top of the forest trail north of town. Pick a run, ride from the summit, and chain tricks for points.',
+    paragraphs: ['Four rated runs leave the summit plateau: a green circle back to the resort, a blue square to the bluff above the lighthouse cove, a black diamond into the west forest, and a double black straight down the couloir.', 'Carve, jump the kickers, collect tokens and land tricks to build combos. Medals, best scores and challenge stars are saved on this device.'],
+    status: 'Playable mini-game', href: '', linkLabel: '',
   },
   frequency: {
     id: 'frequency', title: 'You found the quiet side.', eyebrow: 'Coastal Frequency / Field note 01',

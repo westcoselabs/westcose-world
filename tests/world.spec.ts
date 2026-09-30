@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
-import { PLANET_PLACES, SPAWN_COORDS } from '../src/features/world/data/planet';
-import { mapCoordinates } from '../src/features/world/data/world-map';
+import { PLANET_PLACES, RADIUS, SEA_LEVEL, SPAWN_COORDS } from '../src/features/world/data/planet';
+import { MAP_MIN_Z, MAP_SEAM, mapCoordinates } from '../src/features/world/data/world-map';
+import { PLAYER_CENTER_HEIGHT } from '../src/features/world/runtime/types';
 import { PIER_LAYOUT } from '../src/features/world/data/pier-layout';
 import { MOUNTAIN_LAYOUT } from '../src/features/world/data/mountain-layout';
 
@@ -14,6 +15,8 @@ type WorldState = {
   counters: Record<string, number>;
 };
 type DebugWindow = Window & { __WESTCOSE_WORLD__: { getState: () => WorldState; spawn: (name: string) => void } };
+// A swimming visitor's centre rides at sea level plus the capsule centre height.
+const SWIM_RADIUS = RADIUS + SEA_LEVEL + PLAYER_CENTER_HEIGHT;
 const distance = (a: Vec, b: Vec) => Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);
 const dot = (a: Vec, b: Vec) => a.x*b.x+a.y*b.y+a.z*b.z;
 async function state(page: Page) { return page.evaluate(() => (window as unknown as DebugWindow).__WESTCOSE_WORLD__.getState()); }
@@ -53,14 +56,14 @@ test.afterEach(({ page }) => { expect(errors.get(page)).toEqual([]); });
 test('real keyboard movement crosses the ocean map seam without a position jump', async ({ page }) => {
   await enter(page); await spawn(page,'seam');
   const start = await state(page);
-  expect(mapCoordinates(start.position).z).toBeGreaterThan(170);
+  expect(mapCoordinates(start.position).z).toBeGreaterThan(MAP_SEAM - 6);
   await hold(page, 'w', 4200);
   const end = await state(page);
-  expect(mapCoordinates(end.position).z).toBeLessThan(-38);
+  expect(mapCoordinates(end.position).z).toBeLessThan(MAP_MIN_Z + 12);
   expect(distance(start.position,end.position)).toBeGreaterThan(6);
   expect(distance(start.position,end.position)).toBeLessThan(13);
   expect(end.swimming).toBe(true);
-  expect(end.radius).toBeCloseTo(36.05,1);
+  expect(end.radius).toBeCloseTo(SWIM_RADIUS,1);
   expect(dot(end.up,end.forward)).toBeCloseTo(0,5);
 });
 
@@ -75,7 +78,7 @@ test('keyboard traversal remains stable crossing a pole', async ({ page }) => {
   expect(distance(start.position,end.position)).toBeGreaterThan(8);
   expect(Math.abs(end.lon-start.lon)).toBeGreaterThan(3);
   expect(dot(end.up,end.forward)).toBeCloseTo(0,5);
-  expect(end.radius).toBeGreaterThan(36);
+  expect(end.radius).toBeGreaterThan(RADIUS);
   expect(Number.isFinite(end.cameraDistance)).toBe(true);
 });
 
@@ -93,7 +96,7 @@ test('ocean supports continued travel beyond the coast', async ({ page }) => {
   await enter(page); await spawn(page,'shoreline');
   const shore=await state(page); await hold(page,'w',4500); const water=await state(page);
   expect(water.swimming).toBe(true);
-  expect(water.radius).toBeCloseTo(36.05,1);
+  expect(water.radius).toBeCloseTo(SWIM_RADIUS,1);
   expect(distance(shore.position,water.position)).toBeGreaterThan(8);
   expect(dot(water.up,water.forward)).toBeCloseTo(0,5);
 });
@@ -111,41 +114,35 @@ test('camera shortens at obstructions and globe view returns to the same place',
   expect(distance(initial.position,(await state(page)).position)).toBeLessThan(.05);
 });
 
-test('the pier follow-camera frames the real summit while the globe-occluded base stays unassisted', async ({ page }) => {
+test('the pier looks out over open ocean while the mountain stays around the curve', async ({ page }) => {
   await enter(page);
   await spawn(page, 'pieroutward');
-  await page.waitForTimeout(1600);
-  const framed = await state(page);
-  expect(framed.landmarkFraming.summitFraming).toBeGreaterThan(.5);
-  expect(framed.landmarkFraming.summitVisible).toBe(true);
-  expect(Math.abs(framed.landmarkFraming.summitNdc.x)).toBeLessThan(.98);
-  expect(Math.abs(framed.landmarkFraming.summitNdc.y)).toBeLessThan(.98);
+  await page.waitForTimeout(1200);
+  const pier = await state(page);
+  // The radius-72 globe hides the whole mountain from the pier: no summit on screen
+  // and no camera assist pulling the view toward it.
+  expect(pier.supportKind).toBe('pier');
+  expect(pier.landmarkFraming.summitVisible).toBe(false);
+  expect(pier.landmarkFraming.summitFraming).toBe(0);
 
-  // The compact base lies on the opposite side of this tiny solid planet.
-  // It is an intentionally globe-occluded location, not a second summit-view
-  // camera. Verify its actual approved placement without demanding a fake view.
+  // The resort sits at the foot of the mountain on the far side of the town.
   await spawn(page, 'resort');
-  // This transition starts with the pier's damped camera assistance. Wait for
-  // the actual state to settle instead of assuming a particular frame cadence.
-  await expect.poll(async () => (await state(page)).landmarkFraming.summitFraming).toBeLessThan(.05);
   const base = await state(page);
   const baseMap = mapCoordinates(base.position);
   expect(baseMap.x).toBeCloseTo(MOUNTAIN_LAYOUT.pedestrianArrival.x, 1);
   expect(baseMap.z).toBeCloseTo(MOUNTAIN_LAYOUT.pedestrianArrival.z, 1);
   expect(base.grounded).toBe(true);
   expect(base.swimming).toBe(false);
-  expect(base.landmarkFraming.summitFraming).toBeLessThan(.05);
 
-  // A deliberate vertical right-drag must take precedence over convenience
-  // framing, without moving the visitor or changing collision support.
+  // A vertical right-drag changes only the camera pitch, never the visitor.
   await spawn(page, 'pieroutward');
-  await page.waitForTimeout(1600);
+  await page.waitForTimeout(600);
   const beforeManualPitch = await state(page);
   await page.mouse.move(720, 450);
   await page.mouse.down({ button: 'right' });
   await page.mouse.move(720, 495, { steps: 2 });
   await page.mouse.up({ button: 'right' });
-  await expect.poll(async () => (await state(page)).landmarkFraming.summitFraming).toBeLessThan(.05);
+  await page.waitForTimeout(200);
   expect(distance(beforeManualPitch.position, (await state(page)).position)).toBeLessThan(.05);
 });
 
@@ -183,7 +180,8 @@ test('a fresh document return from project content always starts in the courtyar
 
 test('full reload returns to courtyard even when the prior position is a valid discovery', async ({ page }) => {
   await enter(page); await spawn(page, 'summit');
-  expect(mapCoordinates((await state(page)).position).z).toBeGreaterThan(145);
+  // The summit fixture is the snowboard start plateau just below the peak.
+  expect(mapCoordinates((await state(page)).position).z).toBeGreaterThan(MOUNTAIN_LAYOUT.summitPlateau.z - 4);
   await page.reload(); await ready(page);
   const arrival = await state(page);
   expect(arrival.lon).toBeCloseTo(SPAWN_COORDS.lon, 3);
@@ -205,7 +203,7 @@ test('pause clears held keys, effects toggle works, and reset returns to entry',
 
 test('invalid saved state safely starts at the entry', async ({ page }) => {
   await page.addInitScript(()=>localStorage.setItem('westcose-world:session:v2','{"version":2,"position":{"x":1e300,"y":0,"z":0}}'));
-  await enter(page); const s=await state(page); expect(s.lon).toBeCloseTo(SPAWN_COORDS.lon,2); expect(s.radius).toBeGreaterThan(36); expect(s.grounded).toBe(true);
+  await enter(page); const s=await state(page); expect(s.lon).toBeCloseTo(SPAWN_COORDS.lon,2); expect(s.radius).toBeGreaterThan(RADIUS); expect(s.grounded).toBe(true);
 });
 
 test('FightClub stays an honest unconnected cabinet', async ({ page }) => {

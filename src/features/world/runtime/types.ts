@@ -2,8 +2,10 @@ import { directionAt, frameAt, heightAt } from "../data/planet";
 import { TOWN_SPAWN } from "../data/town-layout";
 import type { InteriorId } from "../data/town-types";
 import { MAP_SEA_LEVEL, mapCoordinates, mapDirection, mapFrame } from "../data/world-map";
+import { createSnowboardSession, type SnowboardSession } from "./snowboard-session";
 
-export type WorldMode = "loading" | "intro" | "exploring" | "reading" | "menu" | "paused" | "overview" | "error";
+/** `tickets` is the lift-ticket booth menu; `snowboard` is a live run of the mini-game. */
+export type WorldMode = "loading" | "intro" | "exploring" | "reading" | "menu" | "paused" | "overview" | "error" | "tickets" | "snowboard";
 export type WorldPosition = { x: number; y: number; z: number };
 /**
  * A map direction can have the normal outdoor support and a lower cave floor.
@@ -49,6 +51,8 @@ export interface WorldRuntimeState {
     summitVisible: boolean;
   };
   counters: { drawCalls: number; triangles: number; geometries: number; textures: number };
+  /** The snowboard mini-game; the walker keeps its own position while a run is active. */
+  snowboard: SnowboardSession;
 }
 
 export const PLAYER_CENTER_HEIGHT = 0.85;
@@ -74,5 +78,6 @@ export function createRuntimeState(): WorldRuntimeState {
     touch: { x: 0, y: 0, active: false }, pointer: { x: 0, y: 0, originX: 0, originY: 0, active: false },
     landmarkFraming: { summitNdc: { x: 0, y: 0, z: 0 }, summitFraming: 0, summitVisible: false },
     counters: { drawCalls: 0, triangles: 0, geometries: 0, textures: 0 },
+    snowboard: createSnowboardSession(),
   };
 }

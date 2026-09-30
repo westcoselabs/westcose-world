@@ -43,6 +43,15 @@ Version 2 checkpoints persist a position, tangent heading and matching spherical
 
 The world is a dynamically imported client-only route. Ordinary portfolio pages do not load Three.js. The previous Rapier dependency was removed because this implementation uses a focused spherical kinematic controller. No physics WASM is downloaded.
 
+## Radius 72 and the snowboard mountain (layout version 8)
+
+The planet radius is now 72 m (`MAP_RADIUS`), four times the original surface. The larger radius makes room for mountain revision 4, a 78 m snowboard mountain on a north island. It also puts that mountain around the curve from the pier, which now looks out over open ocean. The 36 m figures above describe the original build.
+- **Town, pier, skate park and cove:** they keep their chart coordinates, so building sizes and positions are unchanged.
+- **Seam:** the coordinate seam sits in open water at z 380.
+- **Planet version:** `PLANET_VERSION` is 8.
+
+The mountain carries four rated snowboard runs and the lift-ticket booth that starts the mini-game. See [Snowboard V1](design/snowboard-v1/README.md) and [its QA notes](qa/snowboard-v1/README.md).
+
 ## Validation
 
 See [Planet V2 validation](qa/planet/README.md), `npm run test:planet` for deterministic surface/collision/session checks, and `npm test` for actual browser input tests. Phone testing is browser emulation, not a physical-device performance result.

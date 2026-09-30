@@ -4,7 +4,7 @@ import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { ART_WALLS, CAVE_POINTS, CAVE_FLOOR, LIGHTHOUSE, SKATE_CENTER, SKATE_ELEVATION, SKATE_STAIRS, SKATE_STAIR_LENGTH, SKATE_STAIR_BREAKS, landmarkSolids, skateHeightAt, skateStairFrameAt, skateStairPointAt } from '../data/concept-landmarks';
-import { MAP_SUMMIT, mapFrame, mapMetric, mapPoint } from '../data/world-map';
+import { MAP_RADIUS, mapFrame, mapMetric, mapPoint } from '../data/world-map';
 import { TOWN_BUILDINGS, TOWN_ROUTES } from '../data/town-layout';
 import { townSurfaceAt } from '../data/town-surfaces';
 import { SceneryBatch, variation } from './sceneryGeometry';
@@ -12,7 +12,7 @@ import { block, createKitContext, physicalSign, tube, UNIT_BOX } from './kit/con
 import { SignAtlas } from './kit/SignAtlas';
 import PeninsulaCliffs from './PeninsulaCliffs';
 import { PENINSULA_COVE } from '../data/peninsula-layout';
-import { MOUNTAIN_LAYOUT, MOUNTAIN_RUNS } from '../data/mountain-layout';
+import { MOUNTAIN_LAYOUT } from '../data/mountain-layout';
 
 const CONE = new THREE.ConeGeometry(1, 1, 7);
 const CYLINDER = new THREE.CylinderGeometry(1, 1, 1, 7);
@@ -95,7 +95,7 @@ function buildLandmarks() {
   sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', LIGHTHOUSE.x - 3.3, LIGHTHOUSE.z + 4.5, 2.5);
   sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', CAVE_POINTS[0][0] - 3.2, CAVE_POINTS[0][1] + 2.5, 3.4, CAVE_FLOOR);
   sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', PENINSULA_COVE.x - .7, PENINSULA_COVE.z + 3, 2.5);
-  sign('SKI RESORT / F', 'LODGE / TICKETS / THREE SNOW TRAILS', MOUNTAIN_LAYOUT.pedestrianArrival.x-5.5, MOUNTAIN_LAYOUT.pedestrianArrival.z-1, 3.4);
+  sign('SKI RESORT', 'LODGE / LIFT TICKETS / FOUR RUNS', MOUNTAIN_LAYOUT.pedestrianArrival.x-5.5, MOUNTAIN_LAYOUT.pedestrianArrival.z-1, 3.4);
 
   // Simple coping makes the bowl legible without introducing a second support mesh.
   const metric = mapMetric(SKATE_CENTER[0], SKATE_ELEVATION);
@@ -127,37 +127,7 @@ function buildLandmarks() {
     }
   }
 
-  // Static lift infrastructure: no skiing or lift mechanics in this milestone.
-  const liftPoints = [57, 67, 77, 87, 97, 107, 117, 127, 137, 145, 150].map(z => {
-    const x = 7.8, height = townSurfaceAt(x, z).height;
-    const frame = mapFrame(x, z, height);
-    tube(kit.structure, frame.matrix, [0, 2.25, 0], .13, 4.5, '#687878');
-    block(kit.details, frame.matrix, [0, 4.35, 0], [2.3, .16, .23], '#56696A');
-    return { ...frame, z, height };
-  });
-  for (let i = 1; i < liftPoints.length; i++) {
-    const a = liftPoints[i - 1], b = liftPoints[i];
-    for (const side of [-1, 1]) {
-      const start = a.position.clone().addScaledVector(a.up, 4.4).addScaledVector(a.east, side * .9);
-      const end = b.position.clone().addScaledVector(b.up, 4.4).addScaledVector(b.east, side * .9);
-      beam(kit.details, start, end, .035, '#485A5F');
-      const middle = start.clone().lerp(end, .5), up = middle.clone().normalize();
-      const seat = middle.clone().addScaledVector(up, -1.15);
-      beam(kit.details, middle, seat, .04, '#576A6D');
-      const matrix = new THREE.Matrix4().compose(seat, a.quaternion, new THREE.Vector3(1, 1, 1));
-      block(kit.details, matrix, [0, 0, 0], [.95, .12, .48], '#A88967');
-      block(kit.details, matrix, [0, .26, -.22], [.95, .45, .08], '#A88967');
-    }
-  }
-  const peak = mapFrame(MAP_SUMMIT.x + 1.7, MAP_SUMMIT.z, townSurfaceAt(MAP_SUMMIT.x + 1.7, MAP_SUMMIT.z).height).matrix;
-  tube(kit.details, peak, [0, 1.1, 0], .055, 2.2, '#56676A');
-  block(kit.details, peak, [.44, 1.84, 0], [.86, .48, .035], '#CE775B');
-  sign(`SUMMIT / ${MAP_SUMMIT.height} M`, 'SAME MOUNTAIN / OCEAN REAR FACE', MAP_SUMMIT.x - 2.7, MAP_SUMMIT.z - 1, 3.2);
-  for (const run of MOUNTAIN_RUNS) {
-    const [x,z,h]=run.points[0],metric=mapMetric(x,h);
-    // Gate signs stand on the shoulder, leaving the full approved racing width clear.
-    sign(`TRAIL ${run.number}`,run.name.toUpperCase(),x+(run.number===3?-1:1)*(run.width/2+1.2)/metric.x,z,1.9);
-  }
+  // The snowboard mountain's lift, gates, signs and trees live in SkiMountain.
 
   // Blank art and graffiti walls reserve the approved spaces without styling them yet.
   for (const { x, z, elevation, title } of ART_WALLS) {
@@ -179,13 +149,15 @@ function buildLandmarks() {
   for (let i = 0; i < 240; i++) {
     const x = (variation(i * 4 + 1) - .5) * 62;
     const z = 18 + variation(i * 4 + 2) * 122;
+    // Same seeded sequence as before; the mountain's own trees start above the town forest.
+    if (z > 46) continue;
     const surface = townSurfaceAt(x, z);
     if (surface.height < .6 || !clearOfRoutes(x, z, surface.height)) continue;
-    if (TOWN_BUILDINGS.some(b => Math.hypot(b.x - x, (b.z - z) * Math.cos(x / 36)) < Math.max(b.width, b.depth) / 2 + 1.5)) continue;
+    if (TOWN_BUILDINGS.some(b => Math.hypot(b.x - x, (b.z - z) * Math.cos(x / MAP_RADIUS)) < Math.max(b.width, b.depth) / 2 + 1.5)) continue;
     const frame = mapFrame(x, z, surface.height).matrix;
     const size = 1.9 + variation(i * 4 + 3) * 1.9;
     tube(kit.plants, frame, [0, size * .3, 0], .12, size * .6, '#806F56');
-    kit.plants.shape(CONE, frame, [0, size * .7, 0], [size * .34, size, size * .34], z > 128 ? '#789185' : i % 3 ? '#587862' : '#6B8666');
+    kit.plants.shape(CONE, frame, [0, size * .7, 0], [size * .34, size, size * .34], i % 3 ? '#587862' : '#6B8666');
   }
   // Forest-trail side trees reinforce the western loop without occupying either approach.
   for (const [x, z] of [[-32, -7], [-29, -2], [-35, 4], [-32, 17], [-24, 23], [-19, 20]]) {

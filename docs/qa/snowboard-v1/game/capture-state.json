@@ -1,0 +1,167 @@
+{
+  "capturedAt": "2026-09-30T17:56:41.159Z",
+  "base": "http://127.0.0.1:3100",
+  "views": [
+    {
+      "file": "desktop-booth.jpg",
+      "profile": "desktop",
+      "note": "Lift Tickets prompt at the booth",
+      "phase": "idle",
+      "runId": null,
+      "speed": 0
+    },
+    {
+      "file": "desktop-ticket-menu.jpg",
+      "profile": "desktop",
+      "note": "Run menu with ratings, records and controls",
+      "phase": "idle",
+      "runId": null,
+      "speed": 0
+    },
+    {
+      "file": "desktop-ticket-menu-controls.jpg",
+      "profile": "desktop",
+      "note": "Controls expanded",
+      "phase": "idle",
+      "runId": null,
+      "speed": 0
+    },
+    {
+      "file": "desktop-sunday-cruise-start.jpg",
+      "profile": "desktop",
+      "note": "Start gate during the countdown",
+      "phase": "countdown",
+      "runId": "sunday-cruise",
+      "speed": 0
+    },
+    {
+      "file": "desktop-sunday-cruise-riding.jpg",
+      "profile": "desktop",
+      "note": "Mid-run chase camera",
+      "phase": "riding",
+      "runId": "sunday-cruise",
+      "speed": 12.3
+    },
+    {
+      "file": "desktop-lighthouse-line-start.jpg",
+      "profile": "desktop",
+      "note": "Start gate during the countdown",
+      "phase": "countdown",
+      "runId": "lighthouse-line",
+      "speed": 0
+    },
+    {
+      "file": "desktop-lighthouse-line-riding.jpg",
+      "profile": "desktop",
+      "note": "Mid-run chase camera",
+      "phase": "riding",
+      "runId": "lighthouse-line",
+      "speed": 15.1
+    },
+    {
+      "file": "desktop-timber-chute-start.jpg",
+      "profile": "desktop",
+      "note": "Start gate during the countdown",
+      "phase": "countdown",
+      "runId": "timber-chute",
+      "speed": 0
+    },
+    {
+      "file": "desktop-timber-chute-riding.jpg",
+      "profile": "desktop",
+      "note": "Mid-run chase camera",
+      "phase": "riding",
+      "runId": "timber-chute",
+      "speed": 18
+    },
+    {
+      "file": "desktop-dead-coast-couloir-start.jpg",
+      "profile": "desktop",
+      "note": "Start gate during the countdown",
+      "phase": "countdown",
+      "runId": "dead-coast-couloir",
+      "speed": 0
+    },
+    {
+      "file": "desktop-dead-coast-couloir-riding.jpg",
+      "profile": "desktop",
+      "note": "Mid-run chase camera",
+      "phase": "riding",
+      "runId": "dead-coast-couloir",
+      "speed": 18.9
+    },
+    {
+      "file": "desktop-kicker-air.jpg",
+      "profile": "desktop",
+      "note": "Airborne off the Lighthouse Line kicker, spinning",
+      "phase": "riding",
+      "runId": "lighthouse-line",
+      "speed": 14.4
+    },
+    {
+      "file": "desktop-kicker-grab.jpg",
+      "profile": "desktop",
+      "note": "Indy grab in the air",
+      "phase": "riding",
+      "runId": "lighthouse-line",
+      "speed": 16
+    },
+    {
+      "file": "desktop-kicker-landing.jpg",
+      "profile": "desktop",
+      "note": "Trick popup and combo after landing",
+      "phase": "riding",
+      "runId": "lighthouse-line",
+      "speed": 20.5
+    },
+    {
+      "file": "desktop-paused.jpg",
+      "profile": "desktop",
+      "note": "Run paused: resume, restart, quit",
+      "phase": "riding",
+      "runId": "lighthouse-line",
+      "speed": 20.5
+    },
+    {
+      "file": "desktop-results.jpg",
+      "profile": "desktop",
+      "note": "Results: medal, breakdown, challenges and next steps",
+      "phase": "finished",
+      "runId": "sunday-cruise",
+      "speed": 0
+    },
+    {
+      "file": "desktop-explore-from-finish.jpg",
+      "profile": "desktop",
+      "note": "Walker at the resort finish after \"Explore from here\"",
+      "phase": "finished",
+      "runId": "sunday-cruise",
+      "speed": 0
+    },
+    {
+      "file": "phone-ticket-menu.jpg",
+      "profile": "phone",
+      "note": "Run menu on a phone",
+      "phase": "idle",
+      "runId": null,
+      "speed": 0
+    },
+    {
+      "file": "phone-countdown.jpg",
+      "profile": "phone",
+      "note": "Countdown with touch controls",
+      "phase": "countdown",
+      "runId": "lighthouse-line",
+      "speed": 0
+    },
+    {
+      "file": "phone-riding.jpg",
+      "profile": "phone",
+      "note": "Riding the Timber Chute: HUD, steer pad, Jump and Grab",
+      "phase": "riding",
+      "runId": "timber-chute",
+      "speed": 20.7
+    }
+  ],
+  "errors": []
+}

@@ -4,12 +4,13 @@ import { substrateAt, townSurfaceAt, TOWN_STEPS } from './town-surfaces';
 import { buildingDoorPoint, buildingLocalPoint } from './building-shapes';
 import { CAVE_POINTS, LIGHTHOUSE } from './concept-landmarks';
 import { PIER_LAYOUT } from './pier-layout';
-import { MOUNTAIN_LAYOUT, MOUNTAIN_RUNS, mountainSnowAt } from './mountain-layout';
+import { MOUNTAIN_LAYOUT, massifHeightAt, mountainFinishAreaAt, mountainSnowAt } from './mountain-layout';
+import { skiRunSampleAt } from './ski-runs';
 import { coastDistance, PENINSULA_SAND } from './peninsula-layout';
 import { MAP_MAX_HEIGHT, MAP_MIN_Z, MAP_RADIUS, MAP_SEAM, MAP_SEA_LEVEL, mapCoordinates, mapFrame } from './world-map';
 export const RADIUS=MAP_RADIUS;
 export const SEA_LEVEL=MAP_SEA_LEVEL;
-export const PLANET_VERSION=7;
+export const PLANET_VERSION=8;
 export const SPAWN_COORDS={lon:TOWN_SPAWN.lon,lat:TOWN_SPAWN.lat};
 export const clamp=(v:number,low:number,high:number)=>Math.max(low,Math.min(high,v));
 export function smoothstep(low:number,high:number,value:number){const t=clamp((value-low)/(high-low),0,1);return t*t*(3-2*t);}
@@ -71,16 +72,23 @@ export const PLANET_PLACES=[
  {id:'contact',label:'Contact Station',section:'Contact',x:3,z:10.5,radius:2.2,contentId:'contact',number:'05',interior:null},
  {id:'beach',label:'Hidden Beach',section:'Discovery',x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,radius:3,contentId:'frequency',number:'06',interior:null},
  {id:'lab',label:'Alley Room',section:'Labs',x:building('lab').x,z:building('lab').z,radius:4,contentId:'labs',number:'07',interior:'lab'},
+ // The lift-ticket window facing the resort forecourt: E opens the snowboard run menu.
+ {id:'tickets',label:'Lift Tickets',section:'Snowboard',x:MOUNTAIN_LAYOUT.ticketHut.x,z:MOUNTAIN_LAYOUT.ticketHut.z-MOUNTAIN_LAYOUT.ticketHut.depth/2-.9,radius:2.4,contentId:'snowboard',number:'08',interior:null},
 ] as const;
 export function areaAt(d:{x:number;y:number;z:number}):string{
  const{x,z}=mapCoordinates(d),surface=townSurfaceAt(x,z);
  if(surface.kind==='pier')return 'The Pier';
  if(surface.height<SEA_LEVEL)return 'Open Water';
- if(z>=147)return 'Mountain Summit';
- if(z>=MOUNTAIN_LAYOUT.finishApron.z-7&&z<=MOUNTAIN_LAYOUT.finishApron.z+5&&Math.abs(x-MOUNTAIN_LAYOUT.finishApron.x)<20)return 'F / Run Finish';
- if(z>=MOUNTAIN_LAYOUT.pedestrianArrival.z-4&&z<MOUNTAIN_LAYOUT.finishApron.z-7&&Math.abs(x-MOUNTAIN_LAYOUT.resort.x)<12)return 'Ski Resort';
- if(mountainSnowAt(x,z))return MOUNTAIN_RUNS.find(run=>surface.route?.startsWith(run.id))?.name??'Snow Trails';
- if(z>=40)return 'Forest Trail';
+ if(z>=36){
+  const finish=mountainFinishAreaAt(x,z);
+  if(finish)return finish.name;
+  const run=skiRunSampleAt(x,z);
+  if(run&&run.distance<=run.run.width/2+.5&&run.s>0&&run.s<run.run.length)return run.run.name;
+  if(z>=MOUNTAIN_LAYOUT.summitPlateau.z-10&&massifHeightAt(x,z)>=66)return 'Mountain Summit';
+  if(z>=MOUNTAIN_LAYOUT.pedestrianArrival.z-4&&z<60&&Math.abs(x-MOUNTAIN_LAYOUT.resort.x)<12)return 'Ski Resort';
+  if(mountainSnowAt(x,z))return z>MOUNTAIN_LAYOUT.summit.z?'Backcountry':'Snowfield';
+  if(z>=40)return z<60?'Forest Trail':'Mountain Forest';
+ }
  if(x<=-20&&z>=-5&&z<=22)return 'Skate Park';
  if(x>24&&z>=-23&&z<=30&&surface.height<1&&coastDistance(x,z,PENINSULA_SAND)>-.5)return 'Hidden Beach';
  if(x>=27&&x<=41&&z>=-35&&z<=-19){
@@ -111,9 +119,9 @@ export const PLANET_FIXTURES={
  // must shorten against that real obstruction.
  camera:galleryCameraFixture,
  seam:{x:0,z:MAP_SEAM-4,facing:'north'},
- // The north geographic pole now lies under the approved lodge. Exercise the
- // antipodal south pole through the unobstructed rear-ocean lane instead.
- pole:{x:0,z:165.7,facing:'north'},
+ // The north geographic pole now lies under the mountain's south face. Exercise
+ // the antipodal south pole through the unobstructed rear-ocean lane instead.
+ pole:{x:0,z:MAP_RADIUS*Math.PI*1.5-3.9,facing:'north'},
  south:{x:0,z:MAP_MIN_Z+6,facing:'south'},
  // Start beside the pier, not on it, so the shoreline traversal crosses the
  // actual beach into open water.
@@ -129,17 +137,20 @@ export const PLANET_FIXTURES={
  promenade:{x:0,z:-16,facing:'east'},
  eastgrove:{x:18,z:34,facing:'north'},
  westgrove:{x:-18,z:34,facing:'north'},
- farside:{x:0,z:92,facing:'north'},
- ridge:{x:0,z:105,facing:'north'},
+ // Upper south face of the snowboard mountain, on the far side of the planet.
+ farside:{x:0,z:176,facing:'north'},
+ ridge:{x:0,z:200,facing:'north'},
  workshop:workshopFixture,
  // The lab's rotated front faces west, so begin outside that doorway and walk
  // east through it rather than spawning inside the room.
  lab:labFixture,
- circuit:{x:0,z:96,facing:'north'},
+ circuit:{x:0,z:120,facing:'north'},
  skatepark:{x:-27,z:15,facing:'north'},
  lighthouse:{x:LIGHTHOUSE.x-3.2,z:LIGHTHOUSE.z,facing:'east'},
  cave:{x:CAVE_POINTS[0][0]-2,z:CAVE_POINTS[0][1],facing:'east'},
  hiddenbeach:{x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,facing:'north'},
  resort:{x:MOUNTAIN_LAYOUT.pedestrianArrival.x,z:MOUNTAIN_LAYOUT.pedestrianArrival.z,facing:'north'},
- summit:{x:MOUNTAIN_LAYOUT.spawnPad.x,z:MOUNTAIN_LAYOUT.spawnPad.z,facing:'south'},
+ // In front of the lift-ticket hut door, which faces the resort forecourt.
+ tickets:{x:MOUNTAIN_LAYOUT.ticketHut.x,z:MOUNTAIN_LAYOUT.ticketHut.z-MOUNTAIN_LAYOUT.ticketHut.depth/2-1.2,facing:'north'},
+ summit:{x:MOUNTAIN_LAYOUT.summitPlateau.x,z:MOUNTAIN_LAYOUT.summitPlateau.z,facing:'south'},
 } as const;

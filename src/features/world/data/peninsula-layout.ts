@@ -1,3 +1,5 @@
+import { MAP_RADIUS } from './world-map';
+
 /** Local coastal reconstruction. All dimensions are metres on the curved world. */
 export const PENINSULA_CAVE = {
   // Public mouth → directly under the lighthouse → cove behind the headland.
@@ -51,7 +53,7 @@ const smooth = (a: number, b: number, v: number) => { const t = clamp((v - a) / 
 /** Signed distance in local physical metres; positive inside an authored polygon. */
 export function coastDistance(x: number, z: number, polygon: readonly CoastPoint[]) {
   let inside = false, distance = Infinity;
-  const scaleZ = Math.cos(x / 36);
+  const scaleZ = Math.cos(x / MAP_RADIUS);
   for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
     const a = polygon[j], b = polygon[i];
     if ((a[1] > z) !== (b[1] > z) && x < (b[0] - a[0]) * (z - a[1]) / (b[1] - a[1]) + a[0]) inside = !inside;
@@ -107,11 +109,11 @@ export function peninsulaHeightAt(x: number, z: number) {
 /** A small tangent foundation avoids either burying or floating the unchanged tower. */
 export function peninsulaFoundationAt(x: number, z: number): { height: number; blend: number } {
   const tower = PENINSULA_LIGHTHOUSE;
-  const a = x / 36, a0 = tower.x / 36, b = (z - tower.z) / 36;
+  const a = x / MAP_RADIUS, a0 = tower.x / MAP_RADIUS, b = (z - tower.z) / MAP_RADIUS;
   const dot = Math.sin(a) * Math.sin(a0) + Math.cos(a) * Math.cos(a0) * Math.cos(b);
-  const height = (36 + tower.elevation) / dot - 36;
-  const east = (36 + height) * (Math.sin(a) * Math.cos(a0) - Math.cos(a) * Math.sin(a0) * Math.cos(b));
-  const north = (36 + height) * Math.cos(a) * Math.sin(b);
+  const height = (MAP_RADIUS + tower.elevation) / dot - MAP_RADIUS;
+  const east = (MAP_RADIUS + height) * (Math.sin(a) * Math.cos(a0) - Math.cos(a) * Math.sin(a0) * Math.cos(b));
+  const north = (MAP_RADIUS + height) * Math.cos(a) * Math.sin(b);
   const edge = Math.max(Math.abs(east) - 2.8, Math.abs(north) - 2.8);
   return { height, blend: 1 - smooth(0, 1.2, edge) };
 }

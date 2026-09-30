@@ -1,0 +1,780 @@
+{
+  "capturedAt": "2026-09-30T17:58:03.306Z",
+  "base": "http://127.0.0.1:3100",
+  "sourceBefore": "cda2d30f3492e1527a708401878b6ce5edb92a2ac3145660fcd233ab88020bfe",
+  "settleMilliseconds": 1800,
+  "method": "Actual live third-person and globe cameras. Debug placement changes player position and heading only.",
+  "errors": [],
+  "consoleErrors": [
+    {
+      "profile": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "views": [
+    {
+      "filename": "desktop-pier-seaward.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "pier-seaward",
+        "fixture": "pieroutward",
+        "critical": true
+      },
+      "area": "The Pier",
+      "mapX": 0,
+      "mapZ": -46,
+      "radius": 74.34999999999998,
+      "counters": {
+        "drawCalls": 70,
+        "triangles": 242584,
+        "geometries": 83,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-pier-landward.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "pier-landward",
+        "fixture": "pierhead",
+        "critical": true
+      },
+      "area": "The Pier",
+      "mapX": 0,
+      "mapZ": -43,
+      "radius": 74.35,
+      "counters": {
+        "drawCalls": 92,
+        "triangles": 448927,
+        "geometries": 83,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-courtyard.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "courtyard",
+        "fixture": "entry",
+        "critical": true
+      },
+      "area": "WestCose Courtyard",
+      "mapX": 0,
+      "mapZ": 8,
+      "radius": 73.14999999999999,
+      "counters": {
+        "drawCalls": 85,
+        "triangles": 326957,
+        "geometries": 83,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-resort-forecourt.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "resort-forecourt",
+        "x": 1,
+        "z": 50,
+        "facing": "north",
+        "critical": true
+      },
+      "area": "Ski Resort",
+      "mapX": 1,
+      "mapZ": 50,
+      "radius": 75.64999999999999,
+      "counters": {
+        "drawCalls": 76,
+        "triangles": 377348,
+        "geometries": 86,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-ticket-booth.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "ticket-booth",
+        "fixture": "tickets",
+        "critical": true
+      },
+      "area": "Ski Resort",
+      "mapX": 5.072164948449999,
+      "mapZ": 52.299999999999955,
+      "radius": 75.67500000000001,
+      "counters": {
+        "drawCalls": 75,
+        "triangles": 376452,
+        "geometries": 86,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-resort-finish-uphill.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "resort-finish-uphill",
+        "x": 2,
+        "z": 65,
+        "facing": "north",
+        "critical": true
+      },
+      "area": "Resort Finish",
+      "mapX": 2.0000000000000004,
+      "mapZ": 65,
+      "radius": 76.157,
+      "counters": {
+        "drawCalls": 70,
+        "triangles": 378276,
+        "geometries": 87,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-summit-plateau.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "summit-plateau",
+        "fixture": "summit",
+        "critical": true
+      },
+      "area": "Mountain Summit",
+      "mapX": 0,
+      "mapZ": 214,
+      "radius": 143.34999999999997,
+      "counters": {
+        "drawCalls": 54,
+        "triangles": 237020,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-1-start.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-1-start",
+        "x": -9.938134940437555,
+        "z": 204.80547186983821,
+        "facing": {
+          "east": -1.723813392977938,
+          "north": -0.631002393931439
+        },
+        "critical": false
+      },
+      "area": "Sunday Cruise",
+      "mapX": -9.938134940437555,
+      "mapZ": 204.80547186983824,
+      "radius": 142.83086494410193,
+      "counters": {
+        "drawCalls": 54,
+        "triangles": 240642,
+        "geometries": 91,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-1-middle.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-1-middle",
+        "x": -13.665688283518454,
+        "z": 155.95119488657426,
+        "facing": {
+          "east": -0.709053979385633,
+          "north": -1.875981017147159
+        },
+        "critical": true
+      },
+      "area": "Sunday Cruise",
+      "mapX": -13.665688283518456,
+      "mapZ": 155.95119488657417,
+      "radius": 124.85564571539673,
+      "counters": {
+        "drawCalls": 59,
+        "triangles": 283578,
+        "geometries": 91,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-2-start.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-2-start",
+        "x": 21.15449669573027,
+        "z": 205.68047648692132,
+        "facing": {
+          "east": 1.7177759715093188,
+          "north": -0.7398736477661377
+        },
+        "critical": false
+      },
+      "area": "Lighthouse Line",
+      "mapX": 21.15449669573027,
+      "mapZ": 205.6804764869213,
+      "radius": 142.01949970440882,
+      "counters": {
+        "drawCalls": 53,
+        "triangles": 226662,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-2-middle.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-2-middle",
+        "x": 34.388603866507076,
+        "z": 154.3977834148051,
+        "facing": {
+          "east": 1.8494866145993143,
+          "north": -1.5294659704103823
+        },
+        "critical": true
+      },
+      "area": "Lighthouse Line",
+      "mapX": 34.388603866507076,
+      "mapZ": 154.39778341480508,
+      "radius": 119.18658457031164,
+      "counters": {
+        "drawCalls": 58,
+        "triangles": 275930,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-3-start.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-3-start",
+        "x": -24.67593208528794,
+        "z": 210.75603955697426,
+        "facing": {
+          "east": -4.275595167536498,
+          "north": -0.20747596925524817
+        },
+        "critical": false
+      },
+      "area": "Timber Chute",
+      "mapX": -24.67593208528794,
+      "mapZ": 210.75603955697432,
+      "radius": 142.22647085585788,
+      "counters": {
+        "drawCalls": 53,
+        "triangles": 238768,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-3-middle.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-3-middle",
+        "x": -65.94947650655051,
+        "z": 164.72734496180178,
+        "facing": {
+          "east": -0.06258430986585495,
+          "north": -2.1436955609024944
+        },
+        "critical": true
+      },
+      "area": "Timber Chute",
+      "mapX": -65.94947650655051,
+      "mapZ": 164.7273449618018,
+      "radius": 110.6762802596472,
+      "counters": {
+        "drawCalls": 48,
+        "triangles": 270142,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-4-start.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-4-start",
+        "x": 7.5314691260473,
+        "z": 203.8723821976112,
+        "facing": {
+          "east": 1.187709434420337,
+          "north": -3.356892804437767
+        },
+        "critical": false
+      },
+      "area": "Dead Coast Couloir",
+      "mapX": 7.5314691260473,
+      "mapZ": 203.87238219761127,
+      "radius": 143.26806478166628,
+      "counters": {
+        "drawCalls": 54,
+        "triangles": 245658,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-run-4-middle.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "run-4-middle",
+        "x": 15.989084177821658,
+        "z": 150.77378888839726,
+        "facing": {
+          "east": 0.025615499422212196,
+          "north": -3.482900288807498
+        },
+        "critical": true
+      },
+      "area": "Dead Coast Couloir",
+      "mapX": 15.989084177821658,
+      "mapZ": 150.77378888839723,
+      "radius": 117.69818523831303,
+      "counters": {
+        "drawCalls": 63,
+        "triangles": 331850,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-west-run-out.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "west-run-out",
+        "x": -27,
+        "z": 48,
+        "facing": "south"
+      },
+      "area": "West Forest Run-out",
+      "mapX": -26.999999999999996,
+      "mapZ": 48,
+      "radius": 74.61,
+      "counters": {
+        "drawCalls": 88,
+        "triangles": 429240,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-east-run-out.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "east-run-out",
+        "x": 31,
+        "z": 44,
+        "facing": "south"
+      },
+      "area": "East Bluff Run-out",
+      "mapX": 31,
+      "mapZ": 44,
+      "radius": 73.446,
+      "counters": {
+        "drawCalls": 84,
+        "triangles": 406127,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-lighthouse-cove.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "lighthouse-cove",
+        "fixture": "hiddenbeach"
+      },
+      "area": "Hidden Beach",
+      "mapX": 37,
+      "mapZ": -11,
+      "radius": 72.64551999999999,
+      "counters": {
+        "drawCalls": 83,
+        "triangles": 418379,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "desktop-globe-town.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "globe-town",
+        "fixture": "entry",
+        "globe": true,
+        "critical": true
+      },
+      "area": "WestCose Courtyard",
+      "mapX": 0,
+      "mapZ": 8,
+      "radius": 73.14999999999999,
+      "counters": {
+        "drawCalls": 103,
+        "triangles": 408372,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": true
+    },
+    {
+      "filename": "desktop-globe-mountain-front.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "globe-mountain-front",
+        "x": 0,
+        "z": 120,
+        "facing": "north",
+        "globe": true,
+        "critical": true
+      },
+      "area": "Snowfield",
+      "mapX": 0,
+      "mapZ": 120,
+      "radius": 91.5351851851852,
+      "counters": {
+        "drawCalls": 103,
+        "triangles": 408372,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": true
+    },
+    {
+      "filename": "desktop-globe-mountain-rear.jpg",
+      "profile": "desktop",
+      "fixture": {
+        "id": "globe-mountain-rear",
+        "x": 0,
+        "z": 280,
+        "facing": "south",
+        "globe": true
+      },
+      "area": "Backcountry",
+      "mapX": 0,
+      "mapZ": 279.99999999999994,
+      "radius": 110.16029301277243,
+      "counters": {
+        "drawCalls": 103,
+        "triangles": 408372,
+        "geometries": 92,
+        "textures": 8
+      },
+      "summitVisible": true
+    },
+    {
+      "filename": "phone-pier-seaward.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "pier-seaward",
+        "fixture": "pieroutward",
+        "critical": true
+      },
+      "area": "The Pier",
+      "mapX": 0,
+      "mapZ": -46,
+      "radius": 74.34999999999998,
+      "counters": {
+        "drawCalls": 69,
+        "triangles": 238820,
+        "geometries": 83,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-pier-landward.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "pier-landward",
+        "fixture": "pierhead",
+        "critical": true
+      },
+      "area": "The Pier",
+      "mapX": 0,
+      "mapZ": -43,
+      "radius": 74.35,
+      "counters": {
+        "drawCalls": 88,
+        "triangles": 437086,
+        "geometries": 83,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-courtyard.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "courtyard",
+        "fixture": "entry",
+        "critical": true
+      },
+      "area": "WestCose Courtyard",
+      "mapX": 0,
+      "mapZ": 8,
+      "radius": 73.14999999999999,
+      "counters": {
+        "drawCalls": 80,
+        "triangles": 307981,
+        "geometries": 83,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-resort-forecourt.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "resort-forecourt",
+        "x": 1,
+        "z": 50,
+        "facing": "north",
+        "critical": true
+      },
+      "area": "Ski Resort",
+      "mapX": 1,
+      "mapZ": 50,
+      "radius": 75.64999999999999,
+      "counters": {
+        "drawCalls": 76,
+        "triangles": 377348,
+        "geometries": 86,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-ticket-booth.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "ticket-booth",
+        "fixture": "tickets",
+        "critical": true
+      },
+      "area": "Ski Resort",
+      "mapX": 5.072164948449999,
+      "mapZ": 52.299999999999955,
+      "radius": 75.67500000000001,
+      "counters": {
+        "drawCalls": 74,
+        "triangles": 369676,
+        "geometries": 86,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-resort-finish-uphill.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "resort-finish-uphill",
+        "x": 2,
+        "z": 65,
+        "facing": "north",
+        "critical": true
+      },
+      "area": "Resort Finish",
+      "mapX": 2.0000000000000004,
+      "mapZ": 65,
+      "radius": 76.157,
+      "counters": {
+        "drawCalls": 69,
+        "triangles": 371500,
+        "geometries": 87,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-summit-plateau.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "summit-plateau",
+        "fixture": "summit",
+        "critical": true
+      },
+      "area": "Mountain Summit",
+      "mapX": 0,
+      "mapZ": 214,
+      "radius": 143.34999999999997,
+      "counters": {
+        "drawCalls": 54,
+        "triangles": 237020,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-run-1-middle.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "run-1-middle",
+        "x": -13.665688283518454,
+        "z": 155.95119488657426,
+        "facing": {
+          "east": -0.709053979385633,
+          "north": -1.875981017147159
+        },
+        "critical": true
+      },
+      "area": "Sunday Cruise",
+      "mapX": -13.665688283518456,
+      "mapZ": 155.95119488657417,
+      "radius": 124.85564571539673,
+      "counters": {
+        "drawCalls": 59,
+        "triangles": 283578,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-run-2-middle.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "run-2-middle",
+        "x": 34.388603866507076,
+        "z": 154.3977834148051,
+        "facing": {
+          "east": 1.8494866145993143,
+          "north": -1.5294659704103823
+        },
+        "critical": true
+      },
+      "area": "Lighthouse Line",
+      "mapX": 34.388603866507076,
+      "mapZ": 154.39778341480508,
+      "radius": 119.18658457031164,
+      "counters": {
+        "drawCalls": 57,
+        "triangles": 269268,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-run-3-middle.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "run-3-middle",
+        "x": -65.94947650655051,
+        "z": 164.72734496180178,
+        "facing": {
+          "east": -0.06258430986585495,
+          "north": -2.1436955609024944
+        },
+        "critical": true
+      },
+      "area": "Timber Chute",
+      "mapX": -65.94947650655051,
+      "mapZ": 164.7273449618018,
+      "radius": 110.6762802596472,
+      "counters": {
+        "drawCalls": 44,
+        "triangles": 269814,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-run-4-middle.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "run-4-middle",
+        "x": 15.989084177821658,
+        "z": 150.77378888839726,
+        "facing": {
+          "east": 0.025615499422212196,
+          "north": -3.482900288807498
+        },
+        "critical": true
+      },
+      "area": "Dead Coast Couloir",
+      "mapX": 15.989084177821658,
+      "mapZ": 150.77378888839723,
+      "radius": 117.69818523831303,
+      "counters": {
+        "drawCalls": 62,
+        "triangles": 320062,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": false
+    },
+    {
+      "filename": "phone-globe-town.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "globe-town",
+        "fixture": "entry",
+        "globe": true,
+        "critical": true
+      },
+      "area": "WestCose Courtyard",
+      "mapX": 0,
+      "mapZ": 8,
+      "radius": 73.14999999999999,
+      "counters": {
+        "drawCalls": 103,
+        "triangles": 408372,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": true
+    },
+    {
+      "filename": "phone-globe-mountain-front.jpg",
+      "profile": "phone",
+      "fixture": {
+        "id": "globe-mountain-front",
+        "x": 0,
+        "z": 120,
+        "facing": "north",
+        "globe": true,
+        "critical": true
+      },
+      "area": "Snowfield",
+      "mapX": 0,
+      "mapZ": 120,
+      "radius": 91.5351851851852,
+      "counters": {
+        "drawCalls": 103,
+        "triangles": 408372,
+        "geometries": 89,
+        "textures": 8
+      },
+      "summitVisible": true
+    }
+  ],
+  "desktopReadyMs": 7388,
+  "phoneReadyMs": 4246,
+  "sourceAfter": "cda2d30f3492e1527a708401878b6ce5edb92a2ac3145660fcd233ab88020bfe",
+  "sourceUnchanged": true
+}

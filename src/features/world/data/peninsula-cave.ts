@@ -169,8 +169,22 @@ function fitCollider(id: string, vertices: readonly Vector3[], a: Ring, b: Ring,
 }
 
 const wedgeQuads = [[0, 1, 2, 3], [4, 7, 6, 5], [0, 4, 5, 1], [1, 5, 6, 2], [2, 6, 7, 3], [3, 7, 4, 0]] as const;
+// The inner offset of the lighthouse turn can fold back across the other leg. The turn
+// is one broad buried chamber, so a wall wedge whose box would reach the visitor lanes
+// (1.5m either side of the centerline plus the capsule radius) is trimmed.
+const WALL_LANE_CLEARANCE = PENINSULA_CAVE.width / 2 - .2 + .31 + .02;
+function reachesLanes(collider: PeninsulaCaveCollider): boolean {
+  // Corners, edge midpoints, face centres and centre of the fitted box.
+  const signs = [-1, 0, 1];
+  for (const sx of signs) for (const sy of signs) for (const sz of signs) {
+    const point = new Vector3(sx * collider.half.x, sy * collider.half.y, sz * collider.half.z).applyQuaternion(collider.quaternion).add(collider.center);
+    const chart = mapCoordinates(point);
+    if (caveDistanceAt(chart.x, chart.z) < WALL_LANE_CLEARANCE) return true;
+  }
+  return false;
+}
 
-export const peninsulaCaveWedges: PeninsulaCaveWedge[] = rings.slice(1).flatMap((b, slice) => {
+export const peninsulaCaveWedges: PeninsulaCaveWedge[] = rings.slice(1).flatMap((b, slice): PeninsulaCaveWedge[] => {
   const a = rings[slice];
   return Array.from({ length: a.inner.length - 1 }, (_, face) => {
     const kind = face === 2 || face === 3 ? 'roof' : 'wall';
@@ -190,7 +204,7 @@ export const peninsulaCaveWedges: PeninsulaCaveWedge[] = rings.slice(1).flatMap(
     const liningTriangles = triangles.filter(triangle => triangle.every(vertex => [0, 1, 4, 5].includes(vertex)));
     return { id, kind, color, vertices, triangles, liningTriangles, collider: fitCollider(id, vertices, a, b, kind) };
   });
-});
+}).filter(wedge => wedge.kind !== 'wall' || !reachesLanes(wedge.collider));
 
 /** These bounds enclose the actual wedge mesh; no peninsula-wide collision object exists. */
 export const peninsulaCaveColliders = peninsulaCaveWedges.map(wedge => wedge.collider);

@@ -39,11 +39,12 @@ try {
   const pier = require(path.join(output, 'data/pier-layout.js'));
   const map = require(path.join(output, 'data/world-map.js'));
   const mountain = require(path.join(output, 'data/mountain-layout.js'));
+  const skiRuns = require(path.join(output, 'data/ski-runs.js'));
   const landmarks = require(path.join(output, 'data/concept-landmarks.js'));
   const peninsula = require(path.join(output, 'data/peninsula-layout.js'));
   const cave = require(path.join(output, 'data/peninsula-cave.js'));
   const surfaces = require(path.join(output, 'data/town-surfaces.js'));
-  const { makeTerrain, makeTerrainPartition } = require(path.join(output, 'scene/TownLandscape.js'));
+  const { makeTerrain, makeTerrainPartition, TERRAIN_REGIONS } = require(path.join(output, 'scene/TownLandscape.js'));
   const { Vector3 } = require('three');
   const summitChart = [map.MAP_SUMMIT.x, map.MAP_SUMMIT.z];
   const pierTip = [pier.PIER_LAYOUT.entrance[0], pier.PIER_LAYOUT.head.center[1] - pier.PIER_LAYOUT.head.depth / 2];
@@ -140,7 +141,7 @@ try {
 
   await test('map projection round trips the inhabited wrap and preserves building front orientation', () => {
     const circumference = 2 * Math.PI * planet.RADIUS;
-    for (const x of [-40, -18, 0, 18, 40]) for (const z of [map.MAP_MIN_Z + .5, pierTip[1], pier.PIER_LAYOUT.entrance[1], -16, 8, 56.55, 115, 130, summitChart[1], map.MAP_SEAM - .5]) {
+    for (const x of [-40, -18, 0, 18, 40]) for (const z of [map.MAP_MIN_Z + .5, pierTip[1], pier.PIER_LAYOUT.entrance[1], -16, 8, Math.PI / 2 * map.MAP_RADIUS, 115, 130, summitChart[1], map.MAP_SEAM - .5]) {
       const direction = map.mapDirection(x, z);
       const chart = map.mapCoordinates(direction);
       close(chart.x, x, 1e-8); close(chart.z, z, 1e-8);
@@ -232,7 +233,7 @@ try {
     assert.deepEqual(session.getSafePosition(shapes.buildingLocalPoint(solid, [0, runtimeTypes.PLAYER_CENTER_HEIGHT, 0])), runtimeTypes.DEFAULT_SPAWN);
   });
 
-  await test('the default load point is the dry courtyard and the 40m summit checkpoint remains valid', () => {
+  await test('the default load point is the dry courtyard and the summit checkpoint remains valid', () => {
     const courtyard = town.TOWN_AREAS.find(area => area.id === 'courtyard');
     const coordinates = map.mapCoordinates(runtimeTypes.DEFAULT_SPAWN);
     assert.ok(Math.abs(coordinates.x - courtyard.center[0]) < courtyard.width / 2 - 1);
@@ -241,51 +242,51 @@ try {
     assert.equal(collision.buildingContact(runtimeTypes.DEFAULT_SPAWN), null);
     const summit = map.mapDirection(...summitChart);
     const position = summit.clone().multiplyScalar(collision.supportRadius(summit) + runtimeTypes.PLAYER_CENTER_HEIGHT);
-    close(collision.supportRadius(summit), planet.RADIUS + 40, 1e-8);
-    close(position.length(), planet.RADIUS + 40 + runtimeTypes.PLAYER_CENTER_HEIGHT, 1e-8);
-    assert.ok(pointDistance(session.getSafePosition(position), position) < 1e-8, 'The 40m summit must fit the valid checkpoint envelope');
+    close(collision.supportRadius(summit), planet.RADIUS + map.MAP_SUMMIT.height, 1e-8);
+    close(position.length(), planet.RADIUS + map.MAP_SUMMIT.height + runtimeTypes.PLAYER_CENTER_HEIGHT, 1e-8);
+    assert.ok(pointDistance(session.getSafePosition(position), position) < 1e-8, 'The summit must fit the valid checkpoint envelope');
   });
 
-  await test('the real mountain rear is visible across ocean from the pier follow camera', () => {
+  await test('the pier looks out over open ocean: the whole mountain is hidden by the planet', () => {
     const frame = map.mapFrame(...pierTip, pier.PIER_LAYOUT.elevation);
     const forward = frame.north.clone().negate();
     const right = new Vector3().crossVectors(forward, frame.up).normalize();
     const target = frame.position.clone().addScaledVector(frame.up, runtimeTypes.PLAYER_CENTER_HEIGHT + .55).addScaledVector(right, .55);
     const cameraDirection = forward.clone().multiplyScalar(-runtimeTypes.CAMERA_FOLLOW_DISTANCE).addScaledVector(frame.up, 3).normalize();
     const camera = target.addScaledVector(cameraDirection, runtimeTypes.CAMERA_FOLLOW_DISTANCE);
-    const peakUp = map.mapDirection(...summitChart);
-    const peak = peakUp.clone().multiplyScalar(planet.RADIUS + planet.terrainHeightAt(peakUp));
-    const oceanAngle = frame.up.angleTo(peakUp) * 180 / Math.PI;
-    const inlandDistance = summitChart[1] - pierTip[1];
-    assert.ok(oceanAngle > 0 && oceanAngle < 90, 'A true wrap leaves a short ocean seam toward the same mountain');
-    assert.ok(inlandDistance > Math.PI * planet.RADIUS, 'The inland route reaches the summit around the long side of the globe');
-    close(oceanAngle + inlandDistance / map.MAP_RADIUS * 180 / Math.PI, 360, 1e-8,
-      'The mountain across the sea is exactly the same geographic summit, not a proxy');
-    const line = peak.clone().sub(camera), nearestT = Math.max(0, Math.min(1, -camera.dot(line) / line.lengthSq()));
-    const closest = camera.clone().addScaledVector(line, nearestT).length();
-    assert.ok(closest > planet.RADIUS + planet.SEA_LEVEL + 2, 'The camera-to-summit ray must clear the solid ocean sphere');
-    let minimumTerrainClearance = Infinity;
-    for (let index = 1; index < 500; index++) {
-      const sample = camera.clone().lerp(peak, index / 500);
-      const radius = sample.length();
-      const clearance = radius - planet.RADIUS - planet.terrainHeightAt(sample.clone().normalize());
-      minimumTerrainClearance = Math.min(minimumTerrainClearance, clearance);
+    // Every high point of the massif, including the summit and its rear slope, sits
+    // below the pier camera's horizon: the direct sightline passes through the globe.
+    let sampled = 0;
+    for (let z = 150; z <= 300; z += 6) for (let x = -80; x <= 80; x += 8) {
+      const up = map.mapDirection(x, z), height = planet.terrainHeightAt(up);
+      if (height < 6) continue;
+      sampled++;
+      const peak = up.clone().multiplyScalar(planet.RADIUS + height);
+      const line = peak.clone().sub(camera), nearestT = Math.max(0, Math.min(1, -camera.dot(line) / line.lengthSq()));
+      const closest = camera.clone().addScaledVector(line, nearestT).length();
+      assert.ok(closest < planet.RADIUS + planet.SEA_LEVEL, `Mountain point (${x}, ${z}, ${height.toFixed(1)}m) must be hidden from the pier`);
     }
-    assert.ok(minimumTerrainClearance > 0, `Mountain back must not obscure its summit; minimum ray clearance ${minimumTerrainClearance}`);
+    assert.ok(sampled > 200, 'The check covers the real massif, not a few points');
+    // Looking seaward the camera sees only open water to its horizon.
+    for (let distance = 4; distance <= 60; distance += 4) {
+      const z = map.canonicalMapZ(pierTip[1] - distance);
+      assert.ok(surfaces.groundSurfaceAt(0, z).height < planet.SEA_LEVEL, `Open ocean ${distance}m beyond the pier head`);
+    }
   });
 
-  await test('mountain v3 retains its 40m same-mountain envelope, separated runs, and longer pier', () => {
-    close(map.MAP_RADIUS, 36);
-    close(map.MAP_SUMMIT.height, 40);
-    close(mountain.MOUNTAIN_LAYOUT.summit.height, 40);
+  await test('mountain v4 is a 78m snowboard mountain on the radius-72 globe, with the pier unchanged', () => {
+    close(map.MAP_RADIUS, 72);
+    close(map.MAP_SUMMIT.height, 78);
     close(mountain.MOUNTAIN_LAYOUT.summit.x, map.MAP_SUMMIT.x);
     close(mountain.MOUNTAIN_LAYOUT.summit.z, map.MAP_SUMMIT.z);
     close(surfaces.naturalTerrainAt(...summitChart), map.MAP_SUMMIT.height, 1e-8);
-    close(map.MAP_MAX_HEIGHT, 42);
     assert.ok(map.MAP_MAX_HEIGHT >= map.MAP_SUMMIT.height + runtimeTypes.PLAYER_CENTER_HEIGHT);
-    assert.ok(surfaces.naturalTerrainAt(-14, 132) >= 31.5, 'The western shoulder is real terrain, not a painted snow patch');
-    assert.ok(surfaces.naturalTerrainAt(16, 137) >= 33, 'The eastern shoulder has a distinct higher profile');
-    close(map.MAP_SEAM, 176); close(map.MAP_MIN_Z, map.MAP_SEAM - 2 * Math.PI * map.MAP_RADIUS);
+    // The seam lies in open water between the new rear shore and the pier.
+    close(map.MAP_MIN_Z, map.MAP_SEAM - 2 * Math.PI * map.MAP_RADIUS);
+    for (const x of [-40, 0, 40]) {
+      assert.ok(surfaces.groundSurfaceAt(x, map.MAP_SEAM - 1).height < map.MAP_SEA_LEVEL, 'Seam side A is open ocean');
+      assert.ok(surfaces.groundSurfaceAt(x, map.MAP_MIN_Z + 1).height < map.MAP_SEA_LEVEL, 'Seam side B is open ocean');
+    }
     close(pierTip[1], -47); close(pier.PIER_LAYOUT.entrance[1], -30);
     close(pier.PIER_LAYOUT.head.center[1], -43); close(pier.PIER_LAYOUT.head.depth, 8);
     assert.ok(pierTip[1] > map.MAP_MIN_Z + 3, 'The longer head remains clear of the chart cut');
@@ -295,26 +296,27 @@ try {
     }
     assert.ok(surfaces.naturalTerrainAt(0, -30) > map.MAP_SEA_LEVEL, 'The beach beneath the pier entrance remains dry');
     for (const x of [-30, 30]) assert.ok(surfaces.naturalTerrainAt(x, 40) > map.MAP_SEA_LEVEL, 'Wide mainland remains continuous beside the inland route');
-    assert.deepEqual(mountain.MOUNTAIN_RUNS.map(run => run.id), ['ski-central', 'ski-west', 'ski-east']);
-    assert.equal(mountain.MOUNTAIN_RUNS.length, 3);
-    for (const run of mountain.MOUNTAIN_RUNS) {
-      const route = town.TOWN_ROUTES.find(item => item.id === run.id);
-      assert.ok(route, `${run.id} is an authored physical route`);
-      assert.deepEqual(route.points, run.points.map(point => [point[0], point[1]]), `${run.id} uses the exact approved sampled curve`);
-      assert.ok(run.points.length > run.controls.length, `${run.id} is a sampled smooth curve, not its sparse control polygon`);
-      close(run.points[0][1], 148); close(run.points.at(-1)[1], 64);
-      assert.ok(run.points.every(point => point.every(Number.isFinite)), `${run.id} samples remain finite`);
-      assert.ok(!route.points.some(point => point[0] === map.MAP_SUMMIT.x && point[1] === map.MAP_SUMMIT.z),
-        `${run.id} begins at its own gate rather than collapsing into the summit`);
-      const gate = town.TOWN_ROUTES.find(item => item.id === `${run.id}-gate`);
-      const finishReturn = town.TOWN_ROUTES.find(item => item.id === `${run.id}-return`);
-      assert.deepEqual(gate?.points.at(-1), [run.points[0][0], 148], `${run.id} gate connector reaches the approved start`);
-      assert.deepEqual(finishReturn?.points[0], [run.points.at(-1)[0], 64], `${run.id} run-out starts at its approved finish`);
+    // The resort keeps its rev-3 chart anchors and level foundations.
+    for (const area of [mountain.MOUNTAIN_LAYOUT.lodge, mountain.MOUNTAIN_LAYOUT.ticketHut, mountain.MOUNTAIN_LAYOUT.pedestrianArrival]) close(surfaces.naturalTerrainAt(area.x, area.z), 2.8, 1e-8);
+    close(surfaces.naturalTerrainAt(mountain.MOUNTAIN_LAYOUT.summitPlateau.x, mountain.MOUNTAIN_LAYOUT.summitPlateau.z), mountain.MOUNTAIN_LAYOUT.summitPlateau.height, 1e-8);
+    // Four rated runs; none is a walking route any more.
+    assert.deepEqual(skiRuns.SKI_RUNS.map(run => [run.id, run.difficulty]), [
+      ['sunday-cruise', 'green'], ['lighthouse-line', 'blue'], ['timber-chute', 'black'], ['dead-coast-couloir', 'double-black'],
+    ]);
+    assert.ok(!town.TOWN_ROUTES.some(route => route.id.startsWith('ski-')), 'Snow runs are carved terrain, not town routes');
+    for (const run of skiRuns.SKI_RUNS) {
+      const first = run.samples[0], last = run.samples.at(-1), finish = mountain.MOUNTAIN_FINISH_AREAS[run.finish];
+      close(first.h, surfaces.naturalTerrainAt(first.x, first.z), .05);
+      assert.ok(Math.abs(first.h - mountain.MOUNTAIN_LAYOUT.summitPlateau.height) < 1.2, `${run.id} starts on the summit plateau`);
+      close(last.h, finish.height, .05);
+      assert.ok(run.length > 180 && run.length < 460, `${run.id} length ${run.length}`);
+      const [low, high] = run.grade;
+      for (let i = 1; i < run.samples.length; i++) {
+        const a = run.samples[i - 1], b = run.samples[i];
+        const grade = Math.atan2(a.h - b.h, b.s - a.s) * 180 / Math.PI;
+        assert.ok(grade >= low - .05 && grade <= high + .05, `${run.id} stays inside its ${low}-${high} degree band (${grade.toFixed(2)} at ${i})`);
+      }
     }
-    assert.deepEqual(town.TOWN_ROUTES.find(item => item.id === 'ski-summit-walk')?.points, [[0, 153], [0, 151]],
-      'The summit walk bridges the peak to the three independent gate connectors');
-    assert.deepEqual(town.TOWN_ROUTES.find(item => item.id === 'finish-return')?.points[0], [2.1, 61],
-      'The common return begins below the separate run-outs');
   });
 
   await test('the base resort correctly cannot see the summit through the solid tiny planet', () => {
@@ -358,8 +360,8 @@ try {
     assert.equal(planet.waterAt(map.mapDirection(startX + 10, z)), true);
   });
 
-  await test('rendered terrain has outward faces, finite normals and a complete periodic seam', () => {
-    const geometry = makeTerrain(), overviewGeometry = makeTerrain(126);
+  await test('rendered terrain has outward faces, finite normals and covers every land point', () => {
+    const geometry = makeTerrain(), overviewGeometry = makeTerrain('coarse');
     try {
       const positions = geometry.getAttribute('position'), normals = geometry.getAttribute('normal'), indices = geometry.getIndex();
       assert.ok(positions.array.every(Number.isFinite));
@@ -370,56 +372,45 @@ try {
       for (let index = 0; index < indices.count; index += 3) {
         a.fromBufferAttribute(positions, indices.getX(index)); b.fromBufferAttribute(positions, indices.getX(index + 1)); c.fromBufferAttribute(positions, indices.getX(index + 2));
         ab.subVectors(b, a); ac.subVectors(c, a); normal.crossVectors(ab, ac);
-        if (normal.lengthSq() < 1e-12) continue; // coincident vertices at map poles
+        if (normal.lengthSq() < 1e-12) continue;
         assert.ok(normal.dot(a) > 0, `Triangle ${index / 3} faces inward and would expose the ocean through land`);
         tested++;
       }
-      assert.ok(tested > 100_000, 'Check the actual complete globe terrain, not a small proxy');
+      assert.ok(tested > 100_000, 'Check the actual land terrain, not a small proxy');
       let maximumRadius = 0;
-      const peak = new Vector3(), seam = new Map();
+      const peak = new Vector3();
       for (let index = 0; index < positions.count; index++) {
         a.fromBufferAttribute(positions, index);
         if (a.length() > maximumRadius) { maximumRadius = a.length(); peak.copy(a); }
-        const chart = map.mapCoordinates(a);
-        if (Math.abs(chart.x) < 50 && (Math.abs(chart.z - map.MAP_MIN_Z) < .001 || Math.abs(chart.z - map.MAP_SEAM) < .001)) {
-          const key = chart.x.toFixed(3), points = seam.get(key) ?? [];
-          points.push(a.clone()); seam.set(key, points);
-        }
       }
       const peakChart = map.mapCoordinates(peak);
       let overviewMaximumRadius = 0;
-      const overviewPeak = new Vector3();
-      const overviewPositions = overviewGeometry.getAttribute('position');
+      const overviewPeak = new Vector3(), overviewPositions = overviewGeometry.getAttribute('position');
       for (let index = 0; index < overviewPositions.count; index++) {
         a.fromBufferAttribute(overviewPositions, index);
-        if (a.length() > overviewMaximumRadius) {
-          overviewMaximumRadius = a.length();
-          overviewPeak.copy(a);
-        }
+        if (a.length() > overviewMaximumRadius) { overviewMaximumRadius = a.length(); overviewPeak.copy(a); }
       }
-      // The analytic summit is at z153; the two periodic render grids have a
-      // crest row at z152.662 instead. A 0.2m allowance is the measured,
-      // bounded rasterization error at this sharp small summit, not a height
-      // clamp: exact terrain remains 40m and each mesh peak matches the
-      // surface sampled at its own vertex.
-      const MESH_SUMMIT_SAMPLE_ALLOWANCE = .2;
+      // The rounded summit falls between grid rows; this is bounded rasterization, not a clamp.
+      const MESH_SUMMIT_SAMPLE_ALLOWANCE = .25;
       const minimumSampledSummitRadius = planet.RADIUS + map.MAP_SUMMIT.height - MESH_SUMMIT_SAMPLE_ALLOWANCE;
       const overviewPeakChart = map.mapCoordinates(overviewPeak);
-      assert.ok(maximumRadius >= minimumSampledSummitRadius,
-        `Full terrain samples the approved 40m mountain within ${MESH_SUMMIT_SAMPLE_ALLOWANCE}m (observed ${(maximumRadius - planet.RADIUS).toFixed(4)}m at ${peakChart.x.toFixed(3)}, ${peakChart.z.toFixed(3)})`);
-      assert.ok(overviewMaximumRadius >= minimumSampledSummitRadius,
-        `Overview terrain samples the approved 40m mountain within ${MESH_SUMMIT_SAMPLE_ALLOWANCE}m (observed ${(overviewMaximumRadius - planet.RADIUS).toFixed(4)}m at ${overviewPeakChart.x.toFixed(3)}, ${overviewPeakChart.z.toFixed(3)})`);
+      assert.ok(maximumRadius >= minimumSampledSummitRadius, `Full terrain samples the summit (observed ${(maximumRadius - planet.RADIUS).toFixed(4)}m)`);
+      assert.ok(overviewMaximumRadius >= minimumSampledSummitRadius, `Overview terrain samples the summit (observed ${(overviewMaximumRadius - planet.RADIUS).toFixed(4)}m)`);
       close(maximumRadius, planet.RADIUS + surfaces.groundSurfaceAt(peakChart.x, peakChart.z).height, 1e-4,
         'The full terrain peak is the actual sampled terrain, not an independently clipped proxy');
       close(overviewMaximumRadius, planet.RADIUS + surfaces.groundSurfaceAt(overviewPeakChart.x, overviewPeakChart.z).height, 1e-4,
         'The overview terrain peak is the actual sampled terrain, not an independently clipped proxy');
       assert.ok(geometry.boundingSphere.center.distanceTo(peak) <= geometry.boundingSphere.radius + 1e-4,
         'The computed bounding sphere includes the mountain even when its center is offset');
-      assert.ok(seam.size > 150, 'The complete latitude width reaches the periodic chart cut');
-      for (const pair of seam.values()) {
-        assert.equal(pair.length, 2, 'Both copies of the chart seam must exist');
-        assert.ok(pair[0].distanceTo(pair[1]) < 1e-4, 'Periodic render vertices meet without a crack');
+      // Open ocean needs no terrain, but every land point must lie inside a rendered region.
+      const inside = (x, z) => TERRAIN_REGIONS.some(region => x >= region.x0 && x <= region.x0 + region.columns * region.step && z >= region.z0 && z <= region.z0 + region.rows * region.step);
+      let land = 0;
+      for (let x = -110; x <= 110; x += 2) for (let z = map.MAP_MIN_Z; z < map.MAP_SEAM; z += 2) {
+        if (surfaces.groundSurfaceAt(x, z).height <= map.MAP_SEA_LEVEL) continue;
+        land++;
+        assert.ok(inside(x, z), `Land at (${x}, ${z.toFixed(1)}) must be inside a terrain region`);
       }
+      assert.ok(land > 5000, 'The coverage check samples the real island');
     } finally { geometry.dispose(); overviewGeometry.dispose(); }
   });
 
@@ -476,22 +467,23 @@ try {
     return { up, distance, blocked, supportKinds };
   }
 
-  await test('mountain v3 moves every approved run and its summit/base connectors in both directions', () => {
-    const runIds = mountain.MOUNTAIN_RUNS.map(run => run.id);
-    const connectorIds = [
-      'resort-trail', 'resort-approach', 'lodge-walk', 'ticket-walk', 'finish-return', 'ski-summit-walk',
-      ...runIds.flatMap(id => [`${id}-gate`, `${id}-return`]),
-      ...runIds,
-    ];
-    assert.equal(new Set(connectorIds).size, connectorIds.length, 'The approved route matrix must not accidentally duplicate a connector');
-    for (const id of connectorIds) {
+  await test('the resort connectors walk both ways and every snowboard run is dry, walkable snow', () => {
+    for (const id of ['resort-trail', 'resort-approach', 'lodge-walk', 'ticket-walk', 'finish-return']) {
       const route = town.TOWN_ROUTES.find(candidate => candidate.id === id);
-      assert.ok(route, `Mountain v3 route ${id} is present in the live layout`);
+      assert.ok(route, `Resort route ${id} is present in the live layout`);
       for (const reverse of [false, true]) {
-        const result = walkAuthoredRoute(route, reverse, `mountain ${id}`);
+        const result = walkAuthoredRoute(route, reverse, `resort ${id}`);
         assert.ok(result.distance > .2, `${id} has physical length in both directions`);
         assert.equal(result.blocked, 0, `${id} remains an unobstructed walking centerline`);
       }
+    }
+    for (const run of skiRuns.SKI_RUNS) {
+      // Walk down the carved centerline: the snow surface is continuous and never water.
+      const route = { id: run.id, points: run.samples.filter((_, index) => index % 4 === 0).map(sample => [sample.x, sample.z]) };
+      const result = walkAuthoredRoute(route, false, `run ${run.id}`);
+      assert.ok(result.distance > run.length * .45, `${run.id} is walkable from gate to finish`);
+      assert.equal(result.blocked, 0, `${run.id} has no walls or obstacles on its centerline`);
+      assert.ok(!result.supportKinds.has('water'), `${run.id} stays dry`);
     }
   });
 
@@ -575,7 +567,7 @@ try {
       const frame = map.mapFrame(27, -29);
       const forward = frame.east.clone().multiplyScalar(Math.cos(5 * Math.PI / 16)).addScaledVector(frame.north, Math.sin(5 * Math.PI / 16)).normalize();
       const right = forward.clone().cross(frame.up).normalize();
-      const origin = frame.up.clone().multiplyScalar(37.3).addScaledVector(right, .55);
+      const origin = frame.up.clone().multiplyScalar(planet.RADIUS + 1.3).addScaledVector(right, .55);
       const direction = forward.multiplyScalar(-4.8).addScaledVector(frame.up, 3).normalize();
       const clearance = collision.cameraClearDistance(origin, direction, 4.8, null, 'tunnel');
       assert.ok(clearance >= .7 && clearance < 2.2,

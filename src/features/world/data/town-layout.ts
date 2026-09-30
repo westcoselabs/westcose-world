@@ -2,7 +2,7 @@ import type { TownArea, TownBuilding, TownRoute, BuildingArchetype, DistrictId, 
 import { mapGeographic } from './world-map';
 import { CAVE_POINTS, CAVE_WIDTH } from './concept-landmarks';
 import { PENINSULA_COVE, PENINSULA_LIGHTHOUSE } from './peninsula-layout';
-import { MOUNTAIN_LAYOUT, MOUNTAIN_RUNS } from './mountain-layout';
+import { MOUNTAIN_LAYOUT } from './mountain-layout';
 const P={bone:'#E9DFCE',graphite:'#39474A',steel:'#647778',blue:'#5B7E8A',rust:'#A66A45'};
 type Spec=[id:string,x:number,z:number,width:number,depth:number,height:number,archetype:BuildingArchetype,roof:RoofStyle,district:DistrictId,color:string,extra?:Partial<TownBuilding>];
 const make=([id,x,z,width,depth,height,archetype,roof,district,color,extra={}]:Spec):TownBuilding=>({id,x,z,...mapGeographic(x,z),width,depth,height,archetype,roof,district,color,kind:'shop',rotation:0,trim:P.bone,accent:P.blue,entryWidth:2.6,entryOffset:0,floorHeight:.4,...extra});
@@ -16,7 +16,7 @@ const buildings:Spec[]=[
  ['lab',19.5,-6,4.8,5,3.8,'lab','lean','back-alleys','#737E78',{rotation:-Math.PI/2,sign:'ALLEY ROOM',subtitle:'WESTCOSE LABS',interior:'lab',entryWidth:2.4}],
  ['town-corner',-17,-6,6,5.5,3.5,'market','flat','studio-row','#A3A58E',{rotation:Math.PI,sign:'THE BLVD',subtitle:'WESTCOSE / CONCEPT',awning:true}],
  ['resort-lodge',MOUNTAIN_LAYOUT.lodge.x,MOUNTAIN_LAYOUT.lodge.z,MOUNTAIN_LAYOUT.lodge.width,MOUNTAIN_LAYOUT.lodge.depth,4.2,'cottage','gable','high-ground',P.rust,{sign:'WESTCOSE LODGE',subtitle:'SKI RESORT / CONCEPT',floorHeight:MOUNTAIN_LAYOUT.lodge.height}],
- ['ticket-hut',MOUNTAIN_LAYOUT.ticketHut.x,MOUNTAIN_LAYOUT.ticketHut.z,MOUNTAIN_LAYOUT.ticketHut.width,MOUNTAIN_LAYOUT.ticketHut.depth,2.5,'shed','gable','high-ground',P.blue,{sign:'LIFT TICKETS',subtitle:'TRAILS 1 / 2 / 3',floorHeight:MOUNTAIN_LAYOUT.ticketHut.height}],
+ ['ticket-hut',MOUNTAIN_LAYOUT.ticketHut.x,MOUNTAIN_LAYOUT.ticketHut.z,MOUNTAIN_LAYOUT.ticketHut.width,MOUNTAIN_LAYOUT.ticketHut.depth,2.5,'shed','gable','high-ground',P.blue,{sign:'LIFT TICKETS',subtitle:'SNOWBOARD / 4 RUNS',floorHeight:MOUNTAIN_LAYOUT.ticketHut.height}],
 ];
 export const TOWN_BUILDINGS=buildings.map(make);
 export const TOWN_AREAS:TownArea[]=[
@@ -43,14 +43,10 @@ export const TOWN_ROUTES:TownRoute[]=[
   // in front of their approved door-face anchors without moving either building.
   points:link.points.map((point,index)=>[point[0],point[1]-(index===link.points.length-1&&['lodge-walk','ticket-walk'].includes(link.id)?.55:0)] as const),
   width:link.width,material:'dirt' as const,category:'secondary' as const})),
- ...MOUNTAIN_RUNS.map(run=>({id:run.id,label:`${run.number} / ${run.name}`,district:'high-ground' as const,points:run.points.map(p=>[p[0],p[1]] as const),width:run.width,material:'concrete' as const,category:'primary' as const})),
- // Separate walking fan-out and finish links; racing centerlines stay exactly as approved.
- ...MOUNTAIN_RUNS.flatMap(run=>[
-  {id:`${run.id}-gate`,label:`Walk to trail ${run.number}`,district:'high-ground' as const,points:[[0,151],[run.points[0][0]*.4,150],[run.points[0][0],148]] as const,width:3,material:'concrete' as const,category:'secondary' as const},
-  {id:`${run.id}-return`,label:`Trail ${run.number} run-out to F`,district:'high-ground' as const,points:[[run.points.at(-1)![0],64],[run.points.at(-1)![0],61],[2.1,61]] as const,width:2.4,material:'concrete' as const,category:'secondary' as const},
- ]),
- {id:'ski-summit-walk',label:'Summit to route-choice apron',district:'high-ground',points:[[0,153],[0,151]],width:3,material:'concrete',category:'secondary'},
- {id:'lighthouse-trail',label:'Lighthouse Upper Trail',district:'outskirts',points:[[20,4],[23,0],[27,-3],[29,-10],[30,-17],[31,-23],[33,-28],[33.2,-32]],width:2.4,material:'dirt',category:'secondary',elevations:[.2,.2,.4,1.35,2.95,4.8,6.3,6.32]},
+ // Ski runs are carved snow terrain (ski-runs.ts), not walking routes.
+ // Ends .15m further west than on the radius-36 globe: the tower foot spans more chart
+ // width at the larger radius, and the trail's edge lanes must still clear it.
+ {id:'lighthouse-trail',label:'Lighthouse Upper Trail',district:'outskirts',points:[[20,4],[23,0],[27,-3],[29,-10],[30,-17],[31,-23],[33,-28],[33.05,-32]],width:2.4,material:'dirt',category:'secondary',elevations:[.2,.2,.4,1.35,2.95,4.8,6.3,6.32]},
  {id:'beach-west',label:'West Beach Ramp',district:'cove',points:[[-20,-16],[-18,-22],[-10,-28],[-3,-28]],width:2.4,material:'sand',category:'secondary'},
  {id:'beach-east',label:'East Beach and Cave Access',district:'cove',points:[[20,-16],[18,-23],[20,-28],[24,-29],[26,-29],[28,-29]],width:2.4,material:'sand',category:'secondary'},
  {id:'cave',label:'Covered Cave to Hidden Beach',district:'cove',points:CAVE_POINTS.map(p=>[p[0],p[1]]),width:CAVE_WIDTH,material:'sand',category:'discovery'},

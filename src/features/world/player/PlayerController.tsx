@@ -5,8 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Group, MathUtils, Matrix4, PerspectiveCamera, Quaternion, Vector3 } from "three";
 import { HOTSPOTS } from "../data/hotspots";
 import { areaAt, frameAt, RADIUS } from "../data/planet";
-import { PIER_LAYOUT } from "../data/pier-layout";
-import { MAP_MAX_HEIGHT, MAP_SUMMIT, mapCoordinates, mapPoint } from "../data/world-map";
+import { MAP_MAX_HEIGHT, MAP_SUMMIT, mapPoint } from "../data/world-map";
 import { clearWorldInput, isEditableTarget, MOVEMENT_CODES } from "../runtime/input";
 import { activeInteriorAt, cameraClearDistance, moveOnSurface, supportAt } from "../runtime/planet-collision";
 import {
@@ -24,6 +23,8 @@ interface PlayerControllerProps {
 const FIXED_STEP = 1 / 60;
 const WALK_SPEED = 4.8;
 const RUN_SPEED = 7.8;
+/** Globe view raises the near plane so the shoreline keeps depth precision at distance. */
+const OVERVIEW_NEAR = 12;
 const SUMMIT_POINT = mapPoint(MAP_SUMMIT.x, MAP_SUMMIT.z, MAP_SUMMIT.height);
 const copyPoint = (target: { x: number; y: number; z: number }, source: Vector3) => {
   target.x = source.x; target.y = source.y; target.z = source.z;
@@ -48,7 +49,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     inputForward: new Vector3(runtime.forward.x, runtime.forward.y, runtime.forward.z),
     facing: new Vector3(runtime.forward.x, runtime.forward.y, runtime.forward.z),
     target: new Vector3(), look: new Vector3(), desired: new Vector3(), cameraDirection: new Vector3(),
-    summit: new Vector3(), summitNdc: new Vector3(), framingForward: new Vector3(), cameraRight: new Vector3(), screenUp: new Vector3(), summitFraming: 0,
+    summitNdc: new Vector3(), summitFraming: 0,
     overview: new Vector3(), back: new Vector3(), matrix: new Matrix4(), rotation: new Quaternion(),
   });
 
@@ -136,7 +137,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     };
   }, [gl, runtime]);
 
-  useFrame((_, delta) => {
+  useFrame((frame, delta) => {
     const runtime = runtimeRef.current;
     const state = simulation.current;
     const dt = Math.min(delta, 0.05);
@@ -172,6 +173,15 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       if (reset) { runtime.heading = DEFAULT_HEADING; runtime.travelDistance = 0; runtime.lapCount = 0; }
       runtime.resetRequested = false; runtime.teleportRequested = undefined; runtime.forwardRequested = undefined; runtime.teleportSupportLayer = undefined;
       clearWorldInput(runtime);
+    }
+
+    // A snowboard run owns the camera and hides the walker, who waits where the run began.
+    if (runtime.snowboard.active) {
+      if (avatar.current) avatar.current.visible = false;
+      state.cameraInitialized = false; state.accumulator = 0; state.inputActive = false;
+      runtime.counters.drawCalls = gl.info.render.calls;
+      runtime.counters.triangles = gl.info.render.triangles;
+      return;
     }
 
     // The bounded accumulator uses real fixed simulation steps, independent of display refresh rate.
@@ -253,30 +263,13 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
 
     state.up.set(runtime.up.x, runtime.up.y, runtime.up.z);
     state.forward.set(runtime.forward.x, runtime.forward.y, runtime.forward.z);
-    const chart = mapCoordinates(runtime.position);
-    const pierTip = PIER_LAYOUT.head.center[1] - PIER_LAYOUT.head.depth / 2;
-    const pierProgress = MathUtils.clamp((PIER_LAYOUT.entrance[1] - chart.z) / (PIER_LAYOUT.entrance[1] - pierTip), 0, 1);
-    const pierFraming = runtime.supportKind === "pier" ? 0.2 + pierProgress * 0.8 : 0;
-    const resortFraming = MathUtils.clamp((chart.z - 101) / 12, 0, 1) * MathUtils.clamp((140 - chart.z) / 14, 0, 1);
-    state.summit.copy(SUMMIT_POINT).sub(runtime.position);
-    state.summit.addScaledVector(state.up, -state.summit.dot(state.up));
-    const summitAhead = state.summit.lengthSq() > 1e-8 ? state.summit.normalize().dot(state.forward) : -1;
-    const forwardFraming = MathUtils.clamp((summitAhead - .2) / .65, 0, 1);
-    // Vertical right-drag adjusts cameraHeight. Once someone deliberately departs
-    // from the default shoulder view, fade out the convenience framing so it
-    // never fights their chosen pitch.
-    const manualPitchAllowance = MathUtils.clamp(1 - Math.abs(state.cameraHeight - 3) / .6, 0, 1);
-    const desiredSummitFraming = runtime.mode === "exploring"
-      ? Math.max(pierFraming, resortFraming) * forwardFraming * manualPitchAllowance
-      : 0;
-    state.summitFraming = runtime.reducedMotion
-      ? desiredSummitFraming
-      : MathUtils.damp(state.summitFraming, desiredSummitFraming, 3.2, dt);
+    // The radius-72 planet hides the summit from the pier and resort, so there is no
+    // summit-framing assist; the follow camera always keeps the user's own pitch.
+    state.summitFraming = 0;
     state.target.set(runtime.position.x, runtime.position.y, runtime.position.z).addScaledVector(state.up, 0.55);
     state.right.crossVectors(state.forward, state.up).normalize();
     // Keep the visitor just off the center sightline so the raised follow
-    // camera can see the mountain and pier landmarks without obscuring input
-    // or changing the user's right-drag pitch control.
+    // camera can see ahead without obscuring input or the user's right-drag pitch.
     state.target.addScaledVector(state.right, 0.55);
     state.cameraDirection.copy(state.forward).multiplyScalar(-CAMERA_FOLLOW_DISTANCE).addScaledVector(state.up, state.cameraHeight).normalize();
     const availableDistance = cameraClearDistance(state.target, state.cameraDirection, CAMERA_FOLLOW_DISTANCE, runtime.interior, runtime.supportLayer);
@@ -297,23 +290,10 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     state.overview.copy(state.up).addScaledVector(state.forward, -0.23).normalize().multiplyScalar(globeDistance);
     state.desired.lerp(state.overview, runtime.overviewTransition);
     state.look.multiplyScalar(1 - runtime.overviewTransition);
-    if (state.summitFraming > .002 && runtime.overviewTransition < .01) {
-      const lookDistance = state.look.distanceTo(state.desired);
-      state.framingForward.copy(state.look).sub(state.desired).normalize();
-      state.cameraRight.crossVectors(state.framingForward, state.up).normalize();
-      state.screenUp.crossVectors(state.cameraRight, state.framingForward).normalize();
-      state.summit.copy(SUMMIT_POINT).sub(state.desired).normalize();
-      const forwardDot = state.summit.dot(state.framingForward);
-      if (forwardDot > .05) {
-        // Keep the real summit below the top of the actual camera frustum.
-        // This only rotates the look target; collision-safe camera placement
-        // and the user's right-drag height/heading controls remain unchanged.
-        const summitElevation = Math.atan2(state.summit.dot(state.screenUp), forwardDot);
-        const safeElevation = verticalHalfAngle * .58;
-        const pitch = MathUtils.clamp(summitElevation - safeElevation, 0, .65) * state.summitFraming;
-        state.framingForward.applyAxisAngle(state.cameraRight, pitch).normalize();
-        state.look.copy(state.desired).addScaledVector(state.framingForward, lookDistance);
-      }
+    const lens = frame.camera;
+    if (lens instanceof PerspectiveCamera) {
+      const near = MathUtils.lerp(0.08, OVERVIEW_NEAR, runtime.overviewTransition ** 2);
+      if (Math.abs(lens.near - near) > 1e-4) { lens.near = near; lens.updateProjectionMatrix(); }
     }
     camera.position.copy(state.desired);
     camera.up.copy(state.up);

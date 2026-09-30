@@ -18,17 +18,17 @@ export function buildingFrame(building: TownBuilding, radius = MAP_RADIUS) {
   return { position, quaternion, inverse: quaternion.clone().invert(), up: frame.up };
 }
 
-export function buildingMatrix(building: TownBuilding, radius = 36): Matrix4 {
+export function buildingMatrix(building: TownBuilding, radius = MAP_RADIUS): Matrix4 {
   const frame = buildingFrame(building, radius);
   return new Matrix4().compose(frame.position, frame.quaternion, new Vector3(1, 1, 1));
 }
 
-export function buildingLocalPoint(building: TownBuilding, point: LocalPoint, radius = 36): Vector3 {
+export function buildingLocalPoint(building: TownBuilding, point: LocalPoint, radius = MAP_RADIUS): Vector3 {
   const frame = buildingFrame(building, radius);
   return new Vector3(...point).applyQuaternion(frame.quaternion).add(frame.position);
 }
 
-export function buildingDoorPoint(building: TownBuilding, outward = 0, lift = 0, radius = 36): Vector3 {
+export function buildingDoorPoint(building: TownBuilding, outward = 0, lift = 0, radius = MAP_RADIUS): Vector3 {
   return buildingLocalPoint(building, [building.entryOffset, lift, building.depth / 2 + outward], radius);
 }
 
@@ -82,7 +82,7 @@ function cachedFrame(building:TownBuilding, radius:number) {
 }
 
 /** Exact intersection of a radial ray and the visible flat tangent floor. */
-export function buildingFloorRadius(building:TownBuilding, direction:Point, margin = 0, radius = 36):number|null {
+export function buildingFloorRadius(building:TownBuilding, direction:Point, margin = 0, radius = MAP_RADIUS):number|null {
   const frame = cachedFrame(building, radius);
   const normal = new Vector3(direction.x, direction.y, direction.z).normalize();
   const cosine = frame.up.dot(normal);
@@ -96,7 +96,7 @@ export function buildingFloorRadius(building:TownBuilding, direction:Point, marg
 export const buildingApronWidth = (building:TownBuilding) => building.entryWidth + 0.8;
 
 /** An authored door ramp, shared by support queries and the apron mesh samples. */
-export function buildingApronRadius(building:TownBuilding, direction:Point, groundRadius:number, radius = 36):number|null {
+export function buildingApronRadius(building:TownBuilding, direction:Point, groundRadius:number, radius = MAP_RADIUS):number|null {
   if (!building.interior) return null;
   const frame = cachedFrame(building, radius);
   const normal = new Vector3(direction.x, direction.y, direction.z).normalize();
@@ -112,7 +112,7 @@ export function buildingApronRadius(building:TownBuilding, direction:Point, grou
   return MathUtils.lerp(groundRadius, planeRadius, blend);
 }
 
-export function buildingApronPoint(building:TownBuilding, lateral:number, outward:number, groundRadiusAt:(direction:Point)=>number, radius = 36):Vector3 {
+export function buildingApronPoint(building:TownBuilding, lateral:number, outward:number, groundRadiusAt:(direction:Point)=>number, radius = MAP_RADIUS):Vector3 {
   const point = buildingLocalPoint(building, [building.entryOffset + lateral, 0, building.depth / 2 + outward], radius);
   const normal = point.clone().normalize();
   const groundRadius = groundRadiusAt(normal);
@@ -120,7 +120,7 @@ export function buildingApronPoint(building:TownBuilding, lateral:number, outwar
 }
 
 /** Interior state is spatial; walking through a door never changes routes or teleports. */
-export function activeInteriorAt(position:Point, buildings:readonly TownBuilding[] = TOWN_INTERIORS, radius = 36):InteriorId|null {
+export function activeInteriorAt(position:Point, buildings:readonly TownBuilding[] = TOWN_INTERIORS, radius = MAP_RADIUS):InteriorId|null {
   const point = new Vector3(position.x, position.y, position.z);
   for (const building of buildings) {
     if (!building.interior) continue;

@@ -46,7 +46,10 @@ export type SupportHint = { footRadius?:number; layer?:SupportLayer };
 
 const CAVE_QUERY_MARGIN = .06;
 const PORTAL_ENTRY_FLOOR_BAND = .25;
-const EXIT_HANDOFF_MIN_APRON = 1.6;
+// Physical metres beyond the cave end, still inside its 2.4m open-cut apron. On the
+// radius-72 globe the chart-authored cap face rises ~1.7m out, so the handoff starts
+// on the low beach before it.
+const EXIT_HANDOFF_MIN_APRON = 2.05;
 const EXIT_HANDOFF_FLOOR_EPSILON = .1;
 
 /** The normal exposed support. This is intentionally the no-hint default. */

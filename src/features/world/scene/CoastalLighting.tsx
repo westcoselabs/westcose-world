@@ -8,7 +8,7 @@ import {
 } from 'three';
 import type { WorldRuntimeState } from '../runtime/types';
 import { LANTERN_ANCHORS, SUNSET_DIRECTION, type LanternAnchor } from './lighting-anchors';
-import { MAP_MAX_HEIGHT, MAP_RADIUS } from '../data/world-map';
+import { MAP_MAX_HEIGHT, MAP_RADIUS, MAP_VIEW_SCALE } from '../data/world-map';
 
 // The town faces +Z. A fixed western sun gives long shadows without rotating
 // the light with the visitor or changing the planet's day side during travel.
@@ -17,6 +17,9 @@ const SUN_RIGHT = new Vector3().crossVectors(new Vector3(0, 1, 0), SUN).normaliz
 const SUN_UP = new Vector3().crossVectors(SUN, SUN_RIGHT).normalize();
 const SHADOW_SIZE = 2048;
 const HAZE = '#AEC8D4';
+const SUN_DISTANCE = 110 * MAP_VIEW_SCALE;
+const SHADOW_FAR = 220 * MAP_VIEW_SCALE;
+const SKY_SCALE = 300 * MAP_VIEW_SCALE;
 const LANTERN_SLOTS = [0, 1, 2] as const;
 
 const skyVertex = /* glsl */`
@@ -118,12 +121,14 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
     if (light) {
       // Keep contact resolution while walking; include the high mountain in overview.
       const halfExtent = 24 + overview * (MAP_RADIUS + MAP_MAX_HEIGHT + 2 - 24);
-      work.focus.set(state.position.x, state.position.y, state.position.z).multiplyScalar(1 - overview);
+      // Shadows follow whoever is on screen: the walker, or the rider during a run.
+      const focus = state.snowboard.active ? state.snowboard.focus : state.position;
+      work.focus.set(focus.x, focus.y, focus.z).multiplyScalar(1 - overview);
       const texel = halfExtent * 2 / SHADOW_SIZE;
       const right = work.focus.dot(SUN_RIGHT), up = work.focus.dot(SUN_UP);
       work.focus.addScaledVector(SUN_RIGHT, Math.round(right / texel) * texel - right);
       work.focus.addScaledVector(SUN_UP, Math.round(up / texel) * texel - up);
-      light.position.copy(work.focus).addScaledVector(SUN, 110);
+      light.position.copy(work.focus).addScaledVector(SUN, SUN_DISTANCE);
       light.target.position.copy(work.focus);
       // DirectionalLight's default target is not a scene child.
       light.target.updateMatrixWorld();
@@ -199,14 +204,14 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
     <directionalLight
       ref={sun} color="#fff1d9" intensity={2.2} castShadow={!reduced}
       position={[-53, 95, 21]} shadow-mapSize={[SHADOW_SIZE, SHADOW_SIZE]}
-      shadow-camera-near={1} shadow-camera-far={220}
+      shadow-camera-near={1} shadow-camera-far={SHADOW_FAR}
       shadow-camera-left={-50} shadow-camera-right={50}
       shadow-camera-top={50} shadow-camera-bottom={-50}
       shadow-normalBias={0.035} shadow-bias={-0.00008} shadow-radius={1.65}
     />
     <directionalLight position={[50, -38, -80]} intensity={0.9} color="#b4cddd" />
     {LANTERN_SLOTS.map(index => <pointLight key={index} ref={light => { lanternLights.current[index] = light; }} color="#ffbd79" intensity={0} distance={8.2} decay={2} castShadow={false} />)}
-    <mesh ref={sky} scale={300} renderOrder={-1000} frustumCulled={false}>
+    <mesh ref={sky} scale={SKY_SCALE} renderOrder={-1000} frustumCulled={false}>
       <sphereGeometry args={[1, 32, 20]} />
       <shaderMaterial
         ref={skyMaterial} uniforms={uniforms} vertexShader={skyVertex} fragmentShader={skyFragment}

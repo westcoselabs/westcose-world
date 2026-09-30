@@ -1,0 +1,124 @@
+/* Snowboard mini-game: HUD, lift-ticket menu and results. Small graphite panels outside
+   the canvas, the WestCose condensed display face, bone text; see WESTCOSE_WORLD_STYLE.md. */
+.snowboard-hud{position:absolute;inset:0;pointer-events:none;color:#f3eee0;font-family:var(--sans);z-index:2}
+.snowboard-hud .hud-label{display:block;font-family:Consolas,monospace;font-size:8px;letter-spacing:1.8px;font-weight:600;color:#c9c3b1}
+.hud-run,.hud-score,.hud-clock,.hud-stats,.hud-combo{position:absolute;background:#233230e0;border:1px solid #f3eee01f;border-radius:5px;box-shadow:3px 4px 0 #14222226}
+.hud-run{left:30px;top:66px;display:flex;align-items:center;gap:10px;padding:8px 12px 8px 10px}
+.hud-run strong{display:block;font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.2px;line-height:1}
+.hud-run small{display:block;font-family:Consolas,monospace;font-size:8px;letter-spacing:1.4px;text-transform:uppercase;color:#c9c3b1;margin-top:3px}
+.hud-clock{left:50%;top:22px;transform:translateX(-50%);padding:6px 16px 9px;text-align:center;min-width:128px}
+.hud-time{display:block;font-family:var(--display);font-size:34px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.hud-track{display:block;height:3px;margin-top:6px;background:#f3eee02b;border-radius:2px;overflow:hidden}
+.hud-track>span,.hud-flow>span,.hud-charge>span{display:block;height:100%;background:#e4b36e;transform-origin:left center;transform:scaleX(0)}
+.hud-score{right:28px;top:22px;padding:8px 14px 10px;min-width:150px;text-align:right}
+.hud-points{display:block;font-family:var(--display);font-size:36px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.hud-multiplier-row{display:flex;align-items:center;gap:8px;margin-top:6px;justify-content:flex-end}
+.hud-multiplier{--heat:0;font-family:var(--display);font-size:20px;font-weight:700;line-height:1;color:color-mix(in srgb,#f3eee0 calc(100% - var(--heat) * 100%),#f0a45c);transition:color .2s}
+.hud-flow{display:block;width:70px;height:4px;background:#f3eee02b;border-radius:2px;overflow:hidden}
+.hud-flow>span{background:#f0a45c}
+.hud-combo{left:50%;top:92px;transform:translateX(-50%);padding:6px 14px 8px;text-align:center;transition:opacity .15s;max-width:min(420px,calc(100vw - 40px))}
+.hud-combo-points{display:block;font-family:var(--display);font-size:24px;font-weight:600;line-height:1.05;color:#f0c58a}
+.hud-combo-tricks{display:block;font-size:10px;color:#dcd6c5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud-center{position:absolute;left:50%;top:27%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;width:min(560px,calc(100vw - 40px))}
+.hud-toasts{position:absolute;right:28px;top:124px;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.hud-popup{display:flex;flex-direction:column;align-items:center;animation:hud-pop 1.9s ease-out forwards;text-shadow:0 2px 0 #1c2b2a99;text-align:center}
+.hud-popup strong{font-family:var(--display);font-size:34px;font-weight:700;line-height:1;letter-spacing:.3px}
+.hud-popup span{font-family:var(--display);font-size:22px;font-weight:600;color:#f0c58a;line-height:1.1}
+.hud-popup small{font-family:Consolas,monospace;font-size:9px;letter-spacing:1.6px;color:#f3eee0cc}
+.hud-popup.popup-lost strong{color:#f09a7a}.hud-popup.popup-lost span{color:#f09a7a}
+.hud-popup.popup-bank span{color:#bfe3a6}
+.hud-popup.popup-info strong{font-size:30px}
+.hud-popup.popup-count strong{font-size:84px}
+.hud-toasts .hud-popup{flex-direction:row;gap:8px;align-items:baseline;background:#233230d9;border-radius:4px;padding:5px 10px;animation-duration:1.5s;text-shadow:none}
+.hud-toasts .hud-popup strong{font-size:15px;letter-spacing:.6px}
+.hud-toasts .hud-popup span{font-size:15px}
+.hud-toasts .popup-miss strong{color:#f09a7a}
+.hud-toasts .popup-multiplier strong{color:#f0a45c;font-size:18px}
+.hud-warning{position:absolute;left:50%;top:44%;transform:translateX(-50%);background:#a94e2ee6;color:#fff7ea;font-family:var(--display);font-size:24px;font-weight:600;letter-spacing:.5px;padding:8px 18px;border-radius:5px;transition:opacity .2s;text-transform:uppercase}
+.hud-stats{left:30px;bottom:30px;display:flex;align-items:flex-end;gap:16px;padding:8px 14px}
+.hud-stats>span{display:flex;flex-direction:column;align-items:flex-start}
+.hud-stats b{font-family:var(--display);font-size:26px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.hud-stats small{font-family:Consolas,monospace;font-size:7px;letter-spacing:1.6px;color:#c9c3b1;margin-top:2px}
+.hud-stats .hud-charge{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:0 0 5px 5px;overflow:hidden}
+.hud-stats .hud-charge>span{background:#f0c58a}
+.hud-keys{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-size:9px;white-space:nowrap;background:#e9e8dacc;color:#334947;padding:8px 12px;border-radius:3px}
+.hud-keys span{color:#6c7e72}
+.hud-pad{position:absolute;left:24px;bottom:104px;width:124px;height:124px;border-radius:50%;background:#e9ecdf26;border:1px solid #f5f4e940;display:flex;align-items:center;justify-content:center;pointer-events:auto;touch-action:none}
+.hud-pad>span{display:block;width:46px;height:46px;border-radius:50%;background:#f1f2e9b3;pointer-events:none}
+.hud-button{position:absolute;pointer-events:auto;touch-action:none;border-radius:50%;border:1px solid #f3eee055;background:#233230cc;color:#f3eee0;font-family:var(--display);font-weight:600;letter-spacing:.5px;text-transform:uppercase;user-select:none;-webkit-user-select:none}
+.hud-jump{right:22px;bottom:92px;width:86px;height:86px;font-size:19px}
+.hud-grab{right:118px;bottom:118px;width:62px;height:62px;font-size:14px}
+.hud-button:active{background:#3d594f}
+@keyframes hud-pop{0%{opacity:0;transform:translateY(12px) scale(.92)}10%{opacity:1;transform:translateY(0) scale(1)}78%{opacity:1}100%{opacity:0;transform:translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.hud-popup{animation-name:hud-fade}@keyframes hud-fade{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}}
+@media(max-width:650px){
+  .hud-run{left:18px;top:56px;padding:6px 10px 6px 8px}.hud-run strong{font-size:16px}
+  .hud-clock{top:14px;min-width:104px;padding:5px 12px 7px}.hud-time{font-size:27px}
+  .hud-score{right:16px;top:14px;min-width:112px;padding:6px 10px 8px}.hud-points{font-size:28px}.hud-multiplier{font-size:17px}.hud-flow{width:48px}
+  .hud-combo{top:78px}.hud-combo-points{font-size:20px}
+  .hud-center{top:24%}.hud-popup strong{font-size:27px}.hud-popup span{font-size:18px}.hud-popup.popup-count strong{font-size:64px}
+  .hud-toasts{right:16px;top:104px}
+  .hud-stats{left:16px;bottom:auto;top:108px;gap:10px;padding:6px 10px}.hud-stats b{font-size:19px}
+}
+@media(max-height:560px){.hud-center{top:20%}.hud-pad{bottom:70px}.hud-jump{bottom:70px}.hud-grab{bottom:96px}}
+
+/* Trail difficulty symbols */
+.trail-badge{display:inline-flex;align-items:center;justify-content:center;gap:3px;flex:0 0 auto;width:34px;height:34px;background:#f4f1e8;border-radius:4px}
+.trail-badge i{display:block;width:16px;height:16px}
+.trail-green i{background:#2f9e44;border-radius:50%}
+.trail-blue i{background:#1c7ed6;width:15px;height:15px}
+.trail-black i,.trail-double-black i{background:#1f2426;width:12px;height:12px;transform:rotate(45deg)}
+.trail-double-black{width:44px}
+.trail-double-black i{width:10px;height:10px}
+.trail-small{width:26px;height:26px}.trail-small i{width:12px;height:12px}.trail-small.trail-double-black{width:34px}.trail-small.trail-black i,.trail-small.trail-double-black i{width:8px;height:8px}
+
+/* Lift-ticket booth */
+.world-modal.snowboard-tickets,.world-modal.snowboard-results{width:min(600px,calc(100vw - 32px));user-select:text}
+.snowboard-tickets .modal-inner,.snowboard-results .modal-inner{padding:30px 30px 24px}
+.tickets-eyebrow,.results-eyebrow{display:flex;align-items:center;gap:8px;font-family:Consolas,monospace;font-size:9px;letter-spacing:1.5px;font-weight:600;color:#a05436;text-transform:uppercase;padding-right:36px}
+.snowboard-tickets h2,.snowboard-results h2{margin:10px 0 6px}
+.tickets-intro{margin:0 0 16px}
+.tickets-runs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ticket-run{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:12px 14px;border:1px solid #cfd2c3;border-radius:5px;background:#f7f3e8;transition:background .15s,border-color .15s}
+.ticket-run:hover{background:#fffbf1;border-color:#9fae9a}
+.ticket-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ticket-main strong{font-family:var(--display);font-size:24px;font-weight:600;line-height:1;letter-spacing:.2px}
+.ticket-main small{font-family:Consolas,monospace;font-size:9px;letter-spacing:1.2px;color:#6b7768;text-transform:uppercase}
+.ticket-facts{font-size:11px;color:#4d5b53;margin-top:4px}
+.ticket-record{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:11px;color:#34463f;font-weight:600}
+.ticket-stars{display:inline-flex;gap:2px;color:#b9b9a8}
+.ticket-stars .is-earned{color:#c98a2e;fill:#e4b36e}
+.ticket-go{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#3d594f;white-space:nowrap}
+.medal{font-style:normal;font-family:Consolas,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:#e6e1d2}
+.medal-bronze{background:#e7c6a4;color:#5b3a1c}.medal-silver{background:#dde2e4;color:#3b4a51}.medal-gold{background:#f1d58c;color:#5a4410}.medal-westcose{background:#334c48;color:#f3eee0}
+.tickets-controls{margin-top:16px;border-top:1px solid #cfd2c3;padding-top:10px}
+.tickets-controls summary{cursor:pointer;font-size:12px;font-weight:700;padding:6px 0}
+.tickets-controls dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:8px 0 10px;font-size:11px}
+.tickets-controls dt{font-family:Consolas,monospace;font-size:10px;color:#34463f;font-weight:600}
+.tickets-controls dd{margin:0;color:#4d5b53}
+.tickets-controls p{margin:0}
+
+/* Results */
+.results-headline{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.results-headline h2{font-variant-numeric:tabular-nums}
+.results-medal{font-family:Consolas,monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;padding:5px 10px;border-radius:4px;font-weight:700}
+.results-best{font-family:var(--display);font-size:18px;font-weight:700;color:#fff7ea;background:#a94e2e;padding:3px 10px;border-radius:4px;letter-spacing:.8px;animation:results-best 1.2s ease-in-out infinite alternate}
+@keyframes results-best{to{background:#c8653f}}
+@media(prefers-reduced-motion:reduce){.results-best{animation:none}}
+.results-summary{margin:4px 0 14px}
+.results-breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px 18px;margin:0 0 14px;padding:12px 0;border-top:1px solid #cfd2c3;border-bottom:1px solid #cfd2c3}
+.results-breakdown>div{display:flex;justify-content:space-between;gap:8px;font-size:12px}
+.results-breakdown dt{color:#5a675f}.results-breakdown dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
+.results-challenges{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:6px}
+.results-challenges li{display:flex;align-items:center;gap:8px;font-size:12px;color:#6f7b72}
+.results-challenges li svg{color:#b9b9a8}
+.results-challenges li.is-done{color:#253131;font-weight:600}
+.results-challenges li.is-done svg{color:#c98a2e;fill:#e4b36e}
+.results-challenges em{font-style:normal;font-family:Consolas,monospace;font-size:9px;letter-spacing:1px;background:#a94e2e;color:#fff;padding:1px 5px;border-radius:3px}
+.results-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.results-actions button{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #bac7b5;border-radius:4px;padding:11px 12px;background:#e6e5d6;font-size:11px;font-weight:600;text-align:left}
+.results-actions button:hover{background:#f0efe3}
+.results-actions .results-primary{background:#3d594f;color:#f7f0df;border-color:#3d594f}
+.results-actions .results-primary:hover{background:#4b6a5f}
+.results-note{display:block;margin-top:12px;font-size:9px;color:#6f7b72}
+@media(max-width:520px){.results-actions{grid-template-columns:1fr}.ticket-run{gap:10px;padding:10px}.ticket-go{display:none}.snowboard-tickets .modal-inner,.snowboard-results .modal-inner{padding:26px 18px 20px}}

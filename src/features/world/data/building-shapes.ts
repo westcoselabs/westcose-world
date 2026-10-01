@@ -59,21 +59,33 @@ export function buildingWallSegments(building: TownBuilding): WallSegment[] {
 /** Low-detail furniture proxies also describe the visible bases; center aisles stay open. */
 export function interiorFurnitureSegments(building:TownBuilding):WallSegment[] {
   if (!building.interior) return [];
-  const { width } = building;
+  const { width, depth } = building;
   const furniture = (suffix:string, x:number, z:number, size:LocalPoint):WallSegment => ({
     id:`${building.id}:furniture-${suffix}`, buildingId:building.id, center:[x, size[1] / 2, z], size, camera:true,
   });
   switch (building.interior) {
-    case 'studio': return [furniture('worktable', -(width / 2 - 1), -0.8, [1.2, 0.9, 2.8])];
-    case 'workshop': return [-1, 1].map(side => furniture(`bench-${side}`, side * (width / 2 - 0.9), -0.5, [1.2, 0.9, 3.4]));
+    // The gallery keeps its centre aisle open from the doors to the feature wall.
+    case 'studio': return [
+      furniture('worktable', -(width / 2 - 1.1), -1.2, [1.3, 0.9, 3.4]),
+      furniture('flat-files', width / 2 - 1.1, -1.2, [1.3, 0.9, 3.4]),
+      furniture('plinth', 0, -depth / 2 + 2.4, [2.4, 0.75, 1.1]),
+    ];
+    case 'workshop': return [
+      ...[-1, 1].map(side => furniture(`bench-${side}`, side * (width / 2 - 1), -0.9, [1.3, 0.9, 4.4])),
+      furniture('island', 0, -depth / 2 + 2.3, [2.6, 0.9, 1.2]),
+    ];
     case 'arcade': return [-1, 1].map(side => furniture(`cabinets-${side}`, side * (width / 2 - 0.8), -0.5, [1.1, 1.9, 3.8]));
-    case 'about': return [furniture('desk', -(width / 2 - 1.2), -1, [1.7, 0.85, 1.35])];
+    // The lobby's reception counter faces the door across the room; a lounge sofa sits opposite.
+    case 'about': return [
+      furniture('desk', width / 2 - 1.5, -depth / 2 + 1.5, [2.2, 1.0, 0.8]),
+      furniture('sofa', -(width / 2 - 1.1), -depth / 2 + 1.1, [1.8, 0.8, 0.85]),
+    ];
     case 'lab': return [-1, 1].map(side => furniture(`lab-bench-${side}`, side * (width / 2 - 0.95), -0.6, [1.25, 0.95, 3.1]));
     // The counter keeps the board wall behind it; its west end stays open to walk round.
     case 'skateshop': return [
-      furniture('counter', 0.9, -1.35, [5.2, 1.05, 0.75]),
-      furniture('deck-rack', width / 2 - 0.35, 1.2, [0.5, 1.7, 3.0]),
-      furniture('display', 1.5, 1.8, [1.6, 0.8, 1.2]),
+      furniture('counter', 0.9, -depth / 2 + 2.2, [5.4, 1.05, 0.75]),
+      furniture('deck-rack', width / 2 - 0.35, 1.0, [0.5, 1.7, 3.4]),
+      furniture('display', 1.8, 1.4, [1.6, 0.8, 1.2]),
     ];
   }
 }

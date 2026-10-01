@@ -333,6 +333,12 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     camera.position.copy(state.desired);
     camera.up.copy(state.up);
     camera.lookAt(state.look);
+    const review = runtime.debugCamera;
+    if (review) {
+      camera.position.set(review.position.x, review.position.y, review.position.z);
+      camera.up.set(review.up.x, review.up.y, review.up.z);
+      camera.lookAt(review.target.x, review.target.y, review.target.z);
+    }
     // Measure the final, real camera matrix rather than reproducing this math
     // in browser tests. This reaches the development-only world debugger below.
     camera.updateMatrixWorld();

@@ -249,7 +249,7 @@ test('the beach approach supports dry walking onto the timber pier', async ({ pa
   const deck = await state(page);
   expect(mapCoordinates(deck.position).z).toBeLessThan(PIER_LAYOUT.approach.start[1]);
   expect(deck.swimming).toBe(false);
-  // Walk the complete new pier instead of only validating its first metre.
+  // Walk the complete long pier out to its fishing head, not only its first metre.
   await page.keyboard.down('w');
   try {
     await expect.poll(async () => {
@@ -257,7 +257,7 @@ test('the beach approach supports dry walking onto the timber pier', async ({ pa
       expect(current.supportKind).toBe('pier');
       expect(current.swimming).toBe(false);
       return mapCoordinates(current.position).z;
-    }, { timeout: 14000, intervals: [120] }).toBeLessThan(PIER_LAYOUT.head.center[1] - .5);
+    }, { timeout: 22000, intervals: [120] }).toBeLessThan(PIER_LAYOUT.head.center[1] - .5);
   } finally { await page.keyboard.up('w'); }
   await page.keyboard.down('s');
   try {
@@ -265,7 +265,7 @@ test('the beach approach supports dry walking onto the timber pier', async ({ pa
       const current = await state(page);
       expect(current.swimming).toBe(false);
       return current.supportKind;
-    }, { timeout: 14000, intervals: [120] }).toBe('ground');
+    }, { timeout: 22000, intervals: [120] }).toBe('ground');
   } finally { await page.keyboard.up('s'); }
 });
 

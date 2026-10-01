@@ -1,19 +1,22 @@
 import { Matrix4, Quaternion, Vector3 } from 'three';
 import { MAP_RADIUS, mapDirection, mapFrame } from './world-map';
-import { PENINSULA_CAVE, PENINSULA_LIGHTHOUSE } from './peninsula-layout';
-import { BLUFF_WALL, COURTYARD, DOWNTOWN_FURNITURE, WALK_LEVEL } from './downtown-layout';
+import { PENINSULA_CAVE, PENINSULA_LIGHTHOUSE, PLACED_CAVE_POINTS, PLACED_LIGHTHOUSE } from './peninsula-layout';
+import { placeQuaternion, placeVector } from './peninsula-frame';
+import { BLUFF_WALL, COURTYARD, DOWNTOWN_FURNITURE, PLAZA, WALK_LEVEL } from './downtown-layout';
 import { GRAND_STAIRS, halfpipeRailSegments, parkFootprintOutline, parkPoint, parkSurfaceLocal, SKATEPARK } from './skatepark-layout';
 import { peninsulaCaveColliders } from './peninsula-cave';
 import { peninsulaCliffColliders } from './peninsula-cliffs';
+import { TOWN_PROP_COLLIDERS } from './town-props';
 export { caveDistanceAt, caveBlendAt, caveHeightAt } from './peninsula-cave';
 
-/** Authoring data is shared by the walkable terrain, visible blockout, and OBB collision. */
-export const CAVE_POINTS = PENINSULA_CAVE.points;
+/** Authoring data is shared by the walkable terrain, visible blockout, and OBB collision.
+ * The cave and lighthouse positions here are world chart points of the placed peninsula. */
+export const CAVE_POINTS = PLACED_CAVE_POINTS;
 export const CAVE_WIDTH = PENINSULA_CAVE.width;
 export const CAVE_CLEARANCE = PENINSULA_CAVE.clearance;
 export const CAVE_FLOOR = PENINSULA_CAVE.floor;
-export const LIGHTHOUSE = PENINSULA_LIGHTHOUSE;
-export const ART_WALLS = [{ x: -28.8, z: -13.2, elevation: WALK_LEVEL, title: 'ART WALL' }, { x: 22, z: -13, elevation: .2, title: 'GRAFFITI WALL' }] as const;
+export const LIGHTHOUSE = PLACED_LIGHTHOUSE;
+export const ART_WALLS = [{ x: -28.8, z: -13.2, elevation: WALK_LEVEL, title: 'ART WALL' }, { x: 33.6, z: -13, elevation: .2, title: 'GRAFFITI WALL' }] as const;
 
 export type LandmarkSolid = {
   id: string; buildingId: string; center: Vector3; quaternion: Quaternion; inverse: Quaternion;
@@ -24,7 +27,11 @@ function solid(id: string, buildingId: string, center: Vector3, quaternion: Quat
   return { id, buildingId, center, quaternion, inverse: quaternion.clone().invert(), half: new Vector3(...size).multiplyScalar(.5), camera, color, shape, matrix: new Matrix4().compose(center, quaternion, new Vector3(...size)) };
 }
 
-const towerFrame = mapFrame(LIGHTHOUSE.x, LIGHTHOUSE.z, LIGHTHOUSE.elevation);
+// The tower stands on its authored frame, carried with the rest of the peninsula.
+const authoredTower = mapFrame(PENINSULA_LIGHTHOUSE.x, PENINSULA_LIGHTHOUSE.z, PENINSULA_LIGHTHOUSE.elevation);
+const towerFrame = { position: placeVector(authoredTower.position.clone()), quaternion: placeQuaternion(authoredTower.quaternion.clone()) };
+/** The lighthouse's local frame (origin on its foundation), shared by every tower detail. */
+export const LIGHTHOUSE_FRAME = new Matrix4().compose(towerFrame.position, towerFrame.quaternion, new Vector3(1, 1, 1));
 const towerParts: Array<{ id: string; position: [number, number, number]; size: [number, number, number]; color: string }> = [
   { id: 'foot', position: [0, .2, 0], size: [4.2, .4, 4.2], color: '#B3ADA0' },
   { id: 'lower', position: [0, 2.7, 0], size: [3.1, 4.6, 3.1], color: '#E4DBCB' },
@@ -103,8 +110,31 @@ const furnitureColliders: LandmarkSolid[] = DOWNTOWN_FURNITURE.map((item, i) => 
   const quaternion = frame.quaternion.clone().multiply(new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), item.yaw ?? 0));
   return solid(`furniture:${item.kind}:${i}`, `street-${item.kind}`, new Vector3(0, size[1] / 2, 0).applyQuaternion(quaternion).add(frame.position), quaternion, size, '#56645F', item.kind === 'palm');
 });
-const sculptureFrame = mapFrame(COURTYARD.sculpture[0], COURTYARD.sculpture[1], WALK_LEVEL);
-const sculptureCollider = solid('courtyard:sculpture', 'courtyard-sculpture', new Vector3(0, 1.2, 0).applyQuaternion(sculptureFrame.quaternion).add(sculptureFrame.position), sculptureFrame.quaternion, [3.2, 2.4, 3.2], '#56645F');
+/** The fountain: an octagon of rim stones round its basin and the central plinth and wave. */
+const fountainFrame = mapFrame(COURTYARD.fountain[0], COURTYARD.fountain[1], WALK_LEVEL);
+const atFountain = (x: number, y: number, z: number) => new Vector3(x, y, z).applyQuaternion(fountainFrame.quaternion).add(fountainFrame.position);
+const fountainColliders = [
+  ...Array.from({ length: 8 }, (_, i) => {
+    const angle = (i + .5) * Math.PI / 4, r = COURTYARD.basin - .2;
+    const q = fountainFrame.quaternion.clone().multiply(new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), -angle));
+    return solid(`courtyard:fountain-rim:${i}`, 'courtyard-fountain', atFountain(Math.cos(angle) * r, .3, Math.sin(angle) * r), q, [.45, .6, 2 * COURTYARD.basin * Math.tan(Math.PI / 8) + .05], '#56645F');
+  }),
+  solid('courtyard:fountain-plinth', 'courtyard-fountain', atFountain(0, 1.4, 0), fountainFrame.quaternion, [2.2, 2.8, 1.6], '#56645F'),
+];
+const plazaColliders = [
+  ...PLAZA.planters.map(([x, z], i) => {
+    const frame = mapFrame(x, z, WALK_LEVEL);
+    return solid(`courtyard:planter:${i}`, 'courtyard-planter', new Vector3(0, .32, 0).applyQuaternion(frame.quaternion).add(frame.position), frame.quaternion, [PLAZA.planterSize, .64, PLAZA.planterSize], '#56645F', false);
+  }),
+  ...PLAZA.lightPoles.map(([x, z], i) => {
+    const frame = mapFrame(x, z, WALK_LEVEL);
+    return solid(`courtyard:light-pole:${i}`, 'courtyard-lights', new Vector3(0, PLAZA.lightPoleHeight / 2, 0).applyQuaternion(frame.quaternion).add(frame.position), frame.quaternion, [.22, PLAZA.lightPoleHeight, .22], '#56645F', false);
+  }),
+  ...PLAZA.bollards.map(([x, z], i) => {
+    const frame = mapFrame(x, z, WALK_LEVEL);
+    return solid(`courtyard:bollard:${i}`, 'courtyard-bollard', new Vector3(0, .4, 0).applyQuaternion(frame.quaternion).add(frame.position), frame.quaternion, [.26, .8, .26], '#56645F', false);
+  }),
+];
 
 /** Render these exact boxes; do not make a separate hand-authored collision version. */
 export const landmarkSolids: LandmarkSolid[] = [...towerSolids, ...artWallSolids, ...bluffSolids];
@@ -119,5 +149,5 @@ const archPart = (id: string, position: [number, number, number], size: [number,
 const archColliders = [archPart('board', [0, 3.25, 0], [GRAND_STAIRS.halfWidth * 2 + .9, .95, .2]), ...[-1, 1].map(side => archPart(`post:${side}`, [side * (GRAND_STAIRS.halfWidth + .25), 1.7, 0], [.3, 3.4, .3]))];
 /** Railings round the halfpipe decks, so nobody walks off a 3.5m drop. */
 const halfpipeRails = halfpipeRailSegments().map(([u0, v0, u1, v1, base], i) => span(`halfpipe-rail:${i}`, 'halfpipe-rail', parkPoint(u0, v0, SKATEPARK.deck + base), parkPoint(u1, v1, SKATEPARK.deck + base), 1.05, .06, '#56645F', false));
-export const hiddenColliders: LandmarkSolid[] = [...furnitureColliders, sculptureCollider, ...fenceSolids, ...halfpipeRails, ...archColliders];
+export const hiddenColliders: LandmarkSolid[] = [...furnitureColliders, ...fountainColliders, ...plazaColliders, ...fenceSolids, ...halfpipeRails, ...archColliders, ...TOWN_PROP_COLLIDERS];
 export const landmarkColliders = [...landmarkSolids, ...hiddenColliders, ...peninsulaCaveColliders, ...peninsulaCliffColliders];

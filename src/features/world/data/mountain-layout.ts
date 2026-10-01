@@ -4,7 +4,7 @@
  * rear shore. Pure layout data and height fields: no scene, movement or game code.
  * Ski runs are carved separately (ski-runs.ts) and composed in town-surfaces.ts.
  */
-import { existingIslandTerrainAt } from './island-terrain';
+import { islandTerrainAt } from './island-terrain';
 import { MAP_RADIUS, MAP_SUMMIT } from './world-map';
 
 export type MountainMapPoint = readonly [number, number];
@@ -128,7 +128,7 @@ function overlayAt(x: number, z: number): number {
 /** Unplated terrain: the frozen town substrate blended into the mountain island. */
 export function mountainBaseAt(x: number, z: number): number {
   const blend = mountainBlendAt(x, z);
-  const existing = blend < 1 ? existingIslandTerrainAt(x, z) : 0;
+  const existing = blend < 1 ? islandTerrainAt(x, z) : 0;
   return blend === 0 ? existing : blend === 1 ? overlayAt(x, z) : mix(existing, overlayAt(x, z), blend);
 }
 

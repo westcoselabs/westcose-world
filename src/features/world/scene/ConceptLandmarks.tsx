@@ -3,7 +3,9 @@
 import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { ART_WALLS, CAVE_POINTS, CAVE_FLOOR, LIGHTHOUSE, landmarkDecor, landmarkSolids } from '../data/concept-landmarks';
+import { ART_WALLS, CAVE_FLOOR, LIGHTHOUSE_FRAME, landmarkDecor, landmarkSolids } from '../data/concept-landmarks';
+import { PENINSULA_CAVE, PENINSULA_LIGHTHOUSE } from '../data/peninsula-layout';
+import { peninsulaWorldPoint } from '../data/peninsula-frame';
 import { MAP_RADIUS, mapFrame, mapMetric } from '../data/world-map';
 import { TOWN_BUILDINGS, TOWN_ROUTES } from '../data/town-layout';
 import { townSurfaceAt } from '../data/town-surfaces';
@@ -12,6 +14,8 @@ import { block, createKitContext, physicalSign, tube, UNIT_BOX } from './kit/con
 import { SignAtlas } from './kit/SignAtlas';
 import PeninsulaCliffs from './PeninsulaCliffs';
 import { PENINSULA_COVE } from '../data/peninsula-layout';
+/** A sign position on the placed peninsula, from its authoring chart. */
+const placed = (x: number, z: number) => peninsulaWorldPoint(x, z);
 import { MOUNTAIN_LAYOUT } from '../data/mountain-layout';
 
 const CONE = new THREE.ConeGeometry(1, 1, 7);
@@ -32,12 +36,15 @@ function buildLandmarks() {
     physicalSign(kit, frame, title, subtitle, [0, 1.42, .06], width, .76, [0, 0, 0], true, '#394F51');
   };
 
-  sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', LIGHTHOUSE.x - 3.3, LIGHTHOUSE.z + 4.5, 2.5);
-  sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', CAVE_POINTS[0][0] - 3.2, CAVE_POINTS[0][1] + 2.5, 3.4, CAVE_FLOOR);
-  sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', PENINSULA_COVE.x - .7, PENINSULA_COVE.z + 3, 2.5);
+  const lighthouseSign = placed(PENINSULA_LIGHTHOUSE.x - 3.3, PENINSULA_LIGHTHOUSE.z + 4.5);
+  const caveSign = placed(PENINSULA_CAVE.points[0][0] - 3.2, PENINSULA_CAVE.points[0][1] + 2.5);
+  const coveSign = placed(PENINSULA_COVE.x - .7, PENINSULA_COVE.z + 3);
+  sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', lighthouseSign.x, lighthouseSign.z, 2.5);
+  sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', caveSign.x, caveSign.z, 3.4, CAVE_FLOOR);
+  sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', coveSign.x, coveSign.z, 2.5);
   sign('SKI RESORT', 'LODGE / LIFT TICKETS / FOUR RUNS', MOUNTAIN_LAYOUT.pedestrianArrival.x-5.5, MOUNTAIN_LAYOUT.pedestrianArrival.z-1, 3.4);
 
-  const towerFrame = mapFrame(LIGHTHOUSE.x, LIGHTHOUSE.z, LIGHTHOUSE.elevation).matrix;
+  const towerFrame = LIGHTHOUSE_FRAME;
   kit.details.shape(CONE, towerFrame, [0, 11.55, 0], [2.08, .9, 2.08], '#606D6D', [0, Math.PI / 4, 0]);
   block(kit.details, towerFrame, [0, 1.55, 1.565], [.95, 2.3, .04], '#687578');
   // Lantern corner posts distinguish the tower silhouette in the globe review.

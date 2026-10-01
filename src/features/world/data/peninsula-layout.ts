@@ -1,6 +1,10 @@
 import { MAP_RADIUS } from './world-map';
+import { nearPeninsula, peninsulaAuthoredPoint, placedPoint } from './peninsula-frame';
 
-/** Local coastal reconstruction. All dimensions are metres on the curved world. */
+/** Local coastal reconstruction. All dimensions are metres on the curved world.
+ * Everything in this file down to the "World placement" section is the approved authoring
+ * data, in the chart frame it was approved in. peninsula-frame.ts carries it, rigidly, to
+ * where it now stands east of the cul-de-sacs; use the placed exports for world positions. */
 export const PENINSULA_CAVE = {
   // Public mouth → directly under the lighthouse → cove behind the headland.
   points: [[28, -29], [31, -30.5], [34, -32], [36, -32], [37, -30], [38, -26], [38, -22], [38, -20]],
@@ -66,8 +70,8 @@ export function coastDistance(x: number, z: number, polygon: readonly CoastPoint
 }
 
 /** Replace the old eastern mound, with a seam collar only at the unchanged map. */
-export function peninsulaBlendAt(x: number, z: number) {
-  if (!inPeninsulaRegion(x, z)) return 0;
+function authoredBlendAt(x: number, z: number) {
+  if (!inAuthoredRegion(x, z)) return 0;
   const west = z < -18 ? smooth(15, 20, x) : smooth(24, 27, x);
   // At the protected boardwalk corner, approach the unchanged level gently.
   const townCorner = x < 24 ? 1 - smooth(-23, -18, z) : 1;
@@ -77,7 +81,7 @@ export function peninsulaBlendAt(x: number, z: number) {
   return west * townCorner * smooth(-47, -44, z) * (1 - smooth(27, 30, z)) * (1 - smooth(47, 51, x));
 }
 
-export function peninsulaHeightAt(x: number, z: number) {
+function authoredHeightAt(x: number, z: number) {
   const shore = coastDistance(x, z, PENINSULA_COAST);
   // Low intertidal skirt → broken coastal shelf. No continuous 8m radial wall.
   let height = -3 + 3.12 * smooth(-2.6, .65, shore);
@@ -107,7 +111,7 @@ export function peninsulaHeightAt(x: number, z: number) {
 }
 
 /** A small tangent foundation avoids either burying or floating the unchanged tower. */
-export function peninsulaFoundationAt(x: number, z: number): { height: number; blend: number } {
+function authoredFoundationAt(x: number, z: number): { height: number; blend: number } {
   const tower = PENINSULA_LIGHTHOUSE;
   const a = x / MAP_RADIUS, a0 = tower.x / MAP_RADIUS, b = (z - tower.z) / MAP_RADIUS;
   const dot = Math.sin(a) * Math.sin(a0) + Math.cos(a) * Math.cos(a0) * Math.cos(b);
@@ -118,7 +122,60 @@ export function peninsulaFoundationAt(x: number, z: number): { height: number; b
   return { height, blend: 1 - smooth(0, 1.2, edge) };
 }
 
-/** The public access spur belongs to this edit; the town side of z=-18 is protected. */
-export function inPeninsulaRegion(x: number, z: number) {
+/** The authored replacement region: the public access spur and the cape east of the old town. */
+export function inAuthoredRegion(x: number, z: number) {
   return (x >= 15 && z >= -47 && z < -18) || (x > 24 && z >= -18 && z <= 30);
 }
+/** Authored chart metres outside the replacement region (0 inside). */
+function authoredRegionOutside(x: number, z: number) {
+  const spur = Math.hypot(Math.max(0, 15 - x), Math.max(0, -47 - z, z + 18));
+  const cape = Math.hypot(Math.max(0, 24 - x), Math.max(0, -18 - z, z - 30));
+  return Math.min(spur, cape);
+}
+
+// ---------------------------------------------------------------------------
+// World placement: the queries below take world chart coordinates.
+
+let lastX = NaN, lastZ = NaN, last: { x: number; z: number } | null = null;
+/** Authored point for a world point near the placed peninsula, else null. Cached for the
+ * runs of queries the terrain makes at one point. */
+export function peninsulaLocal(x: number, z: number) {
+  if (x === lastX && z === lastZ) return last;
+  lastX = x; lastZ = z;
+  last = nearPeninsula(x, z) ? peninsulaAuthoredPoint(x, z) : null;
+  return last;
+}
+export function inPeninsulaRegion(x: number, z: number) {
+  const a = peninsulaLocal(x, z);
+  return !!a && inAuthoredRegion(a.x, a.z);
+}
+export function peninsulaBlendAt(x: number, z: number) {
+  const a = peninsulaLocal(x, z);
+  return a ? authoredBlendAt(a.x, a.z) : 0;
+}
+export function peninsulaHeightAt(x: number, z: number) {
+  const a = peninsulaLocal(x, z)!;
+  return authoredHeightAt(a.x, a.z);
+}
+export function peninsulaFoundationAt(x: number, z: number): { height: number; blend: number } {
+  const a = peninsulaLocal(x, z);
+  return a ? authoredFoundationAt(a.x, a.z) : { height: 0, blend: 0 };
+}
+/** Signed distance to an authored polygon, for a world point. */
+export function peninsulaCoastDistance(x: number, z: number, polygon: readonly CoastPoint[]) {
+  const a = peninsulaLocal(x, z);
+  return a ? coastDistance(a.x, a.z, polygon) : -Infinity;
+}
+/** How much of the base terrain is the original coast carried with the peninsula: 1 inside
+ * its region, fading over 6 authored metres outside so its seams join the new town land. */
+export function peninsulaTransplantWeight(x: number, z: number) {
+  const a = peninsulaLocal(x, z);
+  return a ? 1 - smooth(0, 6, authoredRegionOutside(a.x, a.z)) : 0;
+}
+
+/** The authored anchors at their world chart positions. */
+const tower = placedPoint([PENINSULA_LIGHTHOUSE.x, PENINSULA_LIGHTHOUSE.z]);
+export const PLACED_LIGHTHOUSE = { ...PENINSULA_LIGHTHOUSE, x: tower[0], z: tower[1] } as const;
+const cove = placedPoint([PENINSULA_COVE.x, PENINSULA_COVE.z]);
+export const PLACED_COVE = { x: cove[0], z: cove[1] } as const;
+export const PLACED_CAVE_POINTS: readonly (readonly [number, number])[] = PENINSULA_CAVE.points.map(point => placedPoint(point));

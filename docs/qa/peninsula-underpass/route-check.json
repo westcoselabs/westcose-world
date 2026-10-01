@@ -6,8 +6,8 @@
       "name": "the authored topology places the tunnel directly under the outer-tip lighthouse",
       "detail": {
         "tower": {
-          "x": 36,
-          "z": -32,
+          "x": 52.9827,
+          "z": -32.5522,
           "elevation": 6.2,
           "height": 12
         },
@@ -30,8 +30,8 @@
     {
       "name": "all peninsula surface and collider samples remain finite",
       "detail": {
-        "samples": 10385,
-        "colliders": 229
+        "samples": 17085,
+        "colliders": 476
       }
     },
     {
@@ -51,11 +51,11 @@
         "radialSeparation": 6.3,
         "forward": {
           "lane": 0,
-          "distance": 3.9997,
+          "distance": 3.9953,
           "steps": 73,
           "end": {
-            "x": 36.9976,
-            "z": -30.0049
+            "x": 53.9934,
+            "z": -30.2011
           },
           "initialLayer": "tunnel",
           "finalLayer": "tunnel",
@@ -67,22 +67,22 @@
             "verticalDelta": 0,
             "sampleDistance": 0,
             "from": {
-              "x": 34,
-              "z": -32
+              "x": 50.9829,
+              "z": -32.5176
             },
             "to": {
-              "x": 34,
-              "z": -32
+              "x": 50.9829,
+              "z": -32.5176
             }
           }
         },
         "reverse": {
           "lane": 0,
-          "distance": 3.9982,
+          "distance": 3.9981,
           "steps": 73,
           "end": {
-            "x": 34,
-            "z": -32
+            "x": 50.9829,
+            "z": -32.5176
           },
           "initialLayer": "tunnel",
           "finalLayer": "tunnel",
@@ -94,12 +94,12 @@
             "verticalDelta": 0,
             "sampleDistance": 0,
             "from": {
-              "x": 37,
-              "z": -30
+              "x": 53.9981,
+              "z": -30.1902
             },
             "to": {
-              "x": 37,
-              "z": -30
+              "x": 53.9981,
+              "z": -30.1902
             }
           }
         }
@@ -120,15 +120,15 @@
       "name": "the lower visitor cannot cross a side wall or snap onto the headland",
       "detail": {
         "blockedAt": {
-          "x": 38.8322,
-          "z": -31.968
+          "x": 55.8149,
+          "z": -32.5674
         },
         "target": {
-          "x": 39.0556,
-          "z": -32
+          "x": 56.038,
+          "z": -32.6101
         },
         "layer": "tunnel",
-        "distance": 2.8437,
+        "distance": 2.8436,
         "steps": 53,
         "softBlocks": 1,
         "contact": {
@@ -147,15 +147,15 @@
       }
     },
     {
-      "name": "lighthouse trail walks from [20, 4] in both directions",
+      "name": "lighthouse trail walks from the Cliff Cul-de-sac in both directions",
       "detail": {
         "forward": {
           "lane": 0,
-          "distance": 37.0842,
-          "steps": 689,
+          "distance": 25.215,
+          "steps": 466,
           "end": {
-            "x": 33.0496,
-            "z": -31.9655
+            "x": 50.0327,
+            "z": -32.4614
           },
           "initialLayer": "upper",
           "finalLayer": "upper",
@@ -163,26 +163,26 @@
           "maxPathHeightGradient": {
             "name": "lighthouse forward",
             "lane": 0,
-            "ratio": 0.5104,
-            "verticalDelta": 0.0281,
+            "ratio": 1.2512,
+            "verticalDelta": 0.0688,
             "sampleDistance": 0.055,
             "from": {
-              "x": 30.8866,
-              "z": -22.319
+              "x": 42.1868,
+              "z": -3.5669
             },
             "to": {
-              "x": 30.8965,
-              "z": -22.3784
+              "x": 42.2259,
+              "z": -3.6134
             }
           }
         },
         "reverse": {
           "lane": 0,
-          "distance": 37.1128,
-          "steps": 689,
+          "distance": 25.2424,
+          "steps": 466,
           "end": {
-            "x": 20,
-            "z": 4
+            "x": 41.9911,
+            "z": -3.3352
           },
           "initialLayer": "upper",
           "finalLayer": "upper",
@@ -190,16 +190,16 @@
           "maxPathHeightGradient": {
             "name": "lighthouse reverse",
             "lane": 0,
-            "ratio": 0.5116,
-            "verticalDelta": -0.0281,
+            "ratio": 1.1873,
+            "verticalDelta": -0.0653,
             "sampleDistance": 0.055,
             "from": {
-              "x": 30.8938,
-              "z": -22.362
+              "x": 42.2139,
+              "z": -3.5991
             },
             "to": {
-              "x": 30.8838,
-              "z": -22.3025
+              "x": 42.1748,
+              "z": -3.5527
             }
           }
         },
@@ -211,11 +211,11 @@
             "status": "passed",
             "report": {
               "lane": -0.65,
-              "distance": 37.4094,
-              "steps": 690,
+              "distance": 25.6192,
+              "steps": 479,
               "end": {
-                "x": 33.7,
-                "z": -31.9988
+                "x": 50.6829,
+                "z": -32.5111
               },
               "initialLayer": "upper",
               "finalLayer": "upper",
@@ -223,16 +223,16 @@
               "maxPathHeightGradient": {
                 "name": "lighthouse lane -0.65 forward",
                 "lane": -0.65,
-                "ratio": 0.6203,
-                "verticalDelta": 0.0341,
+                "ratio": 0.6252,
+                "verticalDelta": 0.0344,
                 "sampleDistance": 0.055,
                 "from": {
-                  "x": 31.4412,
-                  "z": -21.6957
+                  "x": 48.3262,
+                  "z": -20.5204
                 },
                 "to": {
-                  "x": 31.4511,
-                  "z": -21.7554
+                  "x": 48.3382,
+                  "z": -20.589
                 }
               }
             }
@@ -242,11 +242,11 @@
             "status": "passed",
             "report": {
               "lane": -0.65,
-              "distance": 36.8107,
-              "steps": 683,
+              "distance": 24.8621,
+              "steps": 458,
               "end": {
-                "x": 19.4916,
-                "z": 3.5793
+                "x": 41.5553,
+                "z": -3.9128
               },
               "initialLayer": "upper",
               "finalLayer": "upper",
@@ -254,16 +254,16 @@
               "maxPathHeightGradient": {
                 "name": "lighthouse lane -0.65 reverse",
                 "lane": -0.65,
-                "ratio": 0.6144,
-                "verticalDelta": -0.0338,
+                "ratio": 1.7416,
+                "verticalDelta": -0.0958,
                 "sampleDistance": 0.055,
                 "from": {
-                  "x": 30.1726,
-                  "z": -21.9862
+                  "x": 41.8602,
+                  "z": -4.2755
                 },
                 "to": {
-                  "x": 30.1627,
-                  "z": -21.927
+                  "x": 41.8211,
+                  "z": -4.2292
                 }
               }
             }
@@ -273,11 +273,11 @@
             "status": "passed",
             "report": {
               "lane": 0.65,
-              "distance": 36.7973,
-              "steps": 683,
+              "distance": 24.8629,
+              "steps": 458,
               "end": {
-                "x": 32.3998,
-                "z": -31.985
+                "x": 49.3829,
+                "z": -32.4737
               },
               "initialLayer": "upper",
               "finalLayer": "upper",
@@ -285,16 +285,16 @@
               "maxPathHeightGradient": {
                 "name": "lighthouse lane 0.65 forward",
                 "lane": 0.65,
-                "ratio": 0.6158,
-                "verticalDelta": 0.0289,
-                "sampleDistance": 0.047,
+                "ratio": 1.718,
+                "verticalDelta": 0.0945,
+                "sampleDistance": 0.055,
                 "from": {
-                  "x": 30.1641,
-                  "z": -21.9356
+                  "x": 41.8167,
+                  "z": -4.2238
                 },
                 "to": {
-                  "x": 30.1726,
-                  "z": -21.9862
+                  "x": 41.8557,
+                  "z": -4.2702
                 }
               }
             }
@@ -304,11 +304,11 @@
             "status": "passed",
             "report": {
               "lane": 0.65,
-              "distance": 37.4127,
-              "steps": 690,
+              "distance": 25.6192,
+              "steps": 479,
               "end": {
-                "x": 20.5078,
-                "z": 4.4224
+                "x": 42.4362,
+                "z": -2.7666
               },
               "initialLayer": "upper",
               "finalLayer": "upper",
@@ -316,28 +316,28 @@
               "maxPathHeightGradient": {
                 "name": "lighthouse lane 0.65 reverse",
                 "lane": 0.65,
-                "ratio": 0.6192,
-                "verticalDelta": -0.0341,
+                "ratio": 0.6244,
+                "verticalDelta": -0.0343,
                 "sampleDistance": 0.055,
                 "from": {
-                  "x": 30.8384,
-                  "z": -18.0656
+                  "x": 48.3352,
+                  "z": -20.5715
                 },
                 "to": {
-                  "x": 30.8285,
-                  "z": -18.0062
+                  "x": 48.3231,
+                  "z": -20.503
                 }
               }
             }
           }
         ],
         "endpoint": {
-          "x": 33.05,
-          "z": -32
+          "x": 50.0329,
+          "z": -32.5017
         },
         "townLookout": [
-          33.1,
-          -35.5
+          50.02,
+          -36.5863
         ],
         "lookoutSupport": {
           "radius": 77.7521,
@@ -349,8 +349,8 @@
           "distance": 3.119,
           "steps": 58,
           "end": {
-            "x": 33.0997,
-            "z": -35.4793
+            "x": 50.0201,
+            "z": -36.562
           },
           "initialLayer": "upper",
           "finalLayer": "upper",
@@ -358,16 +358,16 @@
           "maxPathHeightGradient": {
             "name": "upper terrace to town-facing lookout",
             "lane": 0,
-            "ratio": 1.5103,
+            "ratio": 1.5101,
             "verticalDelta": -0.0831,
             "sampleDistance": 0.055,
             "from": {
-              "x": 33.0989,
-              "z": -35.4179
+              "x": 50.0204,
+              "z": -36.4904
             },
             "to": {
-              "x": 33.0997,
-              "z": -35.4793
+              "x": 50.0201,
+              "z": -36.562
             }
           }
         }
@@ -378,65 +378,65 @@
       "detail": {
         "bypass": [
           [
-            24.5,
-            -10
+            40.8464,
+            -7.6988
           ],
           [
-            27,
-            -8
+            43.195,
+            -5.2299
           ],
           [
-            30,
-            -7
+            46.1062,
+            -3.7882
           ],
           [
-            33,
-            -11
+            49.3911,
+            -8.0616
           ],
           [
-            35,
-            -13
+            51.5134,
+            -10.1986
           ],
           [
-            37,
-            -15
+            53.6232,
+            -12.3751
           ],
           [
-            37,
-            -19
+            53.8072,
+            -17.112
           ]
         ],
         "forward": {
           "blockedAt": {
-            "x": 29.5521,
-            "z": -7.1471
+            "x": 45.8249,
+            "z": -3.9259
           },
           "target": {
-            "x": 29.75,
-            "z": -7.0833
+            "x": 45.8636,
+            "z": -3.9084
           },
           "layer": "upper",
-          "distance": 5.7968,
-          "steps": 113,
+          "distance": 5.9618,
+          "steps": 116,
           "softBlocks": 1,
           "contact": {
             "buildingId": "peninsula-cliff",
-            "segmentId": "peninsula-cliff:11:lower"
+            "segmentId": "peninsula-cliff:11:upper"
           }
         },
         "reverse": {
           "blockedAt": {
-            "x": 32.0528,
-            "z": -9.5564
+            "x": 48.3412,
+            "z": -6.5074
           },
           "target": {
-            "x": 31.9412,
-            "z": -9.5882
+            "x": 48.2317,
+            "z": -6.5533
           },
           "layer": "upper",
-          "distance": 10.4495,
-          "steps": 201,
-          "softBlocks": 10,
+          "distance": 10.4446,
+          "steps": 200,
+          "softBlocks": 9,
           "contact": {
             "buildingId": "peninsula-cliff",
             "segmentId": "peninsula-cliff:8:lower"
@@ -450,22 +450,22 @@
         "gap": 0,
         "forward": {
           "lane": 0,
-          "distance": 39.7714,
-          "steps": 742,
+          "distance": 40.8036,
+          "steps": 757,
           "end": {
-            "x": 38,
-            "z": -20
+            "x": 54.8441,
+            "z": -18.2867
           },
           "initialLayer": "upper",
           "finalLayer": "tunnel",
           "transitions": [
             {
               "at": {
-                "x": 24.165,
+                "x": 41.165,
                 "z": -29
               },
               "before": {
-                "x": 24.11,
+                "x": 41.11,
                 "z": -29
               },
               "from": "upper",
@@ -481,21 +481,21 @@
             "verticalDelta": -0.025,
             "sampleDistance": 0.055,
             "from": {
-              "x": 24.11,
+              "x": 41.11,
               "z": -29
             },
             "to": {
-              "x": 24.165,
+              "x": 41.165,
               "z": -29
             }
           }
         },
         "reverse": {
           "lane": 0,
-          "distance": 39.7679,
-          "steps": 741,
+          "distance": 40.849,
+          "steps": 758,
           "end": {
-            "x": 20,
+            "x": 33,
             "z": -16
           },
           "initialLayer": "tunnel",
@@ -503,11 +503,11 @@
           "transitions": [
             {
               "at": {
-                "x": 24.1133,
+                "x": 41.1133,
                 "z": -29
               },
               "before": {
-                "x": 24.1683,
+                "x": 41.1683,
                 "z": -29
               },
               "from": "tunnel",
@@ -523,11 +523,11 @@
             "verticalDelta": 0.025,
             "sampleDistance": 0.055,
             "from": {
-              "x": 24.1683,
+              "x": 41.1683,
               "z": -29
             },
             "to": {
-              "x": 24.1133,
+              "x": 41.1133,
               "z": -29
             }
           }
@@ -537,23 +537,23 @@
         "laneReports": [
           {
             "lane": -0.67,
-            "distance": 19.1307,
-            "steps": 352,
+            "distance": 20.219,
+            "steps": 373,
             "end": {
-              "x": 27.9788,
-              "z": -28.276
+              "x": 44.9778,
+              "z": -28.174
             },
             "initialLayer": "upper",
             "finalLayer": "tunnel",
             "transitions": [
               {
                 "at": {
-                  "x": 24.0438,
-                  "z": -28.2841
+                  "x": 41.0315,
+                  "z": -28.1939
                 },
                 "before": {
-                  "x": 23.9903,
-                  "z": -28.2706
+                  "x": 40.9779,
+                  "z": -28.1792
                 },
                 "from": "upper",
                 "to": "tunnel",
@@ -568,34 +568,34 @@
               "verticalDelta": -0.025,
               "sampleDistance": 0.055,
               "from": {
-                "x": 23.9903,
-                "z": -28.2706
+                "x": 40.9779,
+                "z": -28.1792
               },
               "to": {
-                "x": 24.0438,
-                "z": -28.2841
+                "x": 41.0315,
+                "z": -28.1939
               }
             }
           },
           {
             "lane": -0.67,
-            "distance": 21.6148,
-            "steps": 396,
+            "distance": 22.6688,
+            "steps": 416,
             "end": {
-              "x": 19.3551,
-              "z": -15.8114
+              "x": 32.3477,
+              "z": -15.8298
             },
             "initialLayer": "tunnel",
             "finalLayer": "upper",
             "transitions": [
               {
                 "at": {
-                  "x": 24.7257,
-                  "z": -29.7082
+                  "x": 41.7247,
+                  "z": -29.797
                 },
                 "before": {
-                  "x": 24.7807,
-                  "z": -29.7087
+                  "x": 41.7797,
+                  "z": -29.7977
                 },
                 "from": "tunnel",
                 "to": "upper",
@@ -610,34 +610,34 @@
               "verticalDelta": 0.026,
               "sampleDistance": 0.055,
               "from": {
-                "x": 24.7807,
-                "z": -29.7087
+                "x": 41.7797,
+                "z": -29.7977
               },
               "to": {
-                "x": 24.7257,
-                "z": -29.7082
+                "x": 41.7247,
+                "z": -29.797
               }
             }
           },
           {
             "lane": 0.67,
-            "distance": 21.6087,
-            "steps": 396,
+            "distance": 22.6694,
+            "steps": 416,
             "end": {
-              "x": 27.9954,
-              "z": -29.724
+              "x": 44.9944,
+              "z": -29.8261
             },
             "initialLayer": "upper",
             "finalLayer": "tunnel",
             "transitions": [
               {
                 "at": {
-                  "x": 24.7937,
-                  "z": -29.7088
+                  "x": 41.7927,
+                  "z": -29.7978
                 },
                 "before": {
-                  "x": 24.7387,
-                  "z": -29.7083
+                  "x": 41.7377,
+                  "z": -29.7971
                 },
                 "from": "upper",
                 "to": "tunnel",
@@ -652,34 +652,34 @@
               "verticalDelta": -0.026,
               "sampleDistance": 0.055,
               "from": {
-                "x": 24.7387,
-                "z": -29.7083
+                "x": 41.7377,
+                "z": -29.7971
               },
               "to": {
-                "x": 24.7937,
-                "z": -29.7088
+                "x": 41.7927,
+                "z": -29.7978
               }
             }
           },
           {
             "lane": 0.67,
-            "distance": 19.1431,
-            "steps": 352,
+            "distance": 20.2062,
+            "steps": 373,
             "end": {
-              "x": 20.6437,
-              "z": -16.1933
+              "x": 33.6468,
+              "z": -16.1949
             },
             "initialLayer": "tunnel",
             "finalLayer": "upper",
             "transitions": [
               {
                 "at": {
-                  "x": 23.9981,
-                  "z": -28.2726
+                  "x": 40.997,
+                  "z": -28.1844
                 },
                 "before": {
-                  "x": 24.0516,
-                  "z": -28.2861
+                  "x": 41.0506,
+                  "z": -28.1991
                 },
                 "from": "tunnel",
                 "to": "upper",
@@ -694,22 +694,22 @@
               "verticalDelta": 0.025,
               "sampleDistance": 0.055,
               "from": {
-                "x": 24.0516,
-                "z": -28.2861
+                "x": 41.0506,
+                "z": -28.1991
               },
               "to": {
-                "x": 23.9981,
-                "z": -28.2726
+                "x": 40.997,
+                "z": -28.1844
               }
             }
           },
           {
             "lane": -1.17,
-            "distance": 17.2082,
-            "steps": 319,
+            "distance": 17.2085,
+            "steps": 318,
             "end": {
-              "x": 36.8301,
-              "z": -20.0309
+              "x": 53.6749,
+              "z": -18.3445
             },
             "initialLayer": "tunnel",
             "finalLayer": "tunnel",
@@ -721,12 +721,12 @@
               "verticalDelta": 0,
               "sampleDistance": 0,
               "from": {
-                "x": 28.4801,
-                "z": -27.8454
+                "x": 45.4776,
+                "z": -27.6798
               },
               "to": {
-                "x": 28.4801,
-                "z": -27.8454
+                "x": 45.4776,
+                "z": -27.6798
               }
             }
           },
@@ -735,8 +735,8 @@
             "distance": 21.6102,
             "steps": 397,
             "end": {
-              "x": 27.5134,
-              "z": -30.1483
+              "x": 44.511,
+              "z": -30.3075
             },
             "initialLayer": "tunnel",
             "finalLayer": "tunnel",
@@ -748,22 +748,22 @@
               "verticalDelta": 0,
               "sampleDistance": 0,
               "from": {
-                "x": 39.17,
-                "z": -19.9904
+                "x": 56.0116,
+                "z": -18.1658
               },
               "to": {
-                "x": 39.17,
-                "z": -19.9904
+                "x": 56.0116,
+                "z": -18.1658
               }
             }
           },
           {
             "lane": 0,
-            "distance": 19.3877,
-            "steps": 361,
+            "distance": 19.3493,
+            "steps": 359,
             "end": {
-              "x": 38,
-              "z": -20
+              "x": 54.8441,
+              "z": -18.2867
             },
             "initialLayer": "tunnel",
             "finalLayer": "tunnel",
@@ -775,21 +775,21 @@
               "verticalDelta": 0,
               "sampleDistance": 0,
               "from": {
-                "x": 28,
+                "x": 45,
                 "z": -29
               },
               "to": {
-                "x": 28,
+                "x": 45,
                 "z": -29
               }
             }
           },
           {
             "lane": 0,
-            "distance": 19.3839,
+            "distance": 19.3935,
             "steps": 360,
             "end": {
-              "x": 28,
+              "x": 45,
               "z": -29
             },
             "initialLayer": "tunnel",
@@ -802,12 +802,12 @@
               "verticalDelta": 0,
               "sampleDistance": 0,
               "from": {
-                "x": 38,
-                "z": -20
+                "x": 54.843,
+                "z": -18.2435
               },
               "to": {
-                "x": 38,
-                "z": -20
+                "x": 54.843,
+                "z": -18.2435
               }
             }
           },
@@ -816,8 +816,8 @@
             "distance": 21.5854,
             "steps": 397,
             "end": {
-              "x": 39.17,
-              "z": -20.0191
+              "x": 56.0126,
+              "z": -18.2004
             },
             "initialLayer": "tunnel",
             "finalLayer": "tunnel",
@@ -829,22 +829,22 @@
               "verticalDelta": 0,
               "sampleDistance": 0,
               "from": {
-                "x": 27.5134,
-                "z": -30.1483
+                "x": 44.511,
+                "z": -30.3075
               },
               "to": {
-                "x": 27.5134,
-                "z": -30.1483
+                "x": 44.511,
+                "z": -30.3075
               }
             }
           },
           {
             "lane": 1.17,
-            "distance": 17.2122,
-            "steps": 319,
+            "distance": 17.2121,
+            "steps": 318,
             "end": {
-              "x": 28.4801,
-              "z": -27.8454
+              "x": 45.4776,
+              "z": -27.6798
             },
             "initialLayer": "tunnel",
             "finalLayer": "tunnel",
@@ -856,12 +856,12 @@
               "verticalDelta": 0,
               "sampleDistance": 0,
               "from": {
-                "x": 36.83,
-                "z": -20.0094
+                "x": 53.6742,
+                "z": -18.3188
               },
               "to": {
-                "x": 36.83,
-                "z": -20.0094
+                "x": 53.6742,
+                "z": -18.3188
               }
             }
           }
@@ -872,91 +872,91 @@
       "name": "cove is dry sand with an actual eastward ocean opening",
       "detail": {
         "cove": {
-          "x": 37,
-          "z": -11
+          "x": 53.3793,
+          "z": -7.6562
         },
         "color": "#D7BB85",
         "caveToCove": {
           "lane": 0,
-          "distance": 7.8704,
+          "distance": 7.8726,
           "steps": 147,
           "end": {
-            "x": 37,
-            "z": -11
+            "x": 53.3793,
+            "z": -7.6562
           },
           "initialLayer": "tunnel",
           "finalLayer": "upper",
           "transitions": [
             {
               "at": {
-                "x": 37.734,
-                "z": -17.6051
+                "x": 54.4536,
+                "z": -15.4254
               },
               "before": {
-                "x": 37.741,
-                "z": -17.6681
+                "x": 54.4639,
+                "z": -15.4997
               },
               "from": "tunnel",
               "to": "upper",
               "fromRadius": 71.9,
-              "toRadius": 71.9376
+              "toRadius": 71.9712
             }
           ],
           "maxPathHeightGradient": {
             "name": "cave exit to cove",
             "lane": 0,
-            "ratio": 0.6841,
-            "verticalDelta": 0.0376,
+            "ratio": 1.2948,
+            "verticalDelta": 0.0712,
             "sampleDistance": 0.055,
             "from": {
-              "x": 37.741,
-              "z": -17.6681
+              "x": 54.4639,
+              "z": -15.4997
             },
             "to": {
-              "x": 37.734,
-              "z": -17.6051
+              "x": 54.4536,
+              "z": -15.4254
             }
           }
         },
         "coveToCave": {
           "lane": 0,
-          "distance": 7.8704,
+          "distance": 7.8726,
           "steps": 147,
           "end": {
-            "x": 38,
-            "z": -20
+            "x": 54.843,
+            "z": -18.2435
           },
           "initialLayer": "upper",
           "finalLayer": "tunnel",
           "transitions": [
             {
               "at": {
-                "x": 37.7424,
-                "z": -17.6806
+                "x": 54.4558,
+                "z": -15.4413
               },
               "before": {
-                "x": 37.7354,
-                "z": -17.6176
+                "x": 54.4455,
+                "z": -15.367
               },
               "from": "upper",
               "to": "tunnel",
-              "fromRadius": 71.9517,
+              "fromRadius": 71.9171,
               "toRadius": 71.9
             }
           ],
           "maxPathHeightGradient": {
             "name": "cove to cave exit",
             "lane": 0,
-            "ratio": 0.9404,
-            "verticalDelta": -0.0517,
+            "ratio": 0.3645,
+            "verticalDelta": 0.02,
             "sampleDistance": 0.055,
             "from": {
-              "x": 37.7354,
-              "z": -17.6176
+              "x": 53.3793,
+              "z": -7.6562
             },
             "to": {
-              "x": 37.7424,
-              "z": -17.6806
+              "x": 53.3896,
+              "z": -7.7294
             }
           }
         },
@@ -965,8 +965,8 @@
           "index": 10,
           "distance": 0.605,
           "chart": {
-            "x": 37.605,
-            "z": -11
+            "x": 53.9824,
+            "z": -7.5913
           }
         }
       }
@@ -975,8 +975,8 @@
       "name": "normal follow camera stays clear in four cardinal cove views",
       "detail": {
         "cove": {
-          "x": 37,
-          "z": -11
+          "x": 53.3793,
+          "z": -7.6562
         },
         "minimum": 4.8,
         "views": [
@@ -984,104 +984,104 @@
             "heading": "north",
             "available": 4.8,
             "target": {
-              "x": 37.541,
-              "z": -11
+              "x": 53.9203,
+              "z": -7.6562
             },
             "cameraDirection": {
-              "x": 0.2605,
-              "y": -0.9084,
-              "z": 0.3271
+              "x": 0.3579,
+              "y": -0.8847,
+              "z": 0.2987
             }
           },
           {
             "heading": "east",
             "available": 4.8,
             "target": {
-              "x": 36.9989,
-              "z": -11.6212
+              "x": 53.3775,
+              "z": -8.3897
             },
             "cameraDirection": {
-              "x": -0.4779,
-              "y": -0.1337,
-              "z": 0.8682
+              "x": -0.2675,
+              "y": -0.1023,
+              "z": 0.9581
             }
           },
           {
             "heading": "south",
             "available": 4.8,
             "target": {
-              "x": 36.459,
-              "z": -11
+              "x": 52.8383,
+              "z": -7.6562
             },
             "cameraDirection": {
-              "x": 0.2605,
-              "y": 0.7679,
-              "z": 0.5852
+              "x": 0.3579,
+              "y": 0.8017,
+              "z": 0.4787
             }
           },
           {
             "heading": "west",
             "available": 4.8,
             "target": {
-              "x": 36.9989,
-              "z": -10.3788
+              "x": 53.3775,
+              "z": -6.9226
             },
             "cameraDirection": {
-              "x": 0.999,
-              "y": -0.0068,
-              "z": 0.0442
+              "x": 0.9833,
+              "y": 0.0193,
+              "z": -0.1807
             }
           }
         ],
-        "registeredPortalTriangles": 1740
+        "registeredPortalTriangles": 1812
       }
     },
     {
       "name": "lighthouse foot is fully supported by its local foundation",
       "detail": {
         "tower": {
-          "x": 36,
-          "z": -32,
+          "x": 52.9827,
+          "z": -32.5522,
           "elevation": 6.2,
           "height": 12
         },
         "samples": [
           {
             "chart": {
-              "x": 36,
-              "z": -32
+              "x": 52.9827,
+              "z": -32.5522
             },
             "blend": 1,
             "mismatch": 0
           },
           {
             "chart": {
-              "x": 34.0537,
-              "z": -29.8293
+              "x": 51.0524,
+              "z": -29.9727
             },
             "blend": 1,
             "mismatch": 0
           },
           {
             "chart": {
-              "x": 34.0537,
-              "z": -34.1707
+              "x": 51.0028,
+              "z": -35.0632
             },
             "blend": 1,
             "mismatch": 0
           },
           {
             "chart": {
-              "x": 37.918,
-              "z": -29.7647
+              "x": 54.9168,
+              "z": -29.9144
             },
             "blend": 1,
             "mismatch": 0
           },
           {
             "chart": {
-              "x": 37.918,
-              "z": -34.2353
+              "x": 54.8648,
+              "z": -35.2584
             },
             "blend": 1,
             "mismatch": 0
@@ -1092,11 +1092,11 @@
     {
       "name": "the upper headland stays within the declared lighthouse foundation envelope",
       "detail": {
-        "samples": 12383,
+        "samples": 18415,
         "highest": {
           "height": 6.2,
-          "x": 32.2,
-          "z": -25.4,
+          "x": 49.6,
+          "z": -26.8,
           "blend": 1
         },
         "maximumHeight": 6.75
@@ -1106,18 +1106,18 @@
   "failures": [],
   "reports": {
     "maximumPathHeightGradient": {
-      "name": "upper terrace to town-facing lookout",
-      "lane": 0,
-      "ratio": 1.510337968876353,
-      "verticalDelta": -0.08306858828819941,
+      "name": "lighthouse lane -0.65 reverse",
+      "lane": -0.65,
+      "ratio": 1.7415844063283326,
+      "verticalDelta": -0.0957871423480583,
       "sampleDistance": 0.055,
       "from": {
-        "x": 33.0989,
-        "z": -35.4179
+        "x": 41.8602,
+        "z": -4.2755
       },
       "to": {
-        "x": 33.0997,
-        "z": -35.4793
+        "x": 41.8211,
+        "z": -4.2292
       }
     },
     "pathHeightGradients": [
@@ -1128,12 +1128,12 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 34,
-          "z": -32
+          "x": 50.9829,
+          "z": -32.5176
         },
         "to": {
-          "x": 34,
-          "z": -32
+          "x": 50.9829,
+          "z": -32.5176
         }
       },
       {
@@ -1143,117 +1143,117 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 37,
-          "z": -30
+          "x": 53.9981,
+          "z": -30.1902
         },
         "to": {
-          "x": 37,
-          "z": -30
+          "x": 53.9981,
+          "z": -30.1902
         }
       },
       {
         "name": "lighthouse forward",
         "lane": 0,
-        "ratio": 0.5104020281216683,
-        "verticalDelta": 0.028072111546691758,
+        "ratio": 1.2512457234149368,
+        "verticalDelta": 0.06881851478782153,
         "sampleDistance": 0.055,
         "from": {
-          "x": 30.8866,
-          "z": -22.319
+          "x": 42.1868,
+          "z": -3.5669
         },
         "to": {
-          "x": 30.8965,
-          "z": -22.3784
+          "x": 42.2259,
+          "z": -3.6134
         }
       },
       {
         "name": "lighthouse reverse",
         "lane": 0,
-        "ratio": 0.5115668041435645,
-        "verticalDelta": -0.02813617422789605,
+        "ratio": 1.1872525034195034,
+        "verticalDelta": -0.06529888768807268,
         "sampleDistance": 0.055,
         "from": {
-          "x": 30.8938,
-          "z": -22.362
+          "x": 42.2139,
+          "z": -3.5991
         },
         "to": {
-          "x": 30.8838,
-          "z": -22.3025
+          "x": 42.1748,
+          "z": -3.5527
         }
       },
       {
         "name": "lighthouse lane -0.65 forward",
         "lane": -0.65,
-        "ratio": 0.6203132004062891,
-        "verticalDelta": 0.0341172260223459,
+        "ratio": 0.6251728544878109,
+        "verticalDelta": 0.0343845069968296,
         "sampleDistance": 0.055,
         "from": {
-          "x": 31.4412,
-          "z": -21.6957
+          "x": 48.3262,
+          "z": -20.5204
         },
         "to": {
-          "x": 31.4511,
-          "z": -21.7554
+          "x": 48.3382,
+          "z": -20.589
         }
       },
       {
         "name": "lighthouse lane -0.65 reverse",
         "lane": -0.65,
-        "ratio": 0.6143877237010739,
-        "verticalDelta": -0.033791324803559064,
+        "ratio": 1.7415844063283326,
+        "verticalDelta": -0.0957871423480583,
         "sampleDistance": 0.055,
         "from": {
-          "x": 30.1726,
-          "z": -21.9862
+          "x": 41.8602,
+          "z": -4.2755
         },
         "to": {
-          "x": 30.1627,
-          "z": -21.927
+          "x": 41.8211,
+          "z": -4.2292
         }
       },
       {
         "name": "lighthouse lane 0.65 forward",
         "lane": 0.65,
-        "ratio": 0.6157823102118392,
-        "verticalDelta": 0.028930648698789696,
-        "sampleDistance": 0.04698194186324885,
+        "ratio": 1.717971576460348,
+        "verticalDelta": 0.09448843670531915,
+        "sampleDistance": 0.055,
         "from": {
-          "x": 30.1641,
-          "z": -21.9356
+          "x": 41.8167,
+          "z": -4.2238
         },
         "to": {
-          "x": 30.1726,
-          "z": -21.9862
+          "x": 41.8557,
+          "z": -4.2702
         }
       },
       {
         "name": "lighthouse lane 0.65 reverse",
         "lane": 0.65,
-        "ratio": 0.6192298816795404,
-        "verticalDelta": -0.03405764349237472,
+        "ratio": 0.6244002697289116,
+        "verticalDelta": -0.03434201483509014,
         "sampleDistance": 0.055,
         "from": {
-          "x": 30.8384,
-          "z": -18.0656
+          "x": 48.3352,
+          "z": -20.5715
         },
         "to": {
-          "x": 30.8285,
-          "z": -18.0062
+          "x": 48.3231,
+          "z": -20.503
         }
       },
       {
         "name": "upper terrace to town-facing lookout",
         "lane": 0,
-        "ratio": 1.510337968876353,
-        "verticalDelta": -0.08306858828819941,
+        "ratio": 1.5100668505787305,
+        "verticalDelta": -0.08305367678183018,
         "sampleDistance": 0.055,
         "from": {
-          "x": 33.0989,
-          "z": -35.4179
+          "x": 50.0204,
+          "z": -36.4904
         },
         "to": {
-          "x": 33.0997,
-          "z": -35.4793
+          "x": 50.0201,
+          "z": -36.562
         }
       },
       {
@@ -1263,11 +1263,11 @@
         "verticalDelta": -0.024999964191806612,
         "sampleDistance": 0.055,
         "from": {
-          "x": 24.11,
+          "x": 41.11,
           "z": -29
         },
         "to": {
-          "x": 24.165,
+          "x": 41.165,
           "z": -29
         }
       },
@@ -1278,11 +1278,11 @@
         "verticalDelta": 0.024999970810966943,
         "sampleDistance": 0.055,
         "from": {
-          "x": 24.1683,
+          "x": 41.1683,
           "z": -29
         },
         "to": {
-          "x": 24.1133,
+          "x": 41.1133,
           "z": -29
         }
       },
@@ -1293,12 +1293,12 @@
         "verticalDelta": -0.024999999999991473,
         "sampleDistance": 0.055,
         "from": {
-          "x": 23.9903,
-          "z": -28.2706
+          "x": 40.9779,
+          "z": -28.1792
         },
         "to": {
-          "x": 24.0438,
-          "z": -28.2841
+          "x": 41.0315,
+          "z": -28.1939
         }
       },
       {
@@ -1308,27 +1308,27 @@
         "verticalDelta": 0.02602584764943572,
         "sampleDistance": 0.055,
         "from": {
-          "x": 24.7807,
-          "z": -29.7087
+          "x": 41.7797,
+          "z": -29.7977
         },
         "to": {
-          "x": 24.7257,
-          "z": -29.7082
+          "x": 41.7247,
+          "z": -29.797
         }
       },
       {
         "name": "beach-east lane 0.67 forward",
         "lane": 0.6699999999999999,
-        "ratio": 0.47228909978219813,
-        "verticalDelta": -0.025975900488020898,
+        "ratio": 0.4722890997827149,
+        "verticalDelta": -0.02597590048804932,
         "sampleDistance": 0.055,
         "from": {
-          "x": 24.7387,
-          "z": -29.7083
+          "x": 41.7377,
+          "z": -29.7971
         },
         "to": {
-          "x": 24.7937,
-          "z": -29.7088
+          "x": 41.7927,
+          "z": -29.7978
         }
       },
       {
@@ -1338,12 +1338,12 @@
         "verticalDelta": 0.024999999999991473,
         "sampleDistance": 0.055,
         "from": {
-          "x": 24.0516,
-          "z": -28.2861
+          "x": 41.0506,
+          "z": -28.1991
         },
         "to": {
-          "x": 23.9981,
-          "z": -28.2726
+          "x": 40.997,
+          "z": -28.1844
         }
       },
       {
@@ -1353,12 +1353,12 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 28.4801,
-          "z": -27.8454
+          "x": 45.4776,
+          "z": -27.6798
         },
         "to": {
-          "x": 28.4801,
-          "z": -27.8454
+          "x": 45.4776,
+          "z": -27.6798
         }
       },
       {
@@ -1368,12 +1368,12 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 39.17,
-          "z": -19.9904
+          "x": 56.0116,
+          "z": -18.1658
         },
         "to": {
-          "x": 39.17,
-          "z": -19.9904
+          "x": 56.0116,
+          "z": -18.1658
         }
       },
       {
@@ -1383,11 +1383,11 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 28,
+          "x": 45,
           "z": -29
         },
         "to": {
-          "x": 28,
+          "x": 45,
           "z": -29
         }
       },
@@ -1398,12 +1398,12 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 38,
-          "z": -20
+          "x": 54.843,
+          "z": -18.2435
         },
         "to": {
-          "x": 38,
-          "z": -20
+          "x": 54.843,
+          "z": -18.2435
         }
       },
       {
@@ -1413,12 +1413,12 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 27.5134,
-          "z": -30.1483
+          "x": 44.511,
+          "z": -30.3075
         },
         "to": {
-          "x": 27.5134,
-          "z": -30.1483
+          "x": 44.511,
+          "z": -30.3075
         }
       },
       {
@@ -1428,42 +1428,42 @@
         "verticalDelta": 0,
         "sampleDistance": 0,
         "from": {
-          "x": 36.83,
-          "z": -20.0094
+          "x": 53.6742,
+          "z": -18.3188
         },
         "to": {
-          "x": 36.83,
-          "z": -20.0094
+          "x": 53.6742,
+          "z": -18.3188
         }
       },
       {
         "name": "cave exit to cove",
         "lane": 0,
-        "ratio": 0.6841354273955279,
-        "verticalDelta": 0.037627448506754035,
+        "ratio": 1.294781670432082,
+        "verticalDelta": 0.07121299187376451,
         "sampleDistance": 0.055,
         "from": {
-          "x": 37.741,
-          "z": -17.6681
+          "x": 54.4639,
+          "z": -15.4997
         },
         "to": {
-          "x": 37.734,
-          "z": -17.6051
+          "x": 54.4536,
+          "z": -15.4254
         }
       },
       {
         "name": "cove to cave exit",
         "lane": 0,
-        "ratio": 0.9403529915113557,
-        "verticalDelta": -0.051719414533124564,
+        "ratio": 0.364519017770962,
+        "verticalDelta": 0.02004854597740291,
         "sampleDistance": 0.055,
         "from": {
-          "x": 37.7354,
-          "z": -17.6176
+          "x": 53.3793,
+          "z": -7.6562
         },
         "to": {
-          "x": 37.7424,
-          "z": -17.6806
+          "x": 53.3896,
+          "z": -7.7294
         }
       }
     ]

@@ -11,6 +11,7 @@ import type { InteriorId, TownBuilding } from '../../data/town-types';
 import type { WorldRuntimeState } from '../../runtime/types';
 import { addTownInterior } from '../interiors/rooms';
 import { addTownBuilding } from './buildings';
+import { motelPylon } from './facades';
 import { block, createKitContext, physicalSign, type KitContext, type PhysicalSign } from './context';
 import { TOWN_PALETTE as P } from './materials';
 import { SignAtlas } from './SignAtlas';
@@ -68,12 +69,13 @@ function buildTown(extraSigns: PhysicalSign[]) {
     apron(context, building);
   }
   for(const batch of [context.structure,context.details,context.plants,context.glow])batch.setSurfaceFrame(null);
+  motelPylon(context);
   townSigns(context);
   context.signs.push(...extraSigns);
   return {
     structure: context.structure.finish(), details: context.details.finish(),
     plants: context.plants.finish(), glow: context.glow.finish(),
-    roofs: Array.from(context.roofs, ([id, batch]) => ({ id, geometry: batch.finish() })), signs: context.signs,
+    roofs: Array.from(context.roofs, ([id, batch]) => ({ id, geometry: batch.finish() })), signs: context.signs, neon: context.neon,
   };
 }
 const NO_SIGNS: PhysicalSign[] = [];
@@ -107,5 +109,6 @@ export default function TownBuildings({ runtime, extraSigns = NO_SIGNS }: { runt
     <mesh geometry={town.glow}><meshStandardMaterial vertexColors roughness={0.23} emissive={P.amber} emissiveIntensity={0.48} onBeforeCompile={tintEmission} customProgramCacheKey={glowProgram} /></mesh>
     {town.roofs.map(roof => <mesh key={roof.id} geometry={roof.geometry} castShadow receiveShadow ref={mesh => { if (mesh) roofMeshes.current.set(roof.id, mesh); else roofMeshes.current.delete(roof.id); }}><meshStandardMaterial vertexColors roughness={0.84} /></mesh>)}
     <SignAtlas signs={town.signs} hiddenInterior={hiddenInterior} />
+    <SignAtlas signs={town.neon} glow={1.35} />
   </group>;
 }

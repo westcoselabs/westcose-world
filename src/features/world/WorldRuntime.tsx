@@ -15,7 +15,7 @@ import { clearWorldInput } from './runtime/input';
 import { supportAt } from './runtime/planet-collision';
 import { HOTSPOTS } from './data/hotspots';
 import { areaAt, coordinatesAt, PLANET_FIXTURES } from './data/planet';
-import { MAP_VIEW_SCALE, mapCoordinates, mapDirection, mapFrame } from './data/world-map';
+import { MAP_RADIUS, MAP_VIEW_SCALE, mapCoordinates, mapDirection, mapFrame } from './data/world-map';
 import Modal from './ui/Modal';
 import SnowboardController from './snowboard/SnowboardController';
 import SnowboardHud from './snowboard/ui/SnowboardHud';
@@ -306,6 +306,14 @@ export default function WorldRuntime() {
         spawnAt(f.x, f.z, f.facing);
       },
       spawnAt,
+      /** Fixed review camera from chart (x, z, height) toward chart (x, z, height); null restores the follow camera. */
+      setCamera: (view: { from: [number, number, number]; to: [number, number, number] } | null) => {
+        if (!view) { r.debugCamera = null; return; }
+        const position = mapDirection(view.from[0], view.from[1]).multiplyScalar(MAP_RADIUS + view.from[2]);
+        const target = mapDirection(view.to[0], view.to[1]).multiplyScalar(MAP_RADIUS + view.to[2]);
+        const up = mapDirection(view.from[0], view.from[1]);
+        r.debugCamera = { position: { x: position.x, y: position.y, z: position.z }, target: { x: target.x, y: target.y, z: target.z }, up: { x: up.x, y: up.y, z: up.z } };
+      },
       spawnTunnelAt: (x: number, z: number, facing: MapFacing = 'east') => spawnAt(x, z, facing, 'tunnel'),
       snowboard: {
         getState: () => {

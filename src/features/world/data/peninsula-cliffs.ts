@@ -1,5 +1,6 @@
 import { MathUtils, Matrix4, Quaternion, Vector3 } from 'three';
 import { PENINSULA_INNER_CLIFF } from './peninsula-layout';
+import { placeVector } from './peninsula-frame';
 import { MAP_RADIUS, mapDirection, mapPoint } from './world-map';
 
 type CliffAnchor = readonly [x: number, z: number, top: number, backWidth: number, frontWidth: number];
@@ -57,6 +58,8 @@ const rings: CliffRing[] = anchors.map(([x, z, authoredTop, backWidth, frontWidt
   const backTop = project(-backWidth * .7, top + .045 * alternate);
   return { up, tangent, lower: [backFoot, frontFoot, frontShelf, backShelf], upper: [backShelf, frontShelf, frontTop, backTop] };
 });
+// Authored rim, carried rigidly onto the placed peninsula (shared vertices move once).
+for (const ring of rings) for (const vector of new Set([ring.up, ring.tangent, ...ring.lower, ...ring.upper])) placeVector(vector);
 
 const quads = [[0, 1, 2, 3], [4, 7, 6, 5], [0, 4, 5, 1], [1, 5, 6, 2], [2, 6, 7, 3], [3, 7, 4, 0]] as const;
 

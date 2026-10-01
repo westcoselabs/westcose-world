@@ -9,8 +9,9 @@ export const MAP_SUMMIT={x:0,z:228,height:78} as const;
 /** Camera, sky and sun distances were tuned for the original 36m globe and 42m envelope. */
 export const MAP_VIEW_SCALE=(MAP_RADIUS+MAP_MAX_HEIGHT)/78;
 export const MAP_CIRCUMFERENCE=2*Math.PI*MAP_RADIUS;
-// Keep the coordinate seam in open ocean between the pier and the new rear shore.
-export const MAP_SEAM=380;
+// Keep the coordinate seam in open ocean between the pier and the new rear shore. It sits
+// well beyond the long pier head, so nothing a visitor reaches straddles the chart cut.
+export const MAP_SEAM=360;
 export const MAP_MIN_Z=MAP_SEAM-MAP_CIRCUMFERENCE;
 export function canonicalMapZ(z:number){return ((z-MAP_MIN_Z)%MAP_CIRCUMFERENCE+MAP_CIRCUMFERENCE)%MAP_CIRCUMFERENCE+MAP_MIN_Z;}
 export function mapDirection(x:number,z:number){const a=x/MAP_RADIUS,b=z/MAP_RADIUS;return new Vector3(Math.sin(a),Math.cos(a)*Math.sin(b),Math.cos(a)*Math.cos(b));}

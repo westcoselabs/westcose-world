@@ -1,7 +1,12 @@
 import { expect, test, type Page } from '@playwright/test';
 import { Vector3 } from 'three';
 import { MAP_RADIUS, mapDirection } from '../src/features/world/data/world-map';
-import { PENINSULA_CAVE, PENINSULA_COVE, PENINSULA_LIGHTHOUSE } from '../src/features/world/data/peninsula-layout';
+import { PENINSULA_CAVE, PLACED_CAVE_POINTS, PLACED_COVE, PLACED_LIGHTHOUSE } from '../src/features/world/data/peninsula-layout';
+import { peninsulaWorldPoint } from '../src/features/world/data/peninsula-frame';
+
+// The approved peninsula stands where it is placed, east of the Cliff Cul-de-sac.
+const PENINSULA_LIGHTHOUSE = PLACED_LIGHTHOUSE, PENINSULA_COVE = PLACED_COVE;
+const CAVE_FIXTURE = peninsulaWorldPoint(PENINSULA_CAVE.points[0][0] - 2, PENINSULA_CAVE.points[0][1]);
 
 type Vec = { x: number; y: number; z: number };
 type SupportLayer = 'upper' | 'tunnel';
@@ -107,9 +112,9 @@ test('native controls traverse the lower lighthouse underpass without dropping t
   // The fixture begins two metres before the public mouth. Every later point
   // is reached using right-drag plus W, through the real player controller.
   await page.evaluate(() => (window as unknown as DebugWindow).__WESTCOSE_WORLD__.spawn('cave'));
-  await expect.poll(async () => chartDistance(await state(page), PENINSULA_CAVE.points[0][0] - 2, PENINSULA_CAVE.points[0][1])).toBeLessThan(.35);
+  await expect.poll(async () => chartDistance(await state(page), CAVE_FIXTURE.x, CAVE_FIXTURE.z)).toBeLessThan(.35);
 
-  const controls = PENINSULA_CAVE.points.slice(1);
+  const controls = PLACED_CAVE_POINTS.slice(1);
   for (const [index, point] of controls.entries()) {
     const current = await walkTo(page, point[0], point[1], `underpass control ${index + 1}`);
     expectDryGround(current, 'tunnel');

@@ -103,9 +103,22 @@ function roomBase(c: KitContext, b: TownBuilding, m: THREE.Matrix4) {
 }
 
 function studio(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: WallSegment[]) {
-  const back = -b.depth / 2 + 0.24;
-  physicalSign(c, m, 'PROJECTS / PROCESS', CONTENT.world.eyebrow, [0, 3.14, back + 0.023], b.width - 1.05, 0.63);
-  for (let i = 0; i < 3; i++) framedStudy(c, m, [(i - 1) * 1.55, 1.77, back + 0.07], 1.18, 1.68, i);
+  const back = -b.depth / 2 + 0.24, w = b.width, d = b.depth, h = b.height;
+  // The feature wall: the programme title and three large works under track lights.
+  physicalSign(c, m, 'PROJECTS / PROCESS', CONTENT.world.eyebrow, [0, 4.45, back + 0.023], 6.2, 0.8);
+  for (let i = 0; i < 3; i++) framedStudy(c, m, [(i - 1) * 2.7, 2.35, back + 0.07], 1.9, 2.4, i);
+  for (let i = 0; i < 3; i++) {
+    block(c.details, m, [(i - 1) * 2.7, h - .55, back + 1.1], [.08, .08, 2.1], P.graphite);
+    block(c.glow, m, [(i - 1) * 2.7, h - .62, back + 1.75], [.18, .06, .18], P.warmGlass);
+  }
+  // Hung works along both long walls, a hanging rail above each.
+  for (const side of [-1, 1]) {
+    const wall = frame(m, [side * (w / 2 - 0.24), 0, 0], -side * Math.PI / 2);
+    block(c.details, wall, [0, 3.65, .03], [d - 1.4, .05, .05], P.steel);
+    for (let i = 0; i < 3; i++) framedStudy(c, wall, [(i - 1) * 2.55, 2.05, 0.06], 1.35, 1.7, (i + (side > 0 ? 1 : 2)) % 3);
+  }
+  // A long skylight glow down the centre of the hall.
+  block(c.glow, m, [0, h - .3, 0], [1.1, .05, d - 2.4], '#E9E1CC');
   const work = furniture[0]; table(c, m, work, P.paleTimber);
   const [x, , z] = work.center;
   block(c.details, m, [x, 0.97, z + 0.55], [0.82, 0.08, 0.95], P.paper, [0, 0.09, 0]);
@@ -116,21 +129,33 @@ function studio(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: Wal
   for (const end of [-1, 1]) tube(c.details, m, [x - 0.18 + end * 0.324, 1.055, z + 0.61], 0.027, 0.007, P.paleTimber, [0, 0, Math.PI / 2]);
   tube(c.details, m, [x - 0.28, 1.005, z - 1.08], 0.082, 0.21, P.rust);
   for (let i = 0; i < 4; i++) tube(c.details, m, [x - 0.31 + i * 0.021, 1.16 + (i % 2) * 0.025, z - 1.08], 0.008, 0.22, i % 2 ? P.graphite : P.paleTimber, [0, 0, (i - 1.5) * 0.08]);
-  const shelfFrame = frame(m, [b.width / 2 - 0.39, 0, -0.8], -Math.PI / 2);
-  shelf(c, shelfFrame, [0, 0, 0], 2.65, 1.95, 0.38, true);
-  physicalSign(c, shelfFrame, 'WORK IN PROGRESS', undefined, [0, 2.29, 0.03], 2.4, 0.4, [0, 0, 0], true);
   // Flat files under the shared worktable are contained inside its collider.
   for (let j = 0; j < 4; j++) block(c.details, m, [x, 0.35 + j * 0.1, z], [0.89, 0.065, 0.74], j % 2 ? P.concrete : P.paper);
+  // The flat-file chest opposite, with prints laid out on top.
+  const files = furniture[1], [fx, , fz] = files.center, [fw, fh, fd] = files.size;
+  block(c.details, m, [fx, fh / 2, fz], [fw, fh, fd], P.steel);
+  for (let j = 0; j < 5; j++) block(c.details, m, [fx + fw / 2 + .005, .14 + j * .16, fz], [.012, .1, fd - .2], P.graphite);
+  for (let j = 0; j < 3; j++) block(c.details, m, [fx, fh + .012 + j * .004, fz - fd / 3 + j * fd / 3], [fw * .7, .008, fd * .26], [P.paper, P.rust, P.blue][j], [0, .1 * j, 0]);
+  // On the plinth: a model of the little planet itself.
+  const plinth = furniture[2], [px, , pz] = plinth.center, [pw, ph, pd] = plinth.size;
+  block(c.details, m, [px, ph / 2, pz], [pw, ph, pd], P.bone);
+  c.details.shape(UNIT_LEAF, m, [px, ph + .42, pz], [.42, .42, .42], '#3F6371');
+  c.plants.shape(UNIT_LEAF, m, [px - .08, ph + .62, pz + .05], [.2, .16, .2], P.leaf, [.3, 0, .2]);
+  block(c.details, m, [px + .1, ph + .78, pz], [.05, .14, .05], P.bone);
+  physicalSign(c, m, 'WESTCOSE WORLD', 'A SMALL PLANET / WORK IN PROGRESS', [px, ph - .26, pz + pd / 2 + .006], pw * .86, .34, [0, 0, 0], true);
+  const shelfFrame = frame(m, [-(w / 2 - 0.39), 0, d / 2 - 1.9], Math.PI / 2);
+  shelf(c, shelfFrame, [0, 0, 0], 1.6, 1.95, 0.38, true);
 }
 
 function workshop(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: WallSegment[]) {
-  const back = -b.depth / 2 + 0.26;
-  physicalSign(c, m, 'MADE HERE', CONTENT.services.eyebrow, [0, 3.22, back + 0.02], 4.9, 0.63, [0, 0, 0], true);
-  block(c.details, m, [0, 1.87, back + 0.04], [b.width - 1.3, 1.72, 0.09], P.timber);
-  for (let x = 0; x < 13; x++) for (let y = 0; y < 4; y++) block(c.details, m, [(x - 6) * 0.44, 1.24 + y * 0.4, back + 0.091], [0.026, 0.026, 0.015], P.graphite);
-  for (let i = 0; i < 7; i++) {
-    const x = (i - 3) * 0.72;
-    const tool = frame(m, [x, 1.93, back + 0.16]);
+  const back = -b.depth / 2 + 0.26, w = b.width, h = b.height;
+  physicalSign(c, m, 'MADE HERE', CONTENT.services.eyebrow, [0, 4.1, back + 0.02], 5.6, 0.72, [0, 0, 0], true);
+  block(c.details, m, [0, 2.05, back + 0.04], [w - 1.3, 2.3, 0.09], P.timber);
+  const holes = Math.floor((w - 1.6) / .44);
+  for (let x = 0; x < holes; x++) for (let y = 0; y < 5; y++) block(c.details, m, [(x - (holes - 1) / 2) * 0.44, 1.14 + y * 0.42, back + 0.091], [0.026, 0.026, 0.015], P.graphite);
+  for (let i = 0; i < 11; i++) {
+    const x = (i - 5) * 0.78;
+    const tool = frame(m, [x, 2.1, back + 0.16]);
     if (i % 3 === 0) {
       block(c.details, tool, [0, -0.05, 0], [0.061, 0.57, 0.075], P.timber, [0, 0, 0.06]);
       block(c.details, tool, [0, 0.22, 0], [0.31, 0.12, 0.095], P.steel);
@@ -147,8 +172,15 @@ function workshop(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: W
       block(c.details, tool, [0, 0.297, 0], [0.05, 0.043, 0.023], P.steel);
     }
   }
+  // Pendant work lights down the hall.
+  for (let i = 0; i < 3; i++) {
+    const z = back + 1.6 + i * 2.6;
+    tube(c.details, m, [0, h - .9, z], .015, 1.6, P.graphite);
+    block(c.details, m, [0, h - 1.75, z], [1.4, .1, .22], P.graphite);
+    block(c.glow, m, [0, h - 1.81, z], [1.3, .03, .16], P.warmGlass);
+  }
   furniture.forEach((work, i) => {
-    table(c, m, work, P.timber);
+    table(c, m, work, i === 2 ? P.paleTimber : P.timber);
     const [x, , z] = work.center;
     if (i === 0) {
       block(c.details, m, [x, 1.04, z + 0.87], [0.41, 0.27, 0.5], P.blue);
@@ -157,12 +189,21 @@ function workshop(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: W
       tube(c.details, m, [x, 1.04, z + 1.16], 0.021, 0.63, P.graphite, [0, 0, Math.PI / 2]);
       for (const side of [-1, 1]) tube(c.details, m, [x + side * 0.29, 1.04, z + 1.16], 0.052, 0.07, P.steel, [0, 0, Math.PI / 2]);
       deskLamp(c, m, [x - 0.22, 0.9, z - 1.18], Math.PI / 2, P.rust);
-    } else {
+    } else if (i === 1) {
       for (let j = 0; j < 4; j++) block(c.details, m, [x, 0.96 + j * 0.06, z - 0.1], [0.82, 0.05, 1.76 - j * 0.06], j % 2 ? P.paleTimber : P.timber);
+    } else {
+      // A surfboard on the shaping island, mid-repair.
+      block(c.details, m, [x, 1.0, z], [2.1, .07, .5], '#E8DCC2', [0, 0, .02]);
+      block(c.details, m, [x - .2, 1.04, z], [1.2, .012, .08], P.rust);
+      monitor(c, m, [x + .9, .9, z - .2], .5, -.2, true);
     }
-    block(c.details, m, [x, 0.42, z - 0.66], [0.73, 0.4, 0.78], P.steel);
-    block(c.details, m, [x, 0.47, z - 0.25], [0.27, 0.055, 0.035], P.bone);
+    if (i < 2) {
+      block(c.details, m, [x, 0.42, z - 0.66], [0.73, 0.4, 0.78], P.steel);
+      block(c.details, m, [x, 0.47, z - 0.25], [0.27, 0.055, 0.035], P.bone);
+    }
   });
+  // Merch shelving either side of the doors.
+  for (const side of [-1, 1]) shelf(c, frame(m, [side * (w / 2 - .4), 0, b.depth / 2 - 1.6], -side * Math.PI / 2), [0, 0, 0], 1.7, 1.9, .36, false);
 }
 
 function arcadeCabinet(c: KitContext, m: THREE.Matrix4, title: string, main: boolean) {
@@ -199,20 +240,33 @@ function arcade(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: Wal
 
 function about(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: WallSegment[]) {
   const back = -b.depth / 2 + 0.25;
-  physicalSign(c, m, 'WESTCOSE', CONTENT.about.eyebrow, [0, 3.3, back + 0.027], 4.8, 0.67);
-  shelf(c, m, [b.width * 0.19, 0, back + 0.22], b.width * 0.47, 2.37, 0.35, true);
-  const work = furniture[0]; table(c, m, work, P.timber);
-  const [x, , z] = work.center;
-  monitor(c, m, [x - 0.2, 0.85, z - 0.24], 0.78, 0, true);
-  block(c.details, m, [x + 0.5, 0.93, z + 0.23], [0.39, 0.065, 0.51], P.paper, [0, 0.12, 0]);
-  mug(c, m, [x + 0.54, 0.85, z - 0.14]);
-  deskLamp(c, m, [x - 0.6, 0.85, z + 0.39], 0, P.blue);
-  for (let i = 0; i < 2; i++) block(c.details, m, [x + 0.47, 0.875 + i * 0.035, z + 0.26], [0.41, 0.025, 0.51], i ? P.paper : P.rust, [0, 0.12, 0]);
-  const side = frame(m, [b.width / 2 - 0.24, 0, 0], -Math.PI / 2);
-  framedStudy(c, side, [0.49, 1.92, 0.06], 1.08, 1.49, 2);
-  physicalSign(c, side, 'A PLACE FOR IDEAS', undefined, [-1.12, 2.12, 0.052], 1.24, 0.55);
-  block(c.details, m, [b.width / 2 - 0.71, 0.24, 1.14], [0.62, 0.48, 0.62], P.timber);
-  c.plants.shape(UNIT_LEAF, m, [b.width / 2 - 0.71, 0.99, 1.14], [0.48, 0.87, 0.43], P.leaf, [0.05, 1.2, 0.1]);
+  physicalSign(c, m, 'WEST COSE MOTEL', CONTENT.about.eyebrow, [0, 3.4, back + 0.027], 4.6, 0.62);
+  // The reception counter, its bell and register, and the key board behind it.
+  const desk = furniture[0], [x, , z] = desk.center, [dw, dh, dd] = desk.size;
+  block(c.details, m, [x, dh / 2 - .03, z], [dw, dh - .06, dd], P.timber);
+  block(c.details, m, [x, dh - .03, z], [dw + .1, .06, dd + .1], P.paleTimber);
+  for (let i = 0; i < 5; i++) block(c.details, m, [x - dw / 2 + .22 + i * .44, dh * .5, z + dd / 2 + .005], [.3, .6, .012], i % 2 ? '#C2653E' : P.paleTimber);
+  monitor(c, m, [x - .5, dh, z - .1], .52, 0, true);
+  tube(c.details, m, [x + .35, dh + .04, z + .12], .07, .06, '#C9A66B');
+  mug(c, m, [x + .75, dh, z - .05]);
+  const keys = frame(m, [x, 0, back + .05]);
+  block(c.details, keys, [0, 1.75, 0], [1.4, .8, .05], P.timber);
+  for (let i = 0; i < 12; i++) {
+    block(c.details, keys, [(i % 6 - 2.5) * .21, 1.95 - Math.floor(i / 6) * .36, .04], [.04, .04, .04], P.steel);
+    block(c.details, keys, [(i % 6 - 2.5) * .21, 1.84 - Math.floor(i / 6) * .36, .05], [.06, .14, .02], i % 3 ? '#C2653E' : P.bone);
+  }
+  // A lounge corner: sofa, low table, a plant and a framed print.
+  const sofa = furniture[1], [sx, , sz] = sofa.center, [sw, sh, sd] = sofa.size;
+  block(c.details, m, [sx, sh * .32, sz], [sw, sh * .5, sd], '#5B7E8A');
+  block(c.details, m, [sx, sh * .7, sz - sd / 2 + .1], [sw, sh * .55, .2], '#4C6E79');
+  for (const side of [-1, 1]) block(c.details, m, [sx + side * (sw / 2 - .08), sh * .5, sz], [.16, sh * .45, sd], '#4C6E79');
+  block(c.details, m, [sx, .22, sz + 1.05], [1.0, .06, .55], P.paleTimber);
+  for (const lx of [-.42, .42]) block(c.details, m, [sx + lx, .1, sz + 1.05], [.05, .2, .45], P.graphite);
+  framedStudy(c, m, [sx, 1.9, back + .06], 1.1, .8, 2);
+  block(c.details, m, [b.width / 2 - 0.55, 0.24, 0.9], [0.62, 0.48, 0.62], P.timber);
+  c.plants.shape(UNIT_LEAF, m, [b.width / 2 - 0.55, 0.99, 0.9], [0.48, 0.87, 0.43], P.leaf, [0.05, 1.2, 0.1]);
+  const side = frame(m, [-(b.width / 2 - 0.24), 0, 0], Math.PI / 2);
+  physicalSign(c, side, 'A PLACE FOR IDEAS', undefined, [0, 2.12, 0.052], 1.6, 0.55);
 }
 
 function lab(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: WallSegment[]) {
@@ -262,13 +316,18 @@ function skateshop(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: 
   // The board wall behind the counter: three rows of decks on a timber backing.
   physicalSign(c, m, 'TAKE A BOARD', 'DECKS / COMPLETES / FREE TO RIDE', [0, 3.72, back + .04], 4.6, .62, [0, 0, 0], true);
   block(c.details, m, [0, 2.05, back + .03], [b.width - .9, 2.7, .06], P.timber);
+  const decks = Math.floor((b.width - 1.4) / .74);
   for (let row = 0; row < 3; row++) {
     block(c.details, m, [0, 1.12 + row * .86 + .38, back + .08], [b.width - 1.1, .05, .06], P.steel);
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < decks; i++) {
       const [color, stripe] = DECK_GRAPHICS[(i + row * 4) % DECK_GRAPHICS.length];
-      hangingDeck(c, m, [(i - 4) * .74, 1.12 + row * .86, back + .16], color, stripe);
+      hangingDeck(c, m, [(i - (decks - 1) / 2) * .74, 1.12 + row * .86, back + .16], color, stripe);
     }
   }
+  // A mini quarter-pipe display in the front corner, and a sticker-covered pillar.
+  const ramp = frame(m, [b.width / 2 - 1.4, 0, b.depth / 2 - 1.5], -Math.PI / 2);
+  for (let k = 0; k < 6; k++) block(c.details, ramp, [0, .1 + k * .1, -.45 + k * k * .03], [1.4, .06, .22], P.paleTimber, [-k * .22, 0, 0]);
+  block(c.details, ramp, [0, .62, -.02], [1.45, .05, .05], P.steel);
   // Counter: a timber front, a pale top, the register and a few wheels and stickers.
   const counter = furniture[0], [cx, , cz] = counter.center, [cw, ch, cd] = counter.size;
   block(c.details, m, [cx, ch / 2 - .03, cz], [cw, ch - .06, cd], P.graphite);

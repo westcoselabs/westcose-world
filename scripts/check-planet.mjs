@@ -44,6 +44,9 @@ try {
   const downtown = require(path.join(output, 'data/downtown-layout.js'));
   const skatepark = require(path.join(output, 'data/skatepark-layout.js'));
   const peninsula = require(path.join(output, 'data/peninsula-layout.js'));
+  const placement = require(path.join(output, 'data/peninsula-frame.js'));
+  /** A direction on the placed peninsula, from its approved authoring chart. */
+  const placedDirection = (x, z) => map.mapDirection(x, z).applyQuaternion(placement.PENINSULA_ROTATION);
   const cave = require(path.join(output, 'data/peninsula-cave.js'));
   const surfaces = require(path.join(output, 'data/town-surfaces.js'));
   const { makeTerrain, makeTerrainPartition, TERRAIN_REGIONS } = require(path.join(output, 'scene/TownLandscape.js'));
@@ -276,7 +279,7 @@ try {
     }
   });
 
-  await test('mountain v4 is a 78m snowboard mountain on the radius-72 globe, with the pier unchanged', () => {
+  await test('mountain v4 is a 78m snowboard mountain on the radius-72 globe, beyond the long pier', () => {
     close(map.MAP_RADIUS, 72);
     close(map.MAP_SUMMIT.height, 78);
     close(mountain.MOUNTAIN_LAYOUT.summit.x, map.MAP_SUMMIT.x);
@@ -289,9 +292,10 @@ try {
       assert.ok(surfaces.groundSurfaceAt(x, map.MAP_SEAM - 1).height < map.MAP_SEA_LEVEL, 'Seam side A is open ocean');
       assert.ok(surfaces.groundSurfaceAt(x, map.MAP_MIN_Z + 1).height < map.MAP_SEA_LEVEL, 'Seam side B is open ocean');
     }
-    close(pierTip[1], -47); close(pier.PIER_LAYOUT.entrance[1], -30);
-    close(pier.PIER_LAYOUT.head.center[1], -43); close(pier.PIER_LAYOUT.head.depth, 8);
-    assert.ok(pierTip[1] > map.MAP_MIN_Z + 3, 'The longer head remains clear of the chart cut');
+    // The long pier: a 26m walkway past the surf to a 12m by 11m fishing head.
+    close(pierTip[1], -67); close(pier.PIER_LAYOUT.entrance[1], -30);
+    close(pier.PIER_LAYOUT.head.center[1], -61.5); close(pier.PIER_LAYOUT.head.depth, 11);
+    assert.ok(pierTip[1] > map.MAP_MIN_Z + 15, 'The long head stays well clear of the chart cut');
     for (const x of [-12, 12]) {
       assert.ok(surfaces.naturalTerrainAt(x, -29) > map.MAP_SEA_LEVEL, 'The beach extends well beyond the boardwalk');
       assert.ok(surfaces.naturalTerrainAt(x, -39) < map.MAP_SEA_LEVEL, 'The open ocean remains beyond the wider beach');
@@ -331,7 +335,10 @@ try {
   });
 
   await test('the unchanged lighthouse stands at the outer tip above the tunnel, with a clear upper route destination', () => {
-    assert.deepEqual(landmarks.LIGHTHOUSE, peninsula.PENINSULA_LIGHTHOUSE);
+    // The approved tower is authored where it was approved and placed with its peninsula.
+    assert.deepEqual(peninsula.PENINSULA_LIGHTHOUSE, { x: 36, z: -32, elevation: 6.2, height: 12 });
+    assert.deepEqual(landmarks.LIGHTHOUSE, peninsula.PLACED_LIGHTHOUSE);
+    assert.ok(landmarks.LIGHTHOUSE.x > 50, 'The lighthouse cape now stands east of the Cliff Cul-de-sac');
     close(landmarks.LIGHTHOUSE.height, 12); close(landmarks.LIGHTHOUSE.elevation, 6.2);
     const { x, z, elevation, height } = landmarks.LIGHTHOUSE;
     close(surfaces.groundSurfaceAt(x, z).height, elevation, 1e-8);
@@ -352,14 +359,17 @@ try {
 
   await test('the hidden beach has a low continuous opening into the actual ocean', () => {
     const { x: startX, z } = peninsula.PENINSULA_COVE;
-    assert.deepEqual(town.COASTAL_RADIO, { x: startX, z }, 'Discovery follows the real relocated cove');
+    assert.deepEqual(town.COASTAL_RADIO, peninsula.PLACED_COVE, 'Discovery follows the real placed cove');
+    // Walk the cove's own east axis, in its authoring frame.
+    const world = x => placement.peninsulaWorldPoint(x, z);
     for (let x = startX; x <= startX + 10; x += .125) {
-      const height = surfaces.groundSurfaceAt(x, z).height;
+      const point = world(x), height = surfaces.groundSurfaceAt(point.x, point.z).height;
       assert.ok(height <= .2, `The cove outlet must not become a landlocked basin or a trail dam: x=${x}, height=${height}`);
     }
-    assert.ok(surfaces.naturalTerrainAt(startX, z) > map.MAP_SEA_LEVEL, 'The inner cove remains a dry beach');
-    assert.ok(surfaces.groundSurfaceAt(startX + 10, z).height < map.MAP_SEA_LEVEL, 'The opening reaches actual sea, not just a painted sand patch');
-    assert.equal(planet.waterAt(map.mapDirection(startX + 10, z)), true);
+    const inner = world(startX), outer = world(startX + 10);
+    assert.ok(surfaces.naturalTerrainAt(inner.x, inner.z) > map.MAP_SEA_LEVEL, 'The inner cove remains a dry beach');
+    assert.ok(surfaces.groundSurfaceAt(outer.x, outer.z).height < map.MAP_SEA_LEVEL, 'The opening reaches actual sea, not just a painted sand patch');
+    assert.equal(planet.waterAt(map.mapDirection(outer.x, outer.z)), true);
   });
 
   await test('rendered terrain has outward faces, finite normals and covers every land point', () => {
@@ -531,8 +541,8 @@ try {
     }
     assert.ok(checkedVertices >= 400, 'Validate the complete wedge kit, not a representative proxy');
     const middle = peninsula.PENINSULA_CAVE.points[1], first = peninsula.PENINSULA_CAVE.points[0], last = peninsula.PENINSULA_CAVE.points[2];
-    const up = map.mapDirection(...middle);
-    const forward = map.mapDirection(...last).sub(map.mapDirection(...first)).projectOnPlane(up).normalize();
+    const up = placedDirection(...middle);
+    const forward = placedDirection(...last).sub(placedDirection(...first)).projectOnPlane(up).normalize();
     const across = forward.clone().cross(up).normalize();
     let direction = up.clone();
     let lower = collision.supportAt(direction,{layer:'tunnel'});
@@ -566,7 +576,8 @@ try {
       const stats = cave.cavePortalCollisionStats();
       assert.equal(stats.registered, true);
       assert.ok(stats.triangles > 100, 'The detailed portal collar registry must contain the rendered mesh, not a proxy');
-      const frame = map.mapFrame(27, -29);
+      const authoredFrame = map.mapFrame(27, -29), rotation = placement.PENINSULA_ROTATION;
+      const frame = { up: authoredFrame.up.clone().applyQuaternion(rotation), east: authoredFrame.east.clone().applyQuaternion(rotation), north: authoredFrame.north.clone().applyQuaternion(rotation) };
       const forward = frame.east.clone().multiplyScalar(Math.cos(5 * Math.PI / 16)).addScaledVector(frame.north, Math.sin(5 * Math.PI / 16)).normalize();
       const right = forward.clone().cross(frame.up).normalize();
       const origin = frame.up.clone().multiplyScalar(planet.RADIUS + 1.3).addScaledVector(right, .55);
@@ -587,8 +598,8 @@ try {
       const a = points[index - 1], b = points[index];
       const count = Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / .12);
       for (let sample = 0; sample <= count; sample++) {
-        const t = sample / count, up = map.mapDirection(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t);
-        const forward = map.mapDirection(...b).sub(map.mapDirection(...a)).projectOnPlane(up).normalize();
+        const t = sample / count, up = placedDirection(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t);
+        const forward = placedDirection(...b).sub(placedDirection(...a)).projectOnPlane(up).normalize();
         sections.push({ up, across: forward.clone().cross(up).normalize() });
       }
     }

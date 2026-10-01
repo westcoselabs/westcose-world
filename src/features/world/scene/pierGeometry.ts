@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { PIER_LAYOUT, PIER_SUPPORT_ROWS, pierFrameAt, pierHeightAtZ, pierPointAt, pierWidthAtZ } from '../data/pier-layout';
 import { PIER_RAIL_POSTS, PIER_RAIL_SEGMENTS } from '../data/pier-rails';
+import { PIER_SHACK } from '../data/town-props';
 import { SceneryBatch } from './sceneryGeometry';
 import { SURFACE } from './materials/surface-types';
 import type { PhysicalSign } from './kit/context';
@@ -115,7 +116,10 @@ export function buildPierGeometry(){
   const headCenter = PIER_LAYOUT.head.center[1];
   const headTip = headCenter - PIER_LAYOUT.head.depth / 2;
   const headSide = PIER_LAYOUT.head.width / 2 - .72;
-  bench(-headSide, headCenter, Math.PI / 2); bench(headSide, headCenter, -Math.PI / 2);
+  bench(-headSide, headCenter - 1.4, Math.PI / 2); bench(-headSide, headCenter + 2.2, Math.PI / 2); bench(headSide, headTip + 2.2, -Math.PI / 2);
+  // Benches along the walkway rails look out over the surf.
+  const railSide = PIER_LAYOUT.width / 2 - .42;
+  for (const [u, z] of [[-railSide, -36.2], [railSide, -42.8], [-railSide, -49.4]] as const) bench(u, z, u < 0 ? Math.PI / 2 : -Math.PI / 2);
 
   const lantern=(u:number,z:number)=>{
     const m=pierFrameAt(u,z).matrix;
@@ -126,9 +130,31 @@ export function buildPierGeometry(){
     for(const x of [-.13,.13])for(const z of [-.13,.13])cub(m,[x,2.1,z],[.025,.34,.025],IRON,[0,0,0],SURFACE.metal);
   };
   const deckSide = PIER_LAYOUT.width / 2 - .15;
-  lantern(-deckSide, (PIER_LAYOUT.entrance[1] + PIER_LAYOUT.neckEnd[1]) / 2);
-  lantern(deckSide, PIER_LAYOUT.neckEnd[1] + .55);
+  // Lanterns every 6.5m down the walkway, alternating sides, then round the head.
+  for (let i = 0; i < 6; i++) lantern(i % 2 ? deckSide : -deckSide, -19.5 - i * 6.5);
+  lantern(-deckSide, PIER_LAYOUT.neckEnd[1] + .55); lantern(deckSide, PIER_LAYOUT.neckEnd[1] + .55);
   lantern(-headSide, headTip + .62); lantern(headSide, headTip + .62);
+  lantern(-headSide, headCenter + .4);
+
+  // The bait shack: weathered boards, a serving hatch toward the walkway, a lean-to roof.
+  const shackAcross = (PIER_SHACK.across0 + PIER_SHACK.across1) / 2, shackZ = (PIER_SHACK.z0 + PIER_SHACK.z1) / 2;
+  const sw = PIER_SHACK.across1 - PIER_SHACK.across0, sd = PIER_SHACK.z1 - PIER_SHACK.z0, sh = PIER_SHACK.height;
+  const shack = pierFrameAt(shackAcross, shackZ).matrix;
+  cub(shack, [0, sh / 2, 0], [sw, sh, sd], '#7C929A', [0, 0, 0], SURFACE.plaster);
+  for (let i = 0; i < Math.round(sh / .22); i++) cub(shack, [-sw / 2 - .012, .11 + i * .22, 0], [.02, .04, sd], '#6A7F87');
+  cub(shack, [-sw / 2 - .02, 1.45, -.2], [.06, .95, 1.8], '#2E3E44');
+  cub(shack, [-sw / 2 - .25, 1.0, -.2], [.5, .07, 1.9], '#A18D73');
+  cub(shack, [-sw / 2 - .55, 2.05, -.2], [1.1, .06, 2.2], BEAM, [0, 0, -.18]);
+  glow.shape(box, shack, [-sw / 2 - .03, 1.45, -.2], [.02, .8, 1.65], '#E5B574');
+  cub(shack, [0, sh + .12, 0], [sw + .5, .12, sd + .5], '#4F5A5C', [0, 0, .08]);
+  cub(shack, [-sw / 2 + .2, sh - .45, sd / 2 + .03], [.9, .06, .03], BONE);
+  for (let i = 0; i < 3; i++) post(shack, [sw / 2 - .4 - i * .45, .5, sd / 2 + .25], .2, .02, ['#C4553F', '#E9DFCE', '#D9A441'][i], SURFACE.plaster);
+  signs.push({title:'BAIT & TACKLE',subtitle:'SNACKS / COLD DRINKS / RODS FOR HIRE',width:sd - .3,height:.42,matrix:shack.clone().multiply(new THREE.Matrix4().makeTranslation(-sw / 2 - .04, sh - .38, 0)).multiply(new THREE.Matrix4().makeRotationY(-Math.PI/2)),background:'#2E3E44',dark:true});
+  // A coin-op viewer at the seaward rail.
+  const viewer = pierFrameAt(-2.6, headTip + .7).matrix;
+  post(viewer, [0, .55, 0], .06, 1.1, IRON, SURFACE.metal);
+  cub(viewer, [0, 1.2, 0], [.32, .28, .46], '#5B7E8A', [0, 0, 0], SURFACE.metal);
+  for (const side of [-1, 1]) post(viewer, [side * .08, 1.24, .28], .06, .16, IRON, SURFACE.metal);
 
   // Fishing hardware, tied rope and a life ring make the head read as a public pier.
   for(const side of [-1,1]){

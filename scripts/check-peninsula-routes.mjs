@@ -75,6 +75,12 @@ try {
   const map = require(path.join(output, 'data/world-map.js'));
   const town = require(path.join(output, 'data/town-layout.js'));
   const layout = require(path.join(output, 'data/peninsula-layout.js'));
+  // The approved peninsula is authored where it was approved and placed rigidly east of the
+  // cul-de-sacs; world-space checks use its placed points, authored-topology checks the originals.
+  const placement = require(path.join(output, 'data/peninsula-frame.js'));
+  const downtown = require(path.join(output, 'data/downtown-layout.js'));
+  const place = ([x, z]) => { const point = placement.peninsulaWorldPoint(x, z); return [point.x, point.z]; };
+  const placedTower = layout.PLACED_LIGHTHOUSE, placedCove = layout.PLACED_COVE, placedCave = layout.PLACED_CAVE_POINTS;
   const cliffs = require(path.join(output, 'data/peninsula-cliffs.js'));
   const caveGeometry = require(path.join(output, 'data/peninsula-cave.js'));
   const landmarks = require(path.join(output, 'data/concept-landmarks.js'));
@@ -292,19 +298,19 @@ try {
     const expected=[[28,-29],[31,-30.5],[34,-32],[36,-32],[37,-30],[38,-26],[38,-22],[38,-20]];
     assert.deepEqual(layout.PENINSULA_CAVE.points,expected);
     assert.equal(layout.PENINSULA_CAVE.floor,-.1);assert.equal(layout.PENINSULA_CAVE.width,3.4);assert.equal(layout.PENINSULA_CAVE.clearance,4);
-    const tower=layout.PENINSULA_LIGHTHOUSE,frame=map.mapFrame(tower.x,tower.z,tower.elevation);
+    const tower=placedTower,frame=map.mapFrame(tower.x,tower.z,tower.elevation);
     const lowPoint=map.mapPoint(tower.x,tower.z,layout.PENINSULA_CAVE.floor);
     const local=lowPoint.clone().sub(frame.position).applyQuaternion(frame.quaternion.clone().invert());
     assert.ok(Math.hypot(local.x,local.z)<1e-8,'Tunnel must pass below the actual tower center, not beside its footprint');
     assert.ok(-local.y>layout.PENINSULA_CAVE.clearance+.5,'A real roof/foundation thickness must separate low tunnel from upper surface');
     const exit=expected.at(-1),cove=layout.PENINSULA_COVE;
-    assert.ok(exit[1]>tower.z&&cove.z>tower.z,'Tunnel exit and cove must lie behind/north of the outer-tip lighthouse');
+    assert.ok(exit[1]>layout.PENINSULA_LIGHTHOUSE.z&&cove.z>layout.PENINSULA_LIGHTHOUSE.z,'Tunnel exit and cove must lie behind/north of the outer-tip lighthouse');
     return {tower,tunnelUnderFootprint:local,exit,cove,placementCriterion:'Reference topology, never town-camera framing'};
   });
 
   check('all peninsula surface and collider samples remain finite', () => {
     let samples = 0;
-    for (let x = 15; x <= 48.00001; x += .5) for (let z = -47; z <= 30.00001; z += .5) {
+    for (let x = 28; x <= 70.00001; x += .5) for (let z = -56; z <= 44.00001; z += .5) {
       const direction = map.mapDirection(x, z);
       const natural = surfaces.naturalTerrainAt(x, z);
       const substrate = surfaces.substrateAt(x, z);
@@ -325,7 +331,7 @@ try {
   });
 
   check('one map direction supports two real levels under the lighthouse without implicit switching', () => {
-    const tower=layout.PENINSULA_LIGHTHOUSE, cave=layout.PENINSULA_CAVE;
+    const tower=placedTower, cave=layout.PENINSULA_CAVE;
     const up=map.mapDirection(tower.x,tower.z);
     const upper=supportSnapshot(up,{layer:'upper'}),lower=supportSnapshot(up,{layer:'tunnel'});
     assert.equal(upper.layer,'upper');assert.equal(lower.layer,'tunnel');
@@ -337,7 +343,7 @@ try {
     assert.equal(supportSnapshot(up,{layer:'tunnel',footRadius:upper.radius}).layer,'tunnel','Current tunnel layer must not snap onto the upper foundation');
     assert.equal(collision.buildingContact(playerPosition(up,{layer:'tunnel'})),null,'The fixed lighthouse foot must not obstruct the passage beneath it');
     assert.equal(collision.buildingContact(playerPosition(up,{layer:'upper'}))?.id,'lighthouse','The same outdoor position must still collide with the real tower');
-    const section=[[34,-32],[36,-32],[37,-30]];
+    const section=[[34,-32],[36,-32],[37,-30]].map(place);
     const forward=checkTrack('under-foundation lower forward',section,0,{cave:true,initialLayer:'tunnel'});
     const reverse=checkTrack('under-foundation lower reverse',[...section].reverse(),0,{cave:true,initialLayer:'tunnel'});
     assert.equal(forward.transitions.length,0);assert.equal(reverse.transitions.length,0);
@@ -345,7 +351,7 @@ try {
   });
 
   check('rendered lower floor and roof enclose the passage directly below the foundation', () => {
-    const tower=layout.PENINSULA_LIGHTHOUSE,cave=layout.PENINSULA_CAVE;
+    const tower=placedTower,cave=layout.PENINSULA_CAVE;
     const up=map.mapDirection(tower.x,tower.z),origin=map.mapPoint(tower.x,tower.z,cave.floor+1);
     const floorRay=new Ray(origin,up.clone().negate()),roofRay=new Ray(origin,up);
     const intersections=(ray,vertices,triangles)=>triangles.flatMap(([a,b,c])=>{
@@ -367,7 +373,7 @@ try {
   });
 
   check('the lower visitor cannot cross a side wall or snap onto the headland', () => {
-    const result=walkUntilBlocked('under-lighthouse non-portal side exit',[[36,-32],[41,-32]],'tunnel');
+    const result=walkUntilBlocked('under-lighthouse non-portal side exit',[[36,-32],[41,-32]].map(place),'tunnel');
     assert.equal(result.layer,'tunnel');
     assert.equal(result.contact?.buildingId,'cave-rock','Visible cave lining must stop the lower-side shortcut');
     return result;
@@ -416,11 +422,11 @@ try {
     return { wedges: wedges.length, vertices, triangles, maximumContainment };
   });
 
-  check('lighthouse trail walks from [20, 4] in both directions', () => {
+  check('lighthouse trail walks from the Cliff Cul-de-sac in both directions', () => {
     const trail = route('lighthouse-trail');
-    const start = trail.points[0];
-    if (Math.hypot(start[0] - 20, start[1] - 4) > .01) {
-      problem('lighthouse trail must begin at the protected town handoff', { actual: start, expected: [20, 4] });
+    const start = trail.points[0], handoff = downtown.downtownSurfaceAt(start[0], start[1]);
+    if (handoff?.id !== 'main-cul') {
+      problem('lighthouse trail must begin on the Cliff Cul-de-sac sidewalk', { actual: start, handoff });
     }
     const forward = checkTrack('lighthouse forward', trail.points, 0, {expectedLayer:'upper'});
     const reverse = checkTrack('lighthouse reverse', [...trail.points].reverse(), 0, {expectedLayer:'upper'});
@@ -450,7 +456,7 @@ try {
     const endpoint = map.mapDirection(...trail.points.at(-1));
     const contact = collision.buildingContact(playerPosition(endpoint));
     if (contact) problem('lighthouse trail endpoint overlaps a tower/foundation collider', { endpoint: chart(endpoint), contact: contact.segmentId });
-    const townLookout=[33.1,-35.5],lookoutDirection=map.mapDirection(...townLookout);
+    const townLookout=place([33.1,-35.5]),lookoutDirection=map.mapDirection(...townLookout);
     const lookoutSupport=supportSnapshot(lookoutDirection,{layer:'upper'});
     const lookoutContact=collision.buildingContact(playerPosition(lookoutDirection,{layer:'upper'}));
     if(lookoutSupport.kind==='water'||lookoutContact)problem('Town-facing outer terrace fixture is not a clear upper walking position',{townLookout,lookoutSupport,contact:lookoutContact?.segmentId});
@@ -461,7 +467,7 @@ try {
   check('cove cliff rim blocks the non-route bypass from both sides', () => {
     // This is intentionally not an authored TownRoute. It is the tempting
     // direct line across the new cove rim that must remain physically closed.
-    const bypass = [[24.5, -10], [27, -8], [30, -7], [33, -11], [35, -13], [37, -15], [37, -19]];
+    const bypass = [[24.5, -10], [27, -8], [30, -7], [33, -11], [35, -13], [37, -15], [37, -19]].map(place);
     const forward = walkUntilBlocked('cove bypass forward', bypass);
     const reverse = walkUntilBlocked('cove bypass reverse', [...bypass].reverse());
     for (const [direction, result] of [['forward', forward], ['reverse', reverse]]) {
@@ -515,7 +521,7 @@ try {
   });
 
   check('cove is dry sand with an actual eastward ocean opening', () => {
-    const cove = layout.PENINSULA_COVE;
+    const cove = placedCove;
     const coveUp = map.mapDirection(cove.x, cove.z);
     const coveSurface = surfaces.groundSurfaceAt(cove.x, cove.z);
     const coveSupport = supportSnapshot(coveUp);
@@ -529,7 +535,7 @@ try {
 
     // The cave exit must genuinely lead onto the cove, instead of ending at an
     // unreachable visual pocket.
-    const caveEnd = layout.PENINSULA_CAVE.points.at(-1);
+    const caveEnd = placedCave.at(-1);
     const spur = [caveEnd, [cove.x, cove.z]];
     const caveToCove = checkTrack('cave exit to cove', spur, 0, {initialLayer:'tunnel'});
     const coveToCave = checkTrack('cove to cave exit', [...spur].reverse());
@@ -537,7 +543,8 @@ try {
     // Walk physically east from the cove. Parallel-transport the heading so
     // the opening test remains valid on the globe, not just on a flat chart.
     let up = coveUp;
-    let heading = map.mapFrame(cove.x, cove.z).east.clone();
+    // The cove's own east, carried with the placed peninsula.
+    let heading = map.mapFrame(layout.PENINSULA_COVE.x, layout.PENINSULA_COVE.z).east.clone().applyQuaternion(placement.PENINSULA_ROTATION);
     let waterAt = null;
     let maximumDryHeight = coveSurface.height;
     for (let index = 0; index < 260; index++) {
@@ -559,7 +566,7 @@ try {
 
   check('normal follow camera stays clear in four cardinal cove views', () => {
     assert.ok(portalTriangles.length>0,'Camera QA must include the actual rendered portal triangle registry');
-    const cove = layout.PENINSULA_COVE;
+    const cove = placedCove;
     const up = map.mapDirection(cove.x, cove.z);
     const frame = map.mapFrame(cove.x, cove.z, collision.supportRadius(up) - planet.RADIUS);
     const headings = {
@@ -583,7 +590,7 @@ try {
   check('lighthouse foot is fully supported by its local foundation', () => {
     const foot = landmarks.landmarkSolids.find(solid => solid.id === 'lighthouse:foot');
     if (!foot) problem('missing lighthouse foot collider');
-    const tower = layout.PENINSULA_LIGHTHOUSE;
+    const tower = placedTower;
     const centerSurface = surfaces.groundSurfaceAt(tower.x, tower.z);
     if (Math.abs(centerSurface.height - tower.elevation) > 1e-7) {
       problem('tower center does not meet its declared foundation elevation', { tower, centerSurface });
@@ -610,7 +617,7 @@ try {
   check('the upper headland stays within the declared lighthouse foundation envelope', () => {
     let highest = { height: -Infinity, x: 0, z: 0, blend: 0 };
     let samples = 0;
-    for (let x = 15; x <= 48.00001; x += .4) for (let z = -47; z <= 30.00001; z += .4) {
+    for (let x = 28; x <= 70.00001; x += .4) for (let z = -56; z <= 44.00001; z += .4) {
       if (!layout.inPeninsulaRegion(x, z) || landmarks.caveBlendAt(x, z) > .01) continue;
       const height = surfaces.naturalTerrainAt(x, z);
       if (!numeric(height)) problem('non-finite outside-cave terrain height', { x, z, height });

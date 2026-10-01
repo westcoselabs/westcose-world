@@ -3,13 +3,14 @@ import type { TownRoute } from './town-types';
 import { pierSurfaceAt } from './pier-layout';
 import { MAP_RADIUS, mapCoordinates, mapMetric } from './world-map';
 import { massifHeightAt, mountainBaseAt, mountainBlendAt, mountainCoastDistance, mountainFinishAreaAt, mountainResortPlatesAt, mountainRunPlateWeightAt, mountainRunPlatesAt, mountainSnowAt } from './mountain-layout';
-import { existingIslandTerrainAt } from './island-terrain';
+import { islandTerrainAt } from './island-terrain';
 import { RUN_FEATHER, runWidthAt, skiCarveAt, skiRunSampleAt } from './ski-runs';
 import { CAVE_FLOOR, caveBlendAt } from './concept-landmarks';
 import { downtownKindAt, downtownSurfaceAt } from './downtown-layout';
 import { GRAND_STAIRS, grandStairSurfaceAt, nearSkatepark, skateparkSurfaceAt } from './skatepark-layout';
 import { westBluffAt, westBluffDistance } from './island-terrain';
-import { inPeninsulaRegion, peninsulaBlendAt, peninsulaHeightAt, peninsulaFoundationAt, coastDistance, PENINSULA_SAND } from './peninsula-layout';
+import { inAuthoredRegion, inPeninsulaRegion, peninsulaBlendAt, peninsulaCoastDistance, peninsulaHeightAt, peninsulaFoundationAt, peninsulaLocal, peninsulaTransplantWeight, PENINSULA_SAND } from './peninsula-layout';
+import { peninsulaWorldPoint } from './peninsula-frame';
 
 const clamp=(v:number,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=(a:number,b:number,v:number)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t);};
@@ -18,9 +19,37 @@ export const townCoordinates=mapCoordinates;
 export const TOWN_STEPS={lon:GRAND_STAIRS.foot/MAP_RADIUS,endLon:GRAND_STAIRS.top/MAP_RADIUS,width:GRAND_STAIRS.halfWidth*2,count:GRAND_STAIRS.count,rise:GRAND_STAIRS.rise,baseHeight:GRAND_STAIRS.base};
 export const COVE_STEPS={start:[-20,-16] as const,end:[-18,-20] as const,width:2.4,count:0,top:.15,rise:0};
 
-/** Frozen town substrate + mountain island, with the ski runs carved between flat
- * run plates and the resort foundations applied last. The peninsula replacement is
- * still a bounded blend, not a smoothing pass on the former headland mound. */
+/** Low dune hummocks behind the dry beach, clear of the pier, both ramps and the props. */
+export const BEACH_DUNES:readonly (readonly [x:number,z:number,halfX:number,halfZ:number,height:number])[]=[
+ [-26.5,-20.2,3.4,1.5,.34],[-14.6,-20.4,3.6,1.6,.3],[-6.8,-20.1,2.6,1.3,.26],
+ [10.8,-20.3,2.9,1.4,.3],[18.8,-20.6,3.2,1.6,.36],[27.6,-20.6,3,1.4,.3],
+];
+/** The public beach's shore line for its cross-section (one straight shore east of x 15). */
+const beachShore=(x:number)=>{const sx=Math.min(x,15);return -34+1.3*Math.sin(sx*.13)+.8*Math.cos(sx*.3);};
+/** A real beach section: dunes behind a dry upper beach, a berm, a gentle wet foreshore
+ * and a long shallow shelf before the open-sea floor. Replaces the old steep beach face. */
+function beachProfileAt(x:number,z:number){
+ const d=z-beachShore(x);
+ let h:number;
+ if(d>5.5)h=.02+(.16-.02)*smooth(5.5,14,d);
+ else if(d>.5)h=-.8+(.02+.8)*smooth(.5,5.5,d)**.85;
+ else if(d>-5)h=-.8-.7*smooth(.5,-5,d);
+ else h=-1.5-1.5*smooth(-5,-15,d);
+ for(const [dx,dz,hx,hz,height] of BEACH_DUNES){
+  const q=Math.hypot((x-dx)/hx,(z-dz)/hz);
+  if(q<1)h+=height*(.5+.5*Math.cos(Math.PI*q))*(1+.18*Math.sin(x*1.7+z*2.3));
+ }
+ return h;
+}
+/** How much of the ground is the reshaped public beach. */
+function beachWeightAt(x:number,z:number){
+ if(z>-17||z<-52||x<-32||x>40)return 0;
+ return smooth(-32,-28.5,x)*(1-smooth(34,39,x))*(1-smooth(-18.6,-17.2,z));
+}
+
+/** Present town substrate + mountain island, with the ski runs carved between flat
+ * run plates and the resort foundations applied last. The placed peninsula is a bounded
+ * blend in its own authoring frame, and the public beach is shaped last. */
 export function naturalTerrainAt(x:number,z:number):number {
  const plated=mountainRunPlatesAt(x,z,mountainBaseAt(x,z)),carved=skiCarveAt(x,z,plated),plate=mountainRunPlateWeightAt(x,z);
  // Run plates stay level over any carving; a second plate pass would not be idempotent.
@@ -28,6 +57,8 @@ export function naturalTerrainAt(x:number,z:number):number {
  height=mountainResortPlatesAt(x,z,height);
  const blend=peninsulaBlendAt(x,z);
  height=blend===0?height:height+(peninsulaHeightAt(x,z)-height)*blend;
+ const beach=beachWeightAt(x,z);
+ if(beach>0)height+=(beachProfileAt(x,z)-height)*beach;
  // The west bluff reaches far up the chart this far west; it wins over the mountain's
  // chart-z blend, which only means anything near the town meridian.
  return x<-32?Math.max(height,westBluffAt(x,z)):height;
@@ -37,8 +68,8 @@ export const OPEN_SEA_FLOOR=-3;
 export function terrainIsOpenSea(x:number,z:number):boolean{
  if(x<-32&&westBluffAt(x,z)>OPEN_SEA_FLOOR+1e-9)return false;
  if(z>=52)return mountainCoastDistance(x,z)<-3;
- if(z>=40||inPeninsulaRegion(x,z))return false;
- return existingIslandTerrainAt(x,z)<=OPEN_SEA_FLOOR+1e-9;
+ if(z>=40||inPeninsulaRegion(x,z)||beachWeightAt(x,z)>0)return false;
+ return islandTerrainAt(x,z)<=OPEN_SEA_FLOOR+1e-9;
 }
 export function substrateAt(x:number,z:number):number {
  const height=naturalTerrainAt(x,z);
@@ -55,12 +86,6 @@ const makeSegments=(routes:TownRoute[]):Segment[]=>routes.flatMap(route=>{
  });
 });
 const segments=makeSegments(TOWN_ROUTES);
-// The short prefix within the protected town keeps its exact old support/shoulders.
-// The obsolete coastal detour is never evaluated inside the rebuilt peninsula.
-const outsideSegments=makeSegments(TOWN_ROUTES.map(route=>route.id==='lighthouse-trail'?{...route,
- points:[[20,4],[23,0],[24.5,-10],[25.5,-14],[23,-21],[19,-23],[18.5,-29],[20,-33],[24,-36],[29,-38],[32.8,-35],[32.8,-27]],
- elevations:[.2,.2,.2,.2,.1,-.05,-.1,-.1,.8,3.6,6.2,7.8],
-}:route));
 // Curved pistes contain hundreds of authored samples. Query only local segments,
 // preserving their original order so unrelated town support remains bit-identical.
 // Numeric cell keys avoid building a string for every terrain query.
@@ -72,18 +97,21 @@ function segmentIndex(items:Segment[]){
  }
  return cells;
 }
-const localIndex=segmentIndex(segments),outsideIndex=segmentIndex(outsideSegments);
+const routeIndex=segmentIndex(segments);
 const NO_SEGMENTS:Segment[]=[];
-function nearbySegments(x:number,z:number){return (inPeninsulaRegion(x,z)?localIndex:outsideIndex).get(segmentKey(Math.floor(x/8),Math.floor(z/8)))??NO_SEGMENTS;}
+function nearbySegments(x:number,z:number){return routeIndex.get(segmentKey(Math.floor(x/8),Math.floor(z/8)))??NO_SEGMENTS;}
+/** Authored-frame x of a world point inside the placed peninsula region, else -Infinity. */
+function authoredRegionX(x:number,z:number){const a=peninsulaLocal(x,z);return a&&inAuthoredRegion(a.x,a.z)?a.x:-Infinity;}
 function closest(s:Segment,x:number,z:number,height:number){
  const metric=mapMetric(x,height),dx=s.dx*metric.x,dz=s.dz*metric.z;
  const t=clamp(((x-s.ax)*metric.x*dx+(z-s.az)*metric.z*dz)/(dx*dx+dz*dz));
  return {distance:Math.hypot((x-s.ax-s.dx*t)*metric.x,(z-s.az-s.dz*t)*metric.z),progress:(s.offset+t*s.length)/s.total};
 }
 export function routeElevation(route:TownRoute,x:number,z:number,progress:number,substrateHeight?:number){
- if(route.id==='beach-east'&&inPeninsulaRegion(x,z)&&x>23){
+ const ax=route.id==='beach-east'?authoredRegionX(x,z):-Infinity;
+ if(ax>23){
   const beach=substrateAt(x,z)+.025;
-  return beach+(CAVE_FLOOR+.025-beach)*smooth(23,25,x);
+  return beach+(CAVE_FLOOR+.025-beach)*smooth(23,25,ax);
  }
  if(route.elevations){
   const lengths=route.points.slice(1).map((p,i)=>Math.hypot(p[0]-route.points[i][0],p[1]-route.points[i][1]));
@@ -104,16 +132,16 @@ export function routeDistanceAt(x:number,z:number){
  return result;
 }
 /** Upper terrain and paths. The traversable void below is resolved by the runtime. */
-export function groundSurfaceAt(x:number,z:number):{height:number;kind:'ground'|'pier';route?:string}{
+export function groundSurfaceAt(x:number,z:number,stitch=true):{height:number;kind:'ground'|'pier';route?:string}{
  let height=substrateAt(x,z),routeId:string|undefined;
- const local=inPeninsulaRegion(x,z),unroutedHeight=height;
+ const local=inPeninsulaRegion(x,z),unroutedHeight=height,ax=local?authoredRegionX(x,z):-Infinity;
  for(const s of nearbySegments(x,z)){
-  if(s.route.id==='cave'||(s.route.id==='beach-east'&&x>26.3))continue;
+  if(s.route.id==='cave'||(s.route.id==='beach-east'&&ax>26.3))continue;
   if(local&&s.route.id==='lighthouse-trail')continue;
   if(x<s.minX||x>s.maxX||z<s.minZ||z>s.maxZ)continue;
   const c=closest(s,x,z,height),half=s.route.width/2;
   if(c.distance<=half){height=routeElevation(s.route,x,z,c.progress,unroutedHeight);routeId=s.route.id;}
-  else if((s.route.elevation!==undefined||s.route.elevations||(s.route.id==='beach-east'&&inPeninsulaRegion(x,z)&&x>23))&&c.distance<half+1.8){height+=(routeElevation(s.route,x,z,c.progress)-height)*(1-smooth(half,half+1.8,c.distance));}
+  else if((s.route.elevation!==undefined||s.route.elevations||(s.route.id==='beach-east'&&ax>23))&&c.distance<half+1.8){height+=(routeElevation(s.route,x,z,c.progress)-height)*(1-smooth(half,half+1.8,c.distance));}
  }
  if(local){
   // Resolve this winding trail once, not once per overlapping segment. Repeated
@@ -153,13 +181,16 @@ export function groundSurfaceAt(x:number,z:number):{height:number;kind:'ground'|
   const foundation=peninsulaFoundationAt(x,z);
   if(foundation.blend>0)height+=(foundation.height-height)*foundation.blend;
  }
- // Join both sides of the L-shaped protected-town boundary, including its
- // corner. The anchor is always outside, so this single recursive sample ends.
- if(inPeninsulaRegion(x,z)&&x<24.7&&z>-19.2){
-  const anchorX=Math.min(x,24),anchorZ=Math.max(z,-18);
-  const distance=Math.hypot(x-anchorX,(z-anchorZ)*mapMetric(x,0).z);
+ // Join both sides of the peninsula's L-shaped town boundary, including its corner, in
+ // its authoring frame. The anchor is always outside, so this single recursive sample ends.
+ const a=local&&stitch?peninsulaLocal(x,z):null;
+ if(a&&a.x<24.7&&a.z>-19.2){
+  // Just outside the region, so round-off in the placement never lands it back inside.
+  const anchorX=Math.min(a.x,24-1e-6),anchorZ=Math.max(a.z,-18+1e-6);
+  const distance=Math.hypot(a.x-anchorX,(a.z-anchorZ)*mapMetric(a.x,0).z);
   if(distance<.7){
-   const boundary=groundSurfaceAt(anchorX,anchorZ).height;
+   const anchor=peninsulaWorldPoint(anchorX,anchorZ);
+   const boundary=groundSurfaceAt(anchor.x,anchor.z,false).height;
    height=boundary+(height-boundary)*smooth(0,.7,distance);
   }
  }
@@ -189,18 +220,28 @@ export function terrainColorAt(x:number,z:number,height:number,slope=0){
  const half=run?runWidthAt(run.run,run.s)/2:0,onRun=!!run&&run.s>0&&run.s<run.run.length;
  if(onRun&&run!.distance<=half+.6)return '#D3E2E0';
  if(z>36&&mountainFinishAreaAt(x,z))return '#D3E2E0';
+ const cape=inPeninsulaRegion(x,z)&&peninsulaBlendAt(x,z)>.5;
+ // The public beach: dune sand, dry sand, a darker wet band at the water, then the shallows.
+ if(!cape&&z<-17&&x>-31&&x<46&&height<.62){
+  const grain=Math.sin(x*3.1+z*1.7)*Math.sin(x*1.3-z*4.2);
+  if(height<-1.1)return '#A99A74';
+  if(height<-.5)return grain>.2?'#A58A60':'#AC9168';
+  if(height<-.3)return '#C2A87A';
+  if(height>.24)return grain>.35?'#D4BD8C':'#DCC697';
+  return grain>.3?'#DAC291':grain<-.4?'#E2CD9D':'#DEC795';
+ }
  if(height<-.5)return '#BCA87B';
- if(inPeninsulaRegion(x,z)&&peninsulaBlendAt(x,z)>.5){
-  if(height<.4&&coastDistance(x,z,PENINSULA_SAND)>-.5)return '#D7BB85';
+ if(cape){
+  if(height<.4&&peninsulaCoastDistance(x,z,PENINSULA_SAND)>-.5)return '#D7BB85';
   return height>2.4?'#999C89':height>.4?'#818C83':'#BDA77F';
  }
  // Carved run banks stay powder; only natural steep ground shows rock.
  const bank=onRun&&run!.distance<half+RUN_FEATHER;
  if((mountainSnowAt(x,z)||bank)&&height>0)return bank?'#E6EDE6':slope>.85?'#8A968F':slope>.7&&Math.abs(Math.sin(x*.21+z*.13))<.35?'#A3AEA8':'#EDF2E9';
- if(caveBlendAt(x,z)>.3||(x>30&&z<12&&height<.4)||(z<-17&&Math.abs(x)<27&&height<.5))return '#D7BB85';
+ if(caveBlendAt(x,z)>.3)return '#D7BB85';
  // The bluff top is mown grass; its open slopes read as coastal scrub down to the sand.
  if(x<-30&&x>-90){const d=westBluffDistance(x,z);if(d<-.5)return '#6F8D66';if(d<5&&height>.5)return '#7F8C76';}
- if((x>23&&z<18)||(x<-28&&z<20))return '#899087';
+ if(peninsulaTransplantWeight(x,z)>.5||(x<-28&&z<20))return '#899087';
  // Forest belt below the mountain snow line lightens toward the alpine zone.
  if(mountainBlendAt(x,z)>.5){const massif=massifHeightAt(x,z);return massif>4.5?'#8E9C88':massif>3.2?'#7B9175':'#688765';}
  return '#688765';

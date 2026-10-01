@@ -57,6 +57,8 @@ export interface WorldRuntimeState {
   snowboard: SnowboardSession;
   /** The skateboard; while riding, the walker's position follows the rider. */
   skate: SkateSession;
+  /** Development-only review camera: when set, the follow camera is replaced by this fixed view. */
+  debugCamera?: { position: WorldPosition; target: WorldPosition; up: WorldPosition } | null;
 }
 
 export const PLAYER_CENTER_HEIGHT = 0.85;

@@ -3,7 +3,7 @@ import type { TownBuilding } from '../../data/town-types';
 import { block, frame, idSeed, tube, type KitContext, type Triple } from './context';
 import { TOWN_PALETTE as P } from './materials';
 
-export const TRELLIS_BUILDING_IDS = ['studio', 'print-shop', 'about', 'cafe', 'livework', 'coast-radio'] as const;
+export const TRELLIS_BUILDING_IDS = ['print-shop', 'cafe', 'livework', 'coast-radio'] as const;
 export type TrellisFrame = { position: Triple; yaw: number; width: number; height: number };
 export type WindowBoxFrame = { position: Triple; yaw: number; width: number; depth: number };
 
@@ -30,6 +30,7 @@ function facadeDoorRanges(b: TownBuilding): [number, number][] {
   const w = b.width;
   const around = (x: number, width: number): [number, number] => [x - width / 2 - 0.12, x + width / 2 + 0.12];
   if (b.interior) return [around(b.entryOffset, b.entryWidth)];
+  if (b.facade === 'motel-rooms') return Array.from({ length: 3 }, (_, i) => around(w / 2 - w / 3 * (i + .5) - .62, 1.1));
   if (b.secondary || b.archetype === 'shed') return [around(-w * 0.1, Math.min(1.05, w * 0.42))];
   if (b.archetype === 'warehouse' || b.archetype === 'garage') return [around(-w * 0.12, w * 0.58), around(w * 0.36, 0.83)];
   if (b.archetype === 'motel') return Array.from({ length: 4 }, (_, i) => around((i - 1.5) * w / 4 - 0.43, 0.78));

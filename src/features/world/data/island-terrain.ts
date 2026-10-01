@@ -2,6 +2,7 @@
  * mountain and ski-run modules can sample the same base terrain without a cycle.
  * Chart coordinates only; no radius or runtime dependencies.
  */
+import { peninsulaLocal, peninsulaTransplantWeight } from './peninsula-layout';
 const clamp=(v:number,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=(a:number,b:number,v:number)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t);};
 // Frozen pre-approval substrate. Only the bounded mountain overlay changes its massif.
@@ -29,15 +30,25 @@ export function westBluffAt(x:number,z:number){
  return -1.3+(-3+1.3)*smooth(5.5,8,d);
 }
 
-/** Broad continuous island, with scalloped shores instead of a rectangular land strip. */
-export function existingIslandTerrainAt(x:number,z:number):number {
+/** Extra reach of the island east of the old town. The town's new east end and its two
+ * cul-de-sacs fill the ground the peninsula vacated; north of it the coast swings back to
+ * the mountain island's own shore. */
+const EAST_REACH = 17;
+
+/** Broad continuous island, with scalloped shores instead of a rectangular land strip.
+ * `world` selects the present island; without it this is the frozen pre-move substrate,
+ * which the placed peninsula still samples in its own authoring frame. */
+function islandCoreAt(x:number,z:number,world:boolean):number {
  const coastWave=2*Math.sin(z*.075)+1.2*Math.sin(z*.17+.8);
  const forestWidth=35+coastWave;
  const inlandWidth=34+(forestWidth-34)*smooth(10,32,z);
  const width=inlandWidth+(29-inlandWidth)*smooth(105,140,z);
- const coastX=x-(1.6*Math.sin(z*.05)*smooth(20,60,z));
+ let coastX=x-(1.6*Math.sin(z*.05)*smooth(20,60,z));
+ if(world&&x>0)coastX-=EAST_REACH*smooth(14,26,x)*(1-smooth(38,56,z));
  const cross=1-smooth(width-3,width+4,Math.abs(coastX));
- const shoreline=-34+1.3*Math.sin(x*.13)+.8*Math.cos(x*.3);
+ // East of the old headland the beach keeps one straight shore up to the moved cape.
+ const sx=world?Math.min(x,15):x;
+ const shoreline=-34+1.3*Math.sin(sx*.13)+.8*Math.cos(sx*.3);
  const front=smooth(shoreline-2,shoreline+3,z),rear=1-smooth(164,171,z);
  let land=.16+2.22*smooth(20,110,z);
  // An asymmetric massif: three shoulders and cut valleys lead into the real summit.
@@ -57,22 +68,39 @@ export function existingIslandTerrainAt(x:number,z:number):number {
  let height=-3+(land+3)*cross*front*rear;
  // The west bluff carries the skate park above a new west beach.
  height=Math.max(height,westBluffAt(x,z));
- // Tall cliffs surround the low cave floor; a separate finger of land carries the lighthouse.
- const east=Math.hypot((x-33)/12,(z+3)/26);
- const peninsula=Math.hypot((x-35)/10,(z+25)/16);
- height=Math.max(height,-3+10.8*(1-smooth(.7,1.12,east)),-3+10.8*(1-smooth(.68,1.12,peninsula)));
- const peninsulaToe=Math.hypot((x-31)/11,(z+31)/13);
- const toeHeight=2+5.8*smooth(23,33,x);
- height=Math.max(height,-3+(toeHeight+3)*(1-smooth(.66,1.1,peninsulaToe)));
+ if(!world){
+  // Tall cliffs surround the low cave floor; a separate finger of land carries the lighthouse.
+  const east=Math.hypot((x-33)/12,(z+3)/26);
+  const peninsula=Math.hypot((x-35)/10,(z+25)/16);
+  height=Math.max(height,-3+10.8*(1-smooth(.7,1.12,east)),-3+10.8*(1-smooth(.68,1.12,peninsula)));
+  const peninsulaToe=Math.hypot((x-31)/11,(z+31)/13);
+  const toeHeight=2+5.8*smooth(23,33,x);
+  height=Math.max(height,-3+(toeHeight+3)*(1-smooth(.66,1.1,peninsulaToe)));
+ }
  // Keep the village / boardwalk foreground level, rather than burying the eastern shop shells.
- const townShelf=(1-smooth(24,29,x))*(1-smooth(12,20,z))*smooth(-22,-18,z);
+ const townShelf=(1-(world?smooth(41,46,x):smooth(24,29,x)))*(1-smooth(12,20,z))*smooth(-22,-18,z);
  if(x>0)height+=(.16-height)*townShelf;
- const cove=Math.hypot((x-35.7)/5.3,(z-2)/9);
- if(cove<1.2){const beach=1-smooth(.7,1.2,cove);height=height*(1-beach)+(-.12)*beach;}
- // Open the sheltered sand pocket EAST to the sea. The lighthouse trail stays
- // on the south/west headland; no raised path forms a dam across this outlet.
- const outlet=smooth(32,35,x)*(1-smooth(6,10,Math.abs(z-2)));
- const coveFloor=-.12-2.88*smooth(38,44,x);
- height+=(Math.min(height,coveFloor)-height)*outlet;
+ if(!world){
+  const cove=Math.hypot((x-35.7)/5.3,(z-2)/9);
+  if(cove<1.2){const beach=1-smooth(.7,1.2,cove);height=height*(1-beach)+(-.12)*beach;}
+  // Open the sheltered sand pocket EAST to the sea. The lighthouse trail stays
+  // on the south/west headland; no raised path forms a dam across this outlet.
+  const outlet=smooth(32,35,x)*(1-smooth(6,10,Math.abs(z-2)));
+  const coveFloor=-.12-2.88*smooth(38,44,x);
+  height+=(Math.min(height,coveFloor)-height)*outlet;
+ }
  return height;
+}
+
+/** The frozen pre-move island, as the approved peninsula was authored against. */
+export function existingIslandTerrainAt(x:number,z:number):number { return islandCoreAt(x,z,false); }
+
+/** The present island: the widened town shelf and beach, with the original coast carried
+ * along inside (and just around) the placed peninsula so both seams stay continuous. */
+export function islandTerrainAt(x:number,z:number):number {
+ const present=islandCoreAt(x,z,true);
+ const carried=peninsulaTransplantWeight(x,z);
+ if(carried===0)return present;
+ const a=peninsulaLocal(x,z)!;
+ return present+(existingIslandTerrainAt(a.x,a.z)-present)*carried;
 }

@@ -1,5 +1,6 @@
 import { Box3, MathUtils, Matrix4, Plane, Quaternion, Ray, Triangle, Vector3 } from 'three';
-import { PENINSULA_CAVE } from './peninsula-layout';
+import { PENINSULA_CAVE, PLACED_CAVE_POINTS } from './peninsula-layout';
+import { placeVector } from './peninsula-frame';
 import { MAP_RADIUS, mapCoordinates, mapDirection, mapPoint } from './world-map';
 
 type Point = readonly [number, number];
@@ -75,6 +76,15 @@ const rings: Ring[] = authoredPoints.map(([x, z], index) => {
   const project = ([lateral, height]: Point) => origin.clone().addScaledVector(right, lateral * miter).addScaledVector(up, height);
   return { x, z, up, tangent, right, miter, inner: innerProfile.map(project), outer: outerProfile.map(project) };
 });
+// The rings are built in the approved authoring frame, then carried rigidly onto the placed
+// peninsula; everything below works in world space.
+for (const ring of rings) {
+  for (const vector of [ring.up, ring.tangent, ring.right, ...ring.inner, ...ring.outer]) placeVector(vector);
+  const chart = mapCoordinates(ring.up);
+  ring.x = chart.x; ring.z = chart.z;
+}
+/** The broad buried turning chamber's centre beneath the lighthouse junction, placed. */
+const BEND = placeVector(mapDirection(35.7, -31));
 
 const curveSegments = rings.slice(1).map((end, index) => {
   const start = rings[index], normal = start.up.clone().cross(end.up).normalize();
@@ -82,10 +92,10 @@ const curveSegments = rings.slice(1).map((end, index) => {
 });
 export const PENINSULA_CAVE_LENGTH = curveSegments.reduce((length, segment) => length + segment.angle * floorRadius, 0);
 const caveBounds = {
-  minX: Math.min(...PENINSULA_CAVE.points.map(point => point[0])) - 4,
-  maxX: Math.max(...PENINSULA_CAVE.points.map(point => point[0])) + 4,
-  minZ: Math.min(...PENINSULA_CAVE.points.map(point => point[1])) - 8,
-  maxZ: Math.max(...PENINSULA_CAVE.points.map(point => point[1])) + 8,
+  minX: Math.min(...PLACED_CAVE_POINTS.map(point => point[0])) - 4,
+  maxX: Math.max(...PLACED_CAVE_POINTS.map(point => point[0])) + 4,
+  minZ: Math.min(...PLACED_CAVE_POINTS.map(point => point[1])) - 9,
+  maxZ: Math.max(...PLACED_CAVE_POINTS.map(point => point[1])) + 9,
 };
 
 /** Physical spherical distance to the same short centerline used by the tunnel rings. */
@@ -122,7 +132,7 @@ export function caveSectionAt(x: number, z: number) {
     if (!best || distance < best.distance) {
       const tangent = segment.normal.clone().cross(up).normalize(), right = tangent.clone().cross(up).normalize();
       const along = offset + t * floorRadius, lateral = Math.asin(MathUtils.clamp(direction.dot(right), -1, 1)) * floorRadius;
-      const bendDistance = up.angleTo(mapDirection(35.7, -31)) * floorRadius;
+      const bendDistance = up.angleTo(BEND) * floorRadius;
       const halfWidth = PENINSULA_CAVE.width / 2 + .21 + .95 * (1 - MathUtils.smoothstep(bendDistance, .5, 4.4));
       best = { distance, along, length: PENINSULA_CAVE_LENGTH, lateral, ...mapCoordinates(up), up, tangent, right,
         floor: PENINSULA_CAVE.floor,

@@ -5,10 +5,11 @@ import { MAP_RADIUS, mapFrame, mapMetric, mapPoint } from './world-map';
 export const PIER_LAYOUT = {
   radius:MAP_RADIUS,
   entrance:[0,-30] as const,
-  neckEnd:[0,-40] as const,
+  // A long walkway out past the surf, to a broad fishing head with a bait shack.
+  neckEnd:[0,-56] as const,
   width:3.8,
   elevation:1.5,
-  head:{center:[0,-43] as const,width:8,depth:8},
+  head:{center:[0,-61.5] as const,width:12,depth:11},
   approach:{start:[0,-16] as const,end:[0,-30] as const,startElevation:.1},
   railStartZ:-17,
   railHeight:1.12,
@@ -91,4 +92,8 @@ export const PIER_EDGES:readonly PierEdge[] = [
   {id:'seaward-head',start:[-PIER_LAYOUT.head.width/2,PIER_LAYOUT.head.center[1]-PIER_LAYOUT.head.depth/2],end:[PIER_LAYOUT.head.width/2,PIER_LAYOUT.head.center[1]-PIER_LAYOUT.head.depth/2]},
 ];
 
-export const PIER_SUPPORT_ROWS = [-17.5,-20.5,-23.5,-26.5,-29.5,-32.5,-35.5,-38.5,-41.5,-44.5,-46.5] as const;
+/** Pile bents every 3m along the walkway, then across the head out to its seaward edge. */
+export const PIER_SUPPORT_ROWS: readonly number[] = [
+  ...Array.from({ length: 13 }, (_, i) => -17.5 - 3 * i),
+  -56.5, -59.5, -62.5, -65.5, PIER_LAYOUT.head.center[1] - PIER_LAYOUT.head.depth / 2 + .5,
+];

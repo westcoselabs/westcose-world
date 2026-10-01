@@ -1,14 +1,14 @@
 import { Matrix4, Quaternion, Vector3 } from 'three';
 import { COASTAL_RADIO, TOWN_BUILDINGS, TOWN_SPAWN } from './town-layout';
 import { substrateAt, townSurfaceAt, TOWN_STEPS } from './town-surfaces';
-import { buildingDoorPoint, buildingLocalPoint } from './building-shapes';
-import { CAVE_POINTS, LIGHTHOUSE } from './concept-landmarks';
+import { activeInteriorAt, buildingDoorPoint, buildingLocalPoint } from './building-shapes';
 import { PIER_LAYOUT } from './pier-layout';
 import { MOUNTAIN_LAYOUT, massifHeightAt, mountainFinishAreaAt, mountainSnowAt } from './mountain-layout';
 import { skiRunSampleAt } from './ski-runs';
-import { coastDistance, PENINSULA_SAND } from './peninsula-layout';
-import { MAP_MAX_HEIGHT, MAP_MIN_Z, MAP_RADIUS, MAP_SEAM, MAP_SEA_LEVEL, mapCoordinates, mapFrame } from './world-map';
-import { downtownSurfaceAt } from './downtown-layout';
+import { coastDistance, PENINSULA_CAVE, PENINSULA_COVE, PENINSULA_LIGHTHOUSE, PENINSULA_SAND, peninsulaLocal } from './peninsula-layout';
+import { peninsulaWorldPoint } from './peninsula-frame';
+import { MAP_MAX_HEIGHT, MAP_MIN_Z, MAP_RADIUS, MAP_SEAM, MAP_SEA_LEVEL, mapCoordinates, mapDirection, mapFrame } from './world-map';
+import { CUL_DE_SACS, downtownSurfaceAt } from './downtown-layout';
 import { grandStairSurfaceAt, nearSkatepark, skateparkSurfaceAt } from './skatepark-layout';
 import { westBluffDistance } from './island-terrain';
 export const RADIUS=MAP_RADIUS;
@@ -52,7 +52,7 @@ function doorwayFixture(id:string,outward=1.35,intoDoor=true):MapFixture {
  return fixtureToward(source,buildingDoorPoint(shape,intoDoor?0:outward+1));
 }
 function wallFixture(id:string):MapFixture {
- const shape=building(id),localX=-shape.width/2+.7;
+ const shape=building(id),localX=-shape.width/2+1.7;
  return fixtureToward(
   buildingLocalPoint(shape,[localX,0,shape.depth/2+1.35]),
   buildingLocalPoint(shape,[localX,0,shape.depth/2]),
@@ -66,8 +66,13 @@ const labFixture=doorwayFixture('lab');
 const galleryWallFixture=wallFixture('studio');
 const galleryCameraFixture=doorwayFixture('studio',1.35,false);
 const skateShopFixture=doorwayFixture('skate-shop');
+/** A visitor position in the placed peninsula's authoring frame, facing an authored target. */
+function peninsulaFixture(x:number,z:number,targetX:number,targetZ:number):MapFixture {
+ const from=peninsulaWorldPoint(x,z),to=peninsulaWorldPoint(targetX,targetZ);
+ return fixtureToward(mapDirection(from.x,from.z),mapDirection(to.x,to.z));
+}
 /** The customer side of the skate-shop counter, where E takes a board. */
-const skateCounter=mapCoordinates(buildingLocalPoint(building('skate-shop'),[-.2,0,-.35]));
+const skateCounter=mapCoordinates(buildingLocalPoint(building('skate-shop'),[-.2,0,-building('skate-shop').depth/2+3.2]));
 export const PLANET_PLACES=[
  {id:'studio',label:'Portfolio Gallery',section:'Projects',x:building('studio').x,z:building('studio').z,radius:4,contentId:'world',number:'01',interior:'studio'},
  {id:'workshop',label:'WestCose Shop',section:'Services',x:building('workshop').x,z:building('workshop').z,radius:4.8,contentId:'services',number:'02',interior:'workshop'},
@@ -75,7 +80,7 @@ export const PLANET_PLACES=[
  {id:'about',label:'WestCose Motel',section:'About',x:building('about').x,z:building('about').z,radius:4,contentId:'about',number:'04',interior:'about'},
  // Kept just beyond the fresh-load clearing so a visitor arrives in the
  // courtyard without an immediate interaction prompt.
- {id:'contact',label:'Contact Station',section:'Contact',x:4.4,z:10.5,radius:2.2,contentId:'contact',number:'05',interior:null},
+ {id:'contact',label:'Contact Station',section:'Contact',x:5.4,z:16.6,radius:2.2,contentId:'contact',number:'05',interior:null},
  {id:'beach',label:'Hidden Beach',section:'Discovery',x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,radius:3,contentId:'frequency',number:'06',interior:null},
  {id:'lab',label:'Alley Room',section:'Labs',x:building('lab').x,z:building('lab').z,radius:4,contentId:'labs',number:'07',interior:'lab'},
  // The lift-ticket window facing the resort forecourt: E opens the snowboard run menu.
@@ -85,7 +90,11 @@ export const PLANET_PLACES=[
  // Anywhere on the grand stairs (or at the top, riding in): E starts a game of S.K.A.T.E.
  {id:'skatepark',label:'Game of S.K.A.T.E.',section:'Skate Park',x:-29.3,z:0,radius:4.4,contentId:'skatepark',number:'10',interior:null},
 ] as const;
+/** Each room names itself while the visitor is inside it. */
+const ROOM_AREAS={studio:'Studio Row Gallery',workshop:'WestCose Shop',arcade:'Dead Coast Social Club',about:'West Cose Motel',lab:'Alley Room',skateshop:'WestCose Skate Shop'} as const;
 export function areaAt(d:{x:number;y:number;z:number}):string{
+ const room=activeInteriorAt(d);
+ if(room)return ROOM_AREAS[room];
  const{x,z}=mapCoordinates(d),surface=townSurfaceAt(x,z);
  if(surface.kind==='pier')return 'The Pier';
  if(surface.height<SEA_LEVEL)return 'Open Water';
@@ -102,17 +111,24 @@ export function areaAt(d:{x:number;y:number;z:number}):string{
  if(nearSkatepark(x,z)&&skateparkSurfaceAt(x,z))return 'WestCose Skate Park';
  if(grandStairSurfaceAt(x,z))return 'Skate Park Stairs';
  if(x<-32&&x>-100&&Math.abs(z)<45)return westBluffDistance(x,z)<2?'West Bluff':'West Beach';
- if(x>24&&z>=-23&&z<=30&&surface.height<1&&coastDistance(x,z,PENINSULA_SAND)>-.5)return 'Hidden Beach';
- if(x>=27&&x<=41&&z>=-35&&z<=-19){
-  const radius=Math.hypot(d.x,d.y,d.z);
-  if(radius>RADIUS-1&&radius<RADIUS+4)return 'Cave Access';
-  return 'Lighthouse Point';
+ const street=downtownSurfaceAt(x,z)?.id;
+ const cul=CUL_DE_SACS.find(c=>street===c.id||street===`${c.id}:island`||(street===c.street&&x>=c.cut));
+ if(cul)return cul.name;
+ // The placed peninsula's areas, in its own authoring frame.
+ const a=peninsulaLocal(x,z);
+ if(a){
+  if(a.x>24&&a.z>=-23&&a.z<=30&&surface.height<1&&coastDistance(a.x,a.z,PENINSULA_SAND)>-.5)return 'Hidden Beach';
+  if(a.x>=27&&a.x<=41&&a.z>=-35&&a.z<=-19){
+   const radius=Math.hypot(d.x,d.y,d.z);
+   if(radius>RADIUS-1&&radius<RADIUS+4)return 'Cave Access';
+   return 'Lighthouse Point';
+  }
+  if(a.x>24&&a.x<35&&a.z>-25&&a.z<6)return 'Lighthouse Trail';
  }
- if(x>24&&x<35&&z>-25&&z<6)return 'Lighthouse Trail';
  if(z<=-18)return 'The Beach';
  if(z<=-14)return 'Boardwalk';
- const street=downtownSurfaceAt(x,z)?.id;
- if(street==='alley'||(x>=16.5&&x<=24.5&&z>=-14&&z<=-6))return 'Graffiti Alley';
+ if(street==='alley'||(x>=24.4&&x<=33&&z>=-14&&z<=-6))return 'Graffiti Alley';
+ if(street==='motel-walk')return 'West Cose Motel';
  if(street==='courtyard')return 'WestCose Courtyard';
  if(street==='pier-st'||street==='pier-west'||street==='pier-east')return 'Pier Street';
  if(street==='west-promenade'||street==='stair-plaza')return 'West Promenade';
@@ -122,9 +138,9 @@ export function areaAt(d:{x:number;y:number;z:number}):string{
 const entry=mapCoordinates(directionAt(TOWN_SPAWN.lon,TOWN_SPAWN.lat));
 export const PLANET_FIXTURES={
  entry:{x:entry.x,z:entry.z,facing:TOWN_SPAWN.facing},
- courtyard:{x:0,z:14,facing:'south'},
+ courtyard:{x:0,z:16.4,facing:'south'},
  studio:studioFixture,
- alley:{x:18,z:-7,facing:'south'},
+ alley:{x:26.2,z:-7,facing:'south'},
  // Offset left of the gallery doorway so the forward walking fixture meets a
  // real front wall rather than entering the room through its open door.
  collision:galleryWallFixture,
@@ -164,9 +180,11 @@ export const PLANET_FIXTURES={
  skatepark:{x:-34,z:0,facing:'west'},
  skateshop:skateShopFixture,
  mainstreet:{x:-12,z:0,facing:'east'},
- lighthouse:{x:LIGHTHOUSE.x-3.2,z:LIGHTHOUSE.z,facing:'east'},
- cave:{x:CAVE_POINTS[0][0]-2,z:CAVE_POINTS[0][1],facing:'east'},
- hiddenbeach:{x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,facing:'north'},
+ lighthouse:peninsulaFixture(PENINSULA_LIGHTHOUSE.x-3.2,PENINSULA_LIGHTHOUSE.z,PENINSULA_LIGHTHOUSE.x,PENINSULA_LIGHTHOUSE.z),
+ cave:peninsulaFixture(PENINSULA_CAVE.points[0][0]-2,PENINSULA_CAVE.points[0][1],PENINSULA_CAVE.points[0][0],PENINSULA_CAVE.points[0][1]),
+ hiddenbeach:peninsulaFixture(PENINSULA_COVE.x,PENINSULA_COVE.z,PENINSULA_COVE.x,PENINSULA_COVE.z+5),
+ culdesac:{x:CUL_DE_SACS[0].center[0]-4,z:CUL_DE_SACS[0].center[1]-3.6,facing:'east'},
+ motel:{x:16.2,z:-3.9,facing:'south'},
  resort:{x:MOUNTAIN_LAYOUT.pedestrianArrival.x,z:MOUNTAIN_LAYOUT.pedestrianArrival.z,facing:'north'},
  // In front of the lift-ticket hut door, which faces the resort forecourt.
  tickets:{x:MOUNTAIN_LAYOUT.ticketHut.x,z:MOUNTAIN_LAYOUT.ticketHut.z-MOUNTAIN_LAYOUT.ticketHut.depth/2-1.2,facing:'north'},

@@ -31,7 +31,8 @@ export type TerrainRegion={id:'town'|'mountain'|'west';x0:number;z0:number;step:
 /** Chart regions covering all land; they abut at z=42. Open ocean needs no terrain: the
  * sea sphere is opaque. Even cell counts keep full and coarse grids on shared boundaries. */
 export const TERRAIN_REGIONS:readonly TerrainRegion[]=[
- {id:'town',x0:-52,z0:42-.45*206,step:.45,columns:236,rows:206},
+ // Reaches east past the placed lighthouse cape and south past its tip.
+ {id:'town',x0:-52,z0:42-.45*218,step:.45,columns:282,rows:218},
  {id:'mountain',x0:-96,z0:42,step:.8,columns:240,rows:338},
  // The skate-park bluff west of the town. This far west a chart metre of z is far
  // shorter than a physical one, so a coarse step still draws its banks finely.
@@ -42,7 +43,7 @@ const CHUNK_CELLS=80;
 const SKIRT_DEPTH=.8;
 const UNDERWATER=MAP_SEA_LEVEL-.6;
 /** Chunks intersecting this chart box contain peninsula cells clipped around the cave. */
-const PENINSULA_BOX={x0:15,x1:54,z0:-47,z1:30};
+const PENINSULA_BOX={x0:28,x1:74,z0:-54,z1:42};
 const PORTAL_ROCK=new Color('#899185');
 const SEA_FLOOR=new Color('#BCA87B');
 

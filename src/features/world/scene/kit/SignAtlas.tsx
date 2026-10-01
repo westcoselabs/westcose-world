@@ -9,7 +9,7 @@ import { TOWN_PALETTE as P } from './materials';
 
 /** All physical signs share one texture/material and one draw call. */
 const INTERIOR_INDEX: Record<InteriorId, number> = { studio: 1, workshop: 2, arcade: 3, about: 4, lab: 5, skateshop: 6 };
-export function SignAtlas({ signs, hiddenInterior }: { signs: PhysicalSign[]; hiddenInterior?: RefObject<InteriorId | null> }) {
+export function SignAtlas({ signs, hiddenInterior, glow = 0 }: { signs: PhysicalSign[]; hiddenInterior?: RefObject<InteriorId | null>; glow?: number }) {
   const hiddenUniform = useRef({ value: 0 });
   useFrame(() => { hiddenUniform.current.value = hiddenInterior?.current ? INTERIOR_INDEX[hiddenInterior.current] : 0; });
   const { texture, geometry } = useMemo(() => {
@@ -25,14 +25,17 @@ export function SignAtlas({ signs, hiddenInterior }: { signs: PhysicalSign[]; hi
       const x = (i % columns) * cellWidth, y = Math.floor(i / columns) * cellHeight;
       ctx.fillStyle = sign.background ?? (sign.dark ? P.graphite : P.bone);
       ctx.fillRect(x, y, cellWidth, cellHeight);
-      ctx.fillStyle = sign.dark ? P.bone : P.graphite;
+      ctx.fillStyle = sign.color ?? (sign.dark ? P.bone : P.graphite);
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = `800 ${sign.subtitle ? 59 : 76}px "Barlow Condensed", "Arial Narrow", Arial, sans-serif`;
+      if (glow) { ctx.shadowColor = sign.color ?? P.bone; ctx.shadowBlur = 14; }
       ctx.fillText(sign.title, x + cellWidth / 2, y + (sign.subtitle ? 50 : 65), cellWidth - 35);
       if (sign.subtitle) {
+        ctx.fillStyle = sign.subtitleColor ?? sign.color ?? (sign.dark ? P.bone : P.graphite);
         ctx.font = '600 17px "DM Sans", Arial, sans-serif';
         ctx.fillText(sign.subtitle, x + cellWidth / 2, y + 102, cellWidth - 45);
       }
+      ctx.shadowBlur = 0;
       const halfW = sign.width / 2, halfH = sign.height / 2;
       const corners = [[-halfW, halfH], [halfW, halfH], [-halfW, -halfH], [halfW, -halfH]];
       normalMatrix.getNormalMatrix(sign.matrix);
@@ -58,7 +61,7 @@ export function SignAtlas({ signs, hiddenInterior }: { signs: PhysicalSign[]; hi
     return { texture, geometry };
   }, [signs]);
   useEffect(() => () => { texture.dispose(); geometry.dispose(); }, [texture, geometry]);
-  return <mesh geometry={geometry}><meshStandardMaterial map={texture} roughness={1} emissive={P.bone} emissiveIntensity={0.055} onBeforeCompile={shader => {
+  return <mesh geometry={geometry}><meshStandardMaterial map={texture} roughness={1} emissive={glow ? '#ffffff' : P.bone} emissiveMap={glow ? texture : null} emissiveIntensity={glow || 0.055} onBeforeCompile={shader => {
     shader.uniforms.hiddenInterior = hiddenUniform.current;
     shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nattribute float cutawayId;\nvarying float vCutawayId;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvCutawayId = cutawayId;');
     shader.fragmentShader = shader.fragmentShader.replace('#include <common>', '#include <common>\nuniform float hiddenInterior;\nvarying float vCutawayId;').replace('#include <clipping_planes_fragment>', '#include <clipping_planes_fragment>\nif (hiddenInterior > 0.5 && abs(vCutawayId - hiddenInterior) < 0.1) discard;');

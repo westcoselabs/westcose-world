@@ -11,6 +11,8 @@ export type TownBuilding = {
   color:string; trim:string; accent:string; sign?:string; subtitle?:string;
   secondary?:boolean; interior?:InteriorId; entryWidth:number; entryOffset:number;
   floorHeight:number; balcony?:boolean; awning?:boolean; exteriorStair?:boolean;
+  /** A bespoke front, drawn by the building kit instead of the archetype's default. */
+  facade?:'gallery'|'shop'|'motel-lobby'|'motel-rooms';
 };
 export type TownRoute = {
   id:string; label:string; district:DistrictId; points:readonly TownPoint[];

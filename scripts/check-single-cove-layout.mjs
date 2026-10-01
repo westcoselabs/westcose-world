@@ -13,6 +13,9 @@ const surfaces = require('../src/features/world/data/town-surfaces.ts');
 const map = require('../src/features/world/data/world-map.ts');
 const collision = require('../src/features/world/runtime/planet-collision.ts');
 const cliffs = require('../src/features/world/data/peninsula-cliffs.ts');
+const placement = require('../src/features/world/data/peninsula-frame.ts');
+/** The approved cove is authored in its own chart and placed rigidly east of the cul-de-sacs. */
+const place = ([x, z]) => { const point = placement.peninsulaWorldPoint(x, z); return [point.x, point.z]; };
 const approval = readFileSync(new URL('../docs/design/single-cove-approval/approval-template.html', import.meta.url), 'utf8');
 const approved = name => JSON.parse(approval.match(new RegExp(`const ${name} = (\\[.*?\\]);`))[1]);
 assert.deepEqual(layout.PENINSULA_COAST, approved('coast'));
@@ -24,14 +27,15 @@ assert.deepEqual(layout.PENINSULA_CAVE.points, approved('cave'));
 // The former dividing rock tongue is open water, not a smoothed low causeway.
 let dividerSamples = 0;
 for (let x = 38; x <= 45; x += .25) for (let z = -5; z <= 1; z += .25) {
-  assert.ok(surfaces.groundSurfaceAt(x, z).height < -.8, `Former divider remains at ${x},${z}`);
+  const [wx, wz] = place([x, z]);
+  assert.ok(surfaces.groundSurfaceAt(wx, wz).height < -.8, `Former divider remains at ${x},${z}`);
   dividerSamples++;
 }
 assert.ok(cliffs.PENINSULA_CLIFF_RIM.every(([x, z]) => z < -10 || x < 37), 'No middle cliff arm may remain');
-assert.equal(surfaces.groundSurfaceAt(36, -32).height.toFixed(4), '6.2000');
+assert.equal(surfaces.groundSurfaceAt(...place([36, -32])).height.toFixed(4), '6.2000');
 
 const crescent = [[38, -20], [38, -16], [36, -12], [34.5, -7], [33, -1],
-  [31.5, 6], [31.5, 13], [32.5, 18], [35, 22], [37, 25]];
+  [31.5, 6], [31.5, 13], [32.5, 18], [35, 22], [37, 25]].map(place);
 function walk(points, initialLayer) {
   let up = map.mapDirection(...points[0]);
   let support = collision.supportAt(up, { layer: initialLayer });

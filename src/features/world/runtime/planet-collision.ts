@@ -11,6 +11,9 @@ import type { SupportLayer, WorldPosition } from "./types";
 
 export const VISITOR_RADIUS = 0.31;
 export const STEP_HEIGHT = 0.32;
+/** Bowls are smooth concrete with vertical tops: a visitor in one scrambles up its wall
+ * this far in a stride, so nobody walks into a pool and is trapped at the bottom. */
+const BOWL_SCRAMBLE_HEIGHT = 1.5;
 const CENTER_HEIGHT = 0.85;
 
 /** The visible shell segments and perimeter furniture are the collision source of truth. */
@@ -168,6 +171,29 @@ export function buildingContact(position: WorldPosition, radius = VISITOR_RADIUS
   return null;
 }
 
+/** Deepest overlap of an upright capsule (centre, radius, half height) with any solid box,
+ * with a tangent push-out normal. Used by the skateboard, which needs penetration depth. */
+export function capsuleContact(center: Vector3, radius: number, halfHeight: number): { id: string; normal: Vector3; depth: number } | null {
+  let best: { id: string; normal: Vector3; depth: number } | null = null;
+  const local = new Vector3();
+  for (const box of boxes) {
+    if (center.distanceToSquared(box.center) > (box.half.length() + halfHeight + radius + 1) ** 2) continue;
+    local.copy(center).sub(box.center).applyQuaternion(box.inverse);
+    if (local.y - halfHeight > box.half.y || local.y + halfHeight < -box.half.y) continue;
+    const dx = local.x - MathUtils.clamp(local.x, -box.half.x, box.half.x);
+    const dz = local.z - MathUtils.clamp(local.z, -box.half.z, box.half.z);
+    const outside = Math.hypot(dx, dz);
+    let depth: number; const normal = new Vector3();
+    if (outside > 1e-6) { if (outside >= radius) continue; depth = radius - outside; normal.set(dx / outside, 0, dz / outside); }
+    else {
+      const px = box.half.x - Math.abs(local.x), pz = box.half.z - Math.abs(local.z);
+      if (px < pz) { depth = px + radius; normal.set(Math.sign(local.x) || 1, 0, 0); } else { depth = pz + radius; normal.set(0, 0, Math.sign(local.z) || 1); }
+    }
+    if (!best || depth > best.depth) best = { id: box.buildingId, normal: normal.applyQuaternion(box.quaternion), depth };
+  }
+  return best;
+}
+
 /** Small fixed steps, checked against support height and building footprints, then wall sliding. */
 export function moveOnSurface(
   up: Vector3,
@@ -178,11 +204,13 @@ export function moveOnSurface(
 ) {
   const initial = supportAt(up, { footRadius:currentFootRadius, layer:currentLayer });
   const layer = currentLayer ?? initial.layer;
+  const inBowl = initial.id === 'skatepark:pool' || initial.id === 'skatepark:snake';
   const attempt = (direction: Vector3, amount: number) => {
     const advanced = advanceOnSphere(up, direction, amount);
     const support = supportAt(advanced.up, { footRadius:currentFootRadius, layer });
     const ground = support.radius;
-    const tooHigh = ground > currentFootRadius + STEP_HEIGHT;
+    const step = inBowl && support.id?.startsWith('skatepark:') ? BOWL_SCRAMBLE_HEIGHT : STEP_HEIGHT;
+    const tooHigh = ground > currentFootRadius + step;
     const center = advanced.up.clone().multiplyScalar(Math.max(ground, currentFootRadius) + CENTER_HEIGHT);
     return { ...advanced, support, ground, tooHigh, contact: buildingContact(center), distance: amount };
   };

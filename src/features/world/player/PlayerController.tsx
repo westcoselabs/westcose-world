@@ -23,6 +23,12 @@ interface PlayerControllerProps {
 const FIXED_STEP = 1 / 60;
 const WALK_SPEED = 4.8;
 const RUN_SPEED = 7.8;
+/** Arrow-key turning, radians per second. */
+const TURN_RATE = 2.5;
+/** Walking forward eases the camera back behind the visitor; a mouse orbit pauses that. */
+const CAMERA_FOLLOW_RATE = 1.4;
+const ORBIT_HOLD = 1.6;
+const ZOOM_RANGE = [.6, 1.7] as const;
 /** Globe view raises the near plane so the shoreline keeps depth precision at distance. */
 const OVERVIEW_NEAR = 12;
 const SUMMIT_POINT = mapPoint(MAP_SUMMIT.x, MAP_SUMMIT.z, MAP_SUMMIT.height);
@@ -38,13 +44,14 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
   const rightArm = useRef<Group>(null);
   const leftLeg = useRef<Group>(null);
   const rightLeg = useRef<Group>(null);
+  const backBoard = useRef<Group>(null);
   const callbacks = useRef({ onReady, onHotspot, onArea });
   const ready = useRef(false);
-  const pointer = useRef<{ id: number; button: number; x: number; y: number } | null>(null);
+  const pointer = useRef<{ id: number; look: boolean; x: number; y: number } | null>(null);
   const { camera, gl } = useThree();
   const simulation = useRef({
     accumulator: 0, verticalVelocity: 0, inputActive: false, cameraInitialized: false,
-    lastMode: runtime.mode, area: "", phase: 0, gait: 0, cameraHeight: 3.0,
+    lastMode: runtime.mode, area: "", phase: 0, gait: 0, cameraHeight: 3.0, zoom: 1, orbitHold: 0,
     up: new Vector3(), forward: new Vector3(), right: new Vector3(), wish: new Vector3(),
     inputForward: new Vector3(runtime.forward.x, runtime.forward.y, runtime.forward.z),
     facing: new Vector3(runtime.forward.x, runtime.forward.y, runtime.forward.z),
@@ -76,16 +83,18 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     const pointerDown = (event: PointerEvent) => {
       if (runtime.mode !== "exploring" || pointer.current || ![0, 2].includes(event.button)) return;
       event.preventDefault(); canvas.focus({ preventScroll: true });
-      pointer.current = { id: event.pointerId, button: event.button, x: event.clientX, y: event.clientY };
-      runtime.pointer = { x: event.clientX, y: event.clientY, originX: event.clientX, originY: event.clientY, active: event.button === 0 };
-      runtime.touch = { x: 0, y: 0, active: event.button === 0 };
+      // A mouse drag looks around, like other desktop games; touch and pen drag to walk.
+      const look = event.pointerType === "mouse" || event.button === 2;
+      pointer.current = { id: event.pointerId, look, x: event.clientX, y: event.clientY };
+      runtime.pointer = { x: event.clientX, y: event.clientY, originX: event.clientX, originY: event.clientY, active: !look };
+      runtime.touch = { x: 0, y: 0, active: !look };
       canvas.setPointerCapture(event.pointerId);
     };
     const pointerMove = (event: PointerEvent) => {
       const held = pointer.current;
       if (!held || held.id !== event.pointerId || runtime.mode !== "exploring") return;
       event.preventDefault();
-      if (held.button === 2) {
+      if (held.look) {
         const state = simulation.current;
         state.up.set(runtime.up.x, runtime.up.y, runtime.up.z);
         state.rotation.setFromAxisAngle(state.up, -(event.clientX - held.x) * 0.005);
@@ -93,6 +102,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
         state.inputForward.applyQuaternion(state.rotation);
         copyPoint(runtime.forward, state.forward);
         state.cameraHeight = MathUtils.clamp(state.cameraHeight + (event.clientY - held.y) * 0.025, 1.6, 5.5);
+        state.orbitHold = ORBIT_HOLD;
         held.x = event.clientX; held.y = event.clientY;
       } else {
         const dx = event.clientX - held.x;
@@ -107,8 +117,14 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     const pointerEnd = (event: PointerEvent) => { if (event.pointerId === pointer.current?.id) clearPointer(); };
     const focusChange = (event: FocusEvent) => { if (isEditableTarget(event.target)) clear(); };
     const contextMenu = (event: MouseEvent) => event.preventDefault();
+    const wheel = (event: WheelEvent) => {
+      if (runtime.mode !== "exploring") return;
+      event.preventDefault();
+      const state = simulation.current;
+      state.zoom = MathUtils.clamp(state.zoom * Math.exp(event.deltaY * 0.0012), ZOOM_RANGE[0], ZOOM_RANGE[1]);
+    };
     canvas.setAttribute("tabindex", "0");
-    canvas.setAttribute("aria-label", "WestCose planet. Drag to walk, or use W A S D and arrow keys. Right-drag to look around.");
+    canvas.setAttribute("aria-label", "WestCose planet. W A S D or the arrow keys walk; left and right arrows turn. Drag with the mouse to look around; on touch screens, drag to walk.");
     canvas.style.setProperty("touch-action", "none");
     window.addEventListener("keydown", keyDown);
     window.addEventListener("keyup", keyUp);
@@ -121,6 +137,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     canvas.addEventListener("pointercancel", pointerEnd);
     canvas.addEventListener("lostpointercapture", clearPointer);
     canvas.addEventListener("contextmenu", contextMenu);
+    canvas.addEventListener("wheel", wheel, { passive: false });
     return () => {
       clear();
       window.removeEventListener("keydown", keyDown);
@@ -134,6 +151,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       canvas.removeEventListener("pointercancel", pointerEnd);
       canvas.removeEventListener("lostpointercapture", clearPointer);
       canvas.removeEventListener("contextmenu", contextMenu);
+      canvas.removeEventListener("wheel", wheel);
     };
   }, [gl, runtime]);
 
@@ -175,8 +193,9 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       clearWorldInput(runtime);
     }
 
-    // A snowboard run owns the camera and hides the walker, who waits where the run began.
-    if (runtime.snowboard.active) {
+    // A snowboard run or the skateboard owns the camera and hides the walker; a run leaves
+    // the walker waiting where it began, while the skateboard carries it along.
+    if (runtime.snowboard.active || runtime.skate.riding) {
       if (avatar.current) avatar.current.visible = false;
       state.cameraInitialized = false; state.accumulator = 0; state.inputActive = false;
       runtime.counters.drawCalls = gl.info.render.calls;
@@ -195,11 +214,24 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       const moving = runtime.mode === "exploring" && (!isEditableTarget(document.activeElement) || runtime.touch.active);
       if (!moving) clearWorldInput(runtime);
       const keys = runtime.keys;
-      const x = moving ? Number(keys.has("KeyD") || keys.has("ArrowRight")) - Number(keys.has("KeyA") || keys.has("ArrowLeft")) + runtime.touch.x : 0;
-      const y = moving ? Number(keys.has("KeyW") || keys.has("ArrowUp")) - Number(keys.has("KeyS") || keys.has("ArrowDown")) + runtime.touch.y : 0;
+      const strafe = moving ? Number(keys.has("KeyD")) - Number(keys.has("KeyA")) : 0;
+      const turn = moving ? Number(keys.has("ArrowRight")) - Number(keys.has("ArrowLeft")) : 0;
+      const advance = moving ? Number(keys.has("KeyW") || keys.has("ArrowUp")) - Number(keys.has("KeyS") || keys.has("ArrowDown")) : 0;
+      // Touch drag keeps its chase camera; the keyboard walks relative to a steady camera.
+      const chase = moving && runtime.touch.active;
+      const x = strafe + (chase ? runtime.touch.x : 0);
+      const y = advance + (chase ? runtime.touch.y : 0);
+      state.orbitHold = Math.max(0, state.orbitHold - FIXED_STEP);
+      if (turn !== 0) {
+        // Arrow turning swings the visitor and the camera together, as in classic keyboard games.
+        state.rotation.setFromAxisAngle(state.up, -turn * TURN_RATE * FIXED_STEP);
+        state.forward.applyQuaternion(state.rotation).normalize();
+        state.facing.applyQuaternion(state.rotation).normalize();
+        state.inputForward.applyQuaternion(state.rotation).normalize();
+      }
       const inputLength = Math.hypot(x, y);
       if (inputLength > 0.025) {
-        if (!state.inputActive) state.inputForward.copy(state.forward);
+        if (!state.inputActive || !chase) state.inputForward.copy(state.forward);
         state.inputActive = true;
         state.right.crossVectors(state.inputForward, state.up).normalize();
         state.wish.copy(state.inputForward).multiplyScalar(y).addScaledVector(state.right, x).normalize();
@@ -218,11 +250,13 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
         // step cannot resolve the same tunnel point back to the terrace.
         runtime.supportLayer = movement.support.layer;
         if (movement.distance > 0.001) {
-          // The input basis is latched for a gesture and transported too: holding diagonally
+          // A touch gesture latches and transports its input basis: holding diagonally
           // traces a geodesic instead of feeding camera turn back into endless circles.
+          // The keyboard camera only eases in behind forward walking, never flips on S.
           // Rotate within the tangent plane, including the exact 180-degree reverse case.
           let angle = Math.atan2(state.right.crossVectors(state.forward, state.wish).dot(state.up), state.forward.dot(state.wish));
-          state.forward.applyAxisAngle(state.up, angle * (1 - Math.exp(-4.5 * FIXED_STEP))).normalize();
+          const follow = chase ? 4.5 : state.orbitHold > 0 ? 0 : CAMERA_FOLLOW_RATE * Math.max(0, Math.min(1, y));
+          state.forward.applyAxisAngle(state.up, angle * (1 - Math.exp(-follow * FIXED_STEP))).normalize();
           angle = Math.atan2(state.right.crossVectors(state.facing, state.wish).dot(state.up), state.facing.dot(state.wish));
           state.facing.applyAxisAngle(state.up, angle * (1 - Math.exp(-12 * FIXED_STEP))).normalize();
           runtime.travelDistance += movement.distance;
@@ -271,9 +305,10 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     // Keep the visitor just off the center sightline so the raised follow
     // camera can see ahead without obscuring input or the user's right-drag pitch.
     state.target.addScaledVector(state.right, 0.55);
-    state.cameraDirection.copy(state.forward).multiplyScalar(-CAMERA_FOLLOW_DISTANCE).addScaledVector(state.up, state.cameraHeight).normalize();
-    const availableDistance = cameraClearDistance(state.target, state.cameraDirection, CAMERA_FOLLOW_DISTANCE, runtime.interior, runtime.supportLayer);
-    runtime.desiredCameraDistance = CAMERA_FOLLOW_DISTANCE;
+    const followDistance = CAMERA_FOLLOW_DISTANCE * state.zoom;
+    state.cameraDirection.copy(state.forward).multiplyScalar(-followDistance).addScaledVector(state.up, state.cameraHeight * state.zoom).normalize();
+    const availableDistance = cameraClearDistance(state.target, state.cameraDirection, followDistance, runtime.interior, runtime.supportLayer);
+    runtime.desiredCameraDistance = followDistance;
     if (!state.cameraInitialized || availableDistance < runtime.cameraDistance) runtime.cameraDistance = availableDistance;
     else runtime.cameraDistance = MathUtils.damp(runtime.cameraDistance, availableDistance, 5, dt);
     state.desired.copy(state.target).addScaledVector(state.cameraDirection, runtime.cameraDistance);
@@ -311,6 +346,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     runtime.landmarkFraming.summitVisible = summitVisible;
     state.cameraInitialized = true;
 
+    if (backBoard.current) backBoard.current.visible = runtime.skate.owned;
     if (avatar.current) {
       // A collision-shortened follow camera otherwise fills the viewport with
       // the visitor. Treat that close range as a clear first-person cutaway;
@@ -359,6 +395,13 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     {[-0.075, 0.075].map(x => <mesh key={x} position={[x, 1.63, -0.231]}><sphereGeometry args={[0.019, 6, 6]} /><meshToonMaterial color="#28333a" /></mesh>)}
     <mesh position={[0, 1.04, 0.265]} castShadow><boxGeometry args={[0.37, 0.47, 0.16]} /><meshToonMaterial color="#bf7957" /></mesh>
     <mesh position={[0, 1.08, 0.355]}><boxGeometry args={[0.13, 0.04, 0.012]} /><meshToonMaterial color="#f0e6cc" /></mesh>
+    {/* The skate-shop board rides strapped to the pack once the visitor has one. */}
+    <group ref={backBoard} position={[0, 1.02, 0.39]} rotation={[0.12, 0, 0.18]} visible={false}>
+      <mesh castShadow><boxGeometry args={[0.2, 0.78, 0.022]} /><meshToonMaterial color="#c9ae86" /></mesh>
+      <mesh position={[0, 0, 0.013]}><boxGeometry args={[0.18, 0.7, 0.006]} /><meshToonMaterial color="#bf5f3f" /></mesh>
+      {[-0.24, 0.24].map(y => <mesh key={y} position={[0, y, 0.045]}><boxGeometry args={[0.2, 0.05, 0.05]} /><meshToonMaterial color="#efe6cf" /></mesh>)}
+      <mesh position={[0, 0.05, -0.02]}><boxGeometry args={[0.24, 0.05, 0.03]} /><meshToonMaterial color="#2c4047" /></mesh>
+    </group>
     <group ref={leftArm} position={[-0.33, 1.31, 0]} rotation={[0, 0, -0.1]}>
       <mesh position={[0, -0.2, 0]} castShadow><capsuleGeometry args={[0.105, 0.27, 4, 8]} /><meshToonMaterial color="#eee7d4" /></mesh>
       <mesh position={[0, -0.41, 0]} castShadow><sphereGeometry args={[0.09, 8, 8]} /><meshToonMaterial color="#c58d6a" /></mesh>

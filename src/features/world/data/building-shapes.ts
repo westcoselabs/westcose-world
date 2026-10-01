@@ -69,6 +69,12 @@ export function interiorFurnitureSegments(building:TownBuilding):WallSegment[] {
     case 'arcade': return [-1, 1].map(side => furniture(`cabinets-${side}`, side * (width / 2 - 0.8), -0.5, [1.1, 1.9, 3.8]));
     case 'about': return [furniture('desk', -(width / 2 - 1.2), -1, [1.7, 0.85, 1.35])];
     case 'lab': return [-1, 1].map(side => furniture(`lab-bench-${side}`, side * (width / 2 - 0.95), -0.6, [1.25, 0.95, 3.1]));
+    // The counter keeps the board wall behind it; its west end stays open to walk round.
+    case 'skateshop': return [
+      furniture('counter', 0.9, -1.35, [5.2, 1.05, 0.75]),
+      furniture('deck-rack', width / 2 - 0.35, 1.2, [0.5, 1.7, 3.0]),
+      furniture('display', 1.5, 1.8, [1.6, 0.8, 1.2]),
+    ];
   }
 }
 

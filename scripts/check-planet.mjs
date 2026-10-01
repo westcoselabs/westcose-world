@@ -41,6 +41,8 @@ try {
   const mountain = require(path.join(output, 'data/mountain-layout.js'));
   const skiRuns = require(path.join(output, 'data/ski-runs.js'));
   const landmarks = require(path.join(output, 'data/concept-landmarks.js'));
+  const downtown = require(path.join(output, 'data/downtown-layout.js'));
+  const skatepark = require(path.join(output, 'data/skatepark-layout.js'));
   const peninsula = require(path.join(output, 'data/peninsula-layout.js'));
   const cave = require(path.join(output, 'data/peninsula-cave.js'));
   const surfaces = require(path.join(output, 'data/town-surfaces.js'));
@@ -234,10 +236,10 @@ try {
   });
 
   await test('the default load point is the dry courtyard and the summit checkpoint remains valid', () => {
-    const courtyard = town.TOWN_AREAS.find(area => area.id === 'courtyard');
+    const [x0, x1, z0, z1] = downtown.DOWNTOWN_WALKS.find(walk => walk.id === 'courtyard').rect;
     const coordinates = map.mapCoordinates(runtimeTypes.DEFAULT_SPAWN);
-    assert.ok(Math.abs(coordinates.x - courtyard.center[0]) < courtyard.width / 2 - 1);
-    assert.ok(Math.abs(coordinates.z - courtyard.center[1]) < courtyard.depth / 2 - 1);
+    assert.ok(coordinates.x > x0 + 1 && coordinates.x < x1 - 1);
+    assert.ok(coordinates.z > z0 + 1 && coordinates.z < z1 - 1);
     assert.notEqual(collision.supportAt(runtimeTypes.DEFAULT_SPAWN).kind, 'water');
     assert.equal(collision.buildingContact(runtimeTypes.DEFAULT_SPAWN), null);
     const summit = map.mapDirection(...summitChart);
@@ -635,49 +637,49 @@ try {
       'The same map coordinate has a real upper terrace as well as the lower tunnel');
   });
 
-  await test('skate bowl and quarter pipe are traversable changes in the actual ground', () => {
-    const metric = map.mapMetric(landmarks.SKATE_CENTER[0], landmarks.SKATE_ELEVATION);
-    const point = (x, z) => map.mapDirection(landmarks.SKATE_CENTER[0] + x / metric.x, landmarks.SKATE_CENTER[1] + z / metric.z);
-    const height = (x, z) => collision.supportRadius(point(x, z)) - planet.RADIUS;
-    assert.ok(height(-1, -4) - height(-1, 0) > .5, 'Bowl center is below its entry rim');
-    assert.ok(height(5.2, 0) - height(2.8, 0) > .7, 'Quarter pipe must rise above the park floor');
-    for (const path of [[[-1, -4], [-1, 0], [-1, -4]], [[2.8, 0], [5.2, 0], [2.8, 0]]]) {
-      let up = point(...path[0]);
-      for (const target of path.slice(1)) {
-        const walked = walkTo(up, point(...target), 'skate ramp');
-        assert.equal(walked.blocked, 0, 'Both climbing and descending the skate terrain remain walkable');
-        assert.ok(!walked.supportKinds.has('water')); up = walked.up;
-      }
+  await test('skate park bowls, snake, halfpipe and quarter are real ground a visitor can cross', () => {
+    const point = (u, v) => skatepark.parkDirection(u, v);
+    const height = (u, v) => collision.supportRadius(point(u, v)) - planet.RADIUS - skatepark.SKATEPARK.deck;
+    for (const pool of skatepark.PARK_POOLS) close(height(...pool.center), -skatepark.transitionDepth(pool.transition), 1e-6, `${pool.name} floor sits its full depth below the deck`);
+    close(height((skatepark.PARK_HALFPIPE.u0 + skatepark.HALFPIPE_COPING[0]) / 2, 20), skatepark.HALFPIPE_HEIGHT, 1e-6, 'The halfpipe decks stand its full height up');
+    close(height(-10.8, 20), 0, 1e-6, 'The halfpipe flat bottom is the park deck');
+    close(height(4.5, skatepark.QUARTER_TOP + .5), skatepark.QUARTER_HEIGHT, 1e-6, 'The quarter pipe deck stands its full height up');
+    assert.ok(height(-15.6, -22.6) < height(12, -21.3) - 2, 'The snake run deepens toward its pocket');
+    // A visitor walks into every bowl and scrambles back out over the vert, crosses the
+    // snake, and uses the halfpipe's open end, its stairs, the five-stair and the quarter.
+    for (const [label, from, to] of [
+      ['Deep End north', [-9.45, -2.5], [-9.45, -10.4]], ['Deep End west', [-19.5, -10.4], [-9.45, -10.4]],
+      ['Clover Bowl', [-6, 5.17], [-14, 5.17]], ['snake crossing', [0, -16.8], [0, -25.9]], ['snake pocket', [-15.6, -18], [-15.6, -22.6]],
+      ['halfpipe flat', [-10.8, 12], [-10.8, 20]], ['halfpipe stairs', [-2.5, 15.6], [-2.5, 23]],
+      ['five-stair', [14, -9], [14, -13]], ['north quarter', [4.5, 20], [4.5, 26]],
+    ]) {
+      const there = walkTo(point(...from), point(...to), `skate park ${label}`), back = walkTo(there.up, point(...from), `skate park ${label} back`);
+      assert.equal(there.blocked + back.blocked, 0, `${label}: both directions remain walkable`);
+      assert.ok(!there.supportKinds.has('water') && !back.supportKinds.has('water'));
     }
   });
 
-  await test('visible skate stairs have twelve discrete supported treads across their width', () => {
-    const stairs = landmarks.SKATE_STAIRS;
-    assert.equal(stairs.count, 12); close(stairs.rise, .19);
-    for (let step = 0; step < stairs.count; step++) {
-      const along = (step + .5) / stairs.count * landmarks.SKATE_STAIR_LENGTH;
-      const height = stairs.baseHeight + step * stairs.rise;
-      for (const lateral of [-1.1, 0, 1.1]) {
-        const point = landmarks.skateStairPointAt(along, lateral, height);
-        const chart = map.mapCoordinates(point);
-        const surface = landmarks.skateStairSurfaceAt(chart.x, chart.z);
-        assert.ok(surface, `Tread ${step} at offset ${lateral} has shared support`);
-        assert.equal(surface.step, step);
-        close(surface.height, height, 1e-8);
-        close(collision.supportRadius(point), map.MAP_RADIUS + height, 1e-8);
-      }
+  await test('the grand stairs, five-stair and halfpipe stairs have discrete supported treads across their width', () => {
+    const deck = skatepark.SKATEPARK.deck, g = skatepark.GRAND_STAIRS;
+    for (let step = 1; step <= g.count; step++) for (const z of [-2.4, -1.2, 1.2, 2.4]) {
+      const x = g.foot - (step - .5) * skatepark.GRAND_STAIR_TREAD, surface = skatepark.grandStairSurfaceAt(x, z);
+      assert.equal(surface.step, step);
+      close(collision.supportRadius(map.mapDirection(x, z)), map.MAP_RADIUS + g.base + step * g.rise, 1e-8, `Grand stair tread ${step} at z ${z}`);
     }
-    for (let step = 1; step <= stairs.count; step++) {
-      const boundary = step / stairs.count * landmarks.SKATE_STAIR_LENGTH;
-      const pointBefore = landmarks.skateStairPointAt(boundary - .002, 0, stairs.baseHeight);
-      const pointAfter = landmarks.skateStairPointAt(Math.min(boundary + .002, landmarks.SKATE_STAIR_LENGTH), 0, stairs.baseHeight);
-      close(collision.supportRadius(pointAfter) - collision.supportRadius(pointBefore), stairs.rise, 1e-8,
-        `Riser ${step} is a discrete support change, not a smoothed ramp`);
+    const five = skatepark.PARK_STAIRS, treads = five.steps - 1;
+    for (let k = 0; k < treads; k++) for (const u of [five.u0 + .3, (five.u0 + five.u1) / 2 + .6, five.u1 - .3]) {
+      const v = five.top + (k + .5) * (five.bottom - five.top) / treads;
+      close(collision.supportRadius(skatepark.parkDirection(u, v)) - map.MAP_RADIUS - deck, five.height * (1 - (k + 1) / five.steps), 1e-8, `Five-stair tread ${k} at u ${u}`);
+    }
+    const climb = skatepark.HALFPIPE_STAIRS;
+    for (let k = 0; k < climb.steps; k++) for (const u of [climb.u0 + .3, (climb.u0 + climb.u1) / 2, climb.u1 - .3]) {
+      const v = climb.foot + (k + .5) * (climb.top - climb.foot) / climb.steps;
+      close(collision.supportRadius(skatepark.parkDirection(u, v)) - map.MAP_RADIUS - deck, (k + 1) * skatepark.HALFPIPE_HEIGHT / climb.steps, 1e-8, `Halfpipe stair tread ${k} at u ${u}`);
     }
   });
 
-  await test('all five real doorways allow entry and exit while their walls stay solid', () => {
-    assert.equal(town.TOWN_INTERIORS.length, 5);
+  await test('all six real doorways allow entry and exit while their walls stay solid', () => {
+    assert.equal(town.TOWN_INTERIORS.length, 6);
     for (const building of town.TOWN_INTERIORS) {
       const outside = shapes.buildingDoorPoint(building, 1.9).normalize();
       const center = shapes.buildingLocalPoint(building, [building.entryOffset, 0, 0]).normalize();

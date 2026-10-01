@@ -5,7 +5,8 @@ import { BufferGeometry, Color, Float32BufferAttribute, Mesh, MeshStandardMateri
 import { MAP_RADIUS, MAP_SEA_LEVEL, mapCoordinates, mapDirection } from '../data/world-map';
 import { inPeninsulaRegion } from '../data/peninsula-layout';
 import { cavePortalLining, cavePortalSeals, clipTerrainOutsideCave, registerCavePortalTriangles } from '../data/peninsula-cave';
-import { skateStairSurfaceAt } from '../data/concept-landmarks';
+import { downtownKindAt } from '../data/downtown-layout';
+import { grandStairSurfaceAt, nearSkatepark, skateparkTerrainCeiling } from '../data/skatepark-layout';
 import { skiFeatureMaskAt } from '../data/ski-runs';
 import { TOWN_INTERIORS } from '../data/town-layout';
 import { groundSurfaceAt,OPEN_SEA_FLOOR,terrainColorAt,terrainIsOpenSea } from '../data/town-surfaces';
@@ -14,20 +15,27 @@ import type { WorldRuntimeState } from '../runtime/types';
 
 export function terrainVisibleHeight(d:Vector3,h:number){
  for(const building of TOWN_INTERIORS){const r=buildingFloorRadius(building,d,.1);if(r!==null)h=Math.min(h,r-MAP_RADIUS-.1);}
- const p=mapCoordinates(d),stair=skateStairSurfaceAt(p.x,p.z);
+ const p=mapCoordinates(d),stair=grandStairSurfaceAt(p.x,p.z);
  // Coarse terrain triangles must not interpolate up through the explicit level treads.
- if(stair)h=Math.min(h,stair.height-.23);
+ if(stair)h=Math.min(h,stair.height-.25);
+ // Streets, the bluff wall and the park are explicit meshes; keep the cells just beneath.
+ if(downtownKindAt(p.x,p.z))h=Math.min(h,h-.06);
+ if(p.x>-32.95&&p.x<-31.9&&p.z>-24.2&&p.z<27.7)h=Math.min(h,.2);
+ if(nearSkatepark(p.x,p.z)){const ceiling=skateparkTerrainCeiling(p.x,p.z);if(ceiling!==null)h=Math.min(h,ceiling);}
  // Kickers, moguls and drops have their own detailed mesh; keep coarse cells beneath it.
  if(p.z>40)h-=.12*skiFeatureMaskAt(p.x,p.z);
  return h;
 }
 
-export type TerrainRegion={id:'town'|'mountain';x0:number;z0:number;step:number;columns:number;rows:number};
+export type TerrainRegion={id:'town'|'mountain'|'west';x0:number;z0:number;step:number;columns:number;rows:number};
 /** Chart regions covering all land; they abut at z=42. Open ocean needs no terrain: the
  * sea sphere is opaque. Even cell counts keep full and coarse grids on shared boundaries. */
 export const TERRAIN_REGIONS:readonly TerrainRegion[]=[
  {id:'town',x0:-52,z0:42-.45*206,step:.45,columns:236,rows:206},
  {id:'mountain',x0:-96,z0:42,step:.8,columns:240,rows:338},
+ // The skate-park bluff west of the town. This far west a chart metre of z is far
+ // shorter than a physical one, so a coarse step still draws its banks finely.
+ {id:'west',x0:-100,z0:42-.8*190,step:.8,columns:60,rows:190},
 ];
 export type TerrainLod='full'|'coarse';
 const CHUNK_CELLS=80;

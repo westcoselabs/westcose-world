@@ -5,14 +5,17 @@ import { MAP_RADIUS, mapCoordinates, mapMetric } from './world-map';
 import { massifHeightAt, mountainBaseAt, mountainBlendAt, mountainCoastDistance, mountainFinishAreaAt, mountainResortPlatesAt, mountainRunPlateWeightAt, mountainRunPlatesAt, mountainSnowAt } from './mountain-layout';
 import { existingIslandTerrainAt } from './island-terrain';
 import { RUN_FEATHER, runWidthAt, skiCarveAt, skiRunSampleAt } from './ski-runs';
-import { CAVE_FLOOR, caveBlendAt, skateBlendAt, skateHeightAt, skateStairSurfaceAt } from './concept-landmarks';
+import { CAVE_FLOOR, caveBlendAt } from './concept-landmarks';
+import { downtownKindAt, downtownSurfaceAt } from './downtown-layout';
+import { GRAND_STAIRS, grandStairSurfaceAt, nearSkatepark, skateparkSurfaceAt } from './skatepark-layout';
+import { westBluffAt, westBluffDistance } from './island-terrain';
 import { inPeninsulaRegion, peninsulaBlendAt, peninsulaHeightAt, peninsulaFoundationAt, coastDistance, PENINSULA_SAND } from './peninsula-layout';
 
 const clamp=(v:number,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=(a:number,b:number,v:number)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t);};
 export const townCoordinates=mapCoordinates;
-// Compatibility metadata; the actual stair support is authored by the route below.
-export const TOWN_STEPS={lon:-24/MAP_RADIUS,startLat:0,endLat:11/MAP_RADIUS,width:3,count:12,rise:.19,treadAngle:11/MAP_RADIUS/12,baseHeight:.22};
+// Compatibility metadata for the grand stairs up to the skate park; skatepark-layout.ts authors the treads.
+export const TOWN_STEPS={lon:GRAND_STAIRS.foot/MAP_RADIUS,endLon:GRAND_STAIRS.top/MAP_RADIUS,width:GRAND_STAIRS.halfWidth*2,count:GRAND_STAIRS.count,rise:GRAND_STAIRS.rise,baseHeight:GRAND_STAIRS.base};
 export const COVE_STEPS={start:[-20,-16] as const,end:[-18,-20] as const,width:2.4,count:0,top:.15,rise:0};
 
 /** Frozen town substrate + mountain island, with the ski runs carved between flat
@@ -24,19 +27,21 @@ export function naturalTerrainAt(x:number,z:number):number {
  let height=plate>0?carved+(plated-carved)*plate:carved;
  height=mountainResortPlatesAt(x,z,height);
  const blend=peninsulaBlendAt(x,z);
- return blend===0?height:height+(peninsulaHeightAt(x,z)-height)*blend;
+ height=blend===0?height:height+(peninsulaHeightAt(x,z)-height)*blend;
+ // The west bluff reaches far up the chart this far west; it wins over the mountain's
+ // chart-z blend, which only means anything near the town meridian.
+ return x<-32?Math.max(height,westBluffAt(x,z)):height;
 }
 /** Cheap exact test for the flat -3m open-sea floor, where no land layer applies. */
 export const OPEN_SEA_FLOOR=-3;
 export function terrainIsOpenSea(x:number,z:number):boolean{
+ if(x<-32&&westBluffAt(x,z)>OPEN_SEA_FLOOR+1e-9)return false;
  if(z>=52)return mountainCoastDistance(x,z)<-3;
  if(z>=40||inPeninsulaRegion(x,z))return false;
  return existingIslandTerrainAt(x,z)<=OPEN_SEA_FLOOR+1e-9;
 }
 export function substrateAt(x:number,z:number):number {
- let height=naturalTerrainAt(x,z);
- const skate=skateHeightAt(x,z),skateBlend=skateBlendAt(x,z);
- if(skate!==undefined)height+=(skate-height)*skateBlend;
+ const height=naturalTerrainAt(x,z);
  // This is the upper outdoor surface. The cave is a separate lower support,
  // never a radial trench through the lighthouse foundation.
  return height;
@@ -90,7 +95,6 @@ export function routeElevation(route:TownRoute,x:number,z:number,progress:number
  }
  if(typeof route.elevation==='number')return route.elevation;
  if(route.elevation)return route.elevation[0]+(route.elevation[1]-route.elevation[0])*progress;
- if(route.id==='skate-stairs')return .22+Math.min(12,Math.floor(progress*12))* .19;
  if(route.id==='cave')return -.1;
  return (substrateHeight??substrateAt(x,z))+.025;
 }
@@ -109,7 +113,7 @@ export function groundSurfaceAt(x:number,z:number):{height:number;kind:'ground'|
   if(x<s.minX||x>s.maxX||z<s.minZ||z>s.maxZ)continue;
   const c=closest(s,x,z,height),half=s.route.width/2;
   if(c.distance<=half){height=routeElevation(s.route,x,z,c.progress,unroutedHeight);routeId=s.route.id;}
-  else if((s.route.id==='skate-stairs'||s.route.elevation!==undefined||s.route.elevations||(s.route.id==='beach-east'&&inPeninsulaRegion(x,z)&&x>23))&&c.distance<half+1.8){height+=(routeElevation(s.route,x,z,c.progress)-height)*(1-smooth(half,half+1.8,c.distance));}
+  else if((s.route.elevation!==undefined||s.route.elevations||(s.route.id==='beach-east'&&inPeninsulaRegion(x,z)&&x>23))&&c.distance<half+1.8){height+=(routeElevation(s.route,x,z,c.progress)-height)*(1-smooth(half,half+1.8,c.distance));}
  }
  if(local){
   // Resolve this winding trail once, not once per overlapping segment. Repeated
@@ -138,8 +142,12 @@ export function groundSurfaceAt(x:number,z:number):{height:number;kind:'ground'|
  for(const area of TOWN_AREAS){const m=mapMetric(x,height),dx=Math.abs(x-area.center[0])*m.x,dz=Math.abs(z-area.center[1])*m.z;
   if(dx<=area.width/2&&dz<=area.depth/2){const edge=Math.min(area.width/2-dx,area.depth/2-dz);height+=( (area.elevation??height)-height)*smooth(0,.7,edge);}
  }
- const stair=skateStairSurfaceAt(x,z);
- if(stair){height=stair.height;routeId='skate-stairs';}
+ // Downtown streets and sidewalks, the grand stairs, then the skate park on the bluff.
+ const street=downtownSurfaceAt(x,z);
+ if(street){height=street.height;routeId=street.id;}
+ const stair=grandStairSurfaceAt(x,z);
+ if(stair){height=stair.height;routeId='grand-stairs';}
+ if(nearSkatepark(x,z)){const park=skateparkSurfaceAt(x,z);if(park){height=park.height;routeId=`skatepark:${park.feature}`;}}
  // The lighthouse's top foundation is independent of the lower tunnel floor.
  if(inPeninsulaRegion(x,z)){
   const foundation=peninsulaFoundationAt(x,z);
@@ -169,6 +177,9 @@ export function surfaceMaterialAt(x:number,z:number,height=substrateAt(x,z)):str
   if(closest(s,x,z,height).distance<=s.route.width/2)color=s.route.material==='asphalt'?'#687D7E':s.route.material==='timber'?'#A98A60':s.route.material==='sand'?'#D8BD8B':s.route.material==='concrete'?'#CBC6B4':'#AE9972';
  }
  for(const a of TOWN_AREAS){const m=mapMetric(x,height);if(Math.abs(x-a.center[0])*m.x<a.width/2&&Math.abs(z-a.center[1])*m.z<a.depth/2)color=a.material==='gravel'?'#B2A38A':'#D6D0BE';}
+ const paved=downtownKindAt(x,z);
+ if(paved)color=paved==='road'?'#4F5A5C':'#CBC6B4';
+ if(grandStairSurfaceAt(x,z)||(nearSkatepark(x,z)&&skateparkSurfaceAt(x,z)))color='#C3C0B5';
  return color;
 }
 /** `slope` is the local tangent of the rendered terrain, when the caller knows it. */
@@ -187,7 +198,8 @@ export function terrainColorAt(x:number,z:number,height:number,slope=0){
  const bank=onRun&&run!.distance<half+RUN_FEATHER;
  if((mountainSnowAt(x,z)||bank)&&height>0)return bank?'#E6EDE6':slope>.85?'#8A968F':slope>.7&&Math.abs(Math.sin(x*.21+z*.13))<.35?'#A3AEA8':'#EDF2E9';
  if(caveBlendAt(x,z)>.3||(x>30&&z<12&&height<.4)||(z<-17&&Math.abs(x)<27&&height<.5))return '#D7BB85';
- if(skateBlendAt(x,z)>.98)return '#B5BAB3';
+ // The bluff top is mown grass; its open slopes read as coastal scrub down to the sand.
+ if(x<-30&&x>-90){const d=westBluffDistance(x,z);if(d<-.5)return '#6F8D66';if(d<5&&height>.5)return '#7F8C76';}
  if((x>23&&z<18)||(x<-28&&z<20))return '#899087';
  // Forest belt below the mountain snow line lightens toward the alpine zone.
  if(mountainBlendAt(x,z)>.5){const massif=massifHeightAt(x,z);return massif>4.5?'#8E9C88':massif>3.2?'#7B9175':'#688765';}

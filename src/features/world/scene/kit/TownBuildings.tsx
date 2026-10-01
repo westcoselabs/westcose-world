@@ -45,13 +45,11 @@ function apron(context: KitContext, building: TownBuilding) {
 }
 
 function townSigns(c: KitContext) {
-  physicalSign(c, surfaceFrame(0, 13), 'WESTCOSE', 'COURTYARD / ARRIVAL', [0, 2.7, 0.091], 5.9, 1.08);
+  physicalSign(c, surfaceFrame(0, 17.4), 'WESTCOSE', 'COURTYARD / ARRIVAL', [0, 2.7, 0.091], 5.9, 1.08);
   const coast = surfaceFrame(0, -15);
   physicalSign(c, coast, 'BOARDWALK', 'BEACH / PIER', [0, 1.35, 0.23], 1.9, 0.36);
   physicalSign(c, coast, 'BOARDWALK', 'BEACH / PIER', [0, 1.35, -0.23], 1.9, 0.36, [0, Math.PI, 0]);
   for (const data of [
-    { x: -15, z: 0, top: 'THE BLVD', bottom: 'GALLERY / SKATE PARK' },
-    { x: 10, z: 2, top: 'WESTCOSE SHOP →', bottom: 'COURTYARD / BOARDWALK' },
     { x: 0, z: 109, top: 'SKI RESORT', bottom: 'TRAILS 1 / 2 / 3' },
   ]) {
     const m = surfaceFrame(data.x, data.z);

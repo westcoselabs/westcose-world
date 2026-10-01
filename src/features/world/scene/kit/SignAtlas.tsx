@@ -8,7 +8,7 @@ import type { InteriorId } from '../../data/town-types';
 import { TOWN_PALETTE as P } from './materials';
 
 /** All physical signs share one texture/material and one draw call. */
-const INTERIOR_INDEX: Record<InteriorId, number> = { studio: 1, workshop: 2, arcade: 3, about: 4, lab: 5 };
+const INTERIOR_INDEX: Record<InteriorId, number> = { studio: 1, workshop: 2, arcade: 3, about: 4, lab: 5, skateshop: 6 };
 export function SignAtlas({ signs, hiddenInterior }: { signs: PhysicalSign[]; hiddenInterior?: RefObject<InteriorId | null> }) {
   const hiddenUniform = useRef({ value: 0 });
   useFrame(() => { hiddenUniform.current.value = hiddenInterior?.current ? INTERIOR_INDEX[hiddenInterior.current] : 0; });

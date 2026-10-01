@@ -1,0 +1,55 @@
+/* Skateboard: HUD, equip button and S.K.A.T.E. results. Shares the snowboard HUD panels
+   and popups; see WESTCOSE_WORLD_STYLE.md for the palette. */
+.skate-hud .hud-score{top:22px}
+.skate-combo{top:22px;min-width:180px}
+.skate-hud .hud-combo-tricks{font-size:11px;white-space:normal;max-width:min(420px,calc(100vw - 60px))}
+.skate-game{position:absolute;left:30px;top:66px;display:flex;align-items:center;gap:14px;background:#233230e0;border:1px solid #f3eee01f;border-radius:5px;box-shadow:3px 4px 0 #14222226;padding:8px 14px}
+.skate-letters{display:flex;gap:4px}
+.skate-letters>span{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:1px solid #f3eee040;font-family:var(--display);font-size:19px;font-weight:700;color:#f3eee055;transition:background .2s,color .2s}
+.skate-letters>span.is-got{background:#e4b36e;border-color:#e4b36e;color:#243235}
+.skate-clock{font-family:var(--display);font-size:30px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;min-width:58px;text-align:right}
+.hud-popup.popup-bail strong{color:#f09a7a}
+.hud-popup.popup-bank span{color:#bfe3a6}
+.hud-popup.popup-letter strong{font-size:64px;color:#f1d39a}
+.hud-popup.popup-trick{animation-duration:1.1s}
+.hud-popup.popup-trick strong{font-size:24px}
+.hud-popup.popup-trick span{font-size:17px}
+.skate-balance{position:absolute;left:50%;bottom:74px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;transition:opacity .12s}
+.skate-balance-track{position:relative;display:block;width:220px;height:10px;border-radius:5px;background:linear-gradient(90deg,#c65b3c 0,#e4b36e 22%,#9fcf8a 42%,#9fcf8a 58%,#e4b36e 78%,#c65b3c 100%);border:1px solid #233230;box-shadow:2px 3px 0 #14222226}
+.skate-balance-marker{--danger:0;position:absolute;top:-5px;width:4px;height:20px;margin-left:-2px;border-radius:2px;background:#f7f2e4;box-shadow:0 0 0 2px #233230}
+.skate-balance-label{font-family:Consolas,monospace;font-size:8px;letter-spacing:1.6px;color:#f3eee0;text-shadow:0 1px 0 #1c2b2a}
+.skate-stats{bottom:30px}
+.skate-start{position:absolute;left:50%;bottom:118px;transform:translateX(-50%);pointer-events:auto;align-items:center;gap:10px;background:#e4b36e;color:#243235;border:1px solid #c39b63;border-radius:5px;box-shadow:3px 4px 0 #37575b36;padding:10px 16px;font-weight:700;font-size:13px}
+.skate-start kbd{font-family:Consolas,monospace;font-size:10px;background:#243235;color:#f3eee0;border-radius:3px;padding:2px 6px}
+.skate-start:hover{background:#f0c58a}
+.skate-keys{max-width:calc(100vw - 40px);overflow:hidden;text-overflow:ellipsis}
+.skate-flip{right:118px;bottom:40px;width:62px;height:62px;font-size:14px}
+.skate-grind{right:30px;bottom:190px;width:62px;height:62px;font-size:13px}
+.skate-manual{right:196px;bottom:70px;width:58px;height:58px;font-size:12px}
+
+/* Equip / unequip, and a transient note for the board flow. */
+.board-toggle{position:absolute;right:28px;bottom:86px;display:flex;align-items:center;gap:10px;background:#334c48;color:#f3eee0;border:1px solid #233230;border-radius:5px;box-shadow:3px 4px 0 #1c2b2a40;padding:9px 14px;font-weight:700;font-size:12px;z-index:3}
+.board-toggle kbd{font-family:Consolas,monospace;font-size:10px;background:#f3eee0;color:#243235;border-radius:3px;padding:2px 6px}
+.board-toggle:hover{background:#3d594f}
+.board-toggle:disabled{background:#8d9690;border-color:#7a837d;color:#eef0e8;cursor:not-allowed}
+.board-toggle.is-riding{background:#f1ecdf;color:#243235;border-color:#c2cabe}
+.board-toggle.is-riding kbd{background:#243235;color:#f3eee0}
+.board-note{position:absolute;left:50%;top:22%;transform:translateX(-50%);background:#233230ee;color:#f3eee0;border-radius:5px;padding:12px 18px;font-size:13px;font-weight:600;text-align:center;max-width:min(420px,calc(100vw - 40px));box-shadow:3px 4px 0 #14222226;z-index:3;pointer-events:none;animation:board-note 3.4s ease-out forwards}
+.board-note small{display:block;font-weight:500;font-size:11px;color:#dcd6c5;margin-top:4px}
+@keyframes board-note{0%{opacity:0;transform:translate(-50%,8px)}8%{opacity:1;transform:translate(-50%,0)}85%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.board-note{animation-name:board-note-fade}@keyframes board-note-fade{0%{opacity:0}8%{opacity:1}85%{opacity:1}100%{opacity:0}}}
+
+/* Results */
+.skate-results-letters{display:flex;gap:6px;margin:6px 0 12px}
+.skate-results-letters>span{display:inline-flex;align-items:center;gap:2px;justify-content:center;min-width:34px;height:34px;border-radius:17px;border:1px solid #cfd2c3;font-family:var(--display);font-size:22px;font-weight:700;color:#b3b6a6;padding:0 8px}
+.skate-results-letters>span.is-got{background:#e4b36e;border-color:#c39b63;color:#243235}
+
+@media(max-width:650px){
+  .skate-game{left:18px;top:56px;gap:8px;padding:6px 10px}.skate-letters>span{width:22px;height:22px;font-size:15px}.skate-clock{font-size:23px;min-width:44px}
+  .skate-combo{top:100px}
+  .skate-balance{bottom:250px}.skate-balance-track{width:170px}
+  .skate-stats{top:108px;bottom:auto}
+  .skate-start{bottom:auto;top:150px}
+  .board-toggle{bottom:auto;top:18px;right:70px}
+  .board-toggle.is-riding{bottom:auto;top:86px;right:16px}
+}

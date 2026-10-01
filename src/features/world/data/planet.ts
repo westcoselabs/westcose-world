@@ -8,9 +8,12 @@ import { MOUNTAIN_LAYOUT, massifHeightAt, mountainFinishAreaAt, mountainSnowAt }
 import { skiRunSampleAt } from './ski-runs';
 import { coastDistance, PENINSULA_SAND } from './peninsula-layout';
 import { MAP_MAX_HEIGHT, MAP_MIN_Z, MAP_RADIUS, MAP_SEAM, MAP_SEA_LEVEL, mapCoordinates, mapFrame } from './world-map';
+import { downtownSurfaceAt } from './downtown-layout';
+import { grandStairSurfaceAt, nearSkatepark, skateparkSurfaceAt } from './skatepark-layout';
+import { westBluffDistance } from './island-terrain';
 export const RADIUS=MAP_RADIUS;
 export const SEA_LEVEL=MAP_SEA_LEVEL;
-export const PLANET_VERSION=8;
+export const PLANET_VERSION=9;
 export const SPAWN_COORDS={lon:TOWN_SPAWN.lon,lat:TOWN_SPAWN.lat};
 export const clamp=(v:number,low:number,high:number)=>Math.max(low,Math.min(high,v));
 export function smoothstep(low:number,high:number,value:number){const t=clamp((value-low)/(high-low),0,1);return t*t*(3-2*t);}
@@ -62,6 +65,9 @@ const aboutFixture=doorwayFixture('about');
 const labFixture=doorwayFixture('lab');
 const galleryWallFixture=wallFixture('studio');
 const galleryCameraFixture=doorwayFixture('studio',1.35,false);
+const skateShopFixture=doorwayFixture('skate-shop');
+/** The customer side of the skate-shop counter, where E takes a board. */
+const skateCounter=mapCoordinates(buildingLocalPoint(building('skate-shop'),[-.2,0,-.35]));
 export const PLANET_PLACES=[
  {id:'studio',label:'Portfolio Gallery',section:'Projects',x:building('studio').x,z:building('studio').z,radius:4,contentId:'world',number:'01',interior:'studio'},
  {id:'workshop',label:'WestCose Shop',section:'Services',x:building('workshop').x,z:building('workshop').z,radius:4.8,contentId:'services',number:'02',interior:'workshop'},
@@ -69,11 +75,15 @@ export const PLANET_PLACES=[
  {id:'about',label:'WestCose Motel',section:'About',x:building('about').x,z:building('about').z,radius:4,contentId:'about',number:'04',interior:'about'},
  // Kept just beyond the fresh-load clearing so a visitor arrives in the
  // courtyard without an immediate interaction prompt.
- {id:'contact',label:'Contact Station',section:'Contact',x:3,z:10.5,radius:2.2,contentId:'contact',number:'05',interior:null},
+ {id:'contact',label:'Contact Station',section:'Contact',x:4.4,z:10.5,radius:2.2,contentId:'contact',number:'05',interior:null},
  {id:'beach',label:'Hidden Beach',section:'Discovery',x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,radius:3,contentId:'frequency',number:'06',interior:null},
  {id:'lab',label:'Alley Room',section:'Labs',x:building('lab').x,z:building('lab').z,radius:4,contentId:'labs',number:'07',interior:'lab'},
  // The lift-ticket window facing the resort forecourt: E opens the snowboard run menu.
  {id:'tickets',label:'Lift Tickets',section:'Snowboard',x:MOUNTAIN_LAYOUT.ticketHut.x,z:MOUNTAIN_LAYOUT.ticketHut.z-MOUNTAIN_LAYOUT.ticketHut.depth/2-.9,radius:2.4,contentId:'snowboard',number:'08',interior:null},
+ // The skate-shop counter: E takes a board from the wall behind it.
+ {id:'skateshop',label:'Skate Shop Counter',section:'Skateboards',x:skateCounter.x,z:skateCounter.z,radius:2.5,contentId:'skateshop',number:'09',interior:'skateshop'},
+ // Anywhere on the grand stairs (or at the top, riding in): E starts a game of S.K.A.T.E.
+ {id:'skatepark',label:'Game of S.K.A.T.E.',section:'Skate Park',x:-29.3,z:0,radius:4.4,contentId:'skatepark',number:'10',interior:null},
 ] as const;
 export function areaAt(d:{x:number;y:number;z:number}):string{
  const{x,z}=mapCoordinates(d),surface=townSurfaceAt(x,z);
@@ -89,7 +99,9 @@ export function areaAt(d:{x:number;y:number;z:number}):string{
   if(mountainSnowAt(x,z))return z>MOUNTAIN_LAYOUT.summit.z?'Backcountry':'Snowfield';
   if(z>=40)return z<60?'Forest Trail':'Mountain Forest';
  }
- if(x<=-20&&z>=-5&&z<=22)return 'Skate Park';
+ if(nearSkatepark(x,z)&&skateparkSurfaceAt(x,z))return 'WestCose Skate Park';
+ if(grandStairSurfaceAt(x,z))return 'Skate Park Stairs';
+ if(x<-32&&x>-100&&Math.abs(z)<45)return westBluffDistance(x,z)<2?'West Bluff':'West Beach';
  if(x>24&&z>=-23&&z<=30&&surface.height<1&&coastDistance(x,z,PENINSULA_SAND)>-.5)return 'Hidden Beach';
  if(x>=27&&x<=41&&z>=-35&&z<=-19){
   const radius=Math.hypot(d.x,d.y,d.z);
@@ -98,23 +110,27 @@ export function areaAt(d:{x:number;y:number;z:number}):string{
  }
  if(x>24&&x<35&&z>-25&&z<6)return 'Lighthouse Trail';
  if(z<=-18)return 'The Beach';
- if(z<=-12)return 'Boardwalk';
- if(x>=17&&z>=-9&&z<=8)return 'Graffiti Alley';
- if(z>=3&&z<=14)return 'WestCose Courtyard';
- return 'The Boulevard';
+ if(z<=-14)return 'Boardwalk';
+ const street=downtownSurfaceAt(x,z)?.id;
+ if(street==='alley'||(x>=16.5&&x<=24.5&&z>=-14&&z<=-6))return 'Graffiti Alley';
+ if(street==='courtyard')return 'WestCose Courtyard';
+ if(street==='pier-st'||street==='pier-west'||street==='pier-east')return 'Pier Street';
+ if(street==='west-promenade'||street==='stair-plaza')return 'West Promenade';
+ if(z>=16)return z>28?'Upper Town':'Palm Avenue';
+ return 'Main Street';
 }
 const entry=mapCoordinates(directionAt(TOWN_SPAWN.lon,TOWN_SPAWN.lat));
 export const PLANET_FIXTURES={
  entry:{x:entry.x,z:entry.z,facing:TOWN_SPAWN.facing},
- courtyard:{x:0,z:8,facing:'south'},
+ courtyard:{x:0,z:14,facing:'south'},
  studio:studioFixture,
- alley:{x:16.5,z:-1,facing:'south'},
+ alley:{x:18,z:-7,facing:'south'},
  // Offset left of the gallery doorway so the forward walking fixture meets a
  // real front wall rather than entering the room through its open door.
  collision:galleryWallFixture,
  // Begin at the actual foot of the stair route. Its first leg climbs nearly
  // north, so this explicit tangent stays on its narrow physical surface.
- stairs:{x:-23,z:0,facing:{east:-1,north:5}},
+ stairs:{x:-25.8,z:0,facing:'west'},
  // Stand outside the gallery facing away from its front wall; the follow ray
  // must shorten against that real obstruction.
  camera:galleryCameraFixture,
@@ -135,8 +151,8 @@ export const PLANET_FIXTURES={
  pierside:{x:1.2,z:(PIER_LAYOUT.entrance[1]+PIER_LAYOUT.neckEnd[1])/2,facing:'east'},
  pierbeach:{x:10,z:-29,facing:'east'},
  promenade:{x:0,z:-16,facing:'east'},
- eastgrove:{x:18,z:34,facing:'north'},
- westgrove:{x:-18,z:34,facing:'north'},
+ eastgrove:{x:18,z:37.5,facing:'north'},
+ westgrove:{x:-18,z:37.5,facing:'north'},
  // Upper south face of the snowboard mountain, on the far side of the planet.
  farside:{x:0,z:176,facing:'north'},
  ridge:{x:0,z:200,facing:'north'},
@@ -145,7 +161,9 @@ export const PLANET_FIXTURES={
  // east through it rather than spawning inside the room.
  lab:labFixture,
  circuit:{x:0,z:120,facing:'north'},
- skatepark:{x:-27,z:15,facing:'north'},
+ skatepark:{x:-34,z:0,facing:'west'},
+ skateshop:skateShopFixture,
+ mainstreet:{x:-12,z:0,facing:'east'},
  lighthouse:{x:LIGHTHOUSE.x-3.2,z:LIGHTHOUSE.z,facing:'east'},
  cave:{x:CAVE_POINTS[0][0]-2,z:CAVE_POINTS[0][1],facing:'east'},
  hiddenbeach:{x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,facing:'north'},

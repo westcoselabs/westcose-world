@@ -1,4 +1,4 @@
-export type ContentId = 'world' | 'services' | 'about' | 'contact' | 'fightclub' | 'frequency' | 'labs' | 'snowboard';
+export type ContentId = 'world' | 'services' | 'about' | 'contact' | 'fightclub' | 'frequency' | 'labs' | 'snowboard' | 'skateshop' | 'skatepark';
 export type ContentEntry = {
   id: ContentId; title: string; eyebrow: string; summary: string; paragraphs: string[];
   status: string; href: string; linkLabel: string;
@@ -45,6 +45,18 @@ export const CONTENT: Record<ContentId, ContentEntry> = {
     id: 'snowboard', title: 'Four runs from the summit.', eyebrow: 'Ski Resort / Snowboard',
     summary: 'Find the lift-ticket booth at the ski resort, at the top of the forest trail north of town. Pick a run, ride from the summit, and chain tricks for points.',
     paragraphs: ['Four rated runs leave the summit plateau: a green circle back to the resort, a blue square to the bluff above the lighthouse cove, a black diamond into the west forest, and a double black straight down the couloir.', 'Carve, jump the kickers, collect tokens and land tricks to build combos. Medals, best scores and challenge stars are saved on this device.'],
+    status: 'Playable mini-game', href: '', linkLabel: '',
+  },
+  skateshop: {
+    id: 'skateshop', title: 'Grab a board.', eyebrow: 'WestCose Skate Shop / Skateboards',
+    summary: 'The decks hang on the wall behind the counter on Main Street. Take one, head outside and ride anywhere in town.',
+    paragraphs: ['Walk up to the counter and take a skateboard. Equip it from the button on screen whenever you are outdoors, and put it away again the same way.', 'Push, carve, ollie, flip, grab and grind in the style of the classic arcade skate games. The skate park on the west bluff is where it all comes together.'],
+    status: 'Free to ride', href: '', linkLabel: '',
+  },
+  skatepark: {
+    id: 'skatepark', title: 'Game of S.K.A.T.E.', eyebrow: 'WestCose Skate Park / Mini-game',
+    summary: 'Climb the grand stairs at the west end of Main Street. Collect the letters S, K, A, T and E around the park before the clock runs out.',
+    paragraphs: ['Each letter asks for a different skill: an ollie, big vert air in the Deep End, a ledge grind, the full Snake Run and an air out of the South Quarter.', 'You need a skateboard from the WestCose Skate Shop to play. Best times and scores are saved on this device.'],
     status: 'Playable mini-game', href: '', linkLabel: '',
   },
   frequency: {

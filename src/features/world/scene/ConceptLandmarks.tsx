@@ -3,11 +3,11 @@
 import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { ART_WALLS, CAVE_POINTS, CAVE_FLOOR, LIGHTHOUSE, SKATE_CENTER, SKATE_ELEVATION, SKATE_STAIRS, SKATE_STAIR_LENGTH, SKATE_STAIR_BREAKS, landmarkSolids, skateHeightAt, skateStairFrameAt, skateStairPointAt } from '../data/concept-landmarks';
-import { MAP_RADIUS, mapFrame, mapMetric, mapPoint } from '../data/world-map';
+import { ART_WALLS, CAVE_POINTS, CAVE_FLOOR, LIGHTHOUSE, landmarkDecor, landmarkSolids } from '../data/concept-landmarks';
+import { MAP_RADIUS, mapFrame, mapMetric } from '../data/world-map';
 import { TOWN_BUILDINGS, TOWN_ROUTES } from '../data/town-layout';
 import { townSurfaceAt } from '../data/town-surfaces';
-import { SceneryBatch, variation } from './sceneryGeometry';
+import { variation } from './sceneryGeometry';
 import { block, createKitContext, physicalSign, tube, UNIT_BOX } from './kit/context';
 import { SignAtlas } from './kit/SignAtlas';
 import PeninsulaCliffs from './PeninsulaCliffs';
@@ -15,67 +15,14 @@ import { PENINSULA_COVE } from '../data/peninsula-layout';
 import { MOUNTAIN_LAYOUT } from '../data/mountain-layout';
 
 const CONE = new THREE.ConeGeometry(1, 1, 7);
-const CYLINDER = new THREE.CylinderGeometry(1, 1, 1, 7);
 // One chamfer subdivision produces visible stone facets inside conservative OBB bounds.
 const ROCK = new RoundedBoxGeometry(1, 1, 1, 1, .12);
 ROCK.computeVertexNormals();
 
-function beam(batch: SceneryBatch, from: THREE.Vector3, to: THREE.Vector3, radius: number, color: string) {
-  const direction = to.clone().sub(from), length = direction.length();
-  if (length < 1e-5) return;
-  const quaternion = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.divideScalar(length));
-  batch.add(CYLINDER, new THREE.Matrix4().compose(from.clone().add(to).multiplyScalar(.5), quaternion, new THREE.Vector3(radius, length, radius)), color);
-}
-
-function addStairs(batch: SceneryBatch) {
-  const treadVertices: number[] = [], riserVertices: number[] = [];
-  const quad = (target: number[], a: THREE.Vector3, b: THREE.Vector3, c: THREE.Vector3, d: THREE.Vector3, expectedNormal: THREE.Vector3) => {
-    const normal = b.clone().sub(a).cross(c.clone().sub(a));
-    const points = normal.dot(expectedNormal) >= 0 ? [a, b, c, a, c, d] : [a, c, b, a, d, c];
-    for (const point of points) target.push(point.x, point.y, point.z);
-  };
-  const widthSegments = 8, half = SKATE_STAIRS.width / 2;
-  for (let step = 0; step < SKATE_STAIRS.count; step++) {
-    const from = step / SKATE_STAIRS.count * SKATE_STAIR_LENGTH;
-    const to = (step + 1) / SKATE_STAIRS.count * SKATE_STAIR_LENGTH;
-    const height = SKATE_STAIRS.baseHeight + step * SKATE_STAIRS.rise + .014;
-    const splits = [from, ...SKATE_STAIR_BREAKS.filter(d => d > from && d < to), to];
-    for (let piece = 1; piece < splits.length; piece++) {
-      const start = splits[piece - 1], end = splits[piece], count = Math.max(1, Math.ceil((end - start) / .24));
-      for (let along = 0; along < count; along++) {
-        const a = THREE.MathUtils.lerp(start, end, along / count), b = THREE.MathUtils.lerp(start, end, (along + 1) / count);
-        for (let cross = 0; cross < widthSegments; cross++) {
-          const left = -half + cross / widthSegments * SKATE_STAIRS.width, right = -half + (cross + 1) / widthSegments * SKATE_STAIRS.width;
-          quad(treadVertices, skateStairPointAt(a, left, height), skateStairPointAt(b, left, height), skateStairPointAt(b, right, height), skateStairPointAt(a, right, height), skateStairFrameAt((a + b) / 2, height).up);
-        }
-        // Terrain is recessed0.23m beneath the explicit kit; cheeks close those edges.
-        for (const side of [-1, 1]) {
-          const lateral = side * half;
-          quad(riserVertices, skateStairPointAt(a, lateral, height), skateStairPointAt(b, lateral, height), skateStairPointAt(b, lateral, height - .25), skateStairPointAt(a, lateral, height - .25), skateStairFrameAt((a + b) / 2, height).right.multiplyScalar(side));
-        }
-      }
-    }
-    // Radial riser faces agree with the analytic .19m support jump at each boundary.
-    const frame = skateStairFrameAt(to, height);
-    for (let cross = 0; cross < widthSegments; cross++) {
-      const left = -half + cross / widthSegments * SKATE_STAIRS.width, right = -half + (cross + 1) / widthSegments * SKATE_STAIRS.width;
-      quad(riserVertices, skateStairPointAt(to, left, height), skateStairPointAt(to, right, height), skateStairPointAt(to, right, height + SKATE_STAIRS.rise), skateStairPointAt(to, left, height + SKATE_STAIRS.rise), frame.tangent.clone().negate());
-    }
-  }
-  for (const [vertices, color] of [[treadVertices, '#9CA6A0'], [riserVertices, '#DDDACE']] as const) {
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    geometry.computeVertexNormals();
-    batch.add(geometry, new THREE.Matrix4(), color);
-    geometry.dispose();
-  }
-}
-
 /** Low-detail concept geometry only. The terrain owns every walkable ramp and bowl surface. */
 function buildLandmarks() {
   const kit = createKitContext();
-  for (const item of landmarkSolids) kit.structure.add(item.shape === 'rock' ? ROCK : UNIT_BOX, item.matrix, item.color);
-  addStairs(kit.structure);
+  for (const item of [...landmarkSolids, ...landmarkDecor]) kit.structure.add(item.shape === 'rock' ? ROCK : UNIT_BOX, item.matrix, item.color);
 
   const sign = (title: string, subtitle: string, x: number, z: number, width = 3.3, elevation?: number, yaw = 0) => {
     const ground = elevation ?? townSurfaceAt(x, z).height;
@@ -85,33 +32,10 @@ function buildLandmarks() {
     physicalSign(kit, frame, title, subtitle, [0, 1.42, .06], width, .76, [0, 0, 0], true, '#394F51');
   };
 
-  // Place the courtyard marker off the fresh-load point and out of the pier approach.
-  const courtyard = mapFrame(3, 10.5, townSurfaceAt(3, 10.5).height).matrix;
-  tube(kit.structure, courtyard, [0, .12, 0], 1.15, .24, '#BDBAAE');
-  tube(kit.structure, courtyard, [0, .43, 0], .57, .46, '#779598');
-  tube(kit.details, courtyard, [0, .75, 0], .3, .2, '#D5C7A5');
-  sign('WESTCOSE COURTYARD', 'ARRIVAL / CONTACT / WATERFRONT', -3.7, 11.5, 3.3);
-  sign('SKATE PARK', 'BOWL / QUARTER PIPES / BANK / RAIL', -30.3, 9.8, 3.3);
   sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', LIGHTHOUSE.x - 3.3, LIGHTHOUSE.z + 4.5, 2.5);
   sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', CAVE_POINTS[0][0] - 3.2, CAVE_POINTS[0][1] + 2.5, 3.4, CAVE_FLOOR);
   sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', PENINSULA_COVE.x - .7, PENINSULA_COVE.z + 3, 2.5);
   sign('SKI RESORT', 'LODGE / LIFT TICKETS / FOUR RUNS', MOUNTAIN_LAYOUT.pedestrianArrival.x-5.5, MOUNTAIN_LAYOUT.pedestrianArrival.z-1, 3.4);
-
-  // Simple coping makes the bowl legible without introducing a second support mesh.
-  const metric = mapMetric(SKATE_CENTER[0], SKATE_ELEVATION);
-  const coping: THREE.Vector3[] = [];
-  for (let i = 0; i <= 56; i++) {
-    const theta = i / 56 * Math.PI * 2;
-    const x = SKATE_CENTER[0] + (-1 + 3.7 * Math.cos(theta)) / metric.x;
-    const z = SKATE_CENTER[1] + 2.7 * Math.sin(theta) / metric.z;
-    coping.push(mapPoint(x, z, (skateHeightAt(x, z) ?? SKATE_ELEVATION) + .035));
-  }
-  for (let i = 1; i < coping.length; i++) {
-    // Leave a visibly open southern entry instead of railing over the ramp.
-    const theta = (i - .5) / 56 * Math.PI * 2;
-    if (theta > 1.32 * Math.PI && theta < 1.68 * Math.PI) continue;
-    beam(kit.details, coping[i - 1], coping[i], .035, '#DDD8CA');
-  }
 
   const towerFrame = mapFrame(LIGHTHOUSE.x, LIGHTHOUSE.z, LIGHTHOUSE.elevation).matrix;
   kit.details.shape(CONE, towerFrame, [0, 11.55, 0], [2.08, .9, 2.08], '#606D6D', [0, Math.PI / 4, 0]);
@@ -158,14 +82,6 @@ function buildLandmarks() {
     const size = 1.9 + variation(i * 4 + 3) * 1.9;
     tube(kit.plants, frame, [0, size * .3, 0], .12, size * .6, '#806F56');
     kit.plants.shape(CONE, frame, [0, size * .7, 0], [size * .34, size, size * .34], i % 3 ? '#587862' : '#6B8666');
-  }
-  // Forest-trail side trees reinforce the western loop without occupying either approach.
-  for (const [x, z] of [[-32, -7], [-29, -2], [-35, 4], [-32, 17], [-24, 23], [-19, 20]]) {
-    const height = townSurfaceAt(x, z).height;
-    if (height <= 0 || !clearOfRoutes(x, z, height)) continue;
-    const frame = mapFrame(x, z, height).matrix;
-    tube(kit.plants, frame, [0, .7, 0], .13, 1.4, '#806F56');
-    kit.plants.shape(CONE, frame, [0, 2, 0], [1.1, 3.1, 1.1], '#597B64');
   }
   return { structure: kit.structure.finish(), details: kit.details.finish(), plants: kit.plants.finish(), signs: kit.signs };
 }

@@ -7,6 +7,28 @@ const smooth=(a:number,b:number,v:number)=>{const t=clamp((v-a)/(b-a));return t*
 // Frozen pre-approval substrate. Only the bounded mountain overlay changes its massif.
 const ORIGINAL_SUMMIT={z:153,height:32};
 
+/** West bluff: a level plateau at the skate-park deck height, with a steep grass bank
+ * straight down into the sea on its open sides (a sand beach would sprawl across the
+ * chart this far west). The town-facing east edge is a retaining wall at chart x -32. */
+export const WEST_BLUFF={x:-54.6,z:0,halfX:22.6,halfZ:29.5,corner:8,top:3.25} as const;
+export function westBluffDistance(x:number,z:number){
+ const b=WEST_BLUFF,k=Math.cos(x/72);
+ const qx=Math.abs(x-b.x)-(b.halfX-b.corner),qz=Math.abs(z-b.z)*k-(b.halfZ-b.corner);
+ return Math.hypot(Math.max(qx,0),Math.max(qz,0))+Math.min(Math.max(qx,qz),0)-b.corner;
+}
+export function westBluffAt(x:number,z:number){
+ if(x>-20||x<-90)return -3;
+ // The retaining wall along the town side is a clean vertical face, not a bank.
+ if(x>-32&&z>-24&&z<27.5)return -3;
+ const d=westBluffDistance(x,z),top=WEST_BLUFF.top;
+ if(d<=-1)return top;
+ if(d<=0)return top-.25*smooth(-1,0,d);
+ // A steep grass bank, a strip of rock and sand at the waterline, then deep water.
+ if(d<=3.5)return top-.25+(.15-(top-.25))*smooth(0,3.5,d)**.85;
+ if(d<=5.5)return .15+(-1.3-.15)*smooth(3.5,5.5,d);
+ return -1.3+(-3+1.3)*smooth(5.5,8,d);
+}
+
 /** Broad continuous island, with scalloped shores instead of a rectangular land strip. */
 export function existingIslandTerrainAt(x:number,z:number):number {
  const coastWave=2*Math.sin(z*.075)+1.2*Math.sin(z*.17+.8);
@@ -33,8 +55,8 @@ export function existingIslandTerrainAt(x:number,z:number):number {
  }
  if(z<-16)land=.16-.28*smooth(-16,-31,z);
  let height=-3+(land+3)*cross*front*rear;
- const west=Math.hypot((x+29)/12,(z-10)/30);
- height=Math.max(height,-3+5.45*(1-smooth(.68,1.14,west)));
+ // The west bluff carries the skate park above a new west beach.
+ height=Math.max(height,westBluffAt(x,z));
  // Tall cliffs surround the low cave floor; a separate finger of land carries the lighthouse.
  const east=Math.hypot((x-33)/12,(z+3)/26);
  const peninsula=Math.hypot((x-35)/10,(z+25)/16);

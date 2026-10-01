@@ -38,9 +38,12 @@ async function walkInside(page: Page, fixture: string, interior = fixture) {
   await spawn(page, fixture);
   expect((await state(page)).interior).toBeNull();
   await page.keyboard.down('w');
-  try { await expect.poll(async () => (await state(page)).interior, { timeout: 5000, intervals: [60] }).toBe(interior); }
+  try {
+    await expect.poll(async () => (await state(page)).interior, { timeout: 5000, intervals: [60] }).toBe(interior);
+    // A shop counter at the back of the room answers once the visitor walks up to it.
+    await expect.poll(async () => (await state(page)).hotspot, { timeout: 5000, intervals: [60] }).toBe(interior);
+  }
   finally { await page.keyboard.up('w'); }
-  await expect.poll(async () => (await state(page)).hotspot).toBe(interior);
 }
 
 const errors = new WeakMap<Page, string[]>();
@@ -146,11 +149,12 @@ test('the pier looks out over open ocean while the mountain stays around the cur
   expect(distance(beforeManualPitch.position, (await state(page)).position)).toBeLessThan(.05);
 });
 
-test('mouse drag walks and release stops without locking the pointer', async ({ page }) => {
+test('mouse drag orbits the camera without walking or locking the pointer', async ({ page }) => {
   await enter(page); const initial=await state(page);
-  await page.mouse.move(700,480); await page.mouse.down(); await page.mouse.move(700,370,{steps:8}); await page.waitForTimeout(750); await page.mouse.up();
-  const end=await state(page); expect(distance(initial.position,end.position)).toBeGreaterThan(2);
-  await page.waitForTimeout(350); expect(distance(end.position,(await state(page)).position)).toBeLessThan(.05);
+  await page.mouse.move(700,480); await page.mouse.down(); await page.mouse.move(820,480,{steps:8}); await page.waitForTimeout(300); await page.mouse.up();
+  const end=await state(page);
+  expect(distance(initial.position,end.position)).toBeLessThan(.05);
+  expect(dot(initial.forward,end.forward)).toBeLessThan(Math.cos(.3));
   expect(await page.evaluate(()=>document.pointerLockElement)).toBeNull();
 });
 
@@ -215,7 +219,7 @@ test('FightClub stays an honest unconnected cabinet', async ({ page }) => {
 
 test('each authored room can be entered and exited with real walking controls', async ({ page }) => {
   await enter(page);
-  for (const interior of ['studio', 'about', 'workshop', 'lab', 'arcade']) {
+  for (const interior of ['studio', 'about', 'workshop', 'lab', 'arcade', 'skateshop']) {
     await walkInside(page, interior);
     const inside = await state(page);
     expect(inside.supportKind).toBe('floor');

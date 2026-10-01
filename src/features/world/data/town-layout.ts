@@ -3,41 +3,44 @@ import { mapGeographic } from './world-map';
 import { CAVE_POINTS, CAVE_WIDTH } from './concept-landmarks';
 import { PENINSULA_COVE, PENINSULA_LIGHTHOUSE } from './peninsula-layout';
 import { MOUNTAIN_LAYOUT } from './mountain-layout';
+import { COURTYARD } from './downtown-layout';
 const P={bone:'#E9DFCE',graphite:'#39474A',steel:'#647778',blue:'#5B7E8A',rust:'#A66A45'};
 type Spec=[id:string,x:number,z:number,width:number,depth:number,height:number,archetype:BuildingArchetype,roof:RoofStyle,district:DistrictId,color:string,extra?:Partial<TownBuilding>];
-const make=([id,x,z,width,depth,height,archetype,roof,district,color,extra={}]:Spec):TownBuilding=>({id,x,z,...mapGeographic(x,z),width,depth,height,archetype,roof,district,color,kind:'shop',rotation:0,trim:P.bone,accent:P.blue,entryWidth:2.6,entryOffset:0,floorHeight:.4,...extra});
-/** Compact reference composition; local +Z faces the waterfront. */
+const make=([id,x,z,width,depth,height,archetype,roof,district,color,extra={}]:Spec):TownBuilding=>({id,x,z,...mapGeographic(x,z),width,depth,height,archetype,roof,district,color,kind:'shop',rotation:0,trim:P.bone,accent:P.blue,entryWidth:2.6,entryOffset:0,floorHeight:.45,...extra});
+/** Downtown on the widened streets. Local +Z is each front: rotation 0 faces south onto the
+ * street in front, PI faces north. Main St fronts sit 0.3m behind the 2.5m sidewalks. */
+const MAIN_NORTH=6.3,MAIN_SOUTH=-6.3,PALM_NORTH=27.8,PALM_SOUTH=17.2;
+const north=(front:number,depth:number)=>front+depth/2,south=(front:number,depth:number)=>front-depth/2;
 const buildings:Spec[]=[
- ['studio',-9,7,6.8,7,5.2,'studio','sawtooth','studio-row',P.bone,{kind:'studio',sign:'PORTFOLIO GALLERY',subtitle:'PROJECTS / WESTCOSE',interior:'studio',awning:true}],
- ['workshop',8,7,6.4,7,4.5,'warehouse','sawtooth','workshop',P.blue,{kind:'workshop',sign:'WESTCOSE SHOP',subtitle:'SERVICES / MADE HERE',interior:'workshop',entryWidth:3.2}],
- ['skate-shop',14.2,7,5,6,3.8,'market','lean','workshop',P.steel,{sign:'SKATE SHOP',subtitle:'CONNECTED TO WESTCOSE SHOP',awning:true}],
- ['arcade',-8,-6,7.5,6,4.6,'arcade','gable','studio-row',P.graphite,{kind:'arcade',rotation:Math.PI,sign:'SOCIAL CLUB',subtitle:'BAR / ARCADE / GAMES',interior:'arcade',entryWidth:2.8,awning:true,accent:P.rust}],
- ['about',8,-6,10,6,5.6,'motel','flat','courtyard','#D1BA9E',{rotation:Math.PI,sign:'WESTCOSE MOTEL',subtitle:'ABOUT / LOBBY',interior:'about',balcony:true}],
- ['lab',19.5,-6,4.8,5,3.8,'lab','lean','back-alleys','#737E78',{rotation:-Math.PI/2,sign:'ALLEY ROOM',subtitle:'WESTCOSE LABS',interior:'lab',entryWidth:2.4}],
- ['town-corner',-17,-6,6,5.5,3.5,'market','flat','studio-row','#A3A58E',{rotation:Math.PI,sign:'THE BLVD',subtitle:'WESTCOSE / CONCEPT',awning:true}],
+ // Main St, north side.
+ ['surf-supply',-18.7,north(MAIN_NORTH,7),7,7,6.4,'market','flat','studio-row',P.bone,{sign:'WEST COSE SURF SUPPLY',subtitle:'BOARDS / APPAREL / REPAIRS',awning:true,accent:P.rust}],
+ ['studio',-10.9,north(MAIN_NORTH,7),6.8,7,5.4,'studio','sawtooth','studio-row',P.bone,{kind:'studio',sign:'STUDIO ROW GALLERY',subtitle:'PROJECTS / WESTCOSE',interior:'studio',awning:true}],
+ ['workshop',10.9,north(MAIN_NORTH,7),6.4,7,4.8,'warehouse','sawtooth','workshop',P.blue,{kind:'workshop',sign:'WESTCOSE SHOP',subtitle:'SERVICES / MADE HERE',interior:'workshop',entryWidth:3.2}],
+ ['skate-shop',19.3,north(MAIN_NORTH,8.2),8,8.2,5,'market','flat','workshop',P.graphite,{sign:'WESTCOSE SKATE SHOP',subtitle:'DECKS / WHEELS / GRIP',interior:'skateshop',awning:true,accent:P.rust,entryWidth:2.6,entryOffset:-1.6}],
+ // Main St, south side (backs to the boardwalk).
+ ['town-corner',-18.3,south(MAIN_SOUTH,6.5),7,6.5,4.2,'corner','flat','studio-row','#A3A58E',{rotation:Math.PI,sign:'DEAD COAST DINER',subtitle:'BURGERS / SHAKES / LATE',awning:true,accent:P.rust}],
+ ['arcade',-10.1,south(MAIN_SOUTH,6.5),7.5,6.5,4.8,'arcade','gable','studio-row',P.graphite,{kind:'arcade',rotation:Math.PI,sign:'DEAD COAST SOCIAL CLUB',subtitle:'BAR / ARCADE / GAMES',interior:'arcade',entryWidth:2.8,awning:true,accent:P.rust}],
+ ['about',11.4,south(MAIN_SOUTH,6.5),10,6.5,6.2,'motel','flat','courtyard','#D1BA9E',{rotation:Math.PI,sign:'WEST COSE MOTEL',subtitle:'ABOUT / LOBBY',interior:'about',balcony:true}],
+ ['lab',21.8,-9.8,4.8,5,3.8,'lab','lean','back-alleys','#737E78',{rotation:-Math.PI/2,sign:'ALLEY ROOM',subtitle:'WESTCOSE LABS',interior:'lab',entryWidth:2.4}],
+ // Palm Ave, north side, and two small back-lot shops facing it.
+ ['taco-shack',-17.5,north(PALM_NORTH,6),6,6,4.1,'cottage','gable','high-ground','#C98F5E',{sign:'TACO SHACK',subtitle:'BURRITOS / AGUAS FRESCAS',awning:true}],
+ ['apartments',-8.5,north(PALM_NORTH,7),8.5,7,8.2,'livework','flat','high-ground','#D9CDB6',{sign:'PALM COURT',subtitle:'APARTMENTS',balcony:true}],
+ ['records',8,north(PALM_NORTH,6.5),6.5,6.5,5.4,'corner','flat','high-ground',P.graphite,{sign:'DEAD WAX RECORDS',subtitle:'VINYL / TAPES / SHOWS',accent:P.rust}],
+ ['coffee',16,north(PALM_NORTH,6),6,6,4.4,'market','lean','high-ground','#8FA39B',{sign:'SALT & SMOKE',subtitle:'COFFEE / BAKERY',awning:true}],
+ ['bike-rental',-18.7,south(PALM_SOUTH,3),5.5,3,3.2,'shed','lean','studio-row',P.blue,{rotation:Math.PI,sign:'BIKE RENTAL',subtitle:'CRUISERS BY THE DAY'}],
+ ['laundry',11,south(PALM_SOUTH,3),5.5,3,3.3,'garage','flat','workshop','#B8B2A2',{rotation:Math.PI,sign:'SUDS LAUNDRY',subtitle:'WASH / DRY / FOLD'}],
  ['resort-lodge',MOUNTAIN_LAYOUT.lodge.x,MOUNTAIN_LAYOUT.lodge.z,MOUNTAIN_LAYOUT.lodge.width,MOUNTAIN_LAYOUT.lodge.depth,4.2,'cottage','gable','high-ground',P.rust,{sign:'WESTCOSE LODGE',subtitle:'SKI RESORT / CONCEPT',floorHeight:MOUNTAIN_LAYOUT.lodge.height}],
  ['ticket-hut',MOUNTAIN_LAYOUT.ticketHut.x,MOUNTAIN_LAYOUT.ticketHut.z,MOUNTAIN_LAYOUT.ticketHut.width,MOUNTAIN_LAYOUT.ticketHut.depth,2.5,'shed','gable','high-ground',P.blue,{sign:'LIFT TICKETS',subtitle:'SNOWBOARD / 4 RUNS',floorHeight:MOUNTAIN_LAYOUT.ticketHut.height}],
 ];
 export const TOWN_BUILDINGS=buildings.map(make);
 export const TOWN_AREAS:TownArea[]=[
- {id:'courtyard',label:'Courtyard / Arrival',district:'courtyard',center:[0,8],width:10,depth:11,material:'concrete',elevation:.3},
  {id:'resort',label:'Ski Resort / Base of F',district:'high-ground',center:[MOUNTAIN_LAYOUT.pedestrianArrival.x,MOUNTAIN_LAYOUT.pedestrianArrival.z],width:MOUNTAIN_LAYOUT.pedestrianArrival.width,depth:MOUNTAIN_LAYOUT.pedestrianArrival.depth,material:'gravel',elevation:MOUNTAIN_LAYOUT.pedestrianArrival.height},
  {id:'lighthouse-view',label:'Lighthouse Peninsula Lookout',district:'outskirts',center:[PENINSULA_LIGHTHOUSE.x,PENINSULA_LIGHTHOUSE.z],width:6.5,depth:6.5,material:'gravel'},
 ];
+/** Paths beyond the paved downtown network (downtown-layout.ts owns the streets). */
 export const TOWN_ROUTES:TownRoute[]=[
- {id:'boulevard',label:'The Boulevard',district:'studio-row',points:[[-23,0],[-12,0],[0,0],[12,0],[20,0]],width:4,material:'asphalt',category:'primary',elevation:.22},
- {id:'main-street',label:'Courtyard to Pier',district:'courtyard',points:[[0,8],[0,0],[0,-16]],width:4,material:'concrete',category:'primary'},
- {id:'boardwalk',label:'Beach Boardwalk',district:'cove',points:[[-25,-16],[-12,-16],[0,-16],[12,-16],[24,-16]],width:4,material:'timber',category:'primary'},
- {id:'gallery-entry',label:'Gallery Entrance',district:'studio-row',points:[[-9,0],[-9,4]],width:2.8,material:'concrete',category:'secondary'},
- {id:'shop-entry',label:'Shop Entrance',district:'workshop',points:[[8,0],[8,4]],width:3.2,material:'concrete',category:'secondary'},
- {id:'shop-link',label:'Connected Skate Shop',district:'workshop',points:[[8,2],[14.2,2],[14.2,2.5]],width:2.4,material:'concrete',category:'secondary'},
- {id:'social-entry',label:'Social Club Entrance',district:'studio-row',points:[[-8,0],[-8,-3]],width:2.8,material:'concrete',category:'secondary'},
- {id:'motel-entry',label:'Motel Lobby',district:'courtyard',points:[[8,0],[8,-3]],width:2.8,material:'concrete',category:'secondary'},
- {id:'alley',label:'Graffiti Alley',district:'back-alleys',points:[[20,4],[16.5,0],[16.5,-6],[16.5,-16]],width:2.4,material:'concrete',category:'secondary'},
- {id:'lab-entry',label:'Alley Room',district:'back-alleys',points:[[16.5,-6],[17.5,-6]],width:2.4,material:'concrete',category:'secondary'},
- {id:'forest-trail',label:'Forest Trail to Skate Park',district:'high-ground',points:[[-25,-16],[-30,-11],[-33,-1],[-32,8],[-27,15]],width:2.4,material:'dirt',category:'secondary'},
- {id:'skate-stairs',label:'Skate Park Stairs',district:'high-ground',points:[[-23,0],[-24,5],[-27,9]],width:3,material:'concrete',category:'secondary'},
- {id:'resort-trail',label:'Forest Route to Resort',district:'high-ground',points:[[0,13],[0,20],[7,27],[8,34],[-6,42],[0,45]],width:4,material:'dirt',category:'primary'},
+ {id:'boardwalk',label:'Beach Boardwalk',district:'cove',points:[[-31,-16],[-25,-16],[-12,-16],[0,-16],[12,-16],[24,-16]],width:4,material:'timber',category:'primary'},
+ {id:'resort-trail',label:'Forest Route to Resort',district:'high-ground',points:[[0,27.5],[0,34],[-3,38],[-6,42],[0,45]],width:4,material:'dirt',category:'primary'},
  ...MOUNTAIN_LAYOUT.pedestrianLinks.map(link=>({id:link.id,label:link.id.replaceAll('-',' '),district:'high-ground' as const,
   // These closed concept shells are approached, not entered: leave capsule room
   // in front of their approved door-face anchors without moving either building.
@@ -53,4 +56,4 @@ export const TOWN_ROUTES:TownRoute[]=[
 ];
 export const TOWN_INTERIORS=TOWN_BUILDINGS.filter(b=>b.interior);
 export const COASTAL_RADIO=PENINSULA_COVE;
-export const TOWN_SPAWN={...mapGeographic(0,8),facing:'south' as const};
+export const TOWN_SPAWN={...mapGeographic(COURTYARD.spawn[0],COURTYARD.spawn[1]),facing:'south' as const};

@@ -1,6 +1,6 @@
 export type TownPoint = readonly [number, number]; // east metres, north metres on the planet
 export type DistrictId = 'studio-row' | 'courtyard' | 'back-alleys' | 'workshop' | 'outskirts' | 'cove' | 'pier' | 'high-ground';
-export type InteriorId = 'studio' | 'workshop' | 'arcade' | 'about' | 'lab';
+export type InteriorId = 'studio' | 'workshop' | 'arcade' | 'about' | 'lab' | 'skateshop';
 export type BuildingArchetype = 'studio' | 'livework' | 'corner' | 'warehouse' | 'garage' | 'cottage' | 'motel' | 'shed' | 'arcade' | 'office' | 'lab' | 'market';
 export type RoofStyle = 'flat' | 'gable' | 'sawtooth' | 'lean';
 export type TownBuilding = {

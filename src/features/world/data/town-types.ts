@@ -13,6 +13,8 @@ export type TownBuilding = {
   floorHeight:number; balcony?:boolean; awning?:boolean; exteriorStair?:boolean;
   /** A bespoke front, drawn by the building kit instead of the archetype's default. */
   facade?:'gallery'|'shop'|'motel-lobby'|'motel-rooms';
+  /** A small plaque beside a closed street door, such as an office upstairs. */
+  doorSign?:{title:string; subtitle?:string};
 };
 export type TownRoute = {
   id:string; label:string; district:DistrictId; points:readonly TownPoint[];

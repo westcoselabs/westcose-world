@@ -4,6 +4,7 @@ import { MOTEL, MOTEL_POSTS, MOTEL_STAIR } from '../../data/town-props';
 import { WALK_LEVEL } from '../../data/downtown-layout';
 import { mapFrame } from '../../data/world-map';
 import type { SceneryBatch } from '../sceneryGeometry';
+import { rollingRack } from './apparel';
 import { block, frame, neonSign, physicalSign, tube, UNIT_LEAF, type KitContext } from './context';
 import { TOWN_PALETTE as P } from './materials';
 import { windowModule } from './openings';
@@ -57,6 +58,14 @@ function pottedPlant(c: KitContext, m: THREE.Matrix4, x: number, z: number, scal
   block(c.details, m, [x, .53 * scale, z], [.42 * scale, .03, .42 * scale], P.soil);
   c.plants.shape(UNIT_LEAF, m, [x, .9 * scale, z], [.34 * scale, .5 * scale, .32 * scale], '#5F7E4E', [.1, x, .2]);
   c.plants.shape(UNIT_LEAF, m, [x + .08, 1.12 * scale, z - .04], [.22 * scale, .34 * scale, .2 * scale], '#78935C', [.3, z, .1]);
+}
+
+/** A sidewalk A-frame: two timber boards leaning together, a chalk sign on the front one. */
+function aFrame(c: KitContext, m: THREE.Matrix4, x: number, z: number, title: string, subtitle: string) {
+  const f = frame(m, [x, 0, z]);
+  for (const side of [-1, 1]) block(c.details, f, [0, .5, side * .16], [.62, 1.02, .04], DARK_TIMBER, [-side * .3, 0, 0]);
+  block(c.details, f, [0, .55, .185], [.52, .66, .012], '#2F3B3D', [-.3, 0, 0]);
+  physicalSign(c, f, title, subtitle, [0, .62, .2], .5, .3, [-.3, 0, 0], true, '#2F3B3D');
 }
 
 function surfboard(c: KitContext, m: THREE.Matrix4, x: number, z: number, lean: number, color: string, stripe: string) {
@@ -130,11 +139,11 @@ function shop(k: Facade) {
   block(over, m, [0, 5.2, fz + .02], [7.6, 1.55, .08], '#2B3B44');
   physicalSign(c, m, b.sign ?? '', b.subtitle, [0, 5.2, fz + .07], 7.3, 1.36, [0, 0, 0], true, '#2B3B44', b.interior);
   for (const x of [-2.6, 0, 2.6]) gooseneck(c, over, m, x, 6.35, fz);
-  // Boards and a bike out front, clear of the doorway.
-  surfboard(c, m, -w / 2 + 1.05, fz + .32, -.12, '#E8DCC2', '#C2653E');
-  surfboard(c, m, -w / 2 + 1.6, fz + .3, -.1, '#7FA5AE', P.bone);
+  // A rolling rack of tees and a chalk A-frame out front, clear of the doorway.
+  rollingRack(c, m, -w / 2 + 1.75, fz + .55, 1.6, 1);
+  aFrame(c, m, w / 2 - 2.2, fz + .7, 'NEW DROP', 'TEES / HOODIES / CAPS');
   pottedPlant(c, m, w / 2 - 1.1, fz + .3, 1.1);
-  streetSide(k, 1, 'WESTCOSE SHOP', 'SERVICES / ENTER FROM THE COURTYARD');
+  streetSide(k, 1, 'WESTCOSE SHOP', 'CLOTHING / ENTER FROM THE COURTYARD');
   const back = frame(m, [-b.width / 2 - .03, 0, 0], -Math.PI / 2);
   for (const x of [-b.depth * .22, b.depth * .22]) windowModule(c, back, x, 2.1, .02, 1.3, 1.4, b.trim);
 }

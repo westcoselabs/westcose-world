@@ -358,7 +358,7 @@ function buildDowntown() {
   grandStairs(stairs);
   const kit = createKitContext();
   DOWNTOWN_FURNITURE.forEach((item, i) => {
-    if (item.kind === 'palm') palm(kit, item.x, item.z, WALK_LEVEL, i * 37 + 11);
+    if (item.kind === 'palm') palm(kit, item.x, item.z, WALK_LEVEL, (item.seed ?? i) * 37 + 11);
     else if (item.kind === 'lamp') lamp(kit, item.x, item.z, WALK_LEVEL, item.yaw);
     else bench(kit, item.x, item.z, WALK_LEVEL, item.yaw);
   });

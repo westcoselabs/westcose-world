@@ -193,9 +193,9 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       clearWorldInput(runtime);
     }
 
-    // A snowboard run or the skateboard owns the camera and hides the walker; a run leaves
-    // the walker waiting where it began, while the skateboard carries it along.
-    if (runtime.snowboard.active || runtime.skate.riding) {
+    // A snowboard run, the skateboard or a tide owns the camera and hides the walker; a run or
+    // a tide leaves the walker waiting where it began, while the skateboard carries it along.
+    if (runtime.snowboard.active || runtime.skate.riding || runtime.fishing.active) {
       if (avatar.current) avatar.current.visible = false;
       state.cameraInitialized = false; state.accumulator = 0; state.inputActive = false;
       runtime.counters.drawCalls = gl.info.render.calls;

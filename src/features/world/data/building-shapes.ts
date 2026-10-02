@@ -60,8 +60,8 @@ export function buildingWallSegments(building: TownBuilding): WallSegment[] {
 export function interiorFurnitureSegments(building:TownBuilding):WallSegment[] {
   if (!building.interior) return [];
   const { width, depth } = building;
-  const furniture = (suffix:string, x:number, z:number, size:LocalPoint):WallSegment => ({
-    id:`${building.id}:furniture-${suffix}`, buildingId:building.id, center:[x, size[1] / 2, z], size, camera:true,
+  const furniture = (suffix:string, x:number, z:number, size:LocalPoint, camera = true):WallSegment => ({
+    id:`${building.id}:furniture-${suffix}`, buildingId:building.id, center:[x, size[1] / 2, z], size, camera,
   });
   switch (building.interior) {
     // The gallery keeps its centre aisle open from the doors to the feature wall.
@@ -70,9 +70,15 @@ export function interiorFurnitureSegments(building:TownBuilding):WallSegment[] {
       furniture('flat-files', width / 2 - 1.1, -1.2, [1.3, 0.9, 3.4]),
       furniture('plinth', 0, -depth / 2 + 2.4, [2.4, 0.75, 1.1]),
     ];
+    // The WestCose Shop sells clothing. Shallow garment racks line both side walls and let the
+    // camera pass, the cash wrap stands where the old island did, and the fitting room fills a
+    // back corner. Mannequins in the front windows and two folded-tee tables keep the aisle open.
     case 'workshop': return [
-      ...[-1, 1].map(side => furniture(`bench-${side}`, side * (width / 2 - 1), -0.9, [1.3, 0.9, 4.4])),
-      furniture('island', 0, -depth / 2 + 2.3, [2.6, 0.9, 1.2]),
+      ...[-1, 1].map(side => furniture(`rack-${side}`, side * (width / 2 - 0.55), -0.9, [0.6, 1.75, 4.4], false)),
+      furniture('cash-wrap', 0, -depth / 2 + 2.3, [2.6, 1.0, 1.2]),
+      furniture('fitting-room', width / 2 - 1.01, -depth / 2 + 0.86, [1.58, 2.3, 1.28]),
+      ...[-1, 1].map(side => furniture(`mannequin-${side}`, side * 3.4, depth / 2 - 0.9, [0.6, 1.8, 0.6], false)),
+      ...[-1, 1].map(side => furniture(`table-${side}`, side * 2.4, 0.6, [1.4, 0.8, 1.0])),
     ];
     case 'arcade': return [-1, 1].map(side => furniture(`cabinets-${side}`, side * (width / 2 - 0.8), -0.5, [1.1, 1.9, 3.8]));
     // The lobby's reception counter faces the door across the room; a lounge sofa sits opposite.

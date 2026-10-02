@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { PIER_LAYOUT, PIER_SUPPORT_ROWS, pierFrameAt, pierHeightAtZ, pierPointAt, pierWidthAtZ } from '../data/pier-layout';
 import { PIER_RAIL_POSTS, PIER_RAIL_SEGMENTS } from '../data/pier-rails';
 import { PIER_SHACK } from '../data/town-props';
+import { AFRAME_ACROSS, BUCKET_ACROSS, COOLER_ACROSS, RAIL_Z } from '../data/fishing-spot';
 import { SceneryBatch } from './sceneryGeometry';
 import { SURFACE } from './materials/surface-types';
 import type { PhysicalSign } from './kit/context';
@@ -150,6 +151,10 @@ export function buildPierGeometry(){
   cub(shack, [-sw / 2 + .2, sh - .45, sd / 2 + .03], [.9, .06, .03], BONE);
   for (let i = 0; i < 3; i++) post(shack, [sw / 2 - .4 - i * .45, .5, sd / 2 + .25], .2, .02, ['#C4553F', '#E9DFCE', '#D9A441'][i], SURFACE.plaster);
   signs.push({title:'BAIT & TACKLE',subtitle:'SNACKS / COLD DRINKS / RODS FOR HIRE',width:sd - .3,height:.42,matrix:shack.clone().multiply(new THREE.Matrix4().makeTranslation(-sw / 2 - .04, sh - .38, 0)).multiply(new THREE.Matrix4().makeRotationY(-Math.PI/2)),background:'#2E3E44',dark:true});
+  // Pier Pressure's chalk board on the shack's seaward face, where everyone fishing can see it.
+  cub(shack, [0, 1.5, sd / 2 + .03], [1.95, 1.05, .05], '#A18D73');
+  cub(shack, [0, 1.5, sd / 2 + .055], [1.8, .9, .02], '#2F3B3D');
+  signs.push({title:'PIER PRESSURE',subtitle:'THERE’S ALWAYS A BIGGER FISH · CAST AT THE RAIL',width:1.7,height:.62,matrix:shack.clone().multiply(new THREE.Matrix4().makeTranslation(0, 1.52, sd / 2 + .07)),background:'#2F3B3D',dark:true});
   // A coin-op viewer at the seaward rail.
   const viewer = pierFrameAt(-2.6, headTip + .7).matrix;
   post(viewer, [0, .55, 0], .06, 1.1, IRON, SURFACE.metal);
@@ -163,6 +168,19 @@ export function buildPierGeometry(){
     beam(new THREE.Vector3(0,.88,0).applyMatrix4(m),new THREE.Vector3(side*.72,2.05,-.17).applyMatrix4(m),.02,.02,IRON,SURFACE.metal);
     for(let loop=0;loop<3;loop++)solid.shape(ring,m,[0,.08+loop*.025,.37],[.22+loop*.024,.22+loop*.024,.13],'#B6A68B',[Math.PI/2,0,0],{kind:SURFACE.timber});
   }
+  // The fishing spot on the west side of the tip: a cooler, a bait bucket and an A-frame.
+  const cooler=pierFrameAt(COOLER_ACROSS,RAIL_Z+.45).matrix;
+  cub(cooler,[0,.2,0],[.58,.36,.38],'#E9DFCE',[0,0,0],SURFACE.plaster);
+  cub(cooler,[0,.4,0],[.6,.06,.4],'#5B7E8A',[0,0,0],SURFACE.plaster);
+  cub(cooler,[0,.46,0],[.3,.04,.06],BONE);
+  const bucket=pierFrameAt(BUCKET_ACROSS,RAIL_Z+.32).matrix;
+  post(bucket,[0,.17,0],.15,.34,'#647778',SURFACE.metal);
+  post(bucket,[0,.33,0],.13,.02,'#5E4A37');
+  solid.shape(ring,bucket,[0,.36,0],[.15,.15,.15],IRON,[0,0,0],{kind:SURFACE.metal});
+  const aFrame=pierFrameAt(AFRAME_ACROSS,RAIL_Z+.6).matrix.multiply(new THREE.Matrix4().makeRotationY(Math.PI));
+  for(const side of [-1,1])cub(aFrame,[0,.5,side*.16],[.62,1.02,.04],'#5E4A37',[-side*.3,0,0]);
+  cub(aFrame,[0,.55,.185],[.52,.66,.012],'#2F3B3D',[-.3,0,0]);
+  signs.push({title:'PIER PRESSURE',subtitle:'FISH HERE · E AT THE RAIL',width:.5,height:.3,matrix:aFrame.clone().multiply(new THREE.Matrix4().compose(new THREE.Vector3(0,.62,.2),new THREE.Quaternion().setFromEuler(new THREE.Euler(-.3,0,0)),new THREE.Vector3(1,1,1))),background:'#2F3B3D',dark:true});
   const rescue=pierFrameAt(0,headTip).matrix;
   solid.shape(ring,rescue,[0,.65,.12],[.29,.29,.29],'#A66A45',[0,0,0],{kind:SURFACE.plaster});
   for(const angle of [0,Math.PI/2,Math.PI,Math.PI*1.5])cub(rescue,[Math.cos(angle)*.29,.65+Math.sin(angle)*.29,.13],[.09,.09,.12],BONE,[0,0,angle],SURFACE.plaster);

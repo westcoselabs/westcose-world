@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import {
-  BackSide, Color, DirectionalLight, FogExp2, Mesh, PMREMGenerator, PointLight,
+  AmbientLight, BackSide, Color, DirectionalLight, FogExp2, Mesh, PMREMGenerator, PointLight,
   Scene, ShaderMaterial, SphereGeometry, Vector3,
 } from 'three';
 import type { WorldRuntimeState } from '../runtime/types';
@@ -21,6 +21,8 @@ const SUN_DISTANCE = 110 * MAP_VIEW_SCALE;
 const SHADOW_FAR = 220 * MAP_VIEW_SCALE;
 const SKY_SCALE = 300 * MAP_VIEW_SCALE;
 const LANTERN_SLOTS = [0, 1, 2] as const;
+/** The caught Sun, when it dangles from a rod: brighter and wider than any lantern. */
+const SUN_GLOW = { intensity: 46, range: 16, ambient: .35 };
 
 const skyVertex = /* glsl */`
   varying vec3 vDirection;
@@ -74,6 +76,8 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
   const skyMaterial = useRef<ShaderMaterial>(null);
   const scratch = useRef({ focus: new Vector3(), halfExtent: -1 });
   const lanternLights = useRef<Array<PointLight | null>>([null, null, null]);
+  const ambient = useRef<AmbientLight>(null);
+  const sunAnchor = useRef<LanternAnchor>({ id: 'fishing:sun', buildingId: 'pier', interior: null, lens: new Vector3(), position: new Vector3(), outward: null, intensity: 0, range: SUN_GLOW.range });
   const lanterns = useRef({
     elapsed: 1, interior: runtime.interior,
     visitor: new Vector3(), offset: new Vector3(),
@@ -146,6 +150,10 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
 
     const pools = lanterns.current;
     const roomChanged = pools.interior !== state.interior;
+    const glow = state.fishing.sunLight, sunGlow = glow && state.interior === null ? glow.strength : 0;
+    if (glow) sunAnchor.current.position.set(glow.x, glow.y, glow.z);
+    sunAnchor.current.intensity = SUN_GLOW.intensity * sunGlow;
+    if (ambient.current) ambient.current.intensity = .95 + SUN_GLOW.ambient * sunGlow;
     pools.elapsed += delta;
     if (roomChanged || pools.elapsed >= 0.2) {
       pools.elapsed = 0;
@@ -162,6 +170,11 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
         if (score > 18 * 18) continue;
         const insertAt = pools.ranked.findIndex(candidate => score < candidate.score);
         pools.ranked.splice(insertAt < 0 ? pools.ranked.length : insertAt, 0, { anchor, score });
+        if (pools.ranked.length > LANTERN_SLOTS.length) pools.ranked.pop();
+      }
+      // A caught Sun outranks every lantern while it shines.
+      if (sunGlow > 0) {
+        pools.ranked.unshift({ anchor: sunAnchor.current, score: -1 });
         if (pools.ranked.length > LANTERN_SLOTS.length) pools.ranked.pop();
       }
       // Keep matching anchors in their existing slots; changing nearest order
@@ -199,7 +212,7 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
     <fogExp2 ref={haze} attach="fog" args={[HAZE, reduced ? 0 : 0.00065]} />
     {/* The globe has no single global ground/up direction. Neutral ambient
         bounce keeps its opposite hemisphere legible under the fixed sunset. */}
-    <ambientLight color="#dce4e8" intensity={0.95} />
+    <ambientLight ref={ambient} color="#dce4e8" intensity={0.95} />
     <hemisphereLight position={[0, 0, 1]} args={['#9bb4cc', '#aaa193', 0.55]} />
     <directionalLight
       ref={sun} color="#fff1d9" intensity={2.2} castShadow={!reduced}

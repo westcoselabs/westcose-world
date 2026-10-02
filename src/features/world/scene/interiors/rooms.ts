@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { CONTENT } from '@/content/registry';
 import { interiorFurnitureSegments } from '../../data/building-shapes';
 import type { TownBuilding, WallSegment } from '../../data/town-types';
+import { capRow, foldedStacks, GARMENTS, garmentRail, mannequin } from '../kit/apparel';
 import { block, frame, physicalSign, tube, UNIT_CYLINDER, UNIT_LEAF, type KitContext, type Triple } from '../kit/context';
 import { TOWN_PALETTE as P } from '../kit/materials';
 
@@ -89,7 +90,7 @@ function monitor(c: KitContext, m: THREE.Matrix4, position: Triple, width = 0.72
 
 function roomBase(c: KitContext, b: TownBuilding, m: THREE.Matrix4) {
   const w = b.width - 0.44, d = b.depth - 0.44;
-  const timber = b.interior === 'about' || b.interior === 'studio' || b.interior === 'skateshop';
+  const timber = b.interior === 'about' || b.interior === 'studio' || b.interior === 'skateshop' || b.interior === 'workshop';
   block(c.details, m, [0, 0.009, 0], [w, 0.018, d], timber ? P.paleTimber : b.interior === 'arcade' ? P.steel : P.concrete);
   const count = Math.floor(w / (timber ? 0.48 : 1.1));
   for (let j = 1; j < count; j++) block(c.details, m, [-w / 2 + j * w / count, 0.021, 0], [0.018, 0.007, d], timber ? P.timber : P.darkConcrete);
@@ -147,63 +148,67 @@ function studio(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: Wal
   shelf(c, shelfFrame, [0, 0, 0], 1.6, 1.95, 0.38, true);
 }
 
-function workshop(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: WallSegment[]) {
-  const back = -b.depth / 2 + 0.26, w = b.width, h = b.height;
-  physicalSign(c, m, 'MADE HERE', CONTENT.services.eyebrow, [0, 4.1, back + 0.02], 5.6, 0.72, [0, 0, 0], true);
-  block(c.details, m, [0, 2.05, back + 0.04], [w - 1.3, 2.3, 0.09], P.timber);
-  const holes = Math.floor((w - 1.6) / .44);
-  for (let x = 0; x < holes; x++) for (let y = 0; y < 5; y++) block(c.details, m, [(x - (holes - 1) / 2) * 0.44, 1.14 + y * 0.42, back + 0.091], [0.026, 0.026, 0.015], P.graphite);
-  for (let i = 0; i < 11; i++) {
-    const x = (i - 5) * 0.78;
-    const tool = frame(m, [x, 2.1, back + 0.16]);
-    if (i % 3 === 0) {
-      block(c.details, tool, [0, -0.05, 0], [0.061, 0.57, 0.075], P.timber, [0, 0, 0.06]);
-      block(c.details, tool, [0, 0.22, 0], [0.31, 0.12, 0.095], P.steel);
-      block(c.details, tool, [0.15, 0.19, 0], [0.045, 0.13, 0.095], P.graphite, [0, 0, -0.35]);
-    } else if (i % 3 === 1) {
-      block(c.details, tool, [0, -0.03, 0], [0.072, 0.51, 0.06], P.steel);
-      for (const end of [-1, 1]) {
-        block(c.details, tool, [0, end * 0.25, 0], [0.16, 0.08, 0.06], P.steel);
-        for (const side of [-1, 1]) block(c.details, tool, [side * 0.077, end * 0.3, 0], [0.04, 0.13, 0.06], P.steel);
-      }
-    } else {
-      block(c.details, tool, [0, -0.15, 0], [0.098, 0.24, 0.081], P.rust);
-      block(c.details, tool, [0, 0.125, 0], [0.026, 0.34, 0.03], P.steel);
-      block(c.details, tool, [0, 0.297, 0], [0.05, 0.043, 0.023], P.steel);
+/** The WestCose Shop sells clothing: a garment wall and caps behind the cash wrap, racks down both
+ * side walls, folded tees on two tables, a fitting room and mannequins in the front windows. The
+ * furniture list (building-shapes.ts) is read by index, in this order. */
+function clothingStore(c: KitContext, b: TownBuilding, m: THREE.Matrix4, furniture: WallSegment[]) {
+  const back = -b.depth / 2 + 0.26, w = b.width, d = b.depth, h = b.height;
+  const [rackLeft, rackRight, cashWrap, fitting, mannequinLeft, mannequinRight, tableLeft, tableRight] = furniture;
+  physicalSign(c, m, 'WESTCOSE SHOP', 'CLOTHING / MADE ON THE COAST', [0, 4.1, back + 0.02], 5.6, 0.72, [0, 0, 0], true);
+  // The garment wall stops short of the fitting room: two rails of face-out tees and hoodies on a
+  // timber backing, caps on pegs above.
+  const wallLeft = -w / 2 + 0.6, wallRight = fitting.center[0] - fitting.size[0] / 2 - 0.2;
+  block(c.details, m, [(wallLeft + wallRight) / 2, 2.15, back + 0.04], [wallRight - wallLeft + 0.3, 2.7, 0.06], P.timber);
+  garmentRail(c, m, wallLeft, wallRight, 2.86, back + 0.12, 0);
+  garmentRail(c, m, wallLeft, wallRight, 1.68, back + 0.12, 4);
+  capRow(c, m, wallLeft, wallRight, 3.32, back + 0.07, 2);
+  // Track lights wash the walls instead of the old pendant work lights.
+  for (const x of [-1.7, 1.7]) {
+    block(c.details, m, [x, h - 1.4, 0], [0.06, 0.06, d - 1.6], P.graphite);
+    for (let i = 0; i < 5; i++) {
+      const z = -d / 2 + 1.2 + i * (d - 2.4) / 4;
+      tube(c.details, m, [x, h - 1.5, z], 0.05, 0.16, P.graphite);
+      block(c.glow, m, [x, h - 1.585, z], [0.08, 0.012, 0.08], P.warmGlass);
     }
   }
-  // Pendant work lights down the hall.
-  for (let i = 0; i < 3; i++) {
-    const z = back + 1.6 + i * 2.6;
-    tube(c.details, m, [0, h - .9, z], .015, 1.6, P.graphite);
-    block(c.details, m, [0, h - 1.75, z], [1.4, .1, .22], P.graphite);
-    block(c.glow, m, [0, h - 1.81, z], [1.3, .03, .16], P.warmGlass);
+  // Wall racks down both sides face the aisle: a low plinth, two uprights and a rail of garments.
+  for (const [rack, side, title] of [[rackLeft, -1, 'TEES & HOODIES'], [rackRight, 1, 'NEW DROP']] as const) {
+    const [x, , z] = rack.center, length = rack.size[2];
+    const r = frame(m, [x, 0, z], -side * Math.PI / 2);
+    block(c.details, r, [0, 0.12, 0], [length, 0.24, 0.5], P.paleTimber);
+    for (const end of [-1, 1]) tube(c.details, r, [end * (length / 2 - 0.05), 0.92, -0.16], 0.02, 1.62, P.steel);
+    garmentRail(c, r, -length / 2 + 0.1, length / 2 - 0.1, 1.72, -0.12, side > 0 ? 2 : 6);
+    physicalSign(c, frame(m, [side * (w / 2 - 0.24), 0, z], -side * Math.PI / 2), title, 'WESTCOSE / MADE ON THE COAST', [0, 2.65, 0.02], 1.8, 0.42, [0, 0, 0], true);
   }
-  furniture.forEach((work, i) => {
-    table(c, m, work, i === 2 ? P.paleTimber : P.timber);
-    const [x, , z] = work.center;
-    if (i === 0) {
-      block(c.details, m, [x, 1.04, z + 0.87], [0.41, 0.27, 0.5], P.blue);
-      block(c.details, m, [x, 1.21, z + 0.87], [0.55, 0.1, 0.29], P.steel);
-      block(c.details, m, [x, 0.97, z - 0.7], [0.73, 0.06, 0.95], P.paper);
-      tube(c.details, m, [x, 1.04, z + 1.16], 0.021, 0.63, P.graphite, [0, 0, Math.PI / 2]);
-      for (const side of [-1, 1]) tube(c.details, m, [x + side * 0.29, 1.04, z + 1.16], 0.052, 0.07, P.steel, [0, 0, Math.PI / 2]);
-      deskLamp(c, m, [x - 0.22, 0.9, z - 1.18], Math.PI / 2, P.rust);
-    } else if (i === 1) {
-      for (let j = 0; j < 4; j++) block(c.details, m, [x, 0.96 + j * 0.06, z - 0.1], [0.82, 0.05, 1.76 - j * 0.06], j % 2 ? P.paleTimber : P.timber);
-    } else {
-      // A surfboard on the shaping island, mid-repair.
-      block(c.details, m, [x, 1.0, z], [2.1, .07, .5], '#E8DCC2', [0, 0, .02]);
-      block(c.details, m, [x - .2, 1.04, z], [1.2, .012, .08], P.rust);
-      monitor(c, m, [x + .9, .9, z - .2], .5, -.2, true);
-    }
-    if (i < 2) {
-      block(c.details, m, [x, 0.42, z - 0.66], [0.73, 0.4, 0.78], P.steel);
-      block(c.details, m, [x, 0.47, z - 0.25], [0.27, 0.055, 0.035], P.bone);
-    }
-  });
-  // Merch shelving either side of the doors.
-  for (const side of [-1, 1]) shelf(c, frame(m, [side * (w / 2 - .4), 0, b.depth / 2 - 1.6], -side * Math.PI / 2), [0, 0, 0], 1.7, 1.9, .36, false);
+  // The cash wrap: a graphite counter with a pale top, the register, bags and tissue paper.
+  const [cx, , cz] = cashWrap.center, [cw, ch, cd] = cashWrap.size;
+  block(c.details, m, [cx, ch / 2 - 0.03, cz], [cw, ch - 0.06, cd], P.graphite);
+  block(c.details, m, [cx, ch - 0.03, cz], [cw + 0.08, 0.06, cd + 0.1], P.paleTimber);
+  for (let i = 0; i < 3; i++) block(c.details, m, [cx - cw / 2 + 0.45 + i * 0.85, ch * 0.5, cz + cd / 2 + 0.006], [0.6, 0.5, 0.012], GARMENTS[i * 2][0]);
+  monitor(c, m, [cx + 0.75, ch, cz - 0.1], 0.5, 0, true);
+  for (let i = 0; i < 3; i++) block(c.details, m, [cx - 0.78, ch + 0.13, cz - 0.08 + i * 0.07], [0.3, 0.26 - i * 0.03, 0.05], i % 2 ? P.paper : P.bone);
+  block(c.details, m, [cx - 0.15, ch + 0.012, cz + 0.18], [0.5, 0.018, 0.36], P.paper);
+  physicalSign(c, m, 'THANK YOU', 'TEES / HOODIES / CAPS', [cx - 0.1, ch + 0.33, cz + cd / 2 - 0.05], 1.0, 0.28, [0, 0, 0], false);
+  block(c.details, m, [cx - 0.1, ch + 0.16, cz + cd / 2 - 0.1], [0.06, 0.3, 0.06], P.steel);
+  // The fitting room in the back corner: a timber booth, a striped curtain and a mirror outside.
+  const [fx, , fz] = fitting.center, [fw, fh, fd] = fitting.size;
+  block(c.details, m, [fx - fw / 2 + 0.03, fh / 2, fz], [0.06, fh, fd], P.timber);
+  block(c.details, m, [fx, fh + 0.03, fz], [fw, 0.06, fd], P.timber);
+  block(c.details, m, [fx, fh - 0.08, fz + fd / 2], [fw, 0.04, 0.04], P.steel);
+  for (let i = 0; i < 6; i++) block(c.details, m, [fx - fw / 2 + 0.16 + i * (fw - 0.3) / 5, fh / 2 - 0.05, fz + fd / 2 - 0.03], [0.26, fh - 0.25, 0.03], i % 2 ? P.rust : '#B8774F', [0, (i % 2 ? 1 : -1) * 0.25, 0]);
+  block(c.details, m, [fx - fw / 2 - 0.01, 1.25, fz], [0.02, 1.52, 0.68], P.steel);
+  block(c.glow, m, [fx - fw / 2 - 0.025, 1.25, fz], [0.012, 1.4, 0.58], '#9FB4B8');
+  physicalSign(c, m, 'FITTING ROOM', undefined, [fx, fh + 0.22, fz + fd / 2 + 0.01], 1.2, 0.24, [0, 0, 0], true);
+  // Two low tables of folded tees either side of the aisle.
+  for (const [i, table] of [tableLeft, tableRight].entries()) {
+    const [tx, , tz] = table.center, [tw, th, td] = table.size;
+    block(c.details, m, [tx, th - 0.05, tz], [tw, 0.1, td], P.paleTimber);
+    block(c.details, m, [tx, (th - 0.1) / 2, tz], [tw - 0.2, th - 0.1, td - 0.2], P.steel);
+    foldedStacks(c, m, tx, th, tz, tw - 0.1, td - 0.1, i * 3);
+  }
+  // Mannequins in the front windows face the courtyard.
+  mannequin(c, m, mannequinLeft.center[0], mannequinLeft.center[2], GARMENTS[2][0], GARMENTS[2][1]);
+  mannequin(c, m, mannequinRight.center[0], mannequinRight.center[2], GARMENTS[3][0], GARMENTS[3][1], true);
 }
 
 function arcadeCabinet(c: KitContext, m: THREE.Matrix4, title: string, main: boolean) {
@@ -363,5 +368,5 @@ export function addTownInterior(c: KitContext, b: TownBuilding, m: THREE.Matrix4
   if (!b.interior) return;
   roomBase(c, b, m);
   const furniture = interiorFurnitureSegments(b);
-  ({ studio, workshop, arcade, about, lab, skateshop })[b.interior](c, b, m, furniture);
+  ({ studio, workshop: clothingStore, arcade, about, lab, skateshop })[b.interior](c, b, m, furniture);
 }

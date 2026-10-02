@@ -164,6 +164,11 @@ export function addTownBuilding(c: KitContext, b: TownBuilding) {
     closedDoor(c, m, w * 0.32, fz, 0.88, b.accent);
     windowModule(c, m, -w * 0.15, 1.47, fz + 0.04, w * 0.56, 1.79, b.trim, b.archetype === 'market');
     block(c.details, m, [-w * 0.15, 0.43, fz + 0.09], [w * 0.62, 0.17, 0.18], b.accent);
+    // A plaque between the door and the corner names whoever works upstairs.
+    if (b.doorSign) {
+      block(c.details, m, [w * 0.32 + 0.78, 1.62, fz + 0.045], [0.64, 0.42, 0.05], P.steel);
+      physicalSign(c, m, b.doorSign.title, b.doorSign.subtitle, [w * 0.32 + 0.78, 1.62, fz + 0.075], 0.56, 0.34, [0, 0, 0], true);
+    }
   } else {
     closedDoor(c, m, 0, fz, 1.08, b.accent);
     for (const side of [-1, 1]) windowModule(c, m, side * w * 0.3, 1.49, fz + 0.03, w * 0.21, 1.26, b.trim, side > 0, b.archetype === 'cottage');

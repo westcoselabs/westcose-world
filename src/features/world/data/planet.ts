@@ -11,6 +11,7 @@ import { MAP_MAX_HEIGHT, MAP_MIN_Z, MAP_RADIUS, MAP_SEAM, MAP_SEA_LEVEL, mapCoor
 import { CUL_DE_SACS, downtownSurfaceAt } from './downtown-layout';
 import { grandStairSurfaceAt, nearSkatepark, skateparkSurfaceAt } from './skatepark-layout';
 import { westBluffDistance } from './island-terrain';
+import { ANGLER, PROMPT } from './fishing-spot';
 export const RADIUS=MAP_RADIUS;
 export const SEA_LEVEL=MAP_SEA_LEVEL;
 export const PLANET_VERSION=9;
@@ -73,9 +74,15 @@ function peninsulaFixture(x:number,z:number,targetX:number,targetZ:number):MapFi
 }
 /** The customer side of the skate-shop counter, where E takes a board. */
 const skateCounter=mapCoordinates(buildingLocalPoint(building('skate-shop'),[-.2,0,-building('skate-shop').depth/2+3.2]));
+/** The WestCose Studio's street door at Palm Court; the services office is upstairs. */
+const palmCourt=building('apartments'),studioOfficeAt=(outward:number)=>buildingLocalPoint(palmCourt,[palmCourt.width*.32,0,palmCourt.depth/2+outward]);
+const studioOffice=mapCoordinates(studioOfficeAt(.9));
+/** Pier Pressure: the open rail gap on the west side of the pier head. */
+const fishingSpot={x:PROMPT.x,z:PROMPT.z};
 export const PLANET_PLACES=[
  {id:'studio',label:'Portfolio Gallery',section:'Projects',x:building('studio').x,z:building('studio').z,radius:4,contentId:'world',number:'01',interior:'studio'},
- {id:'workshop',label:'WestCose Shop',section:'Services',x:building('workshop').x,z:building('workshop').z,radius:4.8,contentId:'services',number:'02',interior:'workshop'},
+ {id:'workshop',label:'WestCose Shop',section:'Clothing',x:building('workshop').x,z:building('workshop').z,radius:4.8,contentId:'shop',number:'12',interior:'workshop'},
+ {id:'services',label:'WestCose Studio',section:'Services',x:studioOffice.x,z:studioOffice.z,radius:2.2,contentId:'services',number:'02',interior:null},
  {id:'arcade',label:'Social Club',section:'Games',x:building('arcade').x,z:building('arcade').z,radius:4.5,contentId:'fightclub',number:'03',interior:'arcade'},
  {id:'about',label:'WestCose Motel',section:'About',x:building('about').x,z:building('about').z,radius:4,contentId:'about',number:'04',interior:'about'},
  // Kept just beyond the fresh-load clearing so a visitor arrives in the
@@ -89,6 +96,8 @@ export const PLANET_PLACES=[
  {id:'skateshop',label:'Skate Shop Counter',section:'Skateboards',x:skateCounter.x,z:skateCounter.z,radius:2.5,contentId:'skateshop',number:'09',interior:'skateshop'},
  // Anywhere on the grand stairs (or at the top, riding in): E starts a game of S.K.A.T.E.
  {id:'skatepark',label:'Game of S.K.A.T.E.',section:'Skate Park',x:-29.3,z:0,radius:4.4,contentId:'skatepark',number:'10',interior:null},
+ // At the seaward rail of the pier head: E opens the bait-and-tackle menu.
+ {id:'fishing',label:'Pier Pressure',section:'Fishing',x:fishingSpot.x,z:fishingSpot.z,radius:2.4,contentId:'fishing',number:'11',interior:null},
 ] as const;
 /** Each room names itself while the visitor is inside it. */
 const ROOM_AREAS={studio:'Studio Row Gallery',workshop:'WestCose Shop',arcade:'Dead Coast Social Club',about:'West Cose Motel',lab:'Alley Room',skateshop:'WestCose Skate Shop'} as const;
@@ -164,6 +173,8 @@ export const PLANET_FIXTURES={
  pierapproach:{x:0,z:PIER_LAYOUT.approach.start[1]+1.5,facing:'south'},
  pierhead:{x:0,z:PIER_LAYOUT.head.center[1],facing:'north'},
  pieroutward:{x:0,z:PIER_LAYOUT.head.center[1]-PIER_LAYOUT.head.depth/2+1,facing:'south'},
+ // A step back from the fishing rail, facing out to sea.
+ fishing:{x:ANGLER.x,z:ANGLER.z+2.2,facing:'south'},
  pierside:{x:1.2,z:(PIER_LAYOUT.entrance[1]+PIER_LAYOUT.neckEnd[1])/2,facing:'east'},
  pierbeach:{x:10,z:-29,facing:'east'},
  promenade:{x:0,z:-16,facing:'east'},
@@ -173,6 +184,8 @@ export const PLANET_FIXTURES={
  farside:{x:0,z:176,facing:'north'},
  ridge:{x:0,z:200,facing:'north'},
  workshop:workshopFixture,
+ // On Palm Ave, facing the WestCose Studio door at Palm Court from just outside its prompt.
+ studiooffice:fixtureToward(studioOfficeAt(3.2),studioOfficeAt(0)),
  // The lab's rotated front faces west, so begin outside that doorway and walk
  // east through it rather than spawning inside the room.
  lab:labFixture,

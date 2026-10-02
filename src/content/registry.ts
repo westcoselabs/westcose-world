@@ -1,4 +1,4 @@
-export type ContentId = 'world' | 'services' | 'about' | 'contact' | 'fightclub' | 'frequency' | 'labs' | 'snowboard' | 'skateshop' | 'skatepark';
+export type ContentId = 'world' | 'services' | 'shop' | 'about' | 'contact' | 'fightclub' | 'frequency' | 'labs' | 'snowboard' | 'skateshop' | 'skatepark' | 'fishing';
 export type ContentEntry = {
   id: ContentId; title: string; eyebrow: string; summary: string; paragraphs: string[];
   status: string; href: string; linkLabel: string;
@@ -12,10 +12,16 @@ export const CONTENT: Record<ContentId, ContentEntry> = {
     status: 'In development', href: '/projects/westcose-world', linkLabel: 'View project',
   },
   services: {
-    id: 'services', title: 'Room for the next idea.', eyebrow: 'The Workshop / Services',
-    summary: 'The workshop is the future home of WestCose services.',
+    id: 'services', title: 'Room for the next idea.', eyebrow: 'WestCose Studio / Services',
+    summary: 'The studio office upstairs at Palm Court is the future home of WestCose services.',
     paragraphs: ['This space is reserved for the real service offering, process, and ways to work together. Those details haven’t been added to this new repository yet.', 'Direct pages also make the work accessible outside the 3D world. Exploring is always optional.'],
     status: 'Content coming soon', href: '/services', linkLabel: 'View services',
+  },
+  shop: {
+    id: 'shop', title: 'Wear the coast.', eyebrow: 'WestCose Shop / Clothing',
+    summary: 'Tees, hoodies and caps from the coast. The racks are stocked; online orders are coming soon.',
+    paragraphs: ['The WestCose Shop on the courtyard is the home of WestCose clothing: tees, hoodies, caps and whatever the next drop brings.', 'An online store hasn’t been connected to this repository yet. When it is, ordering will open from here.'],
+    status: 'Online store coming soon', href: '', linkLabel: '',
   },
   about: {
     id: 'about', title: 'Welcome to WestCose.', eyebrow: 'Inside the Studio / About',
@@ -59,6 +65,12 @@ export const CONTENT: Record<ContentId, ContentEntry> = {
     paragraphs: ['Each letter asks for a different skill: an ollie, big vert air in the Deep End, a ledge grind, the full Snake Run and an air out of the South Quarter.', 'You need a skateboard from the WestCose Skate Shop to play. Best times and scores are saved on this device.'],
     status: 'Playable mini-game', href: '', linkLabel: '',
   },
+  fishing: {
+    id: 'fishing', title: 'Pier Pressure.', eyebrow: 'Westcose Pier / Fishing',
+    summary: 'Walk to the rail at the end of the pier and cast. Every fish you land can be kept, or hooked back on as bait for something bigger.',
+    paragraphs: ['The food chain runs from sardines to sharks, whales and things that should not be in a fishing game. Each step up pays about three times more, and fights harder.', 'Let go of the reel when a fish runs, steer against its bolts, and bow when it jumps. Clams buy better tackle. Records, the Fish-o-dex and clams are saved on this device.'],
+    status: 'Playable mini-game', href: '', linkLabel: '',
+  },
   frequency: {
     id: 'frequency', title: 'You found the quiet side.', eyebrow: 'Coastal Frequency / Field note 01',
     summary: 'Some things are here simply because you took the long way around.',
@@ -69,7 +81,7 @@ export const CONTENT: Record<ContentId, ContentEntry> = {
 
 export const DESTINATIONS = [
   { label: 'Projects', place: 'Project Studio', id: 'world', href: '/projects', number: '01' },
-  { label: 'Services', place: 'The Workshop', id: 'services', href: '/services', number: '02' },
+  { label: 'Services', place: 'WestCose Studio', id: 'services', href: '/services', number: '02' },
   { label: 'Games', place: 'The Arcade', id: 'fightclub', href: '/games', number: '03' },
   { label: 'About', place: 'Inside the Studio', id: 'about', href: '/about', number: '01b' },
   { label: 'Contact', place: 'Contact Station', id: 'contact', href: '/contact', number: '04' },

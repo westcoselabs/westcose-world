@@ -4,10 +4,12 @@ import type { InteriorId } from "../data/town-types";
 import { MAP_SEA_LEVEL, mapCoordinates, mapDirection, mapFrame } from "../data/world-map";
 import { createSnowboardSession, type SnowboardSession } from "./snowboard-session";
 import { createSkateSession, type SkateSession } from "./skate-session";
+import { createFishingSession, type FishingSession } from "./fishing-session";
 
 /** `tickets` is the lift-ticket booth menu; `snowboard` is a live run of the mini-game;
- * `skating` is riding the skateboard (free skate or a game of S.K.A.T.E.). */
-export type WorldMode = "loading" | "intro" | "exploring" | "reading" | "menu" | "paused" | "overview" | "error" | "tickets" | "snowboard" | "skating";
+ * `skating` is riding the skateboard (free skate or a game of S.K.A.T.E.); `tackle` is the
+ * Pier Pressure menu at the end of the pier and `fishing` a live tide. */
+export type WorldMode = "loading" | "intro" | "exploring" | "reading" | "menu" | "paused" | "overview" | "error" | "tickets" | "snowboard" | "skating" | "tackle" | "fishing";
 export type WorldPosition = { x: number; y: number; z: number };
 /**
  * A map direction can have the normal outdoor support and a lower cave floor.
@@ -57,6 +59,8 @@ export interface WorldRuntimeState {
   snowboard: SnowboardSession;
   /** The skateboard; while riding, the walker's position follows the rider. */
   skate: SkateSession;
+  /** Pier Pressure; the walker waits at the fishing spot while a tide is on. */
+  fishing: FishingSession;
   /** Development-only review camera: when set, the follow camera is replaced by this fixed view. */
   debugCamera?: { position: WorldPosition; target: WorldPosition; up: WorldPosition } | null;
 }
@@ -86,5 +90,6 @@ export function createRuntimeState(): WorldRuntimeState {
     counters: { drawCalls: 0, triangles: 0, geometries: 0, textures: 0 },
     snowboard: createSnowboardSession(),
     skate: createSkateSession(),
+    fishing: createFishingSession(),
   };
 }

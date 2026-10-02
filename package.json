@@ -12,6 +12,7 @@
     "test:planet": "node scripts/check-planet.mjs",
     "test:snowboard": "node scripts/check-ski-mountain.mjs && node scripts/check-snowboard.mjs",
     "test:skate": "node scripts/check-skate.mjs",
+    "test:fishing": "node scripts/check-fishing.mjs",
     "test:headed": "playwright test --headed"
   },
   "dependencies": {

@@ -143,9 +143,10 @@ export function downtownMarkings(): Marking[] {
   return out;
 }
 
-/** Street furniture along the sidewalks (chart x, z, kind). Palms and lamps are solid. A lamp's
- * yaw turns its arm from the default (toward the nearer street centre line). */
-export type Furniture = { kind: 'palm' | 'lamp' | 'bench'; x: number; z: number; yaw?: number };
+/** Street furniture along the sidewalks (chart x, z, kind). Palms, lamps and benches are solid. A
+ * lamp's yaw turns its arm from the default (toward the nearer street centre line). A palm's look
+ * is seeded by its list index unless `seed` pins it. */
+export type Furniture = { kind: 'palm' | 'lamp' | 'bench'; x: number; z: number; yaw?: number; seed?: number };
 /** A point on a cul-de-sac ring; `yaw` turns a lamp's arm (local +Z) toward the centre. */
 const ringPoint = (c: CulDeSac, radius: number, degrees: number) => {
   const a = degrees * Math.PI / 180;
@@ -164,14 +165,13 @@ export const DOWNTOWN_FURNITURE: readonly Furniture[] = [
   { kind: 'lamp', x: -5.2, z: -8.5 }, { kind: 'lamp', x: 5.2, z: -10.6 },
   { kind: 'palm', x: -29.2, z: -9 }, { kind: 'palm', x: -29.2, z: 9 }, { kind: 'palm', x: -29.2, z: 20 },
   { kind: 'lamp', x: -27.2, z: -5.2 }, { kind: 'lamp', x: -27.2, z: 5.2 },
-  // The courtyard: palms in the four corner planters and benches facing the fountain.
+  // The courtyard: palms in the four corner planters; the plaza stays open round the fountain.
   { kind: 'palm', x: -6.4, z: 8.3 }, { kind: 'palm', x: 6.4, z: 8.3 }, { kind: 'palm', x: -6.4, z: 15.3 }, { kind: 'palm', x: 6.4, z: 15.3 },
-  { kind: 'bench', x: -4.5, z: 9.6, yaw: Math.PI / 2 }, { kind: 'bench', x: 4.5, z: 9.6, yaw: -Math.PI / 2 },
-  { kind: 'bench', x: -4.5, z: 13.6, yaw: Math.PI / 2 }, { kind: 'bench', x: 4.5, z: 13.6, yaw: -Math.PI / 2 },
   { kind: 'bench', x: -24.5, z: 5.1 }, { kind: 'bench', x: -12, z: 26.6, yaw: Math.PI },
-  // Each cul-de-sac island carries a palm; lamps stand round the turning circles.
-  { kind: 'palm', x: MAIN_CUL.center[0], z: MAIN_CUL.center[1] },
-  { kind: 'palm', x: PALM_CUL.center[0], z: PALM_CUL.center[1] },
+  // Each cul-de-sac island carries a palm; lamps stand round the turning circles. The seeds keep
+  // both palms as they grew before the courtyard benches were taken out of this list.
+  { kind: 'palm', x: MAIN_CUL.center[0], z: MAIN_CUL.center[1], seed: 39 },
+  { kind: 'palm', x: PALM_CUL.center[0], z: PALM_CUL.center[1], seed: 40 },
   ringLamp(MAIN_CUL, 52), ringLamp(MAIN_CUL, -52), ringLamp(MAIN_CUL, 125),
   ringLamp(PALM_CUL, 60), ringLamp(PALM_CUL, -70),
 ];

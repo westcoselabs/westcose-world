@@ -19,7 +19,7 @@ const buildings:Spec[]=[
  ['surf-supply',-22.8,north(MAIN_NORTH,7),7,7,6.4,'market','flat','studio-row',P.bone,{sign:'WEST COSE SURF SUPPLY',subtitle:'BOARDS / APPAREL / REPAIRS',awning:true,accent:P.rust}],
  // The two courtyard halls: two storeys tall, their grand entrances facing each other.
  ['studio',-14.2,11.8,10.8,9.6,7.6,'studio','flat','studio-row',P.bone,{kind:'studio',rotation:Math.PI/2,sign:'STUDIO ROW GALLERY',subtitle:'PORTFOLIO / PROJECTS / PROCESS',interior:'studio',awning:true,entryWidth:3.2,facade:'gallery'}],
- ['workshop',14.2,11.8,10.8,9.6,7.2,'warehouse','sawtooth','workshop',P.blue,{kind:'workshop',rotation:-Math.PI/2,sign:'WESTCOSE SHOP',subtitle:'SERVICES / MADE HERE / OPEN DAILY',interior:'workshop',awning:true,entryWidth:3.6,accent:P.rust,facade:'shop'}],
+ ['workshop',14.2,11.8,10.8,9.6,7.2,'warehouse','sawtooth','workshop',P.blue,{kind:'workshop',rotation:-Math.PI/2,sign:'WESTCOSE SHOP',subtitle:'CLOTHING / TEES / HOODIES / HATS',interior:'workshop',awning:true,entryWidth:3.6,accent:P.rust,facade:'shop'}],
  ['skate-shop',24,north(MAIN_NORTH,9.2),9.2,9.2,5.8,'market','flat','workshop',P.graphite,{sign:'WESTCOSE SKATE SHOP',subtitle:'DECKS / WHEELS / GRIP / FREE BOARDS',interior:'skateshop',awning:true,accent:P.rust,entryWidth:2.8,entryOffset:-2.2}],
  // Main St, south side (backs to the boardwalk).
  ['town-corner',-18.3,south(MAIN_SOUTH,6.5),7,6.5,4.2,'corner','flat','studio-row','#A3A58E',{rotation:Math.PI,sign:'DEAD COAST DINER',subtitle:'BURGERS / SHAKES / LATE',awning:true,accent:P.rust}],
@@ -28,9 +28,10 @@ const buildings:Spec[]=[
  ['about',MOTEL.lobby.x,MOTEL.lobby.z,MOTEL.lobby.width,MOTEL.lobby.depth,MOTEL.lobby.height,'motel','flat','courtyard','#D8C4A6',{rotation:Math.PI,sign:'WEST COSE MOTEL',subtitle:'LOBBY / ABOUT / CHECK IN',interior:'about',entryWidth:2.4,entryOffset:-1.35,accent:P.rust,facade:'motel-lobby',floorHeight:MOTEL.floorHeight}],
  ['motel-rooms',MOTEL.rooms.x,MOTEL.rooms.z,MOTEL.rooms.width,MOTEL.rooms.depth,MOTEL.rooms.height,'motel','flat','courtyard','#D8C4A6',{rotation:Math.PI,accent:'#C2653E',facade:'motel-rooms',floorHeight:MOTEL.floorHeight}],
  ['lab',30.2,-11,5,5,3.8,'lab','lean','back-alleys','#737E78',{rotation:-Math.PI/2,sign:'ALLEY ROOM',subtitle:'WESTCOSE LABS',interior:'lab',entryWidth:2.4}],
- // Palm Ave, north side, and a small back-lot shop facing it.
+ // Palm Ave, north side, and a small back-lot shop facing it. The WestCose Studio (services)
+ // keeps an office upstairs at Palm Court; its plaque sits beside the street door.
  ['taco-shack',-17.5,north(PALM_NORTH,6),6,6,4.1,'cottage','gable','high-ground','#C98F5E',{sign:'TACO SHACK',subtitle:'BURRITOS / AGUAS FRESCAS',awning:true}],
- ['apartments',-8.5,north(PALM_NORTH,7),8.5,7,8.2,'livework','flat','high-ground','#D9CDB6',{sign:'PALM COURT',subtitle:'APARTMENTS',balcony:true}],
+ ['apartments',-8.5,north(PALM_NORTH,7),8.5,7,8.2,'livework','flat','high-ground','#D9CDB6',{sign:'PALM COURT',subtitle:'APARTMENTS',balcony:true,doorSign:{title:'WESTCOSE STUDIO',subtitle:'SERVICES / UPSTAIRS'}}],
  ['records',8,north(PALM_NORTH,6.5),6.5,6.5,5.4,'corner','flat','high-ground',P.graphite,{sign:'DEAD WAX RECORDS',subtitle:'VINYL / TAPES / SHOWS',accent:P.rust}],
  ['coffee',16,north(PALM_NORTH,6),6,6,4.4,'market','lean','high-ground','#8FA39B',{sign:'SALT & SMOKE',subtitle:'COFFEE / BAKERY',awning:true}],
  ['bike-rental',-23.55,south(PALM_SOUTH,3),5.5,3,3.2,'shed','lean','studio-row',P.blue,{rotation:Math.PI,sign:'BIKE RENTAL',subtitle:'CRUISERS BY THE DAY'}],

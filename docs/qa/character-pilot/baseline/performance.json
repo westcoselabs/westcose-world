@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-02T21:00:12.643Z",
+  "url": "http://127.0.0.1:3001",
+  "buildId": "wzwMICb0Gy8VYNUV9sa6h",
+  "controllerSha256": "597cf8b1dd6b21945d0c8ef660014ebdac3af920fa2d598f54a472bda82b479c",
+  "browser": "154.0.8037.97",
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13620H",
+  "notes": "Production spawn, no movement, fresh contexts, 8 s samples after 4 s settling. RAF cadence is not GPU timing. Raw WebGL draw/triangle submissions INCLUDE shadow passes and instances; they are NOT unique scene geometry. Texture count is live WebGL allocations, NOT bytes. Physical geometry and GPU memory are unavailable from this probe. Phone is desktop emulation, NOT a real phone.",
+  "profiles": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "frames": 284,
+      "frameMs": {
+        "mean": 28.18767605633803,
+        "p50": 30.100000000000364,
+        "p95": 36.400000000001455,
+        "p99": 42.400000000001455,
+        "max": 48.600000000000364
+      },
+      "drawSubmissions": {
+        "mean": 126,
+        "p50": 126,
+        "p95": 126,
+        "p99": 126,
+        "max": 126
+      },
+      "triangleSubmissions": {
+        "mean": 753280,
+        "p50": 753280,
+        "p95": 753280,
+        "p99": 753280,
+        "max": 753280
+      },
+      "liveWebGLTextures": 16,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A7A8) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "transferBytes": 671539,
+      "encodedBytes": 665839,
+      "developmentDebugExposed": false,
+      "errors": []
+    },
+    {
+      "name": "phone-emulated",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": true,
+      "hasTouch": true,
+      "frames": 864,
+      "frameMs": {
+        "mean": 9.272337962962963,
+        "p50": 11.900000000001455,
+        "p95": 12.300000000001091,
+        "p99": 12.600000000000364,
+        "max": 24.30000000000109
+      },
+      "drawSubmissions": {
+        "mean": 107,
+        "p50": 107,
+        "p95": 107,
+        "p99": 107,
+        "max": 107
+      },
+      "triangleSubmissions": {
+        "mean": 607467,
+        "p50": 607467,
+        "p95": 607467,
+        "p99": 607467,
+        "max": 607467
+      },
+      "liveWebGLTextures": 16,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A7A8) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "transferBytes": 671230,
+      "encodedBytes": 665830,
+      "developmentDebugExposed": false,
+      "errors": []
+    }
+  ]
+}

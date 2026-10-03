@@ -12,6 +12,7 @@ import {
   CAMERA_FOLLOW_DISTANCE, DEFAULT_FORWARD, DEFAULT_HEADING, DEFAULT_SPAWN, PLAYER_CENTER_HEIGHT,
   type WorldRuntimeState,
 } from "../runtime/types";
+import { VisitorModel } from "./visitor-model";
 
 interface PlayerControllerProps {
   runtime: WorldRuntimeState;
@@ -45,13 +46,17 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
   const leftLeg = useRef<Group>(null);
   const rightLeg = useRef<Group>(null);
   const backBoard = useRef<Group>(null);
+  /** The box-built walker, shown until the textured model loads (and kept if it can't). */
+  const boxWalker = useRef<Group>(null);
+  const boxLimbs = useRef<Group>(null);
+  const model = useRef<VisitorModel | null>(null);
   const callbacks = useRef({ onReady, onHotspot, onArea });
   const ready = useRef(false);
   const pointer = useRef<{ id: number; look: boolean; x: number; y: number } | null>(null);
   const { camera, gl } = useThree();
   const simulation = useRef({
     accumulator: 0, verticalVelocity: 0, inputActive: false, cameraInitialized: false,
-    lastMode: runtime.mode, area: "", phase: 0, gait: 0, cameraHeight: 3.0, zoom: 1, orbitHold: 0,
+    lastMode: runtime.mode, area: "", phase: 0, gait: 0, speed: 0, cameraHeight: 3.0, zoom: 1, orbitHold: 0,
     up: new Vector3(), forward: new Vector3(), right: new Vector3(), wish: new Vector3(),
     inputForward: new Vector3(runtime.forward.x, runtime.forward.y, runtime.forward.z),
     facing: new Vector3(runtime.forward.x, runtime.forward.y, runtime.forward.z),
@@ -61,6 +66,32 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
   });
 
   useEffect(() => { callbacks.current = { onReady, onHotspot, onArea }; }, [onReady, onHotspot, onArea]);
+
+  useEffect(() => {
+    const visitor = new VisitorModel();
+    const group = avatar.current, board = backBoard.current;
+    if (!group) return;
+    group.add(visitor.root);
+    void visitor.load().then(loaded => {
+      if (!loaded || !boxWalker.current || !boxLimbs.current) { visitor.dispose(); return; }
+      boxWalker.current.visible = false;
+      boxLimbs.current.visible = false;
+      model.current = visitor;
+      if (board && visitor.spine) {
+        // Strap the board flat across the tee's back, then let it ride the spine.
+        board.position.set(0, 1.16, 0.22);
+        board.rotation.set(0.08, 0, 0.18);
+        group.updateMatrixWorld(true);
+        visitor.spine.attach(board);
+      }
+    });
+    return () => {
+      // Hand the board back to the walker before the model (and the bone holding it) is disposed.
+      if (board && board.parent !== group) group.attach(board);
+      model.current = null;
+      visitor.dispose();
+    };
+  }, []);
 
   useEffect(() => {
     const runtime = runtimeRef.current;
@@ -265,9 +296,11 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
           state.phase += movement.distance * 4.5;
         }
         state.gait = MathUtils.damp(state.gait, movement.distance > 0.001 ? Math.min(inputLength, 1) : 0, 12, FIXED_STEP);
+        state.speed = MathUtils.damp(state.speed, movement.distance / FIXED_STEP, 10, FIXED_STEP);
       } else {
         state.inputActive = false;
         state.gait = MathUtils.damp(state.gait, 0, 12, FIXED_STEP);
+        state.speed = MathUtils.damp(state.speed, 0, 10, FIXED_STEP);
       }
 
       const surface = supportAt(state.up, {
@@ -359,8 +392,12 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       // the visitor. Treat that close range as a clear first-person cutaway;
       // collision, movement, and the normal third-person view are unchanged.
       avatar.current.visible = runtime.cameraDistance >= 1.6;
-      const bob = runtime.reducedMotion ? 0 : Math.abs(Math.sin(state.phase)) * 0.045 * state.gait;
-      avatar.current.position.set(runtime.position.x, runtime.position.y, runtime.position.z).addScaledVector(state.up, -PLAYER_CENTER_HEIGHT + bob - (runtime.swimming ? 0.48 : 0));
+      const visitor = model.current?.loaded ? model.current : null;
+      visitor?.update(dt, { speed: state.speed, swimming: runtime.swimming, reducedMotion: runtime.reducedMotion });
+      // The animated model carries its own bob and stroke depth; the box walker fakes both.
+      const bob = visitor || runtime.reducedMotion ? 0 : Math.abs(Math.sin(state.phase)) * 0.045 * state.gait;
+      const depth = visitor ? visitor.waterDepth : runtime.swimming ? 0.48 : 0;
+      avatar.current.position.set(runtime.position.x, runtime.position.y, runtime.position.z).addScaledVector(state.up, -PLAYER_CENTER_HEIGHT + bob - depth);
       state.back.copy(state.facing).negate();
       state.right.crossVectors(state.up, state.back).normalize();
       state.matrix.makeBasis(state.right, state.up, state.back);
@@ -394,6 +431,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.015, 0]}>
       <circleGeometry args={[0.4, 24]} /><meshBasicMaterial color="#233a3c" transparent opacity={0.2} depthWrite={false} />
     </mesh>
+    <group ref={boxWalker}>
     <mesh position={[0, 1.13, 0]} castShadow><capsuleGeometry args={[0.285, 0.36, 5, 10]} /><meshToonMaterial color="#eee7d4" /></mesh>
     <mesh position={[0, 1.41, 0.11]} castShadow><sphereGeometry args={[0.26, 10, 8]} /><meshToonMaterial color="#d9d7c9" /></mesh>
     <mesh position={[0, 1.62, -0.015]} castShadow><sphereGeometry args={[0.235, 12, 10]} /><meshToonMaterial color="#c58d6a" /></mesh>
@@ -402,6 +440,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
     {[-0.075, 0.075].map(x => <mesh key={x} position={[x, 1.63, -0.231]}><sphereGeometry args={[0.019, 6, 6]} /><meshToonMaterial color="#28333a" /></mesh>)}
     <mesh position={[0, 1.04, 0.265]} castShadow><boxGeometry args={[0.37, 0.47, 0.16]} /><meshToonMaterial color="#bf7957" /></mesh>
     <mesh position={[0, 1.08, 0.355]}><boxGeometry args={[0.13, 0.04, 0.012]} /><meshToonMaterial color="#f0e6cc" /></mesh>
+    </group>
     {/* The skate-shop board rides strapped to the pack once the visitor has one. */}
     <group ref={backBoard} position={[0, 1.02, 0.39]} rotation={[0.12, 0, 0.18]} visible={false}>
       <mesh castShadow><boxGeometry args={[0.2, 0.78, 0.022]} /><meshToonMaterial color="#c9ae86" /></mesh>
@@ -409,6 +448,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       {[-0.24, 0.24].map(y => <mesh key={y} position={[0, y, 0.045]}><boxGeometry args={[0.2, 0.05, 0.05]} /><meshToonMaterial color="#efe6cf" /></mesh>)}
       <mesh position={[0, 0.05, -0.02]}><boxGeometry args={[0.24, 0.05, 0.03]} /><meshToonMaterial color="#2c4047" /></mesh>
     </group>
+    <group ref={boxLimbs}>
     <group ref={leftArm} position={[-0.33, 1.31, 0]} rotation={[0, 0, -0.1]}>
       <mesh position={[0, -0.2, 0]} castShadow><capsuleGeometry args={[0.105, 0.27, 4, 8]} /><meshToonMaterial color="#eee7d4" /></mesh>
       <mesh position={[0, -0.41, 0]} castShadow><sphereGeometry args={[0.09, 8, 8]} /><meshToonMaterial color="#c58d6a" /></mesh>
@@ -428,6 +468,7 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       <mesh position={[0, -0.51, 0]} castShadow><capsuleGeometry args={[0.085, 0.27, 4, 8]} /><meshToonMaterial color="#c58d6a" /></mesh>
       <mesh position={[0, -0.69, -0.055]} castShadow><boxGeometry args={[0.22, 0.17, 0.37]} /><meshToonMaterial color="#729eab" /></mesh>
       <mesh position={[0, -0.775, -0.055]}><boxGeometry args={[0.225, 0.055, 0.38]} /><meshToonMaterial color="#ece9d7" /></mesh>
+    </group>
     </group>
   </group>;
 }

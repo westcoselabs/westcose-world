@@ -5,7 +5,10 @@ import { TOWN_BUILDINGS, TOWN_INTERIORS } from "../data/town-layout";
 import { townCoordinates, townSurfaceAt } from "../data/town-surfaces";
 import { PIER_RAIL_SEGMENTS } from "../data/pier-rails";
 import { landmarkColliders } from "../data/concept-landmarks";
-import { cavePortalCameraClearDistance, caveSectionAt } from "../data/peninsula-cave";
+import { isInsideSeaCaveVoid, SEA_CAVE_FRAME, seaCaveAt, seaCaveGradient, seaCavePortalAt } from "../data/sea-cave";
+import { SEA_CAVE_MOUTH, SEA_CAVE_PASSAGES, SEA_CAVE_WALL_OFFSET } from "../data/sea-cave-layout";
+import { seaCaveOpeningCameraClearDistance } from "../data/sea-cave-openings";
+import { lighthouseCameraBlocked, lighthouseSupportAt } from "../data/lighthouse-tower";
 import type { InteriorId } from "../data/town-types";
 import type { SupportLayer, WorldPosition } from "./types";
 
@@ -34,29 +37,33 @@ const boxes = [...TOWN_BUILDINGS.flatMap(building => {
 export type SurfaceSupport = {
   radius:number;
   kind:"ground"|"floor"|"pier"|"water";
-  /** `tunnel` is a second radial support beneath the unchanged outdoor terrain. */
+  /** `tunnel` is the sea caves' floor, a second radial support beneath the outdoor terrain. */
   layer:SupportLayer;
   id?:string;
   interior?:InteriorId;
+  /** Rock or masonry: never walkable. `radius` stays the nearest real floor; `normal` (a
+   * tangent, either sign) lets movement slide along the face instead of sticking. */
+  solid?:boolean;
+  normal?:Vector3;
 };
 
 /**
- * A direction alone is ambiguous below the lighthouse: it intersects both the
- * terrace and the cave floor. Callers that have a foot radius/layer keep that
- * context through movement; callers without it deliberately get the outdoors.
+ * A direction alone is ambiguous over the caves and on the lighthouse stair: it can meet
+ * the headland, a cave floor, the stair and the balcony. Callers that have a foot radius
+ * and layer keep that context through movement; callers without it get the ground.
  */
 export type SupportHint = { footRadius?:number; layer?:SupportLayer };
 
-const CAVE_QUERY_MARGIN = .06;
 const PORTAL_ENTRY_FLOOR_BAND = .25;
-// Physical metres beyond the cave end, still inside its 2.4m open-cut apron. On the
-// radius-72 globe the chart-authored cap face rises ~1.7m out, so the handoff starts
-// on the low beach before it.
+/** Metres out past the mouth, inside its apron, where the beach takes back over from the
+ * cave floor on the way out. */
 const EXIT_HANDOFF_MIN_APRON = 2.05;
-const EXIT_HANDOFF_FLOOR_EPSILON = .1;
+/** Walkable half width of the tunnel at the mouth. */
+const MOUTH_HALF_WIDTH = SEA_CAVE_PASSAGES[0].width[1] / 2 - SEA_CAVE_WALL_OFFSET;
 
-/** The normal exposed support. This is intentionally the no-hint default. */
-export function upperSupportAt(direction:WorldPosition):SurfaceSupport {
+/** The normal exposed support. This is intentionally the no-hint default; a foot radius
+ * only matters on the lighthouse, where the stair and balcony stack over the terrace. */
+export function upperSupportAt(direction:WorldPosition, footRadius?:number):SurfaceSupport {
   const coordinates = townCoordinates(direction);
   const town = townSurfaceAt(coordinates.x, coordinates.z);
   const height = town.height;
@@ -73,25 +80,32 @@ export function upperSupportAt(direction:WorldPosition):SurfaceSupport {
     const apron = buildingApronRadius(building, direction, base.radius, RADIUS);
     if (apron !== null) return { radius:apron, kind:'floor', layer:'upper', id:`${building.id}:apron` };
   }
+  const tower = lighthouseSupportAt(direction, base.radius, footRadius, STEP_HEIGHT);
+  if (tower) return { radius:tower.radius, kind:'ground', layer:'upper', id:tower.id, solid:tower.solid, normal:tower.normal };
   return base;
 }
 
-/**
- * The shared cave query measures the finite inner corridor and its two straight
- * portal aprons. Its widened bend comes from the exact rendered lining, rather
- * than a second, approximate capsule in the collision runtime.
- */
-function tunnelSectionAt(direction:WorldPosition) {
+type CaveQuery = { sample:NonNullable<ReturnType<typeof seaCaveAt>>; s:number; lateral:number };
+/** The sea-cave volume at a direction, with its place relative to the mouth. */
+function caveQueryAt(direction:WorldPosition):CaveQuery|null {
   const { x, z } = townCoordinates(direction);
-  const section = caveSectionAt(x, z);
-  return section && section.distance <= section.halfWidth + CAVE_QUERY_MARGIN ? section : null;
+  const sample = seaCaveAt(x, z);
+  if (!sample) return null;
+  const portal = seaCavePortalAt(sample.u, sample.v);
+  return { sample, s:portal.s, lateral:portal.lateral };
 }
-
-function tunnelSupportAt(direction:WorldPosition):SurfaceSupport|null {
-  const section = tunnelSectionAt(direction);
-  if (!section) return null;
-  return { radius:RADIUS + Math.max(SEA_LEVEL, section.floor), kind:'ground', layer:'tunnel', id:'cave' };
+/** The cave floor inside the plan; solid rock everywhere outside it. */
+function caveSupport(query:CaveQuery):SurfaceSupport {
+  const { sample } = query, radius = RADIUS + Math.max(SEA_LEVEL, sample.floor);
+  if (sample.inside) return { radius, kind:'ground', layer:'tunnel', id:`cave:${sample.zone}` };
+  const gradient = seaCaveGradient(sample.u, sample.v), tangents = SEA_CAVE_FRAME.tangents(sample.u, sample.v);
+  return { radius, kind:'ground', layer:'tunnel', id:'cave:rock', solid:true,
+    normal:tangents.east.multiplyScalar(gradient.u).addScaledVector(tangents.north, gradient.v).normalize() };
 }
+/** The open-air apron in front of the mouth, where beach and cave floor meet. */
+const inMouthApron = (query:CaveQuery) => query.s <= 0 && query.s >= -SEA_CAVE_MOUTH.apron && Math.abs(query.lateral) <= MOUTH_HALF_WIDTH;
+/** The beach just outside the mouth: the only place a cave visitor returns outdoors. */
+const outsideMouth = (query:CaveQuery) => query.s < 0 && query.s > -8 && Math.abs(query.lateral) < 6;
 
 function footPrefersTunnel(footRadius:number|undefined, upper:SurfaceSupport, lower:SurfaceSupport):boolean {
   return footRadius !== undefined
@@ -100,37 +114,25 @@ function footPrefersTunnel(footRadius:number|undefined, upper:SurfaceSupport, lo
 
 /** Query support while retaining radial context where a stack exists. */
 export function supportAt(direction:WorldPosition, hint:SupportHint = {}):SurfaceSupport {
-  const upper = upperSupportAt(direction);
-  const lower = tunnelSupportAt(direction);
-  if (!lower) return upper;
-  const section = tunnelSectionAt(direction);
+  const upper = upperSupportAt(direction, hint.footRadius);
+  const query = caveQueryAt(direction);
+  if (!query) return upper;
   if (hint.layer === 'upper') {
-    // The public beach/cove portals are low, continuous connectors. A visitor
-    // who is already at that low elevation can enter; an upper-deck visitor at
-    // the same map direction can never fall through the foundation.
-    // A low visitor reaches either public portal before the outdoor surface
-    // turns steep. Switching here prevents the growing upper slope from
-    // blocking the entrance, while the terrace remains far outside this band.
-    // The outer exit apron is the explicit handoff boundary. Letting an
-    // already-upper visitor re-enter its still-queryable portal extension
-    // beyond this point creates upper/tunnel chatter on every fixed step.
-    const beyondExitHandoff = section?.portal === 'exit'
-      && section.along >= section.length + EXIT_HANDOFF_MIN_APRON;
-    return section?.portal && !beyondExitHandoff
-      && hint.footRadius !== undefined && hint.footRadius <= lower.radius + PORTAL_ENTRY_FLOOR_BAND
-      ? lower
-      : upper;
+    // A low visitor on the beach steps into the mouth inside its apron. Anyone up on the
+    // headland or the lighthouse terrace at the same direction is never pulled into the rock.
+    return query.sample.inside && inMouthApron(query) && hint.footRadius !== undefined
+      && hint.footRadius <= RADIUS + query.sample.floor + PORTAL_ENTRY_FLOOR_BAND ? caveSupport(query) : upper;
   }
+  const lower = caveSupport(query);
   if (hint.layer === 'tunnel') {
-    // The rear apron opens onto low cove sand. Do not hand off at its inner
-    // edge: that upper surface immediately rises into the cap on a reverse
-    // walk. Only the outer, stably-low sand portion returns to outdoor support.
-    if (section?.portal === 'exit'
-      && section.along >= section.length + EXIT_HANDOFF_MIN_APRON
-      && upper.radius <= lower.radius + EXIT_HANDOFF_FLOOR_EPSILON) return upper;
+    // Out through the mouth, the dry beach takes over once it is level with the visitor:
+    // past the apron's handoff, or stepping off the apron's side. Everywhere else, the window
+    // lip included, outside the plan is rock, so nobody walks out of the caves into the sea.
+    if (outsideMouth(query) && (query.s < -EXIT_HANDOFF_MIN_APRON || !query.sample.inside)
+      && !upper.solid && upper.kind !== 'water' && Math.abs(upper.radius - (hint.footRadius ?? lower.radius)) <= STEP_HEIGHT) return upper;
     return lower;
   }
-  if (footPrefersTunnel(hint.footRadius, upper, lower)) return lower;
+  if (!lower.solid && footPrefersTunnel(hint.footRadius, upper, lower)) return lower;
   return upper;
 }
 
@@ -210,14 +212,16 @@ export function moveOnSurface(
     const support = supportAt(advanced.up, { footRadius:currentFootRadius, layer });
     const ground = support.radius;
     const step = inBowl && support.id?.startsWith('skatepark:') ? BOWL_SCRAMBLE_HEIGHT : STEP_HEIGHT;
-    const tooHigh = ground > currentFootRadius + step;
+    const tooHigh = support.solid === true || ground > currentFootRadius + step;
     const center = advanced.up.clone().multiplyScalar(Math.max(ground, currentFootRadius) + CENTER_HEIGHT);
     return { ...advanced, support, ground, tooHigh, contact: buildingContact(center), distance: amount };
   };
   const direct = attempt(tangent, distance);
   if (!direct.tooHigh && !direct.contact) return { ...direct, blocked: false };
-  if (direct.contact) {
-    const normal = direct.contact.normal.addScaledVector(up, -direct.contact.normal.dot(up)).normalize();
+  // Slide along a wall box, or along cave rock and tower masonry.
+  const face = direct.contact?.normal ?? direct.support.normal?.clone();
+  if (face) {
+    const normal = face.addScaledVector(up, -face.dot(up)).normalize();
     const slide = tangent.clone().addScaledVector(normal, -tangent.dot(normal));
     const fraction = slide.length();
     if (fraction > 0.03) {
@@ -226,17 +230,6 @@ export function moveOnSurface(
     }
   }
   return { up: up.clone(), forward: tangent.clone(), rotation: new Quaternion(), support:initial, ground: currentFootRadius, distance: 0, blocked: true };
-}
-
-/** True only within the lower tunnel void, never merely near its exterior rock. */
-function isInsideTunnelVoid(position:WorldPosition):boolean {
-  const radius = Math.hypot(position.x, position.y, position.z);
-  const direction = new Vector3(position.x, position.y, position.z).normalize();
-  const section = tunnelSectionAt(direction);
-  const elevation = radius - RADIUS;
-  return !!section
-    && elevation >= section.floor - .14
-    && elevation <= section.ceiling + .14;
 }
 
 /** Swept camera ray through expanded OBBs, protecting the near plane at alley corners. */
@@ -275,19 +268,20 @@ export function cameraClearDistance(
     }
     if (enter <= leave && leave >= 0) nearest = Math.min(nearest, Math.max(0.7, enter - 0.15));
   }
-  // Portal collars are detailed terrain-derived triangles rather than fitted
-  // boxes. Their registry expands each triangle into a local .22m prism, so
-  // this preserves the same near-plane safety margin as the OBB collision.
-  nearest = Math.min(nearest, cavePortalCameraClearDistance(origin, direction, nearest));
-  // The outdoor shell remains solid above the tunnel. In the lined void itself,
-  // local roof/wall OBBs are the source of truth; querying the upper radial
-  // surface there would incorrectly close the real passage to the camera.
+  // The seals at the cave openings are drawn triangles rather than boxes; their registry
+  // expands each into a thin prism with the same near-plane margin as the boxes.
+  nearest = Math.min(nearest, seaCaveOpeningCameraClearDistance(origin, direction, nearest));
+  // Rock is solid above and around the caves. Inside the open cave void the analytic volume
+  // is the source of truth; the headland surface over it would wrongly close the passage.
   const sample = new Vector3();
-  for (let distance = 0.7; distance < nearest; distance += 0.22) {
+  // March in fixed steps, and test the end point itself, so the camera never rests in rock.
+  for (let step = 0.7; step < nearest + 0.22; step += 0.22) {
+    const distance = Math.min(step, nearest);
     sample.copy(origin).addScaledVector(direction, distance);
+    if (lighthouseCameraBlocked(sample)) return Math.max(0.7, distance - 0.25);
     const radius = sample.length();
     const up = sample.clone().normalize();
-    if (!(activeLayer === 'tunnel' && isInsideTunnelVoid(sample)) && radius < upperSupportAt(up).radius + 0.2) return Math.max(0.7, distance - 0.25);
+    if (!(activeLayer === 'tunnel' && isInsideSeaCaveVoid(sample)) && radius < upperSupportAt(up).radius + 0.2) return Math.max(0.7, distance - 0.25);
   }
   return nearest;
 }

@@ -51,7 +51,7 @@ const views = [
   ...SKI_RUNS.flatMap(run => [['start', .04], ['middle', .5]].map(([section, progress]) => ({ id: `run-${run.number}-${section}`, ...along(run, progress), critical: section === 'middle' }))),
   { id: 'west-run-out', x: MOUNTAIN_LAYOUT.finishAreas.west.x, z: MOUNTAIN_LAYOUT.finishAreas.west.z, facing: 'south' },
   { id: 'east-run-out', x: MOUNTAIN_LAYOUT.finishAreas.east.x, z: MOUNTAIN_LAYOUT.finishAreas.east.z, facing: 'south' },
-  { id: 'lighthouse-cove', fixture: 'hiddenbeach' },
+  { id: 'sea-cave-grotto', fixture: 'grotto' },
 ];
 const globeViews = [
   { id: 'globe-town', fixture: 'entry', globe: true, critical: true },

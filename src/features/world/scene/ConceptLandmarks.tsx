@@ -3,20 +3,17 @@
 import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { ART_WALLS, CAVE_FLOOR, LIGHTHOUSE_FRAME, landmarkDecor, landmarkSolids } from '../data/concept-landmarks';
-import { PENINSULA_CAVE, PENINSULA_LIGHTHOUSE } from '../data/peninsula-layout';
-import { peninsulaWorldPoint } from '../data/peninsula-frame';
+import { ART_WALLS, landmarkDecor, landmarkSolids } from '../data/concept-landmarks';
+import { SEA_CAVE_FRAME } from '../data/sea-cave';
 import { MAP_RADIUS, mapFrame, mapMetric } from '../data/world-map';
 import { TOWN_BUILDINGS, TOWN_ROUTES } from '../data/town-layout';
 import { townSurfaceAt } from '../data/town-surfaces';
 import { variation } from './sceneryGeometry';
-import { block, createKitContext, physicalSign, tube, UNIT_BOX } from './kit/context';
+import { createKitContext, physicalSign, tube, UNIT_BOX } from './kit/context';
 import { SignAtlas } from './kit/SignAtlas';
-import PeninsulaCliffs from './PeninsulaCliffs';
-import { PENINSULA_COVE } from '../data/peninsula-layout';
-/** A sign position on the placed peninsula, from its authoring chart. */
-const placed = (x: number, z: number) => peninsulaWorldPoint(x, z);
 import { MOUNTAIN_LAYOUT } from '../data/mountain-layout';
+/** A sign position on the placed peninsula, from sea-cave local metres. */
+const placed = (u: number, v: number) => SEA_CAVE_FRAME.chart(u, v);
 
 const CONE = new THREE.ConeGeometry(1, 1, 7);
 // One chamfer subdivision produces visible stone facets inside conservative OBB bounds.
@@ -36,27 +33,14 @@ function buildLandmarks() {
     physicalSign(kit, frame, title, subtitle, [0, 1.42, .06], width, .76, [0, 0, 0], true, '#394F51');
   };
 
-  const lighthouseSign = placed(PENINSULA_LIGHTHOUSE.x - 3.3, PENINSULA_LIGHTHOUSE.z + 4.5);
-  const caveSign = placed(PENINSULA_CAVE.points[0][0] - 3.2, PENINSULA_CAVE.points[0][1] + 2.5);
-  const coveSign = placed(PENINSULA_COVE.x - .7, PENINSULA_COVE.z + 3);
-  sign('LIGHTHOUSE', 'UPPER TRAIL / VIEWING POINT', lighthouseSign.x, lighthouseSign.z, 2.5);
-  sign('CAVE TO HIDDEN BEACH', 'LOWER BEACH ROUTE', caveSign.x, caveSign.z, 3.4, CAVE_FLOOR);
-  sign('HIDDEN BEACH', 'A QUIET WESTCOSE DISCOVERY', coveSign.x, coveSign.z, 2.5);
+  // Beside the trail's arrival at the stair foot, and on the beach by the cave mouth.
+  const lighthouseSign = placed(-5.9, 5.9);
+  const caveSign = placed(-11.4, 6.6);
+  sign('LIGHTHOUSE', 'SPIRAL STAIR / GALLERY', lighthouseSign.x, lighthouseSign.z, 2.5);
+  sign('SEA CAVES', 'THROUGH THE ROCK / OCEAN WINDOW', caveSign.x, caveSign.z, 3.4);
   sign('SKI RESORT', 'LODGE / LIFT TICKETS / FOUR RUNS', MOUNTAIN_LAYOUT.pedestrianArrival.x-5.5, MOUNTAIN_LAYOUT.pedestrianArrival.z-1, 3.4);
 
-  const towerFrame = LIGHTHOUSE_FRAME;
-  kit.details.shape(CONE, towerFrame, [0, 11.55, 0], [2.08, .9, 2.08], '#606D6D', [0, Math.PI / 4, 0]);
-  block(kit.details, towerFrame, [0, 1.55, 1.565], [.95, 2.3, .04], '#687578');
-  // Lantern corner posts distinguish the tower silhouette in the globe review.
-  for (const x of [-1.28, 1.28]) for (const z of [-1.28, 1.28]) tube(kit.details, towerFrame, [x, 10.44, z], .065, 1.43, '#5B6969');
-  for (const side of [-1, 1]) {
-    block(kit.details, towerFrame, [side * 1.94, 10.22, 0], [.07, .07, 3.88], '#6B7978');
-    block(kit.details, towerFrame, [0, 10.22, side * 1.94], [3.88, .07, .07], '#6B7978');
-    for (const along of [-1.9, 0, 1.9]) {
-      tube(kit.details, towerFrame, [side * 1.94, 10.02, along], .045, .55, '#6B7978');
-      tube(kit.details, towerFrame, [along, 10.02, side * 1.94], .045, .55, '#6B7978');
-    }
-  }
+  // The lighthouse (LighthouseTower) and the sea caves (SeaCave) are their own scenes.
 
   // The snowboard mountain's lift, gates, signs and trees live in SkiMountain.
 
@@ -97,7 +81,6 @@ export default function ConceptLandmarks() {
   const geometry = useMemo(() => buildLandmarks(), []);
   useEffect(() => () => { geometry.structure.dispose(); geometry.details.dispose(); geometry.plants.dispose(); }, [geometry]);
   return <group name="concept-landmarks">
-    <PeninsulaCliffs />
     <mesh geometry={geometry.structure} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={1} /></mesh>
     <mesh geometry={geometry.details} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={.88} /></mesh>
     <mesh geometry={geometry.plants} castShadow receiveShadow><meshStandardMaterial vertexColors roughness={1} flatShading /></mesh>

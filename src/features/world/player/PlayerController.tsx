@@ -180,7 +180,8 @@ export default function PlayerController({ runtime, onReady, onHotspot, onArea }
       state.forward.set(forward.x, forward.y, forward.z).addScaledVector(state.up, -(forward.x * state.up.x + forward.y * state.up.y + forward.z * state.up.z));
       if (state.forward.lengthSq() < 0.001) state.forward.copy(frameAt(Math.atan2(state.up.x, state.up.z), Math.asin(state.up.y)).east);
       state.forward.normalize();
-      const resetSupport = supportAt(state.up, { layer:requestedLayer });
+      // The destination's own height picks among stacked surfaces (the lighthouse balcony).
+      const resetSupport = supportAt(state.up, { layer:requestedLayer, footRadius: reset ? undefined : Math.hypot(destination.x, destination.y, destination.z) - PLAYER_CENTER_HEIGHT });
       copyPoint(runtime.position, state.up.clone().multiplyScalar(resetSupport.radius + PLAYER_CENTER_HEIGHT));
       copyPoint(runtime.up, state.up); copyPoint(runtime.forward, state.forward);
       state.inputForward.copy(state.forward); state.facing.copy(state.forward);

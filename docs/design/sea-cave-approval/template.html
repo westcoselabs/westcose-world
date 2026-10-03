@@ -1,0 +1,579 @@
+<title>WestCose Sea Caves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a stack of survey sheets (title block, decisions, plan, sections, panorama, elevations), one column, drawings full width. */
+:root {
+  --paper: #EDF0EC; --sheet: #F7F8F5; --ink: #1E2829; --muted: #5C6866; --rule: #C9CFCA;
+  --signal: #B4553C; --sea: #6C99A1; --sea-deep: #4D7A84; --sand: #D9C292; --rock-0: #B9B7A2; --rock-1: #8E978C; --rock-2: #6E776F;
+  --paved: #D3D1C8; --trail: #8A6A44; --contour: rgba(30, 40, 41, .28); --void: #233236; --void-ink: #EAF2F1; --cut: #7B847C; --air: #F7F8F5;
+  --current: #8A6A44; --limit: #B4553C; --focus: #2F7C8A;
+  --display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+  --body: 'Barlow', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #121819; --sheet: #182022; --ink: #E3E8E4; --muted: #9AA6A2; --rule: #2F3A3B;
+  --signal: #E07A5C; --sea: #34606A; --sea-deep: #244850; --sand: #A8925F; --rock-0: #807F6E; --rock-1: #636C63; --rock-2: #4C544E;
+  --paved: #4A4C48; --trail: #C99E6A; --contour: rgba(227, 232, 228, .22); --void: #0B1112; --void-ink: #D9E6E4; --cut: #475049; --air: #1C2527;
+  --current: #C99E6A; --limit: #E07A5C; --focus: #6FC1CF; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --paper: #121819; --sheet: #182022; --ink: #E3E8E4; --muted: #9AA6A2; --rule: #2F3A3B;
+  --signal: #E07A5C; --sea: #34606A; --sea-deep: #244850; --sand: #A8925F; --rock-0: #807F6E; --rock-1: #636C63; --rock-2: #4C544E;
+  --paved: #4A4C48; --trail: #C99E6A; --contour: rgba(227, 232, 228, .22); --void: #0B1112; --void-ink: #D9E6E4; --cut: #475049; --air: #1C2527;
+  --current: #C99E6A; --limit: #E07A5C; --focus: #6FC1CF; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; margin: 0; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.6rem, 7vw, 4.4rem); }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.15rem; letter-spacing: .04em; }
+p { margin: 0; max-width: 68ch; }
+.mono, .data { font-family: var(--mono); font-size: .82rem; font-variant-numeric: tabular-nums; }
+.eyebrow { font-family: var(--display); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-size: .9rem; }
+
+/* Title block: the drawing-sheet header. */
+.titleblock { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 28px; align-items: end; border-bottom: 3px solid var(--ink); padding-bottom: 18px; }
+.titleblock .intro { display: grid; gap: 12px; min-width: 0; }
+.sheetmeta { display: grid; grid-template-columns: auto auto; gap: 4px 14px; font-family: var(--mono); font-size: .78rem; color: var(--muted); align-self: start; }
+.sheetmeta b { color: var(--ink); font-weight: 500; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .95rem; color: var(--signal); }
+.status::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--signal); }
+@media (max-width: 640px) { .titleblock { grid-template-columns: 1fr; } }
+
+.keyfacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.keyfacts div { background: var(--sheet); padding: 12px 14px; display: grid; gap: 2px; min-width: 0; }
+.keyfacts dt { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; color: var(--muted); }
+.keyfacts dd { margin: 0; font-family: var(--mono); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+
+/* Decisions: the items this sheet set asks you to approve. */
+.decisions { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.decision { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr) minmax(0, 14rem); gap: 6px 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.decision .num { font-family: var(--display); font-weight: 700; font-size: 1.5rem; color: var(--signal); }
+.decision .what { display: grid; gap: 4px; min-width: 0; }
+.decision .what strong { font-weight: 600; }
+.decision .default { font-family: var(--mono); font-size: .8rem; color: var(--muted); min-width: 0; }
+.decision .default b { color: var(--ink); font-weight: 500; display: block; }
+@media (max-width: 640px) { .decision { grid-template-columns: 2rem minmax(0, 1fr); } .decision .default { grid-column: 2; } }
+
+.sheet { background: var(--sheet); border: 1px solid var(--rule); padding: 18px; display: grid; gap: 14px; }
+.sheet header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 16px; }
+.sheet header .tag { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+.sheet .notes { display: grid; gap: 8px; color: var(--muted); font-size: .95rem; }
+.sheet .notes p { max-width: 75ch; }
+canvas { display: block; width: 100%; max-width: 100%; }
+.drawing { position: relative; min-width: 0; }
+.readout { position: absolute; left: 10px; bottom: 10px; background: var(--sheet); border: 1px solid var(--rule); padding: 4px 8px; font-family: var(--mono); font-size: .74rem; color: var(--ink); pointer-events: none; }
+.toggle { display: inline-flex; border: 1px solid var(--ink); }
+.toggle button { font: inherit; font-family: var(--display); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: .9rem; padding: 6px 14px; background: transparent; color: var(--ink); border: 0; cursor: pointer; }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
+.toggle button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .85rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 10px; display: inline-block; border: 1px solid var(--rule); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.grid2 > * { min-width: 0; }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.grid3 > * { min-width: 0; display: grid; gap: 6px; }
+.variant h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.variant .pick { font-family: var(--mono); font-size: .72rem; color: var(--signal); text-transform: none; letter-spacing: 0; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; font-size: .8rem; color: var(--muted); }
+td.n { font-family: var(--mono); font-size: .82rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+footer.limits { display: grid; gap: 8px; color: var(--muted); font-size: .9rem; border-top: 3px solid var(--ink); padding-top: 16px; }
+footer.limits p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <section class="titleblock">
+    <div class="intro">
+      <span class="status">Approved 2026-10-02</span>
+      <h1>WestCose Sea Caves</h1>
+      <p>The hidden beach becomes a rock headland with a cave system inside it, entered from the public beach through a rebuilt tunnel beneath the lighthouse. The lighthouse doubles in height and gets an outside stair to a balcony. Every decision below was approved as drawn. These drawings are rendered from the data the world is built from.</p>
+    </div>
+    <dl class="sheetmeta">
+      <span>Sheet set</span><b>Sea Cave + Lighthouse, rev B</b>
+      <span>Date</span><b>2026-10-02</b>
+      <span>Frame</span><b>local metres, lighthouse = 0,0</b>
+      <span>Source</span><b id="fingerprint">—</b>
+    </dl>
+  </section>
+
+  <dl class="keyfacts" id="keyfacts"></dl>
+
+  <section class="sheet" aria-labelledby="decisions-h">
+    <header><h2 id="decisions-h">Decisions</h2><span class="tag">All five approved as drawn on 2026-10-02</span></header>
+    <div class="decisions" id="decisions"></div>
+  </section>
+
+  <section class="sheet" aria-labelledby="plan-h">
+    <header>
+      <h2 id="plan-h">Sheet 1. Plan</h2>
+      <div class="toggle" role="group" aria-label="Plan state">
+        <button type="button" id="show-current" aria-pressed="false">Current</button>
+        <button type="button" id="show-proposed" aria-pressed="true">Proposed</button>
+      </div>
+    </header>
+    <div class="drawing"><canvas id="plan" aria-label="Top-down plan of the peninsula with the proposed cave system"></canvas><div class="readout" id="readout" hidden></div></div>
+    <div class="legend" id="plan-legend"></div>
+    <div class="notes">
+      <p>North is up. Contours every 1.5 m. The dark shape is the cave, drawn at its rock face; the walkable floor stops 0.35 m inside it so nobody's shoulder clips a wall. Pillars are the gaps inside it. The red bar on the east cliff is the Ocean Window, and the dashed circle in the Grotto is the clear arena kept for the future game.</p>
+      <p>The cliff stays inside the terrain the world already draws (red dashed line). The rock mass stops short of the Cliff Cul-de-sac streets and the lighthouse trail.</p>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="long-h">
+    <header><h2 id="long-h">Sheet 2. Long section</h2><span class="tag">True scale, no vertical exaggeration</span></header>
+    <div class="drawing"><canvas id="long" aria-label="Long section along the main route"></canvas></div>
+    <div class="notes"><p>Follows the main route: beach mouth, tunnel under the lighthouse, Undercroft, the Crawl, the Grotto, then up the ramp onto the window ledge. The floor never drops below sea level, and the ledge lip is 3.3 m above the water with a boulder lip. Walkers in the cave can't step past the lip: outside the cave plan the ground counts as solid rock, so the drop to the sea is unreachable.</p></div>
+  </section>
+
+  <section class="sheet" aria-labelledby="cross-h">
+    <header><h2 id="cross-h">Sheet 3. Cross sections</h2><span class="tag">Lines A, B and C are marked on the plan</span></header>
+    <div class="grid2">
+      <div class="drawing"><canvas id="sec-tunnel" aria-label="Section A through the tunnel beneath the lighthouse"></canvas></div>
+      <div class="drawing"><canvas id="sec-crawlSlot" aria-label="Section B through the Crawl and the Slot"></canvas></div>
+    </div>
+    <div class="drawing"><canvas id="sec-grotto" aria-label="Section C through the Grotto, Twin Arches and Tide Pool"></canvas></div>
+    <div class="notes"><p>A shows the rebuilt tunnel with about 2 m of rock between its roof and the lighthouse terrace. B cuts across both routes to the Grotto: the Crawl is wide and low (about 3 m), the Slot narrow (1.7–2.4 m) and tall (up to 8 m). C runs north through the Grotto dome, the pillar between the Twin Arches, and the Tide Pool.</p></div>
+  </section>
+
+  <section class="sheet" aria-labelledby="view-h">
+    <header><h2 id="view-h">Sheet 4. View from the Cliff Cul-de-sac</h2><span class="tag" id="eye-tag"></span></header>
+    <div class="drawing"><canvas id="panorama" aria-label="Skyline seen from the Cliff Cul-de-sac overlook, current and proposed"></canvas></div>
+    <div class="legend" id="pano-legend"></div>
+    <div class="notes" id="pano-notes"></div>
+  </section>
+
+  <section class="sheet" aria-labelledby="tower-h">
+    <header><h2 id="tower-h">Sheet 5. Lighthouse elevations</h2><span class="tag">Seen from the south, true scale; dashed = far side of the tower</span></header>
+    <div class="grid3" id="variants"></div>
+    <div class="notes" id="tower-notes"></div>
+  </section>
+
+  <section class="sheet" aria-labelledby="zones-h">
+    <header><h2 id="zones-h">Schedule of spaces</h2><span class="tag">Widths rock to rock; heights above sea level</span></header>
+    <div class="tablewrap"><table id="schedule"></table></div>
+  </section>
+
+  <footer class="limits">
+    <h3>Interpretation limits</h3>
+    <p>Terrain is sampled on a 0.5 m grid from the live world modules; the rendered cave mesh will add chunky rock facets and formations that are not drawn here. North of the rock mass the old cove is shown as it is today; with approval its sand becomes low rocky shoreline (decision 5).</p>
+    <p>Rev B, after approval: the window ledge was squared to the cliff face, its ramp lengthened to stay under 35°, the arena disc set at 10 m across, and the town terrain extended 3.6 m east so the cliffs sit inside it. Sizes and decisions are unchanged.</p>
+    <p>Regenerate with <span class="mono">node scripts/render-sea-cave-proposal.mjs</span>; <span class="mono">node scripts/check-sea-cave-layout.mjs</span> pins the world data to this snapshot.</p>
+  </footer>
+</div>
+
+<script>
+const DATA = /*PROPOSAL_DATA*/null;
+(() => {
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const hex = value => {
+    const c = document.createElement('canvas').getContext('2d'); c.fillStyle = value; const s = c.fillStyle;
+    if (s.startsWith('#')) return [parseInt(s.slice(1, 3), 16), parseInt(s.slice(3, 5), 16), parseInt(s.slice(5, 7), 16)];
+    const m = s.match(/[\d.]+/g); return m ? m.slice(0, 3).map(Number) : [128, 128, 128];
+  };
+  const mix = (a, b, t) => a.map((x, i) => Math.round(x + (b[i] - x) * t));
+  const rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
+  const fmt = (n, d = 1) => Number(n).toFixed(d);
+  const N = DATA.numbers, G = DATA.grid, ZONES = DATA.zones, L = DATA.lighthouse;
+
+  document.getElementById('fingerprint').textContent = DATA.sourceFingerprint.slice(0, 12);
+
+  // Key facts.
+  const facts = [
+    ['Cave floor area', `${N.caveArea} m²`], ['Grotto', `${N.grottoSize[0]} × ${N.grottoSize[1]} m`], ['Grotto dome', `${fmt(N.grottoCrown)} m`],
+    ['Ocean Window', `${fmt(N.windowWidth)} m wide`], ['Lowest headroom', `${fmt(N.minClear, 2)} m`], ['Rock over roof', `≥ ${fmt(N.minCover, 2)} m`],
+    ['Lighthouse top', `${fmt(N.towerTop)} m`], ['Stair slope', `${fmt(N.stairSlope)}°`],
+  ];
+  document.getElementById('keyfacts').innerHTML = facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+
+  // Decisions.
+  const decisions = [
+    ['Headland over the whole cove, or a compact one beside the lighthouse', 'As drawn, the headland fills the old cove: it rises from about 3 m at the town edge to 11 m over the sea cliff and closes the sea view from the Cliff Cul-de-sac overlook (Sheet 4). A compact headland south-east of the overlook keeps that view, with the same rooms rearranged.', 'Whole cove, as drawn'],
+    ['Grotto size', `About ${N.grottoSize[0]} × ${N.grottoSize[1]} m with a ${fmt(N.grottoCrown)} m dome that rises toward the sea. Bigger means a taller headland by the town.`, `${N.grottoSize[0]} × ${N.grottoSize[1]} m`],
+    ['Ocean Window', `${fmt(N.windowWidth)} m wide, ledge lip ${fmt(N.windowAboveSea)} m above the sea, arch top at ${fmt(DATA.overlays.window.lintel)} m.`, `${fmt(N.windowWidth)} m`],
+    ['Stair turns', 'One turn is ladder steep, two is gentle but long. All three work with the walking system (Sheet 5).', `${L.tower.stair.turns} turns, ${fmt(N.stairSlope)}°`],
+    ['North end of the old cove', 'Outside the rock mass, the strip of the old hidden beach north of the caves becomes low rocky shoreline rather than sand, so it reads as one headland.', 'Rocky shoreline'],
+  ];
+  document.getElementById('decisions').innerHTML = decisions.map(([what, why, def], i) =>
+    `<div class="decision"><span class="num">${i + 1}</span><div class="what"><strong>${what}</strong><span>${why}</span></div><div class="default">Approved<b>${def}</b></div></div>`).join('');
+
+  // ---------------------------------------------------------------------------------
+  // Canvas helpers.
+  function setup(canvas, aspect) {
+    const width = canvas.parentElement.clientWidth, height = Math.round(width * aspect), ratio = window.devicePixelRatio || 1;
+    canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); canvas.style.height = `${height}px`;
+    const ctx = canvas.getContext('2d'); ctx.setTransform(ratio, 0, 0, ratio, 0, 0); return { ctx, width, height };
+  }
+  function label(ctx, text, x, y, { size = 12, color = css('--ink'), weight = 600, align = 'center', base = 'middle', font = 'display', halo = null, upper = true } = {}) {
+    ctx.font = `${weight} ${size}px ${font === 'mono' ? css('--mono') : css('--display')}`;
+    ctx.textAlign = align; ctx.textBaseline = base;
+    const t = upper ? text.toUpperCase() : text;
+    if (halo) { ctx.lineWidth = 3; ctx.strokeStyle = halo; ctx.lineJoin = 'round'; ctx.strokeText(t, x, y); }
+    ctx.fillStyle = color; ctx.fillText(t, x, y);
+  }
+  // Marching squares: segments where a grid field crosses `level`.
+  function contour(values, cols, rows, level, emit) {
+    for (let j = 0; j < rows - 1; j++) for (let i = 0; i < cols - 1; i++) {
+      const a = values[j * cols + i], b = values[j * cols + i + 1], c = values[(j + 1) * cols + i + 1], d = values[(j + 1) * cols + i];
+      const idx = (a > level ? 8 : 0) | (b > level ? 4 : 0) | (c > level ? 2 : 0) | (d > level ? 1 : 0);
+      if (idx === 0 || idx === 15) continue;
+      const t = (p, q) => (level - p) / (q - p);
+      const top = [i + t(a, b), j], right = [i + 1, j + t(b, c)], bottom = [i + t(d, c), j + 1], left = [i, j + t(a, d)];
+      const map = { 1: [[left, bottom]], 2: [[bottom, right]], 3: [[left, right]], 4: [[top, right]], 5: [[left, top], [bottom, right]], 6: [[top, bottom]], 7: [[left, top]],
+        8: [[left, top]], 9: [[top, bottom]], 10: [[left, bottom], [top, right]], 11: [[top, right]], 12: [[left, right]], 13: [[bottom, right]], 14: [[left, bottom]] };
+      for (const [p, q] of map[idx]) emit(p, q);
+    }
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Sheet 1: plan.
+  let planMode = 'proposed';
+  const planCanvas = document.getElementById('plan');
+  const spanU = G.maxU - G.minU, spanV = G.maxV - G.minV;
+  function drawPlan() {
+    const { ctx, width, height } = setup(planCanvas, spanV / spanU);
+    const s = width / spanU, X = u => (u - G.minU) * s, Y = v => (G.maxV - v) * s;
+    const heights = planMode === 'proposed' ? G.proposed : G.current;
+    const sea = hex(css('--sea')), deep = hex(css('--sea-deep')), sand = hex(css('--sand')), r0 = hex(css('--rock-0')), r1 = hex(css('--rock-1')), r2 = hex(css('--rock-2'));
+    const paved = css('--paved'), trail = css('--trail'), cell = G.step * s;
+    for (let j = 0; j < G.rows; j++) for (let i = 0; i < G.columns; i++) {
+      const k = j * G.columns + i, h = heights[k] / 100, f = G.flags[k];
+      let color;
+      if (f & 1) color = paved;
+      else if (h <= DATA.seaLevel) color = rgb(mix(sea, deep, Math.min(1, (DATA.seaLevel - h) / 2.2)));
+      else if (h < .35) color = rgb(sand);
+      else if (h < 4) color = rgb(mix(r0, r1, (h - .35) / 3.65));
+      else color = rgb(mix(r1, r2, Math.min(1, (h - 4) / 7)));
+      ctx.fillStyle = color;
+      ctx.fillRect(X(G.minU + i * G.step) - cell / 2, Y(G.minV + j * G.step) - cell / 2, cell + .6, cell + .6);
+    }
+    const toXY = ([gi, gj]) => [X(G.minU + gi * G.step), Y(G.minV + gj * G.step)];
+    // Contours.
+    ctx.strokeStyle = css('--contour'); ctx.lineWidth = 1;
+    const hv = Float32Array.from(heights, h => h / 100);
+    ctx.beginPath();
+    for (let level = 1.5; level <= 13.5; level += 1.5) contour(hv, G.columns, G.rows, level, (p, q) => { const a = toXY(p), b = toXY(q); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); });
+    ctx.stroke();
+    // Coverage limit.
+    const limit = Float32Array.from(G.flags, f => (f & 4) ? 1 : 0);
+    ctx.strokeStyle = css('--limit'); ctx.lineWidth = 1.5; ctx.setLineDash([6, 4]); ctx.beginPath();
+    contour(limit, G.columns, G.rows, .5, (p, q) => { const a = toXY(p), b = toXY(q); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); });
+    ctx.stroke(); ctx.setLineDash([]);
+    // Trail.
+    const O = DATA.overlays;
+    const trailPoints = planMode === 'proposed' ? O.trail.slice(0, -1) : O.trail;
+    ctx.strokeStyle = trail; ctx.lineWidth = 2.5; ctx.setLineDash([7, 5]); ctx.beginPath();
+    trailPoints.forEach(([u, v], i) => i ? ctx.lineTo(X(u), Y(v)) : ctx.moveTo(X(u), Y(v))); ctx.stroke(); ctx.setLineDash([]);
+    // Overlook rail.
+    ctx.strokeStyle = css('--ink'); ctx.lineWidth = 2.5; ctx.beginPath();
+    O.overlook.forEach(([u, v], i) => i ? ctx.lineTo(X(u), Y(v)) : ctx.moveTo(X(u), Y(v))); ctx.stroke();
+    const mid = O.overlook[Math.floor(O.overlook.length / 2)];
+    label(ctx, 'Overlook', X(mid[0]) - 8, Y(mid[1]) - 12, { size: 11, align: 'right', halo: css('--sheet') });
+
+    if (planMode === 'proposed') {
+      // Cave at its rock face.
+      const sd = Float32Array.from(G.sdf, d => d / 100);
+      const voidColor = css('--void');
+      ctx.fillStyle = voidColor;
+      for (let j = 0; j < G.rows; j++) for (let i = 0; i < G.columns; i++) {
+        if (sd[j * G.columns + i] > DATA.wallOffset) continue;
+        ctx.fillRect(X(G.minU + i * G.step) - cell / 2, Y(G.minV + j * G.step) - cell / 2, cell + .6, cell + .6);
+      }
+      ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.6; ctx.beginPath();
+      contour(sd, G.columns, G.rows, DATA.wallOffset, (p, q) => { const a = toXY(p), b = toXY(q); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); });
+      ctx.stroke();
+      // Massif footprint.
+      ctx.strokeStyle = css('--muted'); ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.beginPath();
+      O.footprint.forEach(([u, v], i) => i ? ctx.lineTo(X(u), Y(v)) : ctx.moveTo(X(u), Y(v))); ctx.closePath(); ctx.stroke(); ctx.setLineDash([]);
+      // Arena.
+      ctx.strokeStyle = css('--void-ink'); ctx.lineWidth = 1.2; ctx.setLineDash([4, 4]); ctx.beginPath();
+      ctx.arc(X(O.arena.center[0]), Y(O.arena.center[1]), O.arena.radius * s, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+      // Window.
+      const w = O.window, wl = Math.hypot(w.outward[0], w.outward[1]), ou = w.outward[0] / wl, ov = w.outward[1] / wl;
+      const a = [w.center[0] + ov * w.halfWidth, w.center[1] - ou * w.halfWidth], b = [w.center[0] - ov * w.halfWidth, w.center[1] + ou * w.halfWidth];
+      ctx.strokeStyle = css('--signal'); ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(X(a[0]), Y(a[1])); ctx.lineTo(X(b[0]), Y(b[1])); ctx.stroke();
+      label(ctx, 'Ocean Window', X(w.center[0]) + 10, Y(w.center[1]), { size: 12, align: 'left', color: css('--signal'), halo: css('--sheet') });
+      // Mouth arrow.
+      const m = O.mouth, ml = Math.hypot(m.inward[0], m.inward[1]), iu = m.inward[0] / ml, iv = m.inward[1] / ml;
+      const tail = [m.center[0] - iu * 4.5, m.center[1] - iv * 4.5], head = [m.center[0] + iu * .4, m.center[1] + iv * .4];
+      ctx.strokeStyle = css('--signal'); ctx.fillStyle = css('--signal'); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(X(tail[0]), Y(tail[1])); ctx.lineTo(X(head[0]), Y(head[1])); ctx.stroke();
+      const ang = Math.atan2(-(head[1] - tail[1]), head[0] - tail[0]);
+      ctx.beginPath(); ctx.moveTo(X(head[0]), Y(head[1]));
+      ctx.lineTo(X(head[0]) - 10 * Math.cos(ang - .45), Y(head[1]) - 10 * Math.sin(ang - .45));
+      ctx.lineTo(X(head[0]) - 10 * Math.cos(ang + .45), Y(head[1]) - 10 * Math.sin(ang + .45)); ctx.closePath(); ctx.fill();
+      label(ctx, 'Entrance', X(tail[0]) - 4, Y(tail[1]) + 2, { size: 12, align: 'right', color: css('--signal'), halo: css('--sheet') });
+      // Zone labels.
+      const vi = css('--void-ink');
+      for (const c of O.chambers) if (c.id !== 'window') label(ctx, c.name, X(c.center[0]), Y(c.center[1]) + (c.id === 'grotto' ? -O.arena.radius * s - 8 : 0), { size: c.id === 'grotto' ? 14 : 11, color: vi });
+      for (const p of O.passages) {
+        if (p.id === 'tunnel' || p.id === 'arch-east') continue;
+        const q = p.points[Math.floor(p.points.length / 2)];
+        label(ctx, p.id === 'arch-west' ? 'Twin Arches' : p.name, X(q[0]) + (p.id === 'slot' ? 26 : 0), Y(q[1]), { size: 11, color: p.id === 'slot' ? css('--ink') : vi, halo: p.id === 'slot' ? css('--sheet') : null });
+      }
+      // Section lines.
+      const lines = [['A', DATA.sections.tunnel.path], ['B', DATA.sections.crawlSlot.path], ['C', DATA.sections.grotto.path]];
+      ctx.strokeStyle = css('--focus'); ctx.lineWidth = 1.2; ctx.setLineDash([8, 3, 2, 3]);
+      for (const [name, [[u0, v0], [u1, v1]]] of lines) {
+        ctx.beginPath(); ctx.moveTo(X(u0), Y(v0)); ctx.lineTo(X(u1), Y(v1)); ctx.stroke();
+        label(ctx, name, X(u0), Y(v0) + (v1 > v0 ? 9 : -9), { size: 13, color: css('--focus'), halo: css('--sheet') });
+        label(ctx, name, X(u1), Y(v1) + (v1 > v0 ? -9 : 9), { size: 13, color: css('--focus'), halo: css('--sheet') });
+      }
+      ctx.setLineDash([]);
+    } else {
+      // Today's tunnel (with its broken wall pieces) and the hidden beach.
+      ctx.strokeStyle = css('--current'); ctx.lineWidth = O.oldCaveWidth * s; ctx.globalAlpha = .35; ctx.lineCap = 'round'; ctx.beginPath();
+      O.oldCave.forEach(([u, v], i) => i ? ctx.lineTo(X(u), Y(v)) : ctx.moveTo(X(u), Y(v))); ctx.stroke(); ctx.globalAlpha = 1; ctx.lineCap = 'butt';
+      ctx.lineWidth = 1.2; ctx.setLineDash([4, 3]); ctx.beginPath();
+      O.oldCave.forEach(([u, v], i) => i ? ctx.lineTo(X(u), Y(v)) : ctx.moveTo(X(u), Y(v))); ctx.stroke(); ctx.setLineDash([]);
+      const last = O.oldCave.at(-1);
+      label(ctx, 'Tunnel today', X(last[0]) + 10, Y(last[1]), { size: 11, align: 'left', halo: css('--sheet') });
+      label(ctx, 'Hidden beach', X(.5), Y(30), { size: 13, halo: css('--sheet') });
+    }
+    // Lighthouse: tower, stair band, pad.
+    const T = L.tower;
+    ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(X(0), Y(0), (planMode === 'proposed' ? T.pad.radius : 2.8 * Math.SQRT2) * s, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+    if (planMode === 'proposed') {
+      ctx.fillStyle = css('--sheet'); ctx.globalAlpha = .75; ctx.beginPath(); ctx.arc(X(0), Y(0), (T.baseRadius + T.stair.width) * s, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+      ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(X(0), Y(0), (T.baseRadius + T.stair.width) * s, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = css('--signal'); ctx.beginPath(); ctx.arc(X(0), Y(0), T.baseRadius * s, 0, Math.PI * 2); ctx.fill();
+      const foot = T.stair.start * Math.PI / 180;
+      ctx.strokeStyle = css('--signal'); ctx.lineWidth = 2; ctx.beginPath();
+      ctx.moveTo(X(Math.cos(foot) * T.baseRadius), Y(Math.sin(foot) * T.baseRadius)); ctx.lineTo(X(Math.cos(foot) * (T.baseRadius + T.stair.width)), Y(Math.sin(foot) * (T.baseRadius + T.stair.width))); ctx.stroke();
+    } else {
+      ctx.fillStyle = css('--signal'); const half = 2.1 * s; ctx.fillRect(X(0) - half, Y(0) - half, half * 2, half * 2);
+    }
+    label(ctx, 'Lighthouse', X(0) - 6.5 * s, Y(0) - 5.5 * s, { size: 12, align: 'right', halo: css('--sheet') });
+    for (const t of O.labels) label(ctx, t.text, X(t.u), Y(t.v), { size: t.kind === 'sea' ? 15 : 12, color: t.kind === 'sea' ? css('--sheet') : css('--ink'), halo: t.kind === 'sea' ? null : css('--sheet') });
+    // North arrow and scale bar.
+    const nx = width - 30, ny = 34;
+    ctx.fillStyle = css('--ink'); ctx.beginPath(); ctx.moveTo(nx, ny - 16); ctx.lineTo(nx + 7, ny + 6); ctx.lineTo(nx, ny + 1); ctx.lineTo(nx - 7, ny + 6); ctx.closePath(); ctx.fill();
+    label(ctx, 'N', nx, ny + 17, { size: 13 });
+    const sx = width - 20 - 10 * s, sy = height - 22;
+    ctx.fillStyle = css('--ink'); ctx.fillRect(sx, sy, 5 * s, 5); ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1; ctx.strokeRect(sx, sy, 10 * s, 5);
+    label(ctx, '0', sx, sy - 8, { size: 10, font: 'mono', weight: 400 }); label(ctx, '10 m', sx + 10 * s, sy - 8, { size: 10, font: 'mono', weight: 400, upper: false });
+    planCanvas._map = { s, X, Y };
+  }
+  const legend = document.getElementById('plan-legend');
+  legend.innerHTML = [['--void', 'Cave'], ['--sand', 'Sand'], ['--rock-1', 'Rock / land'], ['--sea', 'Sea'], ['--paved', 'Streets'], ['--signal', 'Lighthouse, window']]
+    .map(([t, n]) => `<span><i style="background:var(${t})"></i>${n}</span>`).join('') + '<span><i style="border:0;border-top:2px dashed var(--limit);height:0"></i>Terrain coverage limit</span>';
+  const readout = document.getElementById('readout');
+  planCanvas.addEventListener('mousemove', event => {
+    const r = planCanvas.getBoundingClientRect(), m = planCanvas._map; if (!m) return;
+    const u = G.minU + (event.clientX - r.left) / m.s, v = G.maxV - (event.clientY - r.top) / m.s;
+    const i = Math.round((u - G.minU) / G.step), j = Math.round((v - G.minV) / G.step);
+    if (i < 0 || j < 0 || i >= G.columns || j >= G.rows) { readout.hidden = true; return; }
+    const k = j * G.columns + i, h = (planMode === 'proposed' ? G.proposed : G.current)[k] / 100;
+    let text = `u ${fmt(u)}  v ${fmt(v)}  ground ${fmt(h, 2)} m`;
+    if (planMode === 'proposed' && G.sdf[k] / 100 <= DATA.wallOffset) text += `  ·  ${ZONES[G.zone[k]]}: floor ${fmt(G.floor[k] / 100, 2)}, roof ${fmt(G.ceiling[k] / 100, 2)}`;
+    readout.textContent = text; readout.hidden = false;
+  });
+  planCanvas.addEventListener('mouseleave', () => { readout.hidden = true; });
+  const setMode = mode => {
+    planMode = mode;
+    document.getElementById('show-current').setAttribute('aria-pressed', String(mode === 'current'));
+    document.getElementById('show-proposed').setAttribute('aria-pressed', String(mode === 'proposed'));
+    try { localStorage.setItem('seacave-plan-mode', mode); } catch { /* storage may be blocked */ }
+    drawPlan();
+  };
+  document.getElementById('show-current').addEventListener('click', () => setMode('current'));
+  document.getElementById('show-proposed').addEventListener('click', () => setMode('proposed'));
+  try { const saved = localStorage.getItem('seacave-plan-mode'); if (saved === 'current' || saved === 'proposed') planMode = saved; } catch { /* storage may be blocked */ }
+
+  // ---------------------------------------------------------------------------------
+  // Sections.
+  function drawSection(canvas, section, { minH = -3.5, maxH = 14, labels = true } = {}) {
+    const samples = section.samples, length = samples.at(-1)[0];
+    const pad = { l: 34, r: 12, t: 22, b: 26 };
+    const aspectGuess = (maxH - minH) / length;
+    const width = canvas.parentElement.clientWidth, plotW = width - pad.l - pad.r, s = plotW / length;
+    const { ctx, height } = setup(canvas, ((maxH - minH) * s + pad.t + pad.b) / width);
+    void aspectGuess;
+    const X = d => pad.l + d * s, Y = h => pad.t + (maxH - h) * s;
+    // Sea.
+    ctx.fillStyle = css('--sea'); ctx.fillRect(X(0), Y(DATA.seaLevel), plotW, Y(minH) - Y(DATA.seaLevel));
+    // Rock (proposed terrain down to the drawing floor).
+    ctx.fillStyle = css('--cut'); ctx.beginPath(); ctx.moveTo(X(0), Y(minH));
+    for (const [d, , h1] of samples) ctx.lineTo(X(d), Y(Math.max(minH, h1)));
+    ctx.lineTo(X(length), Y(minH)); ctx.closePath(); ctx.fill();
+    // Cave void, one polygon per open run.
+    ctx.fillStyle = css('--air');
+    for (let k = 0; k < samples.length;) {
+      if (samples[k][3] === null) { k++; continue; }
+      let end = k;
+      while (end + 1 < samples.length && samples[end + 1][3] !== null) end++;
+      ctx.beginPath();
+      for (let q = k; q <= end; q++) q === k ? ctx.moveTo(X(samples[q][0]), Y(samples[q][3])) : ctx.lineTo(X(samples[q][0]), Y(samples[q][3]));
+      for (let q = end; q >= k; q--) ctx.lineTo(X(samples[q][0]), Y(samples[q][4]));
+      ctx.closePath(); ctx.fill();
+      k = end + 1;
+    }
+    // Outline: terrain top and the cave lining.
+    ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.4; ctx.beginPath();
+    samples.forEach(([d, , h1], k) => k ? ctx.lineTo(X(d), Y(h1)) : ctx.moveTo(X(d), Y(h1))); ctx.stroke();
+    for (const index of [3, 4]) {
+      ctx.beginPath(); let open = false;
+      for (const sample of samples) { if (sample[index] === null) { open = false; continue; } if (!open) { ctx.moveTo(X(sample[0]), Y(sample[index])); open = true; } else ctx.lineTo(X(sample[0]), Y(sample[index])); }
+      ctx.stroke();
+    }
+    // Today's ground (before the caves), where the snapshot has it.
+    if (samples.every(sample => sample[1] !== null)) {
+      ctx.strokeStyle = css('--current'); ctx.lineWidth = 1.2; ctx.setLineDash([5, 4]); ctx.beginPath();
+      samples.forEach(([d, h0], k) => k ? ctx.lineTo(X(d), Y(Math.max(DATA.seaLevel, h0))) : ctx.moveTo(X(d), Y(Math.max(DATA.seaLevel, h0)))); ctx.stroke(); ctx.setLineDash([]);
+    }
+    // Axes.
+    ctx.strokeStyle = css('--rule'); ctx.lineWidth = 1;
+    for (let h = Math.ceil(minH / 2) * 2; h <= maxH; h += 2) {
+      ctx.beginPath(); ctx.moveTo(pad.l - 4, Y(h)); ctx.lineTo(pad.l, Y(h)); ctx.stroke();
+      label(ctx, `${h}`, pad.l - 6, Y(h), { size: 10, font: 'mono', weight: 400, align: 'right', color: css('--muted') });
+    }
+    for (let d = 0; d <= length; d += 5) label(ctx, `${d}`, X(d), height - 10, { size: 10, font: 'mono', weight: 400, color: css('--muted') });
+    label(ctx, 'm', pad.l - 6, pad.t - 12, { size: 10, font: 'mono', weight: 400, align: 'right', color: css('--muted'), upper: false });
+    // Zone names along the void.
+    if (labels) {
+      let start = 0;
+      for (let k = 1; k <= samples.length; k++) {
+        const z = samples[start][5];
+        if (k < samples.length && samples[k][5] === z) continue;
+        if (z >= 0 && samples[k - 1][0] - samples[start][0] > 2.2) {
+          const m = samples[Math.floor((start + k - 1) / 2)];
+          label(ctx, ZONES[z], X(m[0]), Y((m[3] + m[4]) / 2), { size: 11, color: css('--ink') });
+        }
+        start = k;
+      }
+    }
+    // A 1.8 m figure for scale, standing on the first open floor.
+    const first = samples.find(sample => sample[3] !== null);
+    if (first) {
+      const fx = X(first[0] + 1.2), fy = Y(first[3]);
+      ctx.strokeStyle = css('--signal'); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(fx, fy - 1.45 * s); ctx.stroke();
+      ctx.beginPath(); ctx.arc(fx, fy - 1.6 * s, .17 * s, 0, Math.PI * 2); ctx.stroke();
+    }
+    label(ctx, section.title, pad.l, 10, { size: 13, align: 'left' });
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Sheet 4: panorama from the overlook.
+  const P = DATA.panorama;
+  document.getElementById('eye-tag').textContent = `Eye ${fmt(P.eyeHeight)} m above sea at the binoculars; sea horizon ${fmt(-P.horizon)}° below level`;
+  function drawPanorama() {
+    const canvas = document.getElementById('panorama');
+    const { ctx, width, height } = setup(canvas, .36);
+    const pad = { l: 34, r: 12, t: 16, b: 26 }, az0 = P.skyline[0][0], az1 = P.skyline.at(-1)[0], a0 = -22, a1 = 36;
+    // Bearings run anticlockwise from east; draw north on the left so it reads as looking out to sea.
+    const X = az => pad.l + (az1 - az) / (az1 - az0) * (width - pad.l - pad.r), Y = a => pad.t + (a1 - a) / (a1 - a0) * (height - pad.t - pad.b);
+    ctx.fillStyle = css('--air'); ctx.fillRect(pad.l, pad.t, width - pad.l - pad.r, height - pad.t - pad.b);
+    ctx.fillStyle = css('--sea'); ctx.fillRect(pad.l, Y(P.horizon), width - pad.l - pad.r, Y(a0) - Y(P.horizon));
+    // Today's land, then the proposed rock above it.
+    ctx.fillStyle = css('--rock-0'); ctx.beginPath(); ctx.moveTo(X(az0), Y(a0));
+    for (const [az, c] of P.skyline) ctx.lineTo(X(az), Y(Math.max(a0, c))); ctx.lineTo(X(az1), Y(a0)); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = css('--cut'); ctx.globalAlpha = .9; ctx.beginPath(); ctx.moveTo(X(az0), Y(a0));
+    for (const [az, , p] of P.skyline) ctx.lineTo(X(az), Y(Math.max(a0, p))); ctx.lineTo(X(az1), Y(a0)); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1;
+    ctx.strokeStyle = css('--current'); ctx.lineWidth = 1.4; ctx.setLineDash([5, 4]); ctx.beginPath();
+    P.skyline.forEach(([az, c], k) => k ? ctx.lineTo(X(az), Y(Math.max(a0, c))) : ctx.moveTo(X(az), Y(Math.max(a0, c)))); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.4; ctx.beginPath();
+    P.skyline.forEach(([az, , p], k) => k ? ctx.lineTo(X(az), Y(Math.max(a0, p))) : ctx.moveTo(X(az), Y(Math.max(a0, p)))); ctx.stroke();
+    ctx.strokeStyle = css('--rule'); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(pad.l, Y(0)); ctx.lineTo(width - pad.r, Y(0)); ctx.stroke();
+    for (let a = -20; a <= a1; a += 10) label(ctx, `${a}°`, pad.l - 6, Y(a), { size: 10, font: 'mono', weight: 400, align: 'right', color: css('--muted') });
+    for (const [az, name] of [[90, 'N'], [45, 'NE'], [0, 'E'], [-45, 'SE']]) label(ctx, name, X(az), height - 10, { size: 11, color: css('--muted') });
+    for (const mark of P.marks) {
+      ctx.strokeStyle = css('--signal'); ctx.lineWidth = 1; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(X(mark.az), pad.t); ctx.lineTo(X(mark.az), height - pad.b); ctx.stroke(); ctx.setLineDash([]);
+      label(ctx, mark.text, X(mark.az) + 4, pad.t + 9, { size: 11, align: 'left', color: css('--signal'), halo: css('--air') });
+    }
+  }
+  const openNow = P.skyline.filter(([, c]) => c < P.horizon).length;
+  const openAfter = P.skyline.filter(([, c, p]) => c < P.horizon && p < P.horizon).length;
+  const blocked = openNow - openAfter;
+  document.getElementById('pano-legend').innerHTML = '<span><i style="background:var(--sea)"></i>Sea</span><span><i style="background:var(--rock-0)"></i>Land today</span><span><i style="background:var(--cut)"></i>Proposed rock</span><span><i style="border:0;border-top:2px dashed var(--current);height:0"></i>Skyline today</span>';
+  document.getElementById('pano-notes').innerHTML = `<p>Looking out from the overlook at the Cliff Cul-de-sac. On a planet this small the sea horizon sits ${fmt(-P.horizon)}° below eye level, so any rock rising above sea level within about 20 m of the overlook hides it. Today the overlook sees open sea across ${openNow}° of this arc; with the headland as drawn, ${openAfter}° stays open.</p><p>This is the main trade-off in the design (decision 1). The alternative is a compact headland south-east of the overlook, beside the lighthouse, with low rocky shore in front of the overlook. A rough version of it, with the same rooms rearranged (Twin Arches and Tide Pool south of the Grotto), keeps 34° of today's 55° of open sea. It needs the world's terrain drawn about 5 m further east than today.</p>`;
+
+  // ---------------------------------------------------------------------------------
+  // Sheet 5: lighthouse elevations, one per stair option.
+  const T = L.tower;
+  const variants = document.getElementById('variants');
+  variants.innerHTML = L.variants.map((v, i) => `<div class="variant"><h3>${v.turns} turn${v.turns === 1 ? '' : 's'}${v.turns === T.stair.turns ? '<span class="pick">recommended</span>' : ''}</h3><div class="drawing"><canvas id="tower-${i}" aria-label="Lighthouse elevation with ${v.turns} stair turns"></canvas></div><div class="data">slope ${fmt(v.slope)}° · inner edge ${fmt(v.innerSlope)}° · run ${fmt(v.run)} m</div></div>`).join('');
+  const towerRadius = h => h > T.gallery ? (h <= T.lantern.top ? T.lantern.radius : 0) : T.baseRadius + (T.topRadius - T.baseRadius) * Math.min(1, Math.max(0, h / T.gallery));
+  function drawTower(canvas, turns) {
+    const { ctx, width, height } = setup(canvas, 1.55);
+    const top = T.finial + 1, bottom = -1.8, s = (height - 30) / (top - bottom), cx = width / 2;
+    const X = x => cx + x * s, Y = h => 10 + (top - h) * s;
+    // Terrace and pad.
+    ctx.fillStyle = css('--rock-1'); ctx.fillRect(0, Y(0), width, Y(bottom) - Y(0));
+    ctx.fillStyle = css('--paved'); ctx.fillRect(X(-T.pad.radius), Y(0) - 3, T.pad.radius * 2 * s, 3);
+    // Stair helix: far side dashed, near side solid; outer and inner edges.
+    const view = -90; // seen from the south: x = east, depth = north
+    const edge = (lateral, near) => {
+      ctx.beginPath(); let open = false;
+      for (let k = 0; k <= 720; k++) {
+        const f = k / 720, h = f * L.rise, az = (T.stair.start + T.stair.spin * f * turns * 360) * Math.PI / 180;
+        const r = towerRadius(h) + lateral * T.stair.width, x = r * Math.cos(az), depth = r * Math.sin(az), isNear = depth < 0;
+        if (isNear !== near) { open = false; continue; }
+        if (!open) { ctx.moveTo(X(x), Y(h)); open = true; } else ctx.lineTo(X(x), Y(h));
+      }
+      ctx.stroke();
+    };
+    void view;
+    ctx.strokeStyle = css('--muted'); ctx.lineWidth = 1; ctx.setLineDash([3, 3]); edge(1, false); ctx.setLineDash([]);
+    // Shaft.
+    ctx.fillStyle = css('--air'); ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.2; ctx.beginPath();
+    ctx.moveTo(X(-T.baseRadius), Y(0)); ctx.lineTo(X(-T.topRadius), Y(T.gallery)); ctx.lineTo(X(T.topRadius), Y(T.gallery)); ctx.lineTo(X(T.baseRadius), Y(0)); ctx.closePath(); ctx.fill(); ctx.stroke();
+    // Red bands.
+    ctx.fillStyle = css('--signal');
+    for (const [h0, h1] of [[5.5, 8.5], [12.5, 15.5]]) {
+      ctx.beginPath(); ctx.moveTo(X(-towerRadius(h0)), Y(h0)); ctx.lineTo(X(-towerRadius(h1)), Y(h1)); ctx.lineTo(X(towerRadius(h1)), Y(h1)); ctx.lineTo(X(towerRadius(h0)), Y(h0)); ctx.closePath(); ctx.fill();
+    }
+    // Balcony slab and rail, lantern, roof, finial.
+    ctx.fillStyle = css('--ink'); ctx.fillRect(X(-T.balcony.outer), Y(T.gallery), T.balcony.outer * 2 * s, T.balcony.slab * s);
+    ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1; ctx.strokeRect(X(-T.balcony.rail), Y(T.gallery + T.balcony.railHeight), T.balcony.rail * 2 * s, T.balcony.railHeight * s);
+    ctx.fillStyle = css('--sand'); ctx.fillRect(X(-T.lantern.radius), Y(T.lantern.top), T.lantern.radius * 2 * s, (T.lantern.top - T.gallery) * s);
+    ctx.strokeRect(X(-T.lantern.radius), Y(T.lantern.top), T.lantern.radius * 2 * s, (T.lantern.top - T.gallery) * s);
+    ctx.fillStyle = css('--ink'); ctx.beginPath(); ctx.moveTo(X(-T.lantern.radius - .25), Y(T.lantern.top)); ctx.lineTo(X(0), Y(T.roof)); ctx.lineTo(X(T.lantern.radius + .25), Y(T.lantern.top)); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(X(0), Y(T.roof)); ctx.lineTo(X(0), Y(T.finial)); ctx.stroke();
+    // Today's 12 m tower as a ghost.
+    ctx.strokeStyle = css('--current'); ctx.setLineDash([4, 3]); ctx.lineWidth = 1.4; ctx.strokeRect(X(-2.1), Y(L.oldHeight), 4.2 * s, L.oldHeight * s); ctx.setLineDash([]);
+    // Near-side stair over the shaft.
+    ctx.strokeStyle = css('--signal'); ctx.lineWidth = 1.6; edge(1, true); ctx.lineWidth = 1; edge(0, true);
+    // Scale figure on the terrace and height ticks.
+    const fx = X(T.pad.radius - .4);
+    ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(fx, Y(0)); ctx.lineTo(fx, Y(1.45)); ctx.stroke(); ctx.beginPath(); ctx.arc(fx, Y(1.62), .17 * s, 0, Math.PI * 2); ctx.stroke();
+    for (const [h, t] of [[T.gallery, `${fmt(T.gallery + T.terrace)} m`], [T.finial, `${fmt(T.finial + T.terrace)} m`], [L.oldHeight, 'today']]) {
+      label(ctx, t, width - 4, Y(h), { size: 10, font: 'mono', weight: 400, align: 'right', color: h === L.oldHeight ? css('--current') : css('--muted'), upper: false });
+    }
+  }
+  const pick = L.variants.find(v => v.turns === T.stair.turns);
+  document.getElementById('tower-notes').innerHTML = `<p>Tower ${fmt(T.finial)} m above its terrace (top ${fmt(N.towerTop)} m above sea), balcony floor ${fmt(N.galleryAbs)} m above sea. The stair is ${T.stair.width} m wide and hugs the shaft, starting where the trail arrives from the north-west. The walked surface is a smooth ramp under the drawn treads, so running up never stutters: at ${pick.turns} turns each running stride rises ${fmt(pick.runStepRise, 2)} m, well under the 0.32 m step limit.</p><p>Where the stair passes under the balcony (the last ${fmt(pick.hatch, 0)}° of the climb) the balcony floor is left open as a hatch. Rails run along the stair's outer edge and round the balcony; the walking rules also refuse any step off the structure, so nobody falls. The "You found the quiet side" field note moves to the balcony, facing the open ocean.</p>`;
+
+  // Schedule of spaces.
+  const rows = [
+    ...DATA.overlays.passages.filter(p => p.id !== 'arch-east').map(p => [p.id === 'arch-west' ? 'Twin Arches (two)' : p.name, `${Math.min(...p.width)}–${Math.max(...p.width)} m`, `${fmt(Math.min(...p.height))}–${fmt(Math.max(...p.height))} m clear`, `${fmt(Math.min(...p.floor), 2)} to ${fmt(Math.max(...p.floor), 2)}`]),
+    ...DATA.overlays.chambers.map(c => [c.name, `${c.radii[0] * 2} × ${c.radii[1] * 2} m`, `${fmt(c.wall)}–${fmt(c.crown)} m roof`, c.ramp ? `${fmt(c.ramp.floors[0], 2)} to ${fmt(c.ramp.floors[1], 2)} (ramp)` : fmt(c.floor, 2)]),
+  ];
+  document.getElementById('schedule').innerHTML = `<thead><tr><th>Space</th><th>Width</th><th>Height</th><th>Floor (m)</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td></tr>`).join('')}</tbody>`;
+
+  function drawAll() {
+    drawPlan();
+    drawSection(document.getElementById('long'), DATA.sections.long);
+    drawSection(document.getElementById('sec-tunnel'), DATA.sections.tunnel, { minH: -3, maxH: 10 });
+    drawSection(document.getElementById('sec-crawlSlot'), DATA.sections.crawlSlot, { minH: -3.5, maxH: 13 });
+    drawSection(document.getElementById('sec-grotto'), DATA.sections.grotto, { minH: -3.5, maxH: 14 });
+    drawPanorama();
+    L.variants.forEach((v, i) => drawTower(document.getElementById(`tower-${i}`), v.turns));
+  }
+  setMode(planMode);
+  drawAll();
+  let pending = 0;
+  window.addEventListener('resize', () => { cancelAnimationFrame(pending); pending = requestAnimationFrame(drawAll); });
+  const scheme = window.matchMedia('(prefers-color-scheme: dark)');
+  scheme.addEventListener?.('change', drawAll);
+  new MutationObserver(drawAll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  document.fonts?.ready.then(drawAll);
+})();
+</script>

@@ -304,7 +304,7 @@ function wayfinding(c: KitContext, x: number, z: number, yaw: number, top: strin
   for (const side of [1, -1]) physicalSign(c, f, top, bottom, [0, 1.95, side * .065], 2.05, .48, [0, side > 0 ? 0 : Math.PI, 0], true);
 }
 
-/** The Cliff Cul-de-sac's overlook above the hidden beach, and the lighthouse trailhead. */
+/** The Cliff Cul-de-sac's overlook toward the sea-cave headland, and the lighthouse trailhead. */
 function overlook(c: KitContext) {
   const posts = 14, steel = '#3B4848';
   for (let k = 0; k <= posts; k++) {
@@ -326,7 +326,7 @@ function overlook(c: KitContext) {
   const plaque = overlookPoint(36, OVERLOOK.radius - .3), pf = mapFrame(plaque.x, plaque.z, WALK_LEVEL).matrix.multiply(new THREE.Matrix4().makeRotationY(Math.atan2(-Math.cos(36 * Math.PI / 180), Math.sin(36 * Math.PI / 180))));
   block(c.details, pf, [0, .55, 0], [.1, 1.1, .1], steel);
   block(c.details, pf, [0, 1.12, 0], [1.1, .5, .08], '#394F51', [-.35, 0, 0]);
-  physicalSign(c, pf, 'THE HIDDEN BEACH', 'BELOW THE CLIFFS / THROUGH THE CAVE', [0, 1.13, .045], 1.02, .44, [-.35, 0, 0], true, '#394F51');
+  physicalSign(c, pf, 'THE SEA CAVES', 'ENTRANCE ON THE BEACH BELOW THE LIGHTHOUSE', [0, 1.13, .045], 1.02, .44, [-.35, 0, 0], true, '#394F51');
   // The trailhead marker where the lighthouse trail leaves the sidewalk.
   const trail = TOWN_ROUTES.find(route => route.id === 'lighthouse-trail')!, [tx, tz] = trail.points[0];
   const t = mapFrame(tx - .9, tz + 1.4, WALK_LEVEL).matrix.multiply(new THREE.Matrix4().makeRotationY(-.4));

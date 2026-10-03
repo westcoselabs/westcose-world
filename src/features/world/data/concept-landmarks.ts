@@ -1,20 +1,14 @@
 import { Matrix4, Quaternion, Vector3 } from 'three';
 import { MAP_RADIUS, mapDirection, mapFrame } from './world-map';
-import { PENINSULA_CAVE, PENINSULA_LIGHTHOUSE, PLACED_CAVE_POINTS, PLACED_LIGHTHOUSE } from './peninsula-layout';
+import { PENINSULA_LIGHTHOUSE, PLACED_LIGHTHOUSE } from './peninsula-layout';
 import { placeQuaternion, placeVector } from './peninsula-frame';
 import { BLUFF_WALL, COURTYARD, DOWNTOWN_FURNITURE, PLAZA, WALK_LEVEL } from './downtown-layout';
 import { GRAND_STAIRS, halfpipeRailSegments, parkFootprintOutline, parkPoint, parkSurfaceLocal, SKATEPARK } from './skatepark-layout';
-import { peninsulaCaveColliders } from './peninsula-cave';
-import { peninsulaCliffColliders } from './peninsula-cliffs';
 import { TOWN_PROP_COLLIDERS } from './town-props';
-export { caveDistanceAt, caveBlendAt, caveHeightAt } from './peninsula-cave';
+import { LIGHTHOUSE_SOLID_BOXES } from './lighthouse-tower';
 
 /** Authoring data is shared by the walkable terrain, visible blockout, and OBB collision.
- * The cave and lighthouse positions here are world chart points of the placed peninsula. */
-export const CAVE_POINTS = PLACED_CAVE_POINTS;
-export const CAVE_WIDTH = PENINSULA_CAVE.width;
-export const CAVE_CLEARANCE = PENINSULA_CAVE.clearance;
-export const CAVE_FLOOR = PENINSULA_CAVE.floor;
+ * The lighthouse position here is the world chart point of the placed peninsula. */
 export const LIGHTHOUSE = PLACED_LIGHTHOUSE;
 export const ART_WALLS = [{ x: -28.8, z: -13.2, elevation: WALK_LEVEL, title: 'ART WALL' }, { x: 33.6, z: -13, elevation: .2, title: 'GRAFFITI WALL' }] as const;
 
@@ -32,15 +26,11 @@ const authoredTower = mapFrame(PENINSULA_LIGHTHOUSE.x, PENINSULA_LIGHTHOUSE.z, P
 const towerFrame = { position: placeVector(authoredTower.position.clone()), quaternion: placeQuaternion(authoredTower.quaternion.clone()) };
 /** The lighthouse's local frame (origin on its foundation), shared by every tower detail. */
 export const LIGHTHOUSE_FRAME = new Matrix4().compose(towerFrame.position, towerFrame.quaternion, new Vector3(1, 1, 1));
-const towerParts: Array<{ id: string; position: [number, number, number]; size: [number, number, number]; color: string }> = [
-  { id: 'foot', position: [0, .2, 0], size: [4.2, .4, 4.2], color: '#B3ADA0' },
-  { id: 'lower', position: [0, 2.7, 0], size: [3.1, 4.6, 3.1], color: '#E4DBCB' },
-  { id: 'stripe', position: [0, 6, 0], size: [2.8, 2, 2.8], color: '#B76D56' },
-  { id: 'upper', position: [0, 8.2, 0], size: [2.55, 2.4, 2.55], color: '#E4DBCB' },
-  { id: 'gallery', position: [0, 9.575, 0], size: [4.2, .35, 4.2], color: '#5C6869' },
-  { id: 'lantern', position: [0, 10.425, 0], size: [2.5, 1.35, 2.5], color: '#D0C28D' },
-];
-const towerSolids = towerParts.map(part => solid(`lighthouse:${part.id}`, 'lighthouse', new Vector3(...part.position).applyQuaternion(towerFrame.quaternion).add(towerFrame.position), towerFrame.quaternion, part.size, part.color));
+/** Hidden tower solids for the skateboard; lighthouse-tower.ts carries walkers and the camera. */
+const towerSolids = LIGHTHOUSE_SOLID_BOXES.map(box => {
+  const quaternion = towerFrame.quaternion.clone().multiply(new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), box.yaw * Math.PI / 180));
+  return solid(`lighthouse:${box.id}`, 'lighthouse', new Vector3(...box.center).applyQuaternion(towerFrame.quaternion).add(towerFrame.position), quaternion, box.size, '#B3ADA0', false);
+});
 
 const artWallSolids = ART_WALLS.map(wall => {
   const frame = mapFrame(wall.x, wall.z, wall.elevation);
@@ -137,7 +127,7 @@ const plazaColliders = [
 ];
 
 /** Render these exact boxes; do not make a separate hand-authored collision version. */
-export const landmarkSolids: LandmarkSolid[] = [...towerSolids, ...artWallSolids, ...bluffSolids];
+export const landmarkSolids: LandmarkSolid[] = [...artWallSolids, ...bluffSolids];
 /** Drawn like the solids but never collided (the wall-top coping sits flush with the deck). */
 export const landmarkDecor: LandmarkSolid[] = bluffDecor;
 /** Solids drawn by their own scene kits (street furniture, the plaza sculpture). */
@@ -149,5 +139,5 @@ const archPart = (id: string, position: [number, number, number], size: [number,
 const archColliders = [archPart('board', [0, 3.25, 0], [GRAND_STAIRS.halfWidth * 2 + .9, .95, .2]), ...[-1, 1].map(side => archPart(`post:${side}`, [side * (GRAND_STAIRS.halfWidth + .25), 1.7, 0], [.3, 3.4, .3]))];
 /** Railings round the halfpipe decks, so nobody walks off a 3.5m drop. */
 const halfpipeRails = halfpipeRailSegments().map(([u0, v0, u1, v1, base], i) => span(`halfpipe-rail:${i}`, 'halfpipe-rail', parkPoint(u0, v0, SKATEPARK.deck + base), parkPoint(u1, v1, SKATEPARK.deck + base), 1.05, .06, '#56645F', false));
-export const hiddenColliders: LandmarkSolid[] = [...furnitureColliders, ...fountainColliders, ...plazaColliders, ...fenceSolids, ...halfpipeRails, ...archColliders, ...TOWN_PROP_COLLIDERS];
-export const landmarkColliders = [...landmarkSolids, ...hiddenColliders, ...peninsulaCaveColliders, ...peninsulaCliffColliders];
+export const hiddenColliders: LandmarkSolid[] = [...furnitureColliders, ...fountainColliders, ...plazaColliders, ...fenceSolids, ...halfpipeRails, ...archColliders, ...TOWN_PROP_COLLIDERS, ...towerSolids];
+export const landmarkColliders = [...landmarkSolids, ...hiddenColliders];

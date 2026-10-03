@@ -47,7 +47,9 @@ try {
   const placement = require(path.join(output, 'data/peninsula-frame.js'));
   /** A direction on the placed peninsula, from its approved authoring chart. */
   const placedDirection = (x, z) => map.mapDirection(x, z).applyQuaternion(placement.PENINSULA_ROTATION);
-  const cave = require(path.join(output, 'data/peninsula-cave.js'));
+  const seaCave = require(path.join(output, 'data/sea-cave.js'));
+  const seaCaveLayout = require(path.join(output, 'data/sea-cave-layout.js'));
+  const tower = require(path.join(output, 'data/lighthouse-tower.js'));
   const surfaces = require(path.join(output, 'data/town-surfaces.js'));
   const { makeTerrain, makeTerrainPartition, TERRAIN_REGIONS } = require(path.join(output, 'scene/TownLandscape.js'));
   const { Vector3 } = require('three');
@@ -334,42 +336,38 @@ try {
     close(result.peakRadius, planet.RADIUS + map.MAP_SUMMIT.height, 1e-8);
   });
 
-  await test('the unchanged lighthouse stands at the outer tip above the tunnel, with a clear upper route destination', () => {
-    // The approved tower is authored where it was approved and placed with its peninsula.
-    assert.deepEqual(peninsula.PENINSULA_LIGHTHOUSE, { x: 36, z: -32, elevation: 6.2, height: 12 });
+  await test('the climbable lighthouse stands at the outer tip above the sea-cave tunnel, at the end of its trail', () => {
+    // The tower is authored where the cape was approved and placed with its peninsula.
+    assert.deepEqual(peninsula.PENINSULA_LIGHTHOUSE, { x: 36, z: -32, elevation: 6.2, height: 24.3, pad: 4.8, skirt: 1.4 });
     assert.deepEqual(landmarks.LIGHTHOUSE, peninsula.PLACED_LIGHTHOUSE);
-    assert.ok(landmarks.LIGHTHOUSE.x > 50, 'The lighthouse cape now stands east of the Cliff Cul-de-sac');
-    close(landmarks.LIGHTHOUSE.height, 12); close(landmarks.LIGHTHOUSE.elevation, 6.2);
-    const { x, z, elevation, height } = landmarks.LIGHTHOUSE;
+    assert.ok(landmarks.LIGHTHOUSE.x > 50, 'The lighthouse cape stands east of the Cliff Cul-de-sac');
+    const { x, z, elevation } = landmarks.LIGHTHOUSE;
     close(surfaces.groundSurfaceAt(x, z).height, elevation, 1e-8);
-    assert.ok(cave.caveDistanceAt(x,z)<1, 'The actual passage passes underneath the lighthouse footprint');
-    close(collision.supportRadius(map.mapDirection(x,z),{layer:'tunnel'}),planet.RADIUS+landmarks.CAVE_FLOOR);
-    const frame = map.mapFrame(x, z, elevation);
-    const tower = landmarks.landmarkSolids.filter(solid => solid.buildingId === 'lighthouse');
-    assert.equal(tower.length, 6, 'The existing tower model retains its six shared render/collision pieces');
-    assert.deepEqual(tower.find(solid => solid.id === 'lighthouse:foot').half.clone().multiplyScalar(2).toArray(), [4.2, .4, 4.2]);
-    assert.deepEqual(tower.find(solid => solid.id === 'lighthouse:lower').half.clone().multiplyScalar(2).toArray(), [3.1, 4.6, 3.1]);
-    const towerTop = Math.max(...tower.map(solid => solid.center.clone().sub(frame.position).dot(frame.up) + solid.half.y));
-    assert.ok(towerTop > 10.8 && towerTop <= height, 'The upper lantern follows the taller silhouette');
+    // The sea caves' tunnel runs beneath its foundation, with real rock between.
+    const beneath = seaCave.seaCaveAt(x, z);
+    assert.ok(beneath && beneath.inside && beneath.zone === 'tunnel', 'The tunnel passes underneath the lighthouse');
+    assert.ok(elevation - beneath.ceiling > 1.2, 'Rock separates the tunnel roof from the terrace');
+    close(collision.supportRadius(map.mapDirection(x, z), { layer: 'tunnel' }), planet.RADIUS + beneath.floor, 1e-8);
+    // Its shaft is solid from the terrace; the balcony and lantern top out at ~24m.
+    assert.equal(collision.supportAt(map.mapDirection(x, z), { footRadius: planet.RADIUS + elevation, layer: 'upper' }).solid, true);
+    close(tower.LIGHTHOUSE_TOWER.gallery + tower.LIGHTHOUSE_TOWER.terrace, 26, 1e-9);
+    assert.ok(tower.stairSlope().slope < 40, 'The stair is steep but a real stair, not a ladder');
+    // The trail ends on open ground at the stair foot.
     const destination = town.TOWN_ROUTES.find(route => route.id === 'lighthouse-trail').points.at(-1);
-    const direction = map.mapDirection(...destination), position = direction.clone().multiplyScalar(collision.supportRadius(direction) + runtimeTypes.PLAYER_CENTER_HEIGHT);
-    assert.equal(collision.buildingContact(position), null, 'The upper trail ends beside the tower, not inside its foot');
-    assert.notEqual(collision.supportAt(direction).kind, 'water');
+    const direction = map.mapDirection(...destination), support = collision.supportAt(direction);
+    assert.ok(!support.solid && support.kind !== 'water', 'The upper trail ends beside the tower, not inside it');
+    assert.equal(collision.buildingContact(direction.clone().multiplyScalar(support.radius + runtimeTypes.PLAYER_CENTER_HEIGHT)), null);
   });
 
-  await test('the hidden beach has a low continuous opening into the actual ocean', () => {
-    const { x: startX, z } = peninsula.PENINSULA_COVE;
-    assert.deepEqual(town.COASTAL_RADIO, peninsula.PLACED_COVE, 'Discovery follows the real placed cove');
-    // Walk the cove's own east axis, in its authoring frame.
-    const world = x => placement.peninsulaWorldPoint(x, z);
-    for (let x = startX; x <= startX + 10; x += .125) {
-      const point = world(x), height = surfaces.groundSurfaceAt(point.x, point.z).height;
-      assert.ok(height <= .2, `The cove outlet must not become a landlocked basin or a trail dam: x=${x}, height=${height}`);
-    }
-    const inner = world(startX), outer = world(startX + 10);
-    assert.ok(surfaces.naturalTerrainAt(inner.x, inner.z) > map.MAP_SEA_LEVEL, 'The inner cove remains a dry beach');
-    assert.ok(surfaces.groundSurfaceAt(outer.x, outer.z).height < map.MAP_SEA_LEVEL, 'The opening reaches actual sea, not just a painted sand patch');
-    assert.equal(planet.waterAt(map.mapDirection(outer.x, outer.z)), true);
+  await test('the hidden beach is gone: the headland covers the caves and the field note waits on the balcony', () => {
+    assert.equal(town.COASTAL_RADIO, undefined);
+    const note = planet.PLANET_PLACES.find(place => place.id === 'beach');
+    assert.equal(note.contentId, 'frequency');
+    close(note.elevation, tower.LIGHTHOUSE_TOWER.terrace + tower.LIGHTHOUSE_TOWER.gallery, .05);
+    // Over the Grotto the ground is the headland's rock, well above its dome.
+    const grotto = seaCaveLayout.SEA_CAVE_CHAMBERS.find(chamber => chamber.id === 'grotto');
+    const chart = seaCave.SEA_CAVE_FRAME.chart(...grotto.center), sample = seaCave.seaCaveAt(chart.x, chart.z);
+    assert.ok(surfaces.groundSurfaceAt(chart.x, chart.z).height > sample.ceiling + seaCaveLayout.SEA_CAVE_COVER, 'Rock roofs the Grotto');
   });
 
   await test('rendered terrain has outward faces, finite normals and covers every land point', () => {
@@ -454,7 +452,8 @@ try {
   function walkAuthoredRoute(route, reverse, label = route.id) {
     const points = reverse ? [...route.points].reverse() : route.points;
     let up = map.mapDirection(...points[0]);
-    let hint = route.id === 'cave' || (route.id === 'beach-east' && reverse) ? { layer:'tunnel' } : {};
+    // beach-east ends in the sea-cave mouth: walked back out, it starts on the cave floor.
+    let hint = route.id === 'beach-east' && reverse ? { layer:'tunnel' } : {};
     let distance = 0;
     let blocked = 0;
     const supportKinds = new Set();
@@ -513,140 +512,7 @@ try {
     assert.deepEqual(failures, [], 'Every route and its reverse must remain reachable through actual controller steps');
   });
 
-  await test('the lighthouse underpass has solid lining and a camera-safe roof beneath the cape', () => {
-    assert.ok(cave.PENINSULA_CAVE_LENGTH > 12 && cave.PENINSULA_CAVE_LENGTH < 22, 'The short passage turns beneath the tower and reaches the rear cove');
-    assert.equal(landmarks.landmarkSolids.filter(solid => solid.buildingId === 'cave-rock').length, 0,
-      'The old rendered cave boxes and crown masses have been removed');
-    const roofs = cave.peninsulaCaveWedges.filter(wedge => wedge.kind === 'roof');
-    assert.ok(roofs.length >= 12, 'Both sloping roof faces continue through every short section');
-    assert.equal(cave.peninsulaCaveColliders.length, cave.peninsulaCaveWedges.length);
-    let checkedVertices = 0;
-    for (const wedge of cave.peninsulaCaveWedges) {
-      assert.equal(wedge.vertices.length, 8, 'Each stone piece is an actual closed wedge prism');
-      const edges = new Map();
-      for (const triangle of wedge.triangles) for (let index = 0; index < 3; index++) {
-        const a = triangle[index], b = triangle[(index + 1) % 3];
-        const key = `${Math.min(a, b)}:${Math.max(a, b)}`;
-        edges.set(key, (edges.get(key) ?? 0) + 1);
-      }
-      assert.ok([...edges.values()].every(count => count === 2), `${wedge.id} has no open mesh edges`);
-      for (const vertex of wedge.vertices) {
-        assert.ok(vertex.toArray().every(Number.isFinite));
-        assert.ok(vertex.length() - planet.RADIUS <= 5.15, 'The tunnel lining stays buried below the5.2m cape');
-        const box = wedge.collider, local = vertex.clone().sub(box.center).applyQuaternion(box.inverse);
-        for (const axis of ['x', 'y', 'z']) assert.ok(Math.abs(local[axis]) <= box.half[axis] + 1e-8,
-          `${wedge.id}: conservative camera collision encloses every rendered vertex`);
-        checkedVertices++;
-      }
-    }
-    assert.ok(checkedVertices >= 400, 'Validate the complete wedge kit, not a representative proxy');
-    const middle = peninsula.PENINSULA_CAVE.points[1], first = peninsula.PENINSULA_CAVE.points[0], last = peninsula.PENINSULA_CAVE.points[2];
-    const up = placedDirection(...middle);
-    const forward = placedDirection(...last).sub(placedDirection(...first)).projectOnPlane(up).normalize();
-    const across = forward.clone().cross(up).normalize();
-    let direction = up.clone();
-    let lower = collision.supportAt(direction,{layer:'tunnel'});
-    close(lower.radius, planet.RADIUS + landmarks.CAVE_FLOOR, .04);
-    const player = direction.clone().multiplyScalar(lower.radius + runtimeTypes.PLAYER_CENTER_HEIGHT);
-    assert.equal(collision.buildingContact(player), null, 'The passage center is open for the visitor');
-    const cameraOrigin = direction.clone().multiplyScalar(lower.radius + 1.4);
-    const roofDistance = collision.cameraClearDistance(cameraOrigin, up, 6);
-    assert.ok(roofDistance > .7 && roofDistance < landmarks.CAVE_CLEARANCE - 1.1,
-      `Camera ray must shorten before the pitched ceiling (distance ${roofDistance})`);
-    let blocked = 0;
-    for (let index = 0; index < 130; index++) {
-      const tangent = across.clone().addScaledVector(direction, -across.dot(direction)).normalize();
-      const moved = collision.moveOnSurface(direction, tangent, .06, lower.radius, lower.layer);
-      direction = moved.up; lower=moved.support; blocked += Number(moved.blocked);
-    }
-    assert.ok(blocked > 60, 'The actual cave OBBs must prevent walking through the rock sides');
-    const stopped = direction.clone().multiplyScalar(lower.radius + runtimeTypes.PLAYER_CENTER_HEIGHT);
-    assert.equal(collision.buildingContact(stopped), null, 'The stopped capsule stays outside the wall volume');
-    const roofContact = collision.buildingContact(roofs[Math.floor(roofs.length / 2)].collider.center);
-    assert.equal(roofContact?.id, 'cave-rock', 'The visible roof participates in the same collision set');
-  });
-
-  await test('exact rendered portal collars stop the camera after detailed terrain registers', () => {
-    // The portal panels are generated from clipped terrain, so first make the
-    // detailed partition exactly as TownLandscape does before querying camera
-    // collision. This guards against a mesh-visible but camera-passable mouth.
-    const terrain = makeTerrainPartition();
-    const release = cave.registerCavePortalTriangles({}, detailedPortalTriangles(terrain.portal));
-    try {
-      const stats = cave.cavePortalCollisionStats();
-      assert.equal(stats.registered, true);
-      assert.ok(stats.triangles > 100, 'The detailed portal collar registry must contain the rendered mesh, not a proxy');
-      const authoredFrame = map.mapFrame(27, -29), rotation = placement.PENINSULA_ROTATION;
-      const frame = { up: authoredFrame.up.clone().applyQuaternion(rotation), east: authoredFrame.east.clone().applyQuaternion(rotation), north: authoredFrame.north.clone().applyQuaternion(rotation) };
-      const forward = frame.east.clone().multiplyScalar(Math.cos(5 * Math.PI / 16)).addScaledVector(frame.north, Math.sin(5 * Math.PI / 16)).normalize();
-      const right = forward.clone().cross(frame.up).normalize();
-      const origin = frame.up.clone().multiplyScalar(planet.RADIUS + 1.3).addScaledVector(right, .55);
-      const direction = forward.multiplyScalar(-4.8).addScaledVector(frame.up, 3).normalize();
-      const clearance = collision.cameraClearDistance(origin, direction, 4.8, null, 'tunnel');
-      assert.ok(clearance >= .7 && clearance < 2.2,
-        `The exact portal collar must shorten its reproduced camera ray (received ${clearance})`);
-    } finally {
-      release();
-      terrain.baseWorld.dispose(); terrain.localPatch.dispose(); terrain.portal.dispose();
-    }
-  });
-
-  await test('the complete short cave width stays low and traversable beneath the lighthouse foundation', () => {
-    const sections = [];
-    const points = peninsula.PENINSULA_CAVE.points;
-    for (let index = 1; index < points.length; index++) {
-      const a = points[index - 1], b = points[index];
-      const count = Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / .12);
-      for (let sample = 0; sample <= count; sample++) {
-        const t = sample / count, up = placedDirection(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t);
-        const forward = placedDirection(...b).sub(placedDirection(...a)).projectOnPlane(up).normalize();
-        sections.push({ up, across: forward.clone().cross(up).normalize() });
-      }
-    }
-    let checked = 0, cameraRays = 0, clippedRays = 0;
-    for (const lateral of [-1.5, 0, 1.5]) {
-      const lane = sections.map(({ up, across }) => up.clone().multiplyScalar(map.MAP_RADIUS + landmarks.CAVE_FLOOR).addScaledVector(across, lateral).normalize());
-      for (const direction of lane) {
-        const chart = map.mapCoordinates(direction);
-        close(landmarks.caveBlendAt(chart.x, chart.z), 1, 1e-8);
-        const lower=collision.supportAt(direction,{layer:'tunnel'});
-        close(lower.radius, planet.RADIUS + landmarks.CAVE_FLOOR, .04);
-        assert.equal(collision.buildingContact(direction.clone().multiplyScalar(lower.radius + runtimeTypes.PLAYER_CENTER_HEIGHT)), null,
-          `Clear full-width lane at ${chart.x},${chart.z}, lateral ${lateral}`);
-        checked++;
-      }
-      for (const reverse of [false, true]) {
-        const targets = reverse ? [...lane].reverse() : lane;
-        let up = targets[0];
-        for (const target of targets.slice(1)) {
-          const result = walkTo(up, target, `cave offset${lateral} ${reverse ? 'reverse' : 'forward'}`, 120, {layer:'tunnel'});
-          assert.equal(result.blocked, 0, 'Every full-width lane is reachable through actual controller steps');
-          assert.ok(!result.supportKinds.has('water'), 'The cave is a dry passage in both directions');
-          up = result.up;
-        }
-      }
-    }
-    for (const { up } of sections) {
-      const chart = map.mapCoordinates(up), frame = map.mapFrame(chart.x, chart.z, landmarks.CAVE_FLOOR);
-      for (const pitch of [.1, .375, 1.2]) for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 8) {
-        const origin = frame.position.clone().addScaledVector(frame.up, 1.4);
-        const ray = frame.east.clone().multiplyScalar(Math.cos(angle)).addScaledVector(frame.north, Math.sin(angle)).addScaledVector(frame.up, pitch).normalize();
-        const distance = collision.cameraClearDistance(origin, ray, 4.8), position = origin.clone().addScaledVector(ray, distance);
-        cameraRays++; clippedRays += Number(distance < 4.8);
-        for (const box of cave.peninsulaCaveColliders) {
-          const local = position.clone().sub(box.center).applyQuaternion(box.inverse);
-          assert.ok(Math.abs(local.x) >= box.half.x || Math.abs(local.y) >= box.half.y || Math.abs(local.z) >= box.half.z,
-            `The actual camera endpoint stays outside${box.id}`);
-        }
-      }
-    }
-    assert.ok(checked >= 180, 'Densely sample both edges and center over the whole short passage');
-    assert.ok(cameraRays >= 2500 && clippedRays > 1000, 'Exercise overhead and side-wall camera collision throughout the cave');
-    const beneath=map.mapDirection(landmarks.LIGHTHOUSE.x,landmarks.LIGHTHOUSE.z);
-    close(collision.supportRadius(beneath,{layer:'tunnel'}),planet.RADIUS+landmarks.CAVE_FLOOR,1e-8);
-    close(collision.supportRadius(beneath),planet.RADIUS+landmarks.LIGHTHOUSE.elevation,1e-8,
-      'The same map coordinate has a real upper terrace as well as the lower tunnel');
-  });
+  // The sea caves and the lighthouse stair have their own suite: scripts/check-sea-cave.mjs.
 
   await test('skate park bowls, snake, halfpipe and quarter are real ground a visitor can cross', () => {
     const point = (u, v) => skatepark.parkDirection(u, v);

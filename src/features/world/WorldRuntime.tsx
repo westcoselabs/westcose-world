@@ -57,10 +57,11 @@ type MapFacing = 'east' | 'north' | 'south' | 'west' | Readonly<{ east: number; 
 const CAMERA_START: [number, number, number] = [80 * MAP_VIEW_SCALE, 70 * MAP_VIEW_SCALE, 110 * MAP_VIEW_SCALE];
 const CAMERA_FAR = 550 * MAP_VIEW_SCALE;
 type WorldRuntimeData = ReturnType<typeof createRuntimeState>;
-/** Move the walker (never the snowboard rider) to a chart point, facing a map direction. */
-function requestWalker(r: WorldRuntimeData, x: number, z: number, facing: MapFacing = 'south', layer: SupportLayer = 'upper') {
+/** Move the walker (never the snowboard rider) to a chart point, facing a map direction.
+ * An elevation picks a raised surface there, such as the lighthouse balcony. */
+function requestWalker(r: WorldRuntimeData, x: number, z: number, facing: MapFacing = 'south', layer: SupportLayer = 'upper', elevation?: number) {
   const direction = mapDirection(x, z);
-  const support = supportAt(direction, { layer });
+  const support = supportAt(direction, { layer, footRadius: elevation === undefined ? undefined : MAP_RADIUS + elevation });
   const frame = mapFrame(x, z);
   const position = direction.clone().multiplyScalar(support.radius + PLAYER_CENTER_HEIGHT);
   const forward = typeof facing === 'object'
@@ -167,6 +168,8 @@ export default function WorldRuntime() {
     const r = runtimeRef.current;
     if (!r.skate.owned || r.skate.riding || r.snowboard.active || r.mode !== 'exploring') return;
     if (r.interior) { notify('Boards stay off indoors', 'Step outside to ride.'); return; }
+    if (r.supportLayer !== 'upper') { notify('Boards stay off in the caves', 'Ride on the beach outside.'); return; }
+    if (supportAt(r.up, { footRadius: Math.hypot(r.position.x, r.position.y, r.position.z) - PLAYER_CENTER_HEIGHT, layer: r.supportLayer }).id?.startsWith('lighthouse:')) { notify('Boards stay off the lighthouse', 'Ride on the terrace below.'); return; }
     r.skate.riding = true; r.skate.request = { kind: 'equip' }; setRiding(true);
     change({ type: 'mode', mode: 'skating' });
   }, [change, notify]);
@@ -362,11 +365,11 @@ export default function WorldRuntime() {
   useEffect(() => {
     if (process.env.NODE_ENV !== 'development') return;
     const r = runtimeRef.current;
-    const spawnAt = (x: number, z: number, facing: MapFacing = 'south', layer: SupportLayer = 'upper') => {
+    const spawnAt = (x: number, z: number, facing: MapFacing = 'south', layer: SupportLayer = 'upper', elevation?: number) => {
       r.snowboard.active = false; r.snowboard.request = null;
       if (r.skate.riding) { r.skate.riding = false; r.skate.request = null; setRiding(false); setSkateResults(null); }
       if (r.fishing.active) { r.fishing.active = false; r.fishing.request = null; r.fishing.sunLight = null; setTideResults(null); }
-      requestWalker(r, x, z, facing, layer);
+      requestWalker(r, x, z, facing, layer, elevation);
       change({ type:'mode', mode:'exploring' });
     };
     const debug = {
@@ -376,8 +379,8 @@ export default function WorldRuntime() {
       },
       spawn: (name: string) => {
         if (!Object.hasOwn(PLANET_FIXTURES, name)) throw new Error('Unknown planet fixture');
-        const f = PLANET_FIXTURES[name as keyof typeof PLANET_FIXTURES];
-        spawnAt(f.x, f.z, f.facing);
+        const f: { x: number; z: number; facing: MapFacing; layer?: SupportLayer; elevation?: number } = PLANET_FIXTURES[name as keyof typeof PLANET_FIXTURES];
+        spawnAt(f.x, f.z, f.facing, f.layer, f.elevation);
       },
       spawnAt,
       /** Fixed review camera from chart (x, z, height) toward chart (x, z, height); null restores the follow camera. */

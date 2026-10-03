@@ -7,7 +7,7 @@ const base = process.env.WORLD_CAPTURE_URL || 'http://127.0.0.1:3000';
 const directory = process.env.WORLD_CAPTURE_DIR || 'docs/qa/globe-refinement/views';
 const settleMilliseconds = Number(process.env.WORLD_CAPTURE_SETTLE_MS || 1600);
 const appendApproach = process.env.WORLD_CAPTURE_APPEND_APPROACH;
-const fixtures = (process.env.WORLD_CAPTURE_FIXTURES || 'courtyard,promenade,beach,pierapproach,pieroutward,skatepark,stairs,resort,summit,lighthouse,cave,hiddenbeach').split(',').filter(Boolean);
+const fixtures = (process.env.WORLD_CAPTURE_FIXTURES || 'courtyard,promenade,beach,pierapproach,pieroutward,skatepark,stairs,resort,summit,lighthouse,cave,grotto').split(',').filter(Boolean);
 const approachViews = loadConceptApproachViews();
 const profiles = [
   { name: 'desktop', viewport: { width: 1440, height: 900 }, isMobile: false, hasTouch: false },

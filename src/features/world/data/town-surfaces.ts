@@ -5,11 +5,12 @@ import { MAP_RADIUS, mapCoordinates, mapMetric } from './world-map';
 import { massifHeightAt, mountainBaseAt, mountainBlendAt, mountainCoastDistance, mountainFinishAreaAt, mountainResortPlatesAt, mountainRunPlateWeightAt, mountainRunPlatesAt, mountainSnowAt } from './mountain-layout';
 import { islandTerrainAt } from './island-terrain';
 import { RUN_FEATHER, runWidthAt, skiCarveAt, skiRunSampleAt } from './ski-runs';
-import { CAVE_FLOOR, caveBlendAt } from './concept-landmarks';
+import { nearSeaCave, seaCaveCliffFootAt, seaCaveMassifWeightAt, seaCaveTerrainAt } from './sea-cave';
+import { SEA_CAVE_MOUTH } from './sea-cave-layout';
 import { downtownKindAt, downtownSurfaceAt } from './downtown-layout';
 import { GRAND_STAIRS, grandStairSurfaceAt, nearSkatepark, skateparkSurfaceAt } from './skatepark-layout';
 import { westBluffAt, westBluffDistance } from './island-terrain';
-import { inAuthoredRegion, inPeninsulaRegion, peninsulaBlendAt, peninsulaCoastDistance, peninsulaHeightAt, peninsulaFoundationAt, peninsulaLocal, peninsulaTransplantWeight, PENINSULA_SAND } from './peninsula-layout';
+import { inAuthoredRegion, inPeninsulaRegion, peninsulaBlendAt, peninsulaHeightAt, peninsulaFoundationAt, peninsulaLocal, peninsulaTransplantWeight } from './peninsula-layout';
 import { peninsulaWorldPoint } from './peninsula-frame';
 
 const clamp=(v:number,a=0,b=1)=>Math.max(a,Math.min(b,v));
@@ -49,7 +50,8 @@ function beachWeightAt(x:number,z:number){
 
 /** Present town substrate + mountain island, with the ski runs carved between flat
  * run plates and the resort foundations applied last. The placed peninsula is a bounded
- * blend in its own authoring frame, and the public beach is shaped last. */
+ * blend in its own authoring frame, the sea-cave headland rises over it, and the public
+ * beach is shaped last. */
 export function naturalTerrainAt(x:number,z:number):number {
  const plated=mountainRunPlatesAt(x,z,mountainBaseAt(x,z)),carved=skiCarveAt(x,z,plated),plate=mountainRunPlateWeightAt(x,z);
  // Run plates stay level over any carving; a second plate pass would not be idempotent.
@@ -57,6 +59,7 @@ export function naturalTerrainAt(x:number,z:number):number {
  height=mountainResortPlatesAt(x,z,height);
  const blend=peninsulaBlendAt(x,z);
  height=blend===0?height:height+(peninsulaHeightAt(x,z)-height)*blend;
+ height=seaCaveTerrainAt(x,z,height);
  const beach=beachWeightAt(x,z);
  if(beach>0)height+=(beachProfileAt(x,z)-height)*beach;
  // The west bluff reaches far up the chart this far west; it wins over the mountain's
@@ -68,7 +71,7 @@ export const OPEN_SEA_FLOOR=-3;
 export function terrainIsOpenSea(x:number,z:number):boolean{
  if(x<-32&&westBluffAt(x,z)>OPEN_SEA_FLOOR+1e-9)return false;
  if(z>=52)return mountainCoastDistance(x,z)<-3;
- if(z>=40||inPeninsulaRegion(x,z)||beachWeightAt(x,z)>0)return false;
+ if(z>=40||inPeninsulaRegion(x,z)||nearSeaCave(x,z)||beachWeightAt(x,z)>0)return false;
  return islandTerrainAt(x,z)<=OPEN_SEA_FLOOR+1e-9;
 }
 export function substrateAt(x:number,z:number):number {
@@ -111,7 +114,7 @@ export function routeElevation(route:TownRoute,x:number,z:number,progress:number
  const ax=route.id==='beach-east'?authoredRegionX(x,z):-Infinity;
  if(ax>23){
   const beach=substrateAt(x,z)+.025;
-  return beach+(CAVE_FLOOR+.025-beach)*smooth(23,25,ax);
+  return beach+(SEA_CAVE_MOUTH.floor+.025-beach)*smooth(23,25,ax);
  }
  if(route.elevations){
   const lengths=route.points.slice(1).map((p,i)=>Math.hypot(p[0]-route.points[i][0],p[1]-route.points[i][1]));
@@ -123,12 +126,11 @@ export function routeElevation(route:TownRoute,x:number,z:number,progress:number
  }
  if(typeof route.elevation==='number')return route.elevation;
  if(route.elevation)return route.elevation[0]+(route.elevation[1]-route.elevation[0])*progress;
- if(route.id==='cave')return -.1;
  return (substrateHeight??substrateAt(x,z))+.025;
 }
 export function routeDistanceAt(x:number,z:number){
  let result={distance:Infinity,route:undefined as TownRoute|undefined,progress:0};const h=substrateAt(x,z);
- for(const s of nearbySegments(x,z)){if(s.route.id==='cave'||x<s.minX||x>s.maxX||z<s.minZ||z>s.maxZ)continue;const c=closest(s,x,z,h);if(c.distance<result.distance)result={...c,route:s.route};}
+ for(const s of nearbySegments(x,z)){if(x<s.minX||x>s.maxX||z<s.minZ||z>s.maxZ)continue;const c=closest(s,x,z,h);if(c.distance<result.distance)result={...c,route:s.route};}
  return result;
 }
 /** Upper terrain and paths. The traversable void below is resolved by the runtime. */
@@ -136,7 +138,7 @@ export function groundSurfaceAt(x:number,z:number,stitch=true):{height:number;ki
  let height=substrateAt(x,z),routeId:string|undefined;
  const local=inPeninsulaRegion(x,z),unroutedHeight=height,ax=local?authoredRegionX(x,z):-Infinity;
  for(const s of nearbySegments(x,z)){
-  if(s.route.id==='cave'||(s.route.id==='beach-east'&&ax>26.3))continue;
+  if(s.route.id==='beach-east'&&ax>26.3)continue;
   if(local&&s.route.id==='lighthouse-trail')continue;
   if(x<s.minX||x>s.maxX||z<s.minZ||z>s.maxZ)continue;
   const c=closest(s,x,z,height),half=s.route.width/2;
@@ -204,7 +206,7 @@ export function asphaltAt(x:number,z:number){const r=routeDistanceAt(x,z);return
 export function surfaceMaterialAt(x:number,z:number,height=substrateAt(x,z)):string|null{
  let color:string|null=null;
  for(const s of nearbySegments(x,z)){if(x<s.minX||x>s.maxX||z<s.minZ||z>s.maxZ)continue;
-  if(s.route.id==='cave'||(s.route.id==='beach-east'&&x>26.3))continue;
+  if(s.route.id==='beach-east'&&authoredRegionX(x,z)>26.3)continue;
   if(closest(s,x,z,height).distance<=s.route.width/2)color=s.route.material==='asphalt'?'#687D7E':s.route.material==='timber'?'#A98A60':s.route.material==='sand'?'#D8BD8B':s.route.material==='concrete'?'#CBC6B4':'#AE9972';
  }
  for(const a of TOWN_AREAS){const m=mapMetric(x,height);if(Math.abs(x-a.center[0])*m.x<a.width/2&&Math.abs(z-a.center[1])*m.z<a.depth/2)color=a.material==='gravel'?'#B2A38A':'#D6D0BE';}
@@ -220,6 +222,17 @@ export function terrainColorAt(x:number,z:number,height:number,slope=0){
  const half=run?runWidthAt(run.run,run.s)/2:0,onRun=!!run&&run.s>0&&run.s<run.run.length;
  if(onRun&&run!.distance<=half+.6)return '#D3E2E0';
  if(z>36&&mountainFinishAreaAt(x,z))return '#D3E2E0';
+ // The sea-cave headland: weathered rock, darker on its cliffs and wet at the waterline.
+ const headland=seaCaveMassifWeightAt(x,z);
+ // Its cliffs run straight down into the water: the sea floor at their foot is rock too.
+ if(height<=-.5&&seaCaveCliffFootAt(x,z))return '#5F6B66';
+ if(headland>.35&&height>-.5){
+  if(slope>1.15)return height<1.2?'#6E7A73':'#7E857B';
+  const facet=Math.sin(x*1.1+z*.7)*Math.sin(x*.4-z*1.3),scrub=Math.sin(x*.53+z*.31)*Math.sin(x*.27-z*.61);
+  // Low salt-scrub on the gentler treads, bare stone on the risers.
+  if(slope<.45&&height>3&&scrub>.18)return scrub>.42?'#6F7F69':'#7D8B73';
+  return height>7.5?(facet>.25?'#A3A592':'#999C89'):height>3?(facet>.2?'#959989':'#8C9386'):'#818C83';
+ }
  const cape=inPeninsulaRegion(x,z)&&peninsulaBlendAt(x,z)>.5;
  // The public beach: dune sand, dry sand, a darker wet band at the water, then the shallows.
  if(!cape&&z<-17&&x>-31&&x<46&&height<.62){
@@ -232,13 +245,11 @@ export function terrainColorAt(x:number,z:number,height:number,slope=0){
  }
  if(height<-.5)return '#BCA87B';
  if(cape){
-  if(height<.4&&peninsulaCoastDistance(x,z,PENINSULA_SAND)>-.5)return '#D7BB85';
   return height>2.4?'#999C89':height>.4?'#818C83':'#BDA77F';
  }
  // Carved run banks stay powder; only natural steep ground shows rock.
  const bank=onRun&&run!.distance<half+RUN_FEATHER;
  if((mountainSnowAt(x,z)||bank)&&height>0)return bank?'#E6EDE6':slope>.85?'#8A968F':slope>.7&&Math.abs(Math.sin(x*.21+z*.13))<.35?'#A3AEA8':'#EDF2E9';
- if(caveBlendAt(x,z)>.3)return '#D7BB85';
  // The bluff top is mown grass; its open slopes read as coastal scrub down to the sand.
  if(x<-30&&x>-90){const d=westBluffDistance(x,z);if(d<-.5)return '#6F8D66';if(d<5&&height>.5)return '#7F8C76';}
  if(peninsulaTransplantWeight(x,z)>.5||(x<-28&&z<20))return '#899087';

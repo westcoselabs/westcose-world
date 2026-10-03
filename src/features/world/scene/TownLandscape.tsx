@@ -3,8 +3,7 @@ import { useEffect,useMemo,useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { BufferGeometry, Color, Float32BufferAttribute, Mesh, MeshStandardMaterial, Sphere, Triangle, Vector3 } from 'three';
 import { MAP_RADIUS, MAP_SEA_LEVEL, mapCoordinates, mapDirection } from '../data/world-map';
-import { inPeninsulaRegion } from '../data/peninsula-layout';
-import { cavePortalLining, cavePortalSeals, clipTerrainOutsideCave, registerCavePortalTriangles } from '../data/peninsula-cave';
+import { clipTerrainOutsideSeaCave, insideSeaCaveCut, nearSeaCaveCut, registerSeaCaveOpeningTriangles, seaCaveOpeningSeals } from '../data/sea-cave-openings';
 import { downtownKindAt } from '../data/downtown-layout';
 import { grandStairSurfaceAt, nearSkatepark, skateparkTerrainCeiling } from '../data/skatepark-layout';
 import { skiFeatureMaskAt } from '../data/ski-runs';
@@ -31,8 +30,8 @@ export type TerrainRegion={id:'town'|'mountain'|'west';x0:number;z0:number;step:
 /** Chart regions covering all land; they abut at z=42. Open ocean needs no terrain: the
  * sea sphere is opaque. Even cell counts keep full and coarse grids on shared boundaries. */
 export const TERRAIN_REGIONS:readonly TerrainRegion[]=[
- // Reaches east past the placed lighthouse cape and south past its tip.
- {id:'town',x0:-52,z0:42-.45*218,step:.45,columns:282,rows:218},
+ // Reaches east past the sea-cave headland's cliffs and south past the lighthouse cape.
+ {id:'town',x0:-52,z0:42-.45*218,step:.45,columns:290,rows:218},
  {id:'mountain',x0:-96,z0:42,step:.8,columns:240,rows:338},
  // The skate-park bluff west of the town. This far west a chart metre of z is far
  // shorter than a physical one, so a coarse step still draws its banks finely.
@@ -42,8 +41,8 @@ export type TerrainLod='full'|'coarse';
 const CHUNK_CELLS=80;
 const SKIRT_DEPTH=.8;
 const UNDERWATER=MAP_SEA_LEVEL-.6;
-/** Chunks intersecting this chart box contain peninsula cells clipped around the cave. */
-const PENINSULA_BOX={x0:28,x1:74,z0:-54,z1:42};
+/** Chunks intersecting this chart box contain the cells cut at the sea-cave openings. */
+const PENINSULA_BOX={x0:28,x1:79,z0:-54,z1:42};
 const PORTAL_ROCK=new Color('#899185');
 const SEA_FLOOR=new Color('#BCA87B');
 
@@ -53,7 +52,6 @@ export type TerrainBuild={full:TerrainLevel;coarse:TerrainLevel};
 type ChunkSamples={region:TerrainRegion;i0:number;j0:number;cols:number;rows:number;cave:boolean;
  positions:Float32Array;normals:Float32Array;colors:Float32Array;heights:Float32Array};
 
-function visibleHeightAt(x:number,z:number){return terrainVisibleHeight(mapDirection(x,z),groundSurfaceAt(x,z).height);}
 
 /** Sample one chunk at full detail. A one-vertex apron gives central-difference normals
  * that match exactly across chunk edges; both levels of detail reuse these samples. */
@@ -87,8 +85,9 @@ function sampleChunk(region:TerrainRegion,i0:number,i1:number,j0:number,j1:numbe
  return {region,i0,j0,cols,rows,cave,positions,normals,colors,heights};
 }
 
-/** Mesh a sampled chunk at a stride (1 = full detail, 2 = coarse). Only the detailed level
- * clips peninsula cells around the cave and collects the matching portal collars. */
+/** Mesh a sampled chunk at a stride (1 = full detail, 2 = coarse). The detailed level cuts
+ * both sea-cave openings and collects their seals; the coarse level cuts only the ocean
+ * window, so it still reads as open from a distance. */
 function meshChunk(samples:ChunkSamples,stride:number,skirts:boolean,portal:number[]|null):TerrainChunk|null{
  const {region}=samples,cols=samples.cols/stride,rows=samples.rows/stride,step=region.step*stride;
  const X=(a:number)=>region.x0+samples.i0*region.step+a*step,Z=(b:number)=>region.z0+samples.j0*region.step+b*step;
@@ -99,7 +98,7 @@ function meshChunk(samples:ChunkSamples,stride:number,skirts:boolean,portal:numb
   heights.push(samples.heights[source]);
  }
  const vertex=(a:number,b:number)=>a*(rows+1)+b;
- const clip=samples.cave&&portal!==null;
+ const clip=samples.cave,detailed=portal!==null;
  const point=(index:number)=>new Vector3(positions[index*3],positions[index*3+1],positions[index*3+2]);
  const addVertex=(position:Vector3,from:number[],weights:number[])=>{
   const index=positions.length/3;positions.push(position.x,position.y,position.z);
@@ -109,22 +108,22 @@ function meshChunk(samples:ChunkSamples,stride:number,skirts:boolean,portal:numb
  const triangle=new Triangle(),bary=new Vector3();
  const emit=(t:[number,number,number],local:boolean)=>{
   if(!local){indices.push(t[0],t[1],t[2]);return;}
-  // Subtract the 3D cave void; high roof/cape triangles keep their exact positions.
+  // Cut the openings; every other triangle keeps its exact position.
   const points=t.map(point);
-  const fragments=clipTerrainOutsideCave(points[0],points[1],points[2]);
+  const fragments=clipTerrainOutsideSeaCave(points[0],points[1],points[2],!detailed);
   if(fragments===undefined){indices.push(t[0],t[1],t[2]);return;}
   triangle.set(points[0],points[1],points[2]);
   for(const polygon of fragments){
    const ids=polygon.map(q=>{const w=triangle.getBarycoord(q,bary)??bary.set(1,0,0);return addVertex(q,t,[w.x,w.y,w.z]);});
    for(let i=1;i<ids.length-1;i++)indices.push(ids[0],ids[i],ids[i+1]);
   }
-  // The clipped boundary meets the buried lining; without this collar sky shows through the mouth.
-  for(const panel of cavePortalSeals(fragments))for(const q of panel)portal!.push(q.x,q.y,q.z);
+  // The cut edges meet the cave rock; without these seals sky shows round the openings.
+  if(detailed)for(const panel of seaCaveOpeningSeals(fragments))for(const q of panel)portal!.push(q.x,q.y,q.z);
  };
  for(let a=0;a<cols;a++)for(let b=0;b<rows;b++){
   const i=vertex(a,b),j=vertex(a+1,b);
   if(heights[i]<UNDERWATER&&heights[j]<UNDERWATER&&heights[i+1]<UNDERWATER&&heights[j+1]<UNDERWATER)continue;
-  const local=clip&&inPeninsulaRegion(X(a)+step/2,Z(b)+step/2);
+  const local=clip&&nearSeaCaveCut(X(a)+step/2,Z(b)+step/2);
   emit([i,j,i+1],local);emit([j,j+1,i+1],local);
  }
  if(indices.length===0)return null;
@@ -134,6 +133,8 @@ function meshChunk(samples:ChunkSamples,stride:number,skirts:boolean,portal:numb
    const s0=list[e-1],s1=list[e];
    if(heights[s0]<UNDERWATER&&heights[s1]<UNDERWATER)continue;
    const h0=Math.hypot(positions[s0*3],positions[s0*3+1],positions[s0*3+2]),h1=Math.hypot(positions[s1*3],positions[s1*3+1],positions[s1*3+2]);
+   // A flap across a cut opening would hang in it as a thin sheet.
+   if(clip&&insideSeaCaveCut(point(s0).add(point(s1)).multiplyScalar(.5).multiplyScalar(1-SKIRT_DEPTH/(h0+h1))))continue;
    const low0=addVertex(point(s0).multiplyScalar((h0-SKIRT_DEPTH)/h0),[s0],[1]),low1=addVertex(point(s1).multiplyScalar((h1-SKIRT_DEPTH)/h1),[s1],[1]);
    indices.push(s0,s1,low1,s0,low1,low0,s0,low1,s1,s0,low0,low1);
   }};
@@ -158,7 +159,6 @@ export function buildTerrain({skirts=true}:{skirts?:boolean}={}):TerrainBuild{
    full.push(meshChunk(samples,1,skirts,portal));coarse.push(meshChunk(samples,2,skirts,null));
   }
  }
- for(const panel of cavePortalLining(visibleHeightAt))for(const q of panel)portal.push(q.x,q.y,q.z);
  const geometry=new BufferGeometry();
  geometry.setAttribute('position',new Float32BufferAttribute(portal,3));
  geometry.setAttribute('color',new Float32BufferAttribute(Array.from({length:portal.length/3},()=>[PORTAL_ROCK.r,PORTAL_ROCK.g,PORTAL_ROCK.b]).flat(),3));
@@ -225,7 +225,7 @@ export default function TownLandscape({runtime}:{runtime:WorldRuntimeState}){
  useEffect(()=>{
   const portal=terrain.full.portal!,positions=portal.getAttribute('position'),triangles:Vector3[][]=[];
   for(let index=0;index<positions.count;index+=3)triangles.push([0,1,2].map(offset=>new Vector3().fromBufferAttribute(positions,index+offset)));
-  const release=registerCavePortalTriangles(portal,triangles);
+  const release=registerSeaCaveOpeningTriangles(portal,triangles);
   return ()=>{
    release();
    for(const level of [terrain.full,terrain.coarse]){for(const chunk of level.chunks)chunk?.geometry.dispose();level.portal?.dispose();}

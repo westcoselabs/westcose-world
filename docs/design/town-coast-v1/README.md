@@ -31,6 +31,8 @@ This rework covers:
 
 ## The peninsula move
 
+> **Superseded on 2026-10-02 by [Sea Caves V1](../sea-cave-v1/README.md).** The hidden beach, its cliffs and the old underpass were replaced by the sea-cave headland, and the lighthouse rebuilt. `check-single-cove-layout` and `check-peninsula-routes` were retired. The placement rotation below still carries the cape and the caves.
+
 The lighthouse cape, the cave, the hidden-beach cove and its cliffs are still authored exactly as approved, in the original chart coordinates. `check-single-cove-layout` still compares the polygons with the approval drawing.
 
 `data/peninsula-frame.ts` places that system with one rigid rotation of the globe. The pivot is the public beach by the cave mouth, authored at (30, −29); it moves 17 m east. Every physical distance, height, slope and tunnel section is therefore unchanged.

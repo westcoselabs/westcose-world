@@ -1,12 +1,14 @@
 import { Matrix4, Quaternion, Vector3 } from 'three';
-import { COASTAL_RADIO, TOWN_BUILDINGS, TOWN_SPAWN } from './town-layout';
+import { TOWN_BUILDINGS, TOWN_SPAWN } from './town-layout';
 import { substrateAt, townSurfaceAt, TOWN_STEPS } from './town-surfaces';
 import { activeInteriorAt, buildingDoorPoint, buildingLocalPoint } from './building-shapes';
 import { PIER_LAYOUT } from './pier-layout';
 import { MOUNTAIN_LAYOUT, massifHeightAt, mountainFinishAreaAt, mountainSnowAt } from './mountain-layout';
 import { skiRunSampleAt } from './ski-runs';
-import { coastDistance, PENINSULA_CAVE, PENINSULA_COVE, PENINSULA_LIGHTHOUSE, PENINSULA_SAND, peninsulaLocal } from './peninsula-layout';
-import { peninsulaWorldPoint } from './peninsula-frame';
+import { peninsulaLocal } from './peninsula-layout';
+import { SEA_CAVE_FRAME, seaCaveAt, SEA_CAVE_ZONE_NAMES } from './sea-cave';
+import { SEA_CAVE_ARENA, SEA_CAVE_MOUTH, SEA_CAVE_WALL_OFFSET, SEA_CAVE_WINDOW } from './sea-cave-layout';
+import { LIGHTHOUSE_GALLERY_NOTE, LIGHTHOUSE_GALLERY_STAND, LIGHTHOUSE_STAIR_FOOT, LIGHTHOUSE_TOWER, lighthouseLocal } from './lighthouse-tower';
 import { MAP_MAX_HEIGHT, MAP_MIN_Z, MAP_RADIUS, MAP_SEAM, MAP_SEA_LEVEL, mapCoordinates, mapDirection, mapFrame } from './world-map';
 import { CUL_DE_SACS, downtownSurfaceAt } from './downtown-layout';
 import { grandStairSurfaceAt, nearSkatepark, skateparkSurfaceAt } from './skatepark-layout';
@@ -39,7 +41,8 @@ export type { TownBuilding as PlanetBuilding } from './town-types';
 export const BUILDINGS=TOWN_BUILDINGS;
 const building=(id:string)=>TOWN_BUILDINGS.find(candidate=>candidate.id===id)!;
 type FixtureFacing='east'|'north'|'south'|'west'|{east:number;north:number};
-type MapFixture={x:number;z:number;facing:FixtureFacing};
+/** `layer` and `elevation` place a fixture in the sea caves or up on the lighthouse. */
+type MapFixture={x:number;z:number;facing:FixtureFacing;layer?:'upper'|'tunnel';elevation?:number};
 
 /** Build fixture headings from the rendered doorway geometry, not stale chart guesses. */
 function fixtureToward(source:Vector3,target:Vector3):MapFixture {
@@ -67,10 +70,9 @@ const labFixture=doorwayFixture('lab');
 const galleryWallFixture=wallFixture('studio');
 const galleryCameraFixture=doorwayFixture('studio',1.35,false);
 const skateShopFixture=doorwayFixture('skate-shop');
-/** A visitor position in the placed peninsula's authoring frame, facing an authored target. */
-function peninsulaFixture(x:number,z:number,targetX:number,targetZ:number):MapFixture {
- const from=peninsulaWorldPoint(x,z),to=peninsulaWorldPoint(targetX,targetZ);
- return fixtureToward(mapDirection(from.x,from.z),mapDirection(to.x,to.z));
+/** A visitor position at sea-cave local metres, facing another local point. */
+function caveFixture(u:number,v:number,toU:number,toV:number,extra:Partial<MapFixture>={}):MapFixture {
+ return {...fixtureToward(SEA_CAVE_FRAME.direction(u,v),SEA_CAVE_FRAME.direction(toU,toV)),...extra};
 }
 /** The customer side of the skate-shop counter, where E takes a board. */
 const skateCounter=mapCoordinates(buildingLocalPoint(building('skate-shop'),[-.2,0,-building('skate-shop').depth/2+3.2]));
@@ -88,7 +90,9 @@ export const PLANET_PLACES=[
  // Kept just beyond the fresh-load clearing so a visitor arrives in the
  // courtyard without an immediate interaction prompt.
  {id:'contact',label:'Contact Station',section:'Contact',x:5.4,z:16.6,radius:2.2,contentId:'contact',number:'05',interior:null},
- {id:'beach',label:'Hidden Beach',section:'Discovery',x:COASTAL_RADIO.x,z:COASTAL_RADIO.z,radius:3,contentId:'frequency',number:'06',interior:null},
+ // The field note waits on the lighthouse balcony. The id stays 'beach' so discoveries
+ // already saved on a device carry over from its old home on the hidden beach.
+ {id:'beach',label:'Lighthouse Gallery',section:'Discovery',x:LIGHTHOUSE_GALLERY_NOTE.x,z:LIGHTHOUSE_GALLERY_NOTE.z,elevation:LIGHTHOUSE_GALLERY_NOTE.elevation,radius:2.2,contentId:'frequency',number:'06',interior:null},
  {id:'lab',label:'Alley Room',section:'Labs',x:building('lab').x,z:building('lab').z,radius:4,contentId:'labs',number:'07',interior:'lab'},
  // The lift-ticket window facing the resort forecourt: E opens the snowboard run menu.
  {id:'tickets',label:'Lift Tickets',section:'Snowboard',x:MOUNTAIN_LAYOUT.ticketHut.x,z:MOUNTAIN_LAYOUT.ticketHut.z-MOUNTAIN_LAYOUT.ticketHut.depth/2-.9,radius:2.4,contentId:'snowboard',number:'08',interior:null},
@@ -123,16 +127,18 @@ export function areaAt(d:{x:number;y:number;z:number}):string{
  const street=downtownSurfaceAt(x,z)?.id;
  const cul=CUL_DE_SACS.find(c=>street===c.id||street===`${c.id}:island`||(street===c.street&&x>=c.cut));
  if(cul)return cul.name;
+ // The sea caves name their rooms when a visitor is down inside them.
+ const elevation=Math.hypot(d.x,d.y,d.z)-RADIUS,cave=seaCaveAt(x,z);
+ if(cave&&cave.sdf<=SEA_CAVE_WALL_OFFSET&&elevation>cave.floor-.6&&elevation<cave.ceiling+.3)return SEA_CAVE_ZONE_NAMES[cave.zone];
+ // Up on the lighthouse: its stair, then the balcony.
+ const tower=lighthouseLocal(d);
+ if(tower.radius<LIGHTHOUSE_TOWER.balcony.outer+.6&&tower.height>1.2)return tower.height>LIGHTHOUSE_TOWER.gallery-.6?'Lighthouse Gallery':'Lighthouse Stair';
  // The placed peninsula's areas, in its own authoring frame.
  const a=peninsulaLocal(x,z);
  if(a){
-  if(a.x>24&&a.z>=-23&&a.z<=30&&surface.height<1&&coastDistance(a.x,a.z,PENINSULA_SAND)>-.5)return 'Hidden Beach';
-  if(a.x>=27&&a.x<=41&&a.z>=-35&&a.z<=-19){
-   const radius=Math.hypot(d.x,d.y,d.z);
-   if(radius>RADIUS-1&&radius<RADIUS+4)return 'Cave Access';
-   return 'Lighthouse Point';
-  }
+  if(a.x>=27&&a.x<=41&&a.z>=-35&&a.z<=-19)return 'Lighthouse Point';
   if(a.x>24&&a.x<35&&a.z>-25&&a.z<6)return 'Lighthouse Trail';
+  if(cave&&a.x>24)return 'Sea Cave Headland';
  }
  if(z<=-18)return 'The Beach';
  if(z<=-14)return 'Boardwalk';
@@ -193,9 +199,14 @@ export const PLANET_FIXTURES={
  skatepark:{x:-34,z:0,facing:'west'},
  skateshop:skateShopFixture,
  mainstreet:{x:-12,z:0,facing:'east'},
- lighthouse:peninsulaFixture(PENINSULA_LIGHTHOUSE.x-3.2,PENINSULA_LIGHTHOUSE.z,PENINSULA_LIGHTHOUSE.x,PENINSULA_LIGHTHOUSE.z),
- cave:peninsulaFixture(PENINSULA_CAVE.points[0][0]-2,PENINSULA_CAVE.points[0][1],PENINSULA_CAVE.points[0][0],PENINSULA_CAVE.points[0][1]),
- hiddenbeach:peninsulaFixture(PENINSULA_COVE.x,PENINSULA_COVE.z,PENINSULA_COVE.x,PENINSULA_COVE.z+5),
+ // At the end of the trail, facing the foot of the lighthouse stair.
+ lighthouse:caveFixture(-3.4,4.3,LIGHTHOUSE_STAIR_FOOT.u,LIGHTHOUSE_STAIR_FOOT.v),
+ // On the lighthouse balcony, just short of the field note.
+ lighthousegallery:{...fixtureToward(mapDirection(LIGHTHOUSE_GALLERY_STAND.x,LIGHTHOUSE_GALLERY_STAND.z),mapDirection(LIGHTHOUSE_GALLERY_NOTE.x,LIGHTHOUSE_GALLERY_NOTE.z)),elevation:LIGHTHOUSE_GALLERY_STAND.elevation},
+ // On the beach two metres outside the sea-cave mouth, facing in.
+ cave:caveFixture(SEA_CAVE_MOUTH.center[0]-2*SEA_CAVE_MOUTH.inward[0]/Math.hypot(...SEA_CAVE_MOUTH.inward),SEA_CAVE_MOUTH.center[1]-2*SEA_CAVE_MOUTH.inward[1]/Math.hypot(...SEA_CAVE_MOUTH.inward),SEA_CAVE_MOUTH.center[0],SEA_CAVE_MOUTH.center[1]),
+ // The middle of the Grotto, facing the ocean window.
+ grotto:caveFixture(SEA_CAVE_ARENA.center[0],SEA_CAVE_ARENA.center[1],SEA_CAVE_WINDOW.center[0],SEA_CAVE_WINDOW.center[1],{layer:'tunnel'}),
  culdesac:{x:CUL_DE_SACS[0].center[0]-4,z:CUL_DE_SACS[0].center[1]-3.6,facing:'east'},
  motel:{x:16.2,z:-3.9,facing:'south'},
  resort:{x:MOUNTAIN_LAYOUT.pedestrianArrival.x,z:MOUNTAIN_LAYOUT.pedestrianArrival.z,facing:'north'},

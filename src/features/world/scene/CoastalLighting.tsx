@@ -3,12 +3,14 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import {
-  AmbientLight, BackSide, Color, DirectionalLight, FogExp2, Mesh, PMREMGenerator, PointLight,
+  AmbientLight, BackSide, Color, DirectionalLight, FogExp2, HemisphereLight, Mesh, PMREMGenerator, PointLight,
   Scene, ShaderMaterial, SphereGeometry, Vector3,
 } from 'three';
 import type { WorldRuntimeState } from '../runtime/types';
 import { LANTERN_ANCHORS, SUNSET_DIRECTION, type LanternAnchor } from './lighting-anchors';
 import { MAP_MAX_HEIGHT, MAP_RADIUS, MAP_VIEW_SCALE } from '../data/world-map';
+import { SEA_CAVE_FRAME, seaCavePortalAt } from '../data/sea-cave';
+import { SEA_CAVE_WINDOW } from '../data/sea-cave-layout';
 
 // The town faces +Z. A fixed western sun gives long shadows without rotating
 // the light with the visitor or changing the planet's day side during travel.
@@ -23,6 +25,16 @@ const SKY_SCALE = 300 * MAP_VIEW_SCALE;
 const LANTERN_SLOTS = [0, 1, 2] as const;
 /** The caught Sun, when it dangles from a rod: brighter and wider than any lantern. */
 const SUN_GLOW = { intensity: 46, range: 16, ambient: .35 };
+/** Down in the sea caves: no sun, a dimmer bounce, and cool daylight in through the window. */
+const CAVE_LIGHT = { ambient: .45, hemisphere: .22, fill: .8, environment: .1 };
+const LANTERN_COLOR = new Color('#ffbd79');
+const WINDOW_LIGHT = (() => {
+  const w = SEA_CAVE_WINDOW, l = Math.hypot(w.outward[0], w.outward[1]);
+  const target = SEA_CAVE_FRAME.point(w.center[0] - w.outward[0] / l * 6, w.center[1] - w.outward[1] / l * 6, 2);
+  const source = SEA_CAVE_FRAME.point(w.center[0] + w.outward[0] / l * 30, w.center[1] + w.outward[1] / l * 30, 14);
+  return { target, source };
+})();
+const FILL_POSITION = new Vector3(50, -38, -80);
 
 const skyVertex = /* glsl */`
   varying vec3 vDirection;
@@ -77,6 +89,9 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
   const scratch = useRef({ focus: new Vector3(), halfExtent: -1 });
   const lanternLights = useRef<Array<PointLight | null>>([null, null, null]);
   const ambient = useRef<AmbientLight>(null);
+  const hemisphere = useRef<HemisphereLight>(null);
+  const fill = useRef<DirectionalLight>(null);
+  const cave = useRef({ mix: 0 });
   const sunAnchor = useRef<LanternAnchor>({ id: 'fishing:sun', buildingId: 'pier', interior: null, lens: new Vector3(), position: new Vector3(), outward: null, intensity: 0, range: SUN_GLOW.range });
   const lanterns = useRef({
     elapsed: 1, interior: runtime.interior,
@@ -153,7 +168,24 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
     const glow = state.fishing.sunLight, sunGlow = glow && state.interior === null ? glow.strength : 0;
     if (glow) sunAnchor.current.position.set(glow.x, glow.y, glow.z);
     sunAnchor.current.intensity = SUN_GLOW.intensity * sunGlow;
-    if (ambient.current) ambient.current.intensity = .95 + SUN_GLOW.ambient * sunGlow;
+    // Ease into the caves' light over the first metres past the mouth.
+    let caveTarget = 0;
+    if (state.supportLayer === 'tunnel' && !state.snowboard.active) {
+      const local = SEA_CAVE_FRAME.local(state.position), s = seaCavePortalAt(local.u, local.v).s;
+      caveTarget = Math.max(0, Math.min(1, (s - 1) / 7));
+    }
+    const caveMix = cave.current.mix += (caveTarget - cave.current.mix) * (reduced ? 1 : 1 - Math.exp(-Math.min(delta, .1) * 4));
+    if (ambient.current) ambient.current.intensity = (.95 + SUN_GLOW.ambient * sunGlow) * (1 - caveMix) + CAVE_LIGHT.ambient * caveMix;
+    if (hemisphere.current) hemisphere.current.intensity = .55 + (CAVE_LIGHT.hemisphere - .55) * caveMix;
+    if (light) light.intensity = 2.2 * (1 - caveMix);
+    if (fill.current) {
+      const f = fill.current;
+      if (caveMix > .001) { f.position.copy(WINDOW_LIGHT.source); f.target.position.copy(WINDOW_LIGHT.target); f.color.set('#cfe0e6'); }
+      else { f.position.copy(FILL_POSITION); f.target.position.set(0, 0, 0); f.color.set('#b4cddd'); }
+      f.target.updateMatrixWorld();
+      f.intensity = .9 + (CAVE_LIGHT.fill - .9) * caveMix;
+    }
+    sceneRef.current.environmentIntensity = .24 + (CAVE_LIGHT.environment - .24) * caveMix;
     pools.elapsed += delta;
     if (roomChanged || pools.elapsed >= 0.2) {
       pools.elapsed = 0;
@@ -161,9 +193,11 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
       pools.visitor.set(state.position.x, state.position.y, state.position.z);
       pools.ranked.length = 0;
       for (const anchor of LANTERN_ANCHORS) {
-        // Interior lanterns only light their active room. Exterior candidates
-        // must face the visitor, avoiding a light selected through a rear wall.
+        // Interior lanterns only light their active room, and cave lights only a visitor
+        // down in the caves. Exterior candidates must face the visitor, avoiding a light
+        // selected through a rear wall.
         if (anchor.interior !== state.interior) continue;
+        if (anchor.layer && anchor.layer !== state.supportLayer) continue;
         pools.offset.copy(pools.visitor).sub(anchor.position);
         if (anchor.outward && pools.offset.dot(anchor.outward) < -0.7) continue;
         const score = pools.offset.lengthSq();
@@ -199,6 +233,7 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
           if (slot.anchor) {
             point.position.copy(slot.anchor.position);
             point.distance = slot.anchor.range;
+            if (slot.anchor.color) point.color.set(slot.anchor.color); else point.color.copy(LANTERN_COLOR);
           }
         }
       }
@@ -213,7 +248,7 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
     {/* The globe has no single global ground/up direction. Neutral ambient
         bounce keeps its opposite hemisphere legible under the fixed sunset. */}
     <ambientLight ref={ambient} color="#dce4e8" intensity={0.95} />
-    <hemisphereLight position={[0, 0, 1]} args={['#9bb4cc', '#aaa193', 0.55]} />
+    <hemisphereLight ref={hemisphere} position={[0, 0, 1]} args={['#9bb4cc', '#aaa193', 0.55]} />
     <directionalLight
       ref={sun} color="#fff1d9" intensity={2.2} castShadow={!reduced}
       position={[-53, 95, 21]} shadow-mapSize={[SHADOW_SIZE, SHADOW_SIZE]}
@@ -222,7 +257,7 @@ export default function CoastalLighting({ runtime, reduced }: { runtime: WorldRu
       shadow-camera-top={50} shadow-camera-bottom={-50}
       shadow-normalBias={0.035} shadow-bias={-0.00008} shadow-radius={1.65}
     />
-    <directionalLight position={[50, -38, -80]} intensity={0.9} color="#b4cddd" />
+    <directionalLight ref={fill} position={[50, -38, -80]} intensity={0.9} color="#b4cddd" />
     {LANTERN_SLOTS.map(index => <pointLight key={index} ref={light => { lanternLights.current[index] = light; }} color="#ffbd79" intensity={0} distance={8.2} decay={2} castShadow={false} />)}
     <mesh ref={sky} scale={SKY_SCALE} renderOrder={-1000} frustumCulled={false}>
       <sphereGeometry args={[1, 32, 20]} />

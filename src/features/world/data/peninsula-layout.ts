@@ -5,21 +5,14 @@ import { nearPeninsula, peninsulaAuthoredPoint, placedPoint } from './peninsula-
  * Everything in this file down to the "World placement" section is the approved authoring
  * data, in the chart frame it was approved in. peninsula-frame.ts carries it, rigidly, to
  * where it now stands east of the cul-de-sacs; use the placed exports for world positions. */
-export const PENINSULA_CAVE = {
-  // Public mouth → directly under the lighthouse → cove behind the headland.
-  points: [[28, -29], [31, -30.5], [34, -32], [36, -32], [37, -30], [38, -26], [38, -22], [38, -20]],
-  floor: -.1,
-  width: 3.4,
-  clearance: 4,
-} as const;
-
-export const PENINSULA_LIGHTHOUSE = { x: 36, z: -32, elevation: 6.2, height: 12 } as const;
-// Discovery/arrival lies on open sand beyond the exit wall, with room for the normal camera.
-export const PENINSULA_COVE = { x: 37, z: -11 } as const;
+/** The lighthouse on the cape's tip: its terrace elevation, the tower's height above it, and
+ * the round foundation pad (radius and blend skirt) that carries the tower and its stair.
+ * The sea caves (sea-cave-layout.ts) are authored in the frame of this tower. */
+export const PENINSULA_LIGHTHOUSE = { x: 36, z: -32, elevation: 6.2, height: 24.3, pad: 4.8, skirt: 1.4 } as const;
 
 export type CoastPoint = readonly [number, number];
-// Approved single-cove shoreline: the former middle spur is absent. The eastern
-// indentation runs continuously from the lighthouse cape to the northern arm.
+// The shoreline the sea-cave headland is built over: the old cove's water inside it becomes
+// rock, and its northern crescent low rocky shore.
 export const PENINSULA_COAST: readonly CoastPoint[] = [
   [24, 30], [37, 30], [40, 27], [40, 24], [37, 21], [35, 16],
   [34, 10], [34, 4], [35, -3], [37, -11], [41, -19], [44, -24],
@@ -39,16 +32,6 @@ export const PENINSULA_CAP: readonly CoastPoint[] = [
 export const PENINSULA_UPPER: readonly CoastPoint[] = [
   [24, 30], [36, 28], [32, 23], [28.5, 18], [27.8, 12], [28.5, 5],
   [29.8, -3], [32, -12], [35, -20], [32, -24], [29, -23], [27, -14], [26, -5],
-];
-export const PENINSULA_SAND: readonly CoastPoint[] = [
-  [36, 26], [33, 22], [30, 17], [29, 10], [29.5, 3], [31, -5],
-  [33, -13], [36, -20], [38, -23], [41, -20], [38, -14], [36, -7],
-  [34, 2], [34, 10], [35, 17], [37, 22], [40, 25],
-];
-/** Back edge of the one crescent, not a second arm projecting into its water. */
-export const PENINSULA_INNER_CLIFF: readonly CoastPoint[] = [
-  [36, 28], [32, 23], [28.5, 18], [27.8, 12], [28.5, 5],
-  [29.8, -3], [32, -12], [35, -20], [38, -24],
 ];
 
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
@@ -101,16 +84,12 @@ function authoredHeightAt(x: number, z: number) {
   if (z > -18) height += (.16 - height) * (1 - smooth(24, 28.5, x));
   // Public beach joins the peninsula's low south-west shore without a climb.
   if (x < 27 && z < -25) height += (-.1 - height) * (1 - smooth(24, 28, x)) * smooth(-37, -32, z);
-  const sand = coastDistance(x, z, PENINSULA_SAND);
-  // A continuous low crescent, not a second independent beach patch. Its
-  // seaward feather also joins the intertidal skirt without a retaining lip.
-  height += (Math.min(height, -.1) - height) * smooth(-1, .2, sand);
   const cap = coastDistance(x, z, PENINSULA_CAP);
   height += (Math.max(height, 5.2) - height) * smooth(-.7, .4, cap);
   return height;
 }
 
-/** A small tangent foundation avoids either burying or floating the unchanged tower. */
+/** A round tangent foundation pad for the tower and the foot of its stair. */
 function authoredFoundationAt(x: number, z: number): { height: number; blend: number } {
   const tower = PENINSULA_LIGHTHOUSE;
   const a = x / MAP_RADIUS, a0 = tower.x / MAP_RADIUS, b = (z - tower.z) / MAP_RADIUS;
@@ -118,8 +97,8 @@ function authoredFoundationAt(x: number, z: number): { height: number; blend: nu
   const height = (MAP_RADIUS + tower.elevation) / dot - MAP_RADIUS;
   const east = (MAP_RADIUS + height) * (Math.sin(a) * Math.cos(a0) - Math.cos(a) * Math.sin(a0) * Math.cos(b));
   const north = (MAP_RADIUS + height) * Math.cos(a) * Math.sin(b);
-  const edge = Math.max(Math.abs(east) - 2.8, Math.abs(north) - 2.8);
-  return { height, blend: 1 - smooth(0, 1.2, edge) };
+  const edge = Math.hypot(east, north) - tower.pad;
+  return { height, blend: 1 - smooth(0, tower.skirt, edge) };
 }
 
 /** The authored replacement region: the public access spur and the cape east of the old town. */
@@ -176,6 +155,3 @@ export function peninsulaTransplantWeight(x: number, z: number) {
 /** The authored anchors at their world chart positions. */
 const tower = placedPoint([PENINSULA_LIGHTHOUSE.x, PENINSULA_LIGHTHOUSE.z]);
 export const PLACED_LIGHTHOUSE = { ...PENINSULA_LIGHTHOUSE, x: tower[0], z: tower[1] } as const;
-const cove = placedPoint([PENINSULA_COVE.x, PENINSULA_COVE.z]);
-export const PLACED_COVE = { x: cove[0], z: cove[1] } as const;
-export const PLACED_CAVE_POINTS: readonly (readonly [number, number])[] = PENINSULA_CAVE.points.map(point => placedPoint(point));

@@ -1,7 +1,6 @@
 import type { TownArea, TownBuilding, TownRoute, BuildingArchetype, DistrictId, RoofStyle } from './town-types';
 import { mapGeographic } from './world-map';
-import { CAVE_POINTS, CAVE_WIDTH } from './concept-landmarks';
-import { PLACED_COVE, PLACED_LIGHTHOUSE } from './peninsula-layout';
+import { PLACED_LIGHTHOUSE } from './peninsula-layout';
 import { placedPoint } from './peninsula-frame';
 import { MOUNTAIN_LAYOUT } from './mountain-layout';
 import { COURTYARD, CUL_DE_SACS } from './downtown-layout';
@@ -41,10 +40,11 @@ const buildings:Spec[]=[
 export const TOWN_BUILDINGS=buildings.map(make);
 export const TOWN_AREAS:TownArea[]=[
  {id:'resort',label:'Ski Resort / Base of F',district:'high-ground',center:[MOUNTAIN_LAYOUT.pedestrianArrival.x,MOUNTAIN_LAYOUT.pedestrianArrival.z],width:MOUNTAIN_LAYOUT.pedestrianArrival.width,depth:MOUNTAIN_LAYOUT.pedestrianArrival.depth,material:'gravel',elevation:MOUNTAIN_LAYOUT.pedestrianArrival.height},
- {id:'lighthouse-view',label:'Lighthouse Peninsula Lookout',district:'outskirts',center:[PLACED_LIGHTHOUSE.x,PLACED_LIGHTHOUSE.z],width:6.5,depth:6.5,material:'gravel'},
+ {id:'lighthouse-view',label:'Lighthouse Peninsula Lookout',district:'outskirts',center:[PLACED_LIGHTHOUSE.x,PLACED_LIGHTHOUSE.z],width:10,depth:10,material:'gravel'},
 ];
 /** The lighthouse trail leaves the Cliff Cul-de-sac's south-east sidewalk, then follows the
- * approved upper trail (authored points, placed with the peninsula) to the lighthouse terrace. */
+ * approved upper trail (authored points, placed with the peninsula) to the foot of the
+ * lighthouse's spiral stair on its terrace. */
 const MAIN_CUL=CUL_DE_SACS[0];
 const trailhead=(degrees:number):[number,number]=>[MAIN_CUL.center[0]+Math.cos(degrees*Math.PI/180)*(MAIN_CUL.walk-.3),MAIN_CUL.center[1]+Math.sin(degrees*Math.PI/180)*(MAIN_CUL.walk-.3)];
 /** Paths beyond the paved downtown network (downtown-layout.ts owns the streets). */
@@ -57,11 +57,9 @@ export const TOWN_ROUTES:TownRoute[]=[
   points:link.points.map((point,index)=>[point[0],point[1]-(index===link.points.length-1&&['lodge-walk','ticket-walk'].includes(link.id)?.55:0)] as const),
   width:link.width,material:'dirt' as const,category:'secondary' as const})),
  // Ski runs are carved snow terrain (ski-runs.ts), not walking routes.
- {id:'lighthouse-trail',label:'Lighthouse Upper Trail',district:'outskirts',points:[trailhead(-24),...([[29,-10],[30,-17],[31,-23],[33,-28],[33.05,-32]] as const).map(placedPoint)],width:2.4,material:'dirt',category:'secondary',elevations:[.37,1.35,2.95,4.8,6.3,6.32]},
+ {id:'lighthouse-trail',label:'Lighthouse Upper Trail',district:'outskirts',points:[trailhead(-24),...([[29,-10],[30,-17],[31,-23],[33,-28]] as const).map(placedPoint)],width:2.4,material:'dirt',category:'secondary',elevations:[.37,1.35,2.95,4.8,6.3]},
  {id:'beach-west',label:'West Beach Ramp',district:'cove',points:[[-20,-16],[-18,-22],[-10,-28],[-3,-28]],width:2.4,material:'sand',category:'secondary'},
- {id:'beach-east',label:'East Beach and Cave Access',district:'cove',points:[[33,-16],[31.5,-22.5],...([[20,-28],[24,-29],[26,-29],[28,-29]] as const).map(placedPoint)],width:2.4,material:'sand',category:'secondary'},
- {id:'cave',label:'Covered Cave to Hidden Beach',district:'cove',points:CAVE_POINTS.map(p=>[p[0],p[1]]),width:CAVE_WIDTH,material:'sand',category:'discovery'},
+ {id:'beach-east',label:'East Beach and Sea Caves',district:'cove',points:[[33,-16],[31.5,-22.5],...([[20,-28],[24,-29],[26,-29],[28,-29]] as const).map(placedPoint)],width:2.4,material:'sand',category:'secondary'},
 ];
 export const TOWN_INTERIORS=TOWN_BUILDINGS.filter(b=>b.interior);
-export const COASTAL_RADIO=PLACED_COVE;
 export const TOWN_SPAWN={...mapGeographic(COURTYARD.spawn[0],COURTYARD.spawn[1]),facing:'south' as const};
